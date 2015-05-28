@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>169</width>
-    <height>442</height>
+    <width>470</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="HueBar" name="widget" native="true">
+   <widget class="HueBar" name="hueBar" native="true">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>310</x>
       <y>10</y>
       <width>40</width>
       <height>360</height>
@@ -46,8 +46,8 @@ border-radius:10px;</string>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>80</y>
+      <x>370</x>
+      <y>350</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -59,11 +59,28 @@ border-radius:10px;</string>
    <widget class="ColorSample" name="colorSample" native="true">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
+      <x>370</x>
+      <y>10</y>
       <width>81</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:1px solid black;</string>
+    </property>
+   </widget>
+   <widget class="SatValueSelector" name="satValueSelector" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>291</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:1px solid black;
+border-radius:10px;</string>
     </property>
    </widget>
   </widget>
@@ -72,7 +89,7 @@ border-radius:10px;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>169</width>
+     <width>470</width>
      <height>18</height>
     </rect>
    </property>
@@ -99,6 +116,12 @@ border-radius:10px;</string>
    <class>ColorSample</class>
    <extends>QWidget</extends>
    <header>colorsample.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SatValueSelector</class>
+   <extends>QWidget</extends>
+   <header>satvalueselector.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

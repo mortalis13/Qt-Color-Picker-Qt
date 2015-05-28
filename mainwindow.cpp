@@ -20,7 +20,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::addActions(){
-  connect( ui->widget, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
+//  connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
+  connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->satValueSelector, SLOT(changeHue(QColor)) );
 }
 
 void MainWindow::changeColorSample(QColor color){

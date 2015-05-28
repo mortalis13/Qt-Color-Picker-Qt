@@ -11,7 +11,7 @@ public:
   QSize sizeHint() const;
 
 signals:
-  void colorChanged(QColor);
+  void hueChanged(QColor);
 
 public slots:
 
@@ -21,9 +21,7 @@ protected:
   void mouseMoveEvent(QMouseEvent*);
 
 private:
-  int x, y, r;
   int mx, my;
-
   int h,s,v;
 
   QColor color;

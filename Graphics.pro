@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     huebar.cpp \
-    colorsample.cpp
+    colorsample.cpp \
+    satvalueselector.cpp 
 
 HEADERS  += mainwindow.h \
     huebar.h \
-    colorsample.h
+    colorsample.h \
+    satvalueselector.h 
 
 FORMS    += mainwindow.ui

@@ -63,7 +63,7 @@ void HueBar::updateColor(QMouseEvent* e){
   if(h<0 || h>360) return;
 
   color.setHsv(h, s, v);
-  emit colorChanged(color);
+  emit hueChanged(color);
 
-  qDebug() << QString("Coordinates: %1, %2").arg(mx).arg(my);
+//  qDebug() << QString("Coordinates: %1, %2").arg(mx).arg(my);
 }
