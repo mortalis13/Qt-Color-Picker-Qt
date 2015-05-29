@@ -1,0 +1,588 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="2071" measuredH="935" mockupW="2051" mockupH="925">
+  <controls>
+    <control controlID="120" controlTypeID="__group__" x="20" y="10" w="620" h="439" measuredW="620" measuredH="439" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="620" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="120">
+          <controlProperties>
+            <close>true</close>
+            <maximizeRestore>false</maximizeRestore>
+            <minimize>true</minimize>
+            <text>QtColorPicker</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="39" w="315" h="360" measuredW="315" measuredH="360" zOrder="1" locked="false" isInGroup="120">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="256" h="256" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="275" y="0" w="40" h="360" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="1"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="287" w="256" h="73" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="1"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="352" y="39" w="251" h="298" measuredW="251" measuredH="298" zOrder="2" locked="false" isInGroup="120">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="251" h="56" measuredW="251" measuredH="56" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="__group__" x="0" y="0" w="143" h="49" measuredW="143" measuredH="49" zOrder="0" locked="false" isInGroup="0">
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="0" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <text>HSV</text>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="86" measuredH="28" zOrder="1" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <size>14</size>
+                        <text>257%2036%20185</text>
+                      </controlProperties>
+                    </control>
+                  </groupChildrenDescriptors>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="158" y="21" w="93" h="35" measuredW="53" measuredH="27" zOrder="1" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <text>Copy</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="1" controlTypeID="__group__" x="0" y="64" w="251" h="56" measuredW="251" measuredH="56" zOrder="1" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="__group__" x="0" y="0" w="143" h="49" measuredW="143" measuredH="49" zOrder="0" locked="false" isInGroup="1">
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="0" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <text>RGB</text>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="72" measuredH="28" zOrder="1" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <size>14</size>
+                        <text>255%209%2067</text>
+                      </controlProperties>
+                    </control>
+                  </groupChildrenDescriptors>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="158" y="21" w="93" h="35" measuredW="53" measuredH="27" zOrder="1" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <text>Copy</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="2" controlTypeID="__group__" x="0" y="128" w="251" h="56" measuredW="251" measuredH="56" zOrder="2" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="__group__" x="0" y="0" w="143" h="49" measuredW="143" measuredH="49" zOrder="0" locked="false" isInGroup="2">
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="38" measuredH="21" zOrder="0" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <text>CMYK</text>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="100" measuredH="28" zOrder="1" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <size>14</size>
+                        <text>98%20100%2056%2032</text>
+                      </controlProperties>
+                    </control>
+                  </groupChildrenDescriptors>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="158" y="21" w="93" h="35" measuredW="53" measuredH="27" zOrder="1" locked="false" isInGroup="2">
+                  <controlProperties>
+                    <text>Copy</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="3" controlTypeID="__group__" x="0" y="192" w="251" h="106" measuredW="251" measuredH="106" zOrder="3" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="__group__" x="0" y="0" w="143" h="49" measuredW="143" measuredH="49" zOrder="0" locked="false" isInGroup="3">
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="0" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <text>Hex</text>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="64" measuredH="28" zOrder="1" locked="false" isInGroup="0">
+                      <controlProperties>
+                        <backgroundAlpha>1</backgroundAlpha>
+                        <size>14</size>
+                        <text>a86d52</text>
+                      </controlProperties>
+                    </control>
+                  </groupChildrenDescriptors>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="158" y="21" w="93" h="35" measuredW="53" measuredH="27" zOrder="1" locked="false" isInGroup="3">
+                  <controlProperties>
+                    <text>Copy</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="158" y="71" w="93" h="35" measuredW="65" measuredH="27" zOrder="2" locked="false" isInGroup="3">
+                  <controlProperties>
+                    <text>Copy%20%23</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="121" controlTypeID="__group__" x="698" y="10" w="620" h="439" measuredW="620" measuredH="439" zOrder="1" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="620" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="121">
+          <controlProperties>
+            <close>true</close>
+            <maximizeRestore>false</maximizeRestore>
+            <minimize>true</minimize>
+            <text>QtColorPicker</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="39" w="315" h="360" measuredW="315" measuredH="360" zOrder="1" locked="false" isInGroup="121">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="256" h="256" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="275" y="0" w="40" h="360" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="1"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="287" w="256" h="73" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="1"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="460" y="39" w="143" h="241" measuredW="143" measuredH="241" zOrder="2" locked="false" isInGroup="121">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="143" h="49" measuredW="143" measuredH="49" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="0" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <text>HSV</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="86" measuredH="28" zOrder="1" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <size>14</size>
+                    <text>257%2036%20185</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="1" controlTypeID="__group__" x="0" y="64" w="143" h="49" measuredW="143" measuredH="49" zOrder="1" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <text>RGB</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="72" measuredH="28" zOrder="1" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <size>14</size>
+                    <text>255%209%2067</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="2" controlTypeID="__group__" x="0" y="128" w="143" h="49" measuredW="143" measuredH="49" zOrder="2" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="38" measuredH="21" zOrder="0" locked="false" isInGroup="2">
+                  <controlProperties>
+                    <text>CMYK</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="100" measuredH="28" zOrder="1" locked="false" isInGroup="2">
+                  <controlProperties>
+                    <size>14</size>
+                    <text>98%20100%2056%2032</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="3" controlTypeID="__group__" x="0" y="192" w="143" h="49" measuredW="143" measuredH="49" zOrder="3" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="0" locked="false" isInGroup="3">
+                  <controlProperties>
+                    <text>Hex</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="143" h="-1" measuredW="64" measuredH="28" zOrder="1" locked="false" isInGroup="3">
+                  <controlProperties>
+                    <backgroundAlpha>1</backgroundAlpha>
+                    <size>14</size>
+                    <text>a86d52</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="352" y="59" w="93" h="35" measuredW="53" measuredH="27" zOrder="3" locked="false" isInGroup="121">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="352" y="123" w="93" h="35" measuredW="53" measuredH="27" zOrder="4" locked="false" isInGroup="121">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="352" y="187" w="93" h="35" measuredW="53" measuredH="27" zOrder="5" locked="false" isInGroup="121">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="352" y="251" w="93" h="35" measuredW="53" measuredH="27" zOrder="6" locked="false" isInGroup="121">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="352" y="298" w="93" h="35" measuredW="65" measuredH="27" zOrder="7" locked="false" isInGroup="121">
+          <controlProperties>
+            <text>Copy%20%23</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="122" controlTypeID="__group__" x="20" y="496" w="620" h="439" measuredW="620" measuredH="439" zOrder="2" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="620" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="122">
+          <controlProperties>
+            <close>true</close>
+            <maximizeRestore>false</maximizeRestore>
+            <minimize>true</minimize>
+            <text>QtColorPicker</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="39" w="315" h="360" measuredW="315" measuredH="360" zOrder="1" locked="false" isInGroup="122">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="256" h="256" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="275" y="0" w="40" h="360" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="1"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="287" w="256" h="73" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="1"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="460" y="70" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="2" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>HSV</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="40" w="143" h="-1" measuredW="86" measuredH="28" zOrder="3" locked="false" isInGroup="122">
+          <controlProperties>
+            <size>14</size>
+            <text>257%2036%20185</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="460" y="136" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="4" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>RGB</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="104" w="143" h="-1" measuredW="72" measuredH="28" zOrder="5" locked="false" isInGroup="122">
+          <controlProperties>
+            <size>14</size>
+            <text>255%209%2067</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="460" y="199" w="-1" h="-1" measuredW="38" measuredH="21" zOrder="6" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>CMYK</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="168" w="143" h="-1" measuredW="100" measuredH="28" zOrder="7" locked="false" isInGroup="122">
+          <controlProperties>
+            <size>14</size>
+            <text>98%20100%2056%2032</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="460" y="262" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="8" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>Hex</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="232" w="143" h="-1" measuredW="64" measuredH="28" zOrder="9" locked="false" isInGroup="122">
+          <controlProperties>
+            <backgroundAlpha>1</backgroundAlpha>
+            <size>14</size>
+            <text>a86d52</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="352" y="39" w="93" h="35" measuredW="53" measuredH="27" zOrder="10" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="352" y="103" w="93" h="35" measuredW="53" measuredH="27" zOrder="11" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="352" y="167" w="93" h="35" measuredW="53" measuredH="27" zOrder="12" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="352" y="231" w="93" h="35" measuredW="53" measuredH="27" zOrder="13" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="14" controlTypeID="com.balsamiq.mockups::Button" x="352" y="278" w="93" h="35" measuredW="65" measuredH="27" zOrder="14" locked="false" isInGroup="122">
+          <controlProperties>
+            <text>Copy%20%23</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="123" controlTypeID="__group__" x="698" y="496" w="664" h="439" measuredW="664" measuredH="439" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="664" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="123">
+          <controlProperties>
+            <close>true</close>
+            <maximizeRestore>false</maximizeRestore>
+            <minimize>true</minimize>
+            <text>QtColorPicker</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="39" w="315" h="360" measuredW="315" measuredH="360" zOrder="1" locked="false" isInGroup="123">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="256" h="256" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="275" y="0" w="40" h="360" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="1"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="287" w="256" h="73" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="1"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="611" y="40" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="2" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>HSV</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="40" w="143" h="-1" measuredW="86" measuredH="28" zOrder="3" locked="false" isInGroup="123">
+          <controlProperties>
+            <size>14</size>
+            <text>257%2036%20185</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="611" y="97" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="4" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>RGB</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="97" w="143" h="-1" measuredW="72" measuredH="28" zOrder="5" locked="false" isInGroup="123">
+          <controlProperties>
+            <size>14</size>
+            <text>255%209%2067</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="611" y="155" w="-1" h="-1" measuredW="38" measuredH="21" zOrder="6" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>CMYK</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="155" w="143" h="-1" measuredW="100" measuredH="28" zOrder="7" locked="false" isInGroup="123">
+          <controlProperties>
+            <size>14</size>
+            <text>98%20100%2056%2032</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="611" y="212" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="8" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>Hex</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::TextInput" x="460" y="212" w="143" h="-1" measuredW="64" measuredH="28" zOrder="9" locked="false" isInGroup="123">
+          <controlProperties>
+            <backgroundAlpha>1</backgroundAlpha>
+            <size>14</size>
+            <text>a86d52</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="352" y="39" w="93" h="35" measuredW="53" measuredH="27" zOrder="10" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="352" y="96" w="93" h="35" measuredW="53" measuredH="27" zOrder="11" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="352" y="154" w="93" h="35" measuredW="53" measuredH="27" zOrder="12" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="352" y="211" w="93" h="35" measuredW="53" measuredH="27" zOrder="13" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="14" controlTypeID="com.balsamiq.mockups::Button" x="352" y="258" w="93" h="35" measuredW="65" measuredH="27" zOrder="14" locked="false" isInGroup="123">
+          <controlProperties>
+            <text>Copy%20%23</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="124" controlTypeID="__group__" x="1407" y="496" w="618" h="439" measuredW="618" measuredH="439" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="618" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="124">
+          <controlProperties>
+            <close>true</close>
+            <maximizeRestore>false</maximizeRestore>
+            <minimize>true</minimize>
+            <text>QtColorPicker%20-%20Final</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="39" w="315" h="360" measuredW="315" measuredH="360" zOrder="1" locked="false" isInGroup="124">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="256" h="256" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="275" y="0" w="40" h="360" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="1"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="287" w="256" h="73" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="1"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="466" y="39" w="137" h="200" measuredW="137" measuredH="200" zOrder="2" locked="false" isInGroup="124">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="137" h="-1" measuredW="86" measuredH="28" zOrder="0" locked="false" isInGroup="2">
+              <controlProperties>
+                <size>14</size>
+                <text>257%2036%20185</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="57" w="137" h="-1" measuredW="72" measuredH="28" zOrder="1" locked="false" isInGroup="2">
+              <controlProperties>
+                <size>14</size>
+                <text>255%209%2067</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="115" w="137" h="-1" measuredW="100" measuredH="28" zOrder="2" locked="false" isInGroup="2">
+              <controlProperties>
+                <size>14</size>
+                <text>98%20100%2056%2032</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="172" w="137" h="-1" measuredW="64" measuredH="28" zOrder="3" locked="false" isInGroup="2">
+              <controlProperties>
+                <backgroundAlpha>1</backgroundAlpha>
+                <size>14</size>
+                <text>a86d52</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="350" y="39" w="104" h="35" measuredW="49" measuredH="27" zOrder="3" locked="false" isInGroup="124">
+          <controlProperties>
+            <text>HSV</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="350" y="96" w="104" h="35" measuredW="49" measuredH="27" zOrder="4" locked="false" isInGroup="124">
+          <controlProperties>
+            <text>RGB</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="350" y="154" w="104" h="35" measuredW="60" measuredH="27" zOrder="5" locked="false" isInGroup="124">
+          <controlProperties>
+            <text>CMYK</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="350" y="211" w="104" h="35" measuredW="45" measuredH="27" zOrder="6" locked="false" isInGroup="124">
+          <controlProperties>
+            <text>Hex</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="350" y="258" w="104" h="35" measuredW="57" measuredH="27" zOrder="7" locked="false" isInGroup="124">
+          <controlProperties>
+            <text>Hex%20%23</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="125" controlTypeID="__group__" x="1407" y="10" w="664" h="439" measuredW="664" measuredH="439" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="664" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="125">
+          <controlProperties>
+            <close>true</close>
+            <maximizeRestore>false</maximizeRestore>
+            <minimize>true</minimize>
+            <text>QtColorPicker</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="39" w="315" h="360" measuredW="315" measuredH="360" zOrder="1" locked="false" isInGroup="125">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="256" h="256" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="275" y="0" w="40" h="360" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="1"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="287" w="256" h="73" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="1"/>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="456" y="42" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="2" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>HSV</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="456" y="98" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="3" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>RGB</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="456" y="156" w="-1" h="-1" measuredW="38" measuredH="21" zOrder="4" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>CMYK</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="456" y="213" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="5" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>Hex</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="__group__" x="502" y="40" w="143" h="200" measuredW="143" measuredH="200" zOrder="6" locked="false" isInGroup="125">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="143" h="-1" measuredW="86" measuredH="28" zOrder="0" locked="false" isInGroup="6">
+              <controlProperties>
+                <size>14</size>
+                <text>257%2036%20185</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="57" w="143" h="-1" measuredW="72" measuredH="28" zOrder="1" locked="false" isInGroup="6">
+              <controlProperties>
+                <size>14</size>
+                <text>255%209%2067</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="115" w="143" h="-1" measuredW="100" measuredH="28" zOrder="2" locked="false" isInGroup="6">
+              <controlProperties>
+                <size>14</size>
+                <text>98%20100%2056%2032</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="172" w="143" h="-1" measuredW="64" measuredH="28" zOrder="3" locked="false" isInGroup="6">
+              <controlProperties>
+                <backgroundAlpha>1</backgroundAlpha>
+                <size>14</size>
+                <text>a86d52</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="352" y="39" w="93" h="35" measuredW="53" measuredH="27" zOrder="7" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="352" y="96" w="93" h="35" measuredW="53" measuredH="27" zOrder="8" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="352" y="154" w="93" h="35" measuredW="53" measuredH="27" zOrder="9" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="352" y="211" w="93" h="35" measuredW="53" measuredH="27" zOrder="10" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>Copy</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="352" y="258" w="93" h="35" measuredW="65" measuredH="27" zOrder="11" locked="false" isInGroup="125">
+          <controlProperties>
+            <text>Copy%20%23</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

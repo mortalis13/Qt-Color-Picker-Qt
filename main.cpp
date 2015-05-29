@@ -11,6 +11,10 @@ int main(int argc, char *argv[])
   MainWindow w;
   w.show();
 
+  QString style;
+  style="fusion";
+
+  QApplication::setStyle(style);
   return a.exec();
 }
 
