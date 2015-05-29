@@ -2,6 +2,8 @@
 #define SATVALUESELECTOR_H
 
 #include <QWidget>
+#include <QList>
+#include <QPixmap>
 
 class SatValueSelector : public QWidget
 {
@@ -27,6 +29,8 @@ private:
 
   QColor color;
   void updateColor(QMouseEvent *e);
+  
+  QList<QPixmap> hues;
 };
 
 #endif // SATVALUESELECTOR_H
