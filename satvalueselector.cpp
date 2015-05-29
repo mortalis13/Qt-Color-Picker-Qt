@@ -12,57 +12,88 @@ SatValueSelector::SatValueSelector(QWidget *parent) :
   
   int max=255;
   
-  for(int h=0;h<360;h++){
-    QPixmap pm(max, max);
-    QPainter p(&pm);
+//  for(int h=0;h<360;h++){
+//    QPixmap pm(max, max);
+//    QPainter p(&pm);
     
-    for(int v=255;v>0;v--){
-      for(int s=0;s<255;s++){
-        QColor c;
-        c.setHsv(h, s, v);
-        p.setPen(c);
-        p.drawPoint(s, max-v);
-      }
-    }
+//    for(int v=255;v>0;v--){
+//      for(int s=0;s<255;s++){
+//        QColor c;
+//        c.setHsv(h, s, v);
+//        p.setPen(c);
+//        p.drawPoint(s, max-v);
+//      }
+//    }
     
-    hues.append(pm);
-  }
+//    hues.append(pm);
+//  }
+
+
+//  QFile file("hues.dat");
+//  if( !file.open(QIODevice::ReadOnly) ){
+//    qDebug("Cannot open file");
+//    return;
+//  }
+
+//  QDataStream stream(&file);
+//  stream >> hues;
+//  file.close();
   
 }
 
 void SatValueSelector::changeHue(QColor color)
 {
   h=color.hue();
-  repaint();
+//  repaint();
+  update();
 }
 
 void SatValueSelector::paintEvent(QPaintEvent *event)
 {
-//  QPixmap pixmap(255, 255);
+  int size=255;
+  int maxCoordinate=size-1;
+  QColor color;
+  
+
+//  QPainter p(this);
+//  p.drawImage(0, 0, hues.at(h));
+
 
   QPainter p(this);
+  QImage image(size, size, QImage::Format_RGB32);
+  for(int s=0; s<255; s++){
+    for(int v=0; v<255; v++){
+      color.setHsv(h, s, v);
+      image.setPixel(s, maxCoordinate-v, color.rgb());
+    }
+  }
+  p.drawImage(0, 0, image);
+
+
+//  QPixmap pixmap(size, size);
+//  QPainter p(&pixmap);
+//  for(int s=0; s<255; s++){
+//    for(int v=0; v<255; v++){
+//      color.setHsv(h, s, v);
+//      p.setPen(color);
+//      p.drawPoint(s, maxValue-v);
+//    }
+//  }
+//  QPainter wp(this);
+//  wp.drawPixmap(0, 0, pixmap);
   
+
   // QColor color;
-
-  // int s, v;
-  // int x, y;
-
-  // for(int i=maxValue;i>=0;i--){
-  //   v=i;
-  //   y=maxValue-i;
-
-  //   for(int j=0;j<255;j++){
-  //     s=j;
-  //     x=j;
-
+  // for(int s=0; s<255; s++){
+  //   for(int v=0; v<255; v++){
   //     color.setHsv(h, s, v);
   //     p.setPen(color);
-  //     p.drawPoint(x, y);
+  //     p.drawPoint(s, maxValue-v);
   //   }
   // }
 
-  QPainter wp(this);
-  wp.drawPixmap(0, 0, hues.at(h));
+//  QPainter wp(this);
+//  wp.drawPixmap(0, 0, hues.at(h));
 }
 
 void SatValueSelector::mousePressEvent(QMouseEvent *e)

@@ -30,7 +30,7 @@ private:
   QColor color;
   void updateColor(QMouseEvent *e);
   
-  QList<QPixmap> hues;
+  QList<QImage> hues;
 };
 
 #endif // SATVALUESELECTOR_H
