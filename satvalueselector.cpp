@@ -8,6 +8,8 @@ SatValueSelector::SatValueSelector(QWidget *parent) :
   QWidget(parent)
 {
   h=0;
+  s=255;
+  v=255;
   maxValue=255;
   
   int max=255;
@@ -44,8 +46,10 @@ SatValueSelector::SatValueSelector(QWidget *parent) :
 void SatValueSelector::changeHue(QColor color)
 {
   h=color.hue();
-//  repaint();
+  QColor newColor;
+  newColor.setHsv(h, s, v);
   update();
+  emit colorChanged(newColor);
 }
 
 void SatValueSelector::paintEvent(QPaintEvent *event)
@@ -98,21 +102,23 @@ void SatValueSelector::paintEvent(QPaintEvent *event)
 
 void SatValueSelector::mousePressEvent(QMouseEvent *e)
 {
-//  updateColor(e);
+  updateColor(e);
 }
 
 void SatValueSelector::mouseMoveEvent(QMouseEvent *e)
 {
-//  updateColor(e);
+  updateColor(e);
 }
 
 void SatValueSelector::updateColor(QMouseEvent* e){
   mx=e->x();
   my=e->y();
 
-  h=my;
+  s=mx;
+  v=255-my;
 
-  if(h<0 || h>360) return;
+  if(s<0 || s>255) return;
+  if(v<0 || v>255) return;
 
   color.setHsv(h, s, v);
   emit colorChanged(color);

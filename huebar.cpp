@@ -12,12 +12,6 @@ HueBar::HueBar(QWidget *parent) :
   v=255;
 }
 
-QSize HueBar::sizeHint() const
-{
-//  return QSize(this->width(), this->height());
-//  return QSize(30, 360);
-}
-
 void HueBar::paintEvent(QPaintEvent *event)
 {
   QPainter p(this);

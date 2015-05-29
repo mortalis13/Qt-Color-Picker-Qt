@@ -12,7 +12,7 @@ ColorSample::ColorSample(QWidget *parent) :
 void ColorSample::changeColor(QColor color)
 {
   this->color=color;
-  repaint();
+  update();
 }
 
 void ColorSample::paintEvent(QPaintEvent *event)

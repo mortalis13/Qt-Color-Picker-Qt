@@ -8,7 +8,6 @@ class HueBar : public QWidget
   Q_OBJECT
 public:
   explicit HueBar(QWidget *parent = 0);
-  QSize sizeHint() const;
 
 signals:
   void hueChanged(QColor);
