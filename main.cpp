@@ -5,7 +5,16 @@
 #include <QList>
 #include <QFile>
 
-void test(){
+int main(int argc, char *argv[])
+{
+  QApplication a(argc, argv);
+  MainWindow w;
+  w.show();
+
+  return a.exec();
+}
+
+void saveHuesToFile(){
   QFile file("hues.dat");
   if( !file.open(QIODevice::WriteOnly) ){
     qDebug("Cannot open file");
@@ -14,16 +23,17 @@ void test(){
 
   QList<QImage> hues;
   QColor color;
-  int size=255;
-  int maxCoordinate=size-1;
 
-  for(int h=0;h<360;h++){
-    QImage image(size, size, QImage::Format_RGB32);
+  int maxHue=360;
+  int max=255;
 
-    for(int s=0; s<255; s++){
-      for(int v=0; v<255; v++){
+  for(int h=0;h<maxHue;h++){
+    QImage image(max+1, max+1, QImage::Format_RGB32);
+
+    for(int s=0; s<=max; s++){
+      for(int v=0; v<=max; v++){
         color.setHsv(h, s, v);
-        image.setPixel(s, maxCoordinate-v, color.rgb());
+        image.setPixel(s, max-v, color.rgb());
       }
     }
 
@@ -33,15 +43,4 @@ void test(){
   QDataStream stream(&file);
   stream << hues;
   file.close();
-}
-
-int main(int argc, char *argv[])
-{
-  QApplication a(argc, argv);
-  MainWindow w;
-  w.show();
-
-//  test();
-
-  return a.exec();
 }

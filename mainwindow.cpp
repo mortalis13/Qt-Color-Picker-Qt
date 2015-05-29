@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-
+  init();
   addActions();
 }
 
@@ -19,16 +19,11 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
+void MainWindow::init(){
+//  ui->statusBar->setSizeGripEnabled(false);
+}
+
 void MainWindow::addActions(){
-//  connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
   connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->satValueSelector, SLOT(changeHue(QColor)) );
   connect( ui->satValueSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
-}
-
-void MainWindow::changeColorSample(QColor color){
-
-}
-
-void MainWindow::on_pushButton_clicked()
-{
 }

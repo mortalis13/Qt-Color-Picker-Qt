@@ -23,14 +23,19 @@ protected:
   void mouseMoveEvent(QMouseEvent*);
 
 private:  
-  int mx, my;
+  QColor color;
+  QList<QImage> hues;
+
+  int max;
+  int maxH;
   int h,s,v;
+
+  int mx, my;
   int maxValue;
 
-  QColor color;
   void updateColor(QMouseEvent *e);
-  
-  QList<QImage> hues;
+  void loadHuesFromFile();
+  void paintFromList(QPainter *p);
 };
 
 #endif // SATVALUESELECTOR_H

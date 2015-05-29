@@ -15,13 +15,10 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
-private slots:
-  void on_pushButton_clicked();
-
-  void changeColorSample(QColor color);
 private:
   Ui::MainWindow *ui;
   void addActions();
+  void init();
 };
 
 #endif // MAINWINDOW_H

@@ -4,12 +4,14 @@
 #include <QDebug>
 #include <QMouseEvent>
 
-HueBar::HueBar(QWidget *parent) :
-  QWidget(parent)
+HueBar::HueBar(QWidget *parent) : QWidget(parent)
 {
+  max=255;
+  maxH=360;
+
   h=0;
-  s=255;
-  v=255;
+  s=max;
+  v=max;
 }
 
 void HueBar::paintEvent(QPaintEvent *event)
@@ -17,24 +19,12 @@ void HueBar::paintEvent(QPaintEvent *event)
   QPainter p(this);
   QColor color;
 
-  int width;
-  int height;
-  int line=0;
+  int width=this->width();
 
-  int h=0;
-  int s=255;
-  int v=255;
-
-  width=this->width();
-  height=this->height();
-
-  for(int i=0;i<360;i++){
-    h=i;
-    line=i;
-
+  for(int h=0; h<=maxH; ++h){
     color.setHsv(h, s, v);
     p.setPen(color);
-    p.drawLine(0, line, width, line);
+    p.drawLine(0, h, width, h);
   }
 }
 
@@ -49,15 +39,13 @@ void HueBar::mouseMoveEvent(QMouseEvent *e)
 }
 
 void HueBar::updateColor(QMouseEvent* e){
-  mx=e->x();
-  my=e->y();
+  QColor color;
 
-  h=my;
-
-  if(h<0 || h>360) return;
+  h=e->y();
+  if(h<0 || h>maxH) return;
 
   color.setHsv(h, s, v);
   emit hueChanged(color);
 
-//  qDebug() << QString("Coordinates: %1, %2").arg(mx).arg(my);
+//  qDebug() << QString("Coordinates: %1, %2").arg(e->x()).arg(e->y());
 }

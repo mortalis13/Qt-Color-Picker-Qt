@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>655</width>
+    <width>470</width>
     <height>396</height>
    </rect>
   </property>
@@ -15,6 +15,18 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>470</width>
+    <height>396</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>470</width>
+    <height>396</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -90,15 +102,14 @@
          <property name="minimumSize">
           <size>
            <width>40</width>
-           <height>360</height>
+           <height>361</height>
           </size>
          </property>
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true">border:1px solid black;
-border-radius:10px;</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -112,12 +123,12 @@ border-radius:10px;</string>
          </property>
          <property name="minimumSize">
           <size>
-           <width>255</width>
-           <height>50</height>
+           <width>256</width>
+           <height>60</height>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">border:1px solid black;</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -147,13 +158,12 @@ border-radius:10px;</string>
          </property>
          <property name="minimumSize">
           <size>
-           <width>255</width>
-           <height>255</height>
+           <width>256</width>
+           <height>256</height>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">border:1px solid black;
-border-radius:10px;</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -202,7 +212,6 @@ border-radius:10px;</string>
       </layout>
       <zorder>pushButton</zorder>
       <zorder>verticalSpacer_2</zorder>
-      <zorder>widget</zorder>
      </widget>
     </item>
    </layout>
@@ -210,7 +219,11 @@ border-radius:10px;</string>
    <zorder>widget</zorder>
    <zorder>horizontalSpacer_2</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

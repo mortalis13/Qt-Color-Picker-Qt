@@ -20,10 +20,10 @@ protected:
   void mouseMoveEvent(QMouseEvent*);
 
 private:
-  int mx, my;
+  int max;
+  int maxH;
   int h,s,v;
 
-  QColor color;
   void updateColor(QMouseEvent *e);
 };
 
