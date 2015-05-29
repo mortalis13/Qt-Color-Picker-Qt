@@ -23,11 +23,16 @@ protected:
   void mouseMoveEvent(QMouseEvent*);
 
 private:
+  bool hueBarDrawn;
+  
+  QPixmap hueBarPixmap;
+  
   int max;
   int maxH;
 
   int barWidth;
   int barX;
+  int barY;
   int pointerWidth;
 
   int border;
@@ -42,8 +47,11 @@ private:
 
   void updateColor(QMouseEvent *e);
   void drawRoundRect(QPainter &p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
-  void drawPointer(QPainter &p);
   void movePointer(QMouseEvent *e);
+  
+  void drawPointer(QPainter &p);
+  void drawBorder(QPainter& p);
+  
   void drawLeftTriangle(QPainter &p);
   void drawRightTriangle(QPainter &p);
   void drawRightTrapezoid(QPainter &p);

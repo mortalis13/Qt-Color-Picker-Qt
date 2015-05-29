@@ -25,6 +25,25 @@ protected:
 private:  
   QColor color;
   QList<QImage> hues;
+  QImage hueLayerImage;
+  
+  QColor borderColor;
+  QColor pointerBorderColor;
+  QColor pointerFillColor;
+  
+  bool hueLayerDrawn;
+  
+  int selectorX;
+  int selectorWidth;
+  
+  int pointerWidth;
+  int pointerBorder;
+  
+  int pointerX;
+  int pointerY;
+  int pointerR;
+
+  int border;
 
   int max;
   int maxH;
@@ -33,9 +52,21 @@ private:
   int mx, my;
   int maxValue;
 
+  void drawRoundRect(QPainter &p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
+  
+  void movePointer(QMouseEvent *e);
+
   void updateColor(QMouseEvent *e);
   void loadHuesFromFile();
   void paintFromList(QPainter *p);
+  
+  void drawPointer(QPainter &p);
+  void drawBorder(QPainter& p);
+  void drawCircle(QPainter &p);
+  
+  void normalizeHsv();
+  void correctPointer();
+  
 };
 
 #endif // SATVALUESELECTOR_H

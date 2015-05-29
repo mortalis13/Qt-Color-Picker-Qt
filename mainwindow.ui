@@ -73,8 +73,8 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>256</width>
-           <height>256</height>
+           <width>260</width>
+           <height>260</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -570,7 +570,6 @@
    <zorder>pColorPicker</zorder>
    <zorder>hSpacer1</zorder>
    <zorder>doubleSpinBox</zorder>
-   <zorder>verticalLayoutWidget</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="sizeGripEnabled">

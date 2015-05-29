@@ -6,12 +6,12 @@
 
 HueBar::HueBar(QWidget *parent) : QWidget(parent)
 {
+  hueBarDrawn=false;
+  
   max=255;
   maxH=360;
 
   barWidth=40;
-//  barX=(width() - barWidth)/2;
-
   border=2;
 
   pointerY=0;
@@ -29,6 +29,54 @@ HueBar::HueBar(QWidget *parent) : QWidget(parent)
   v=max;
 }
 
+void HueBar::paintEvent(QPaintEvent *event)
+{
+  QColor color;
+
+  QPainter p(this);
+  p.setRenderHint(QPainter::Antialiasing);
+
+  barX=border;
+  barY=border;
+  
+  if(!hueBarDrawn){
+    qDebug() << QString("%1, %2").arg(barWidth).arg(maxH+1);
+    
+    hueBarPixmap=QPixmap(barWidth, maxH+1);
+    QPainter tempP(&hueBarPixmap);
+
+    for(int h=0; h<=maxH; ++h){
+      color.setHsv(h, s, v);
+      tempP.setPen(color);
+      tempP.drawLine(0, h, barWidth, h);
+    }
+    
+    hueBarDrawn=true;
+  }
+  
+  p.drawPixmap(barX, barY, hueBarPixmap);
+
+  // for(int h=0; h<=maxH; ++h){
+  //   int y=h+border;
+  //   color.setHsv(h, s, v);
+  //   p.setPen(color);
+  //   p.drawLine(barX, y, barX+barWidth, y);
+  // }
+  
+  drawBorder(p);
+  drawPointer(p);
+}
+
+void HueBar::drawBorder(QPainter& p){
+  QRectF rectangle(barX-border, 0, barWidth+2*border, height());
+  drawRoundRect(p, rectangle, border, 10, borderColor);
+}
+
+void HueBar::drawPointer(QPainter& p){
+//  drawRightTriangle(p);
+  drawRightTrapezoid(p);
+}
+
 void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor)
 {
   QPen pen;
@@ -36,6 +84,7 @@ void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int bor
   pen.setColor(borderColor);
 
   p.setPen(pen);
+  p.setBrush(Qt::NoBrush);
 
   QRectF rect(sizeRect.x() + borderSize/2, sizeRect.y() + borderSize/2,
               sizeRect.width() - borderSize, sizeRect.height() - borderSize);
@@ -46,27 +95,24 @@ void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int bor
     p.drawRoundedRect(rect.translated(0.5, 0.5), borderRadius, borderRadius);
 }
 
-void HueBar::paintEvent(QPaintEvent *event)
-{
-  QColor color;
+void HueBar::drawRightTrapezoid(QPainter& p){
+  QPen pen(Qt::NoPen);
+  QBrush brush(pointerColor);
+  pen.setCapStyle(Qt::FlatCap);
+  p.setBrush(brush);
+  p.setPen(pen);
 
-  QPainter p(this);
-  p.setRenderHint(QPainter::Antialiasing);
+  QPolygonF triangle;
 
-//  barX=(width() - barWidth)/2;
-  barX=border;
+  QPoint p1(width() - pointerWidth, pointerY + pointerDy1);
+  QPoint p2(width() - pointerWidth, pointerY - pointerDy1);
+  QPoint p3(width(), pointerY - pointerDy2);
+  QPoint p4(width(), pointerY + pointerDy2);
 
-  QRectF rectangle(barX-border, 0, barWidth+2*border, height());
-  drawRoundRect(p, rectangle, border, 10, borderColor);
-  
-  for(int h=0; h<=maxH; ++h){
-    int y=h+border;
-    color.setHsv(h, s, v);
-    p.setPen(color);
-    p.drawLine(barX, y, barX+barWidth, y);
-  }
-
-  drawPointer(p);
+  triangle << p1 << p2 << p3 << p4;
+  QPainterPath path;
+  path.addPolygon(triangle);
+  p.drawPath(path);
 }
 
 void HueBar::drawLeftTriangle(QPainter& p){
@@ -105,31 +151,6 @@ void HueBar::drawRightTriangle(QPainter& p){
   QPainterPath path;
   path.addPolygon(triangle);
   p.drawPath(path);
-}
-
-void HueBar::drawRightTrapezoid(QPainter& p){
-  QPen pen(Qt::NoPen);
-  QBrush brush(pointerColor);
-  pen.setCapStyle(Qt::FlatCap);
-  p.setBrush(brush);
-  p.setPen(pen);
-
-  QPolygonF triangle;
-
-  QPoint p1(width() - pointerWidth, pointerY + pointerDy1);
-  QPoint p2(width() - pointerWidth, pointerY - pointerDy1);
-  QPoint p3(width(), pointerY - pointerDy2);
-  QPoint p4(width(), pointerY + pointerDy2);
-
-  triangle << p1 << p2 << p3 << p4;
-  QPainterPath path;
-  path.addPolygon(triangle);
-  p.drawPath(path);
-}
-
-void HueBar::drawPointer(QPainter& p){
-//  drawRightTriangle(p);
-  drawRightTrapezoid(p);
 }
 
 void HueBar::mousePressEvent(QMouseEvent *e)
