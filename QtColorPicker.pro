@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     huebar.cpp \
     colorsample.cpp \
-    satvalueselector.cpp 
+    satvalueselector.cpp \
+testpaint.cpp
 
 HEADERS  += mainwindow.h \
     huebar.h \
     colorsample.h \
-    satvalueselector.h 
+    satvalueselector.h \
+testpaint.h
 
 FORMS    += mainwindow.ui

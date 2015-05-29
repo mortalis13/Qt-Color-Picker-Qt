@@ -9,6 +9,8 @@ class HueBar : public QWidget
 public:
   explicit HueBar(QWidget *parent = 0);
 
+  QSize sizeHint() const;
+
 signals:
   void hueChanged(QColor);
 
@@ -22,9 +24,11 @@ protected:
 private:
   int max;
   int maxH;
+  int barWidth;
   int h,s,v;
 
   void updateColor(QMouseEvent *e);
+  void drawRoundRect(QPainter &p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
 };
 
 #endif // HUEBAR_H
