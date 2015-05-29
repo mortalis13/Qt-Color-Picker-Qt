@@ -25,4 +25,5 @@ HEADERS  += mainwindow.h \
     satvalueselector.h \
 testpaint.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialog.ui
