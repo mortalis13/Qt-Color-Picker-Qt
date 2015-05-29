@@ -22,7 +22,7 @@ HueBar::HueBar(QWidget *parent) : QWidget(parent)
   pointerDy2=5;
 
   borderColor.setRgb(80,80,80,200);
-  pointerColor.setRgb(80,80,80,200);
+  pointerColor.setNamedColor("#333");
 
   h=0;
   s=max;
@@ -40,8 +40,6 @@ void HueBar::paintEvent(QPaintEvent *event)
   barY=border;
   
   if(!hueBarDrawn){
-    qDebug() << QString("%1, %2").arg(barWidth).arg(maxH+1);
-    
     hueBarPixmap=QPixmap(barWidth, maxH+1);
     QPainter tempP(&hueBarPixmap);
 
@@ -56,13 +54,6 @@ void HueBar::paintEvent(QPaintEvent *event)
   
   p.drawPixmap(barX, barY, hueBarPixmap);
 
-  // for(int h=0; h<=maxH; ++h){
-  //   int y=h+border;
-  //   color.setHsv(h, s, v);
-  //   p.setPen(color);
-  //   p.drawLine(barX, y, barX+barWidth, y);
-  // }
-  
   drawBorder(p);
   drawPointer(p);
 }
@@ -82,6 +73,7 @@ void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int bor
   QPen pen;
   pen.setWidth(borderSize);
   pen.setColor(borderColor);
+  pen.setJoinStyle(Qt::RoundJoin);
 
   p.setPen(pen);
   p.setBrush(Qt::NoBrush);

@@ -19,6 +19,13 @@ protected:
 
 private:
   QColor color;
+  QColor borderColor;
+  
+  int border;
+  
+  void drawBorder(QPainter& p);
+  void drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
+  
 };
 
 #endif // COLORSAMPLE_H

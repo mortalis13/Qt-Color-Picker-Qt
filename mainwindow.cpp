@@ -20,11 +20,16 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::init(){
+//  ui->statusBar->showMessage("Hex value copied");
+  QMargins margins(5,0,0,0);
+
+  ui->leHSV->setTextMargins(margins);
+  ui->leRGB->setTextMargins(margins);
+  ui->leCMYK->setTextMargins(margins);
+  ui->leHex->setTextMargins(margins);
 }
 
 void MainWindow::addActions(){
   connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->satValueSelector, SLOT(changeHue(QColor)) );
   connect( ui->satValueSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
-
-  connect( ui->doubleSpinBox, SIGNAL(valueChanged(double)), ui->hueBar, SLOT(changePointerSize(double)) );
 }

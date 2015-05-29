@@ -1,1 +1,2 @@
 - drag by any point
+- copy hex on Sample click

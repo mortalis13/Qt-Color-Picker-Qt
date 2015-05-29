@@ -39,13 +39,8 @@ void SatValueSelector::normalizeHsv(){
 }
 
 void SatValueSelector::correctPointer(){
-  qDebug() << QString("[%1, %2]: Before Pointer correction").arg(pointerX).arg(pointerY);
-  
   pointerX=s+border;
   pointerY=max-v+border;
-  
-  qDebug() << QString("[%1, %2]: Pointer corrected").arg(pointerX).arg(pointerY);
-  qDebug();
 }
 
 void SatValueSelector::changeHue(QColor color)
@@ -110,6 +105,7 @@ void SatValueSelector::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSiz
   QPen pen;
   pen.setWidth(borderSize);
   pen.setColor(borderColor);
+  pen.setJoinStyle(Qt::RoundJoin);
 
   p.setPen(pen);
   p.setBrush(Qt::NoBrush);
@@ -125,14 +121,29 @@ void SatValueSelector::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSiz
 
 void SatValueSelector::mousePressEvent(QMouseEvent *e)
 {
+  hideCursor();
   updateColor(e);
   movePointer(e);
 }
 
 void SatValueSelector::mouseMoveEvent(QMouseEvent *e)
 {
+  hideCursor();
   updateColor(e);
   movePointer(e);
+}
+
+void SatValueSelector::mouseReleaseEvent(QMouseEvent *e)
+{
+  restoreCursor();
+}
+
+void SatValueSelector::hideCursor(){
+  this->setCursor( QCursor(Qt::BlankCursor) );
+}
+
+void SatValueSelector::restoreCursor(){
+  this->setCursor( QCursor(Qt::ArrowCursor) );
 }
 
 void SatValueSelector::movePointer(QMouseEvent* e){

@@ -18,9 +18,10 @@ public slots:
   void changeHue(QColor color);
 
 protected:
-  void paintEvent(QPaintEvent *event);
-  void mousePressEvent(QMouseEvent*);
-  void mouseMoveEvent(QMouseEvent*);
+  void paintEvent(QPaintEvent *e);
+  void mousePressEvent(QMouseEvent* e);
+  void mouseMoveEvent(QMouseEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
 
 private:  
   QColor color;
@@ -67,6 +68,8 @@ private:
   void normalizeHsv();
   void correctPointer();
   
+  void hideCursor();
+  void restoreCursor();
 };
 
 #endif // SATVALUESELECTOR_H
