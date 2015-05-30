@@ -34,9 +34,6 @@ void MainWindow::init(){
 }
 
 void MainWindow::addActions(){
-  // connect( ui->hueBar, SIGNAL(hueChangedManually(QColor)), ui->satValueSelector, SLOT(changeHueManually(QColor)) );
-  // connect( ui->hueBar, SIGNAL(hueChangedFromText(QColor)), ui->satValueSelector, SLOT(changeHueFromText(QColor)) );
-  
   connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->satValueSelector, SLOT(changeHue(QColor)) );
 
   connect( ui->satValueSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
@@ -48,7 +45,56 @@ void MainWindow::addActions(){
   connect( ui->leHex, SIGNAL(textEdited(QString)), this, SLOT(updateColorHex(QString)) );
   
   connect( colorProcessor, SIGNAL(updateFinished()), this, SLOT(updateColorFinished()) );
+
+  connect ( ui->bHSV, SIGNAL(clicked()), this, SLOT(copyHSV()) );
+  connect ( ui->bRGB, SIGNAL(clicked()), this, SLOT(copyRGB()) );
+  connect ( ui->bCMYK, SIGNAL(clicked()), this, SLOT(copyCMYK()) );
+  connect ( ui->bHex, SIGNAL(clicked()), this, SLOT(copyHex()) );
+  connect ( ui->bHexHash, SIGNAL(clicked()), this, SLOT(copyHexHash()) );
+
+  connect ( ui->bPasteHex, SIGNAL(clicked()), this, SLOT(pasteHex()) );
 }
+
+// --------------------------------------------- buttons ---------------------------------------------
+
+void MainWindow::copyHSV(){
+  QString text=ui->leHSV->text();
+  colorProcessor->copyText(text);
+  log("HSV copied");
+}
+
+void MainWindow::copyRGB(){
+  QString text=ui->leRGB->text();
+  colorProcessor->copyText(text);
+  log("RGB copied");
+}
+
+void MainWindow::copyCMYK(){
+  QString text=ui->leCMYK->text();
+  colorProcessor->copyText(text);
+  log("CMYK copied");
+}
+
+void MainWindow::copyHex(){
+  QString text=ui->leHex->text();
+  colorProcessor->copyText(text);
+  log("Hex copied");
+}
+
+void MainWindow::copyHexHash(){
+  QString text=ui->leHex->text();
+  colorProcessor->copyText("#"+text);
+  log("Hex # copied");
+}
+
+void MainWindow::pasteHex(){
+  QString text=colorProcessor->pasteText();
+  ui->leHex->setText(text);
+  ui->leHex->textEdited(text);
+  log("Hex value pasted");
+}
+
+// --------------------------------------------- update color ---------------------------------------------
 
 void MainWindow::updateColorFinished(){
   editingField="";
@@ -73,6 +119,8 @@ void MainWindow::updateColorHex(QString Hex){
   editingField="Hex";
   colorProcessor->updateColorHex(Hex);
 }
+
+// --------------------------------------------- update color text ---------------------------------------------
 
 void MainWindow::updateColorText(QColor color){
   QString HSV, RGB, CMYK, Hex;
@@ -106,4 +154,10 @@ void MainWindow::setCMYK(QString text){
 void MainWindow::setHex(QString text){
   if(editingField=="Hex") return;
   ui->leHex->setText(text);
+}
+
+// --------------------------------------------- service ---------------------------------------------
+
+void MainWindow::log(QString msg){
+  ui->statusBar->showMessage(msg);
 }

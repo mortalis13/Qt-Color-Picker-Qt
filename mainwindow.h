@@ -26,6 +26,12 @@ private slots:
   void updateColorCMYK(QString CMYK);
   void updateColorHex(QString Hex);
   
+  void copyHSV();
+  void copyRGB();
+  void copyCMYK();
+  void copyHex();
+  void copyHexHash();
+  void pasteHex();
 private:
   Ui::MainWindow *ui;
   ColorProcessor *colorProcessor;
@@ -39,6 +45,7 @@ private:
   void setCMYK(QString text);
   void setHex(QString text);
   
+  void log(QString msg);
 };
 
 #endif // MAINWINDOW_H

@@ -3,7 +3,9 @@
 
 #include <QtCore>
 #include <QColor>
+
 #include <QObject>
+#include <QClipboard>
 
 #include "huebar.h"
 #include "satvalueselector.h"
@@ -27,12 +29,16 @@ public:
   
   void updateColor(QColor color);
   
+  void copyText(QString text);
+  QString pasteText();
+
 signals:
   void updateFinished();
 
 private:
   HueBar* hueBar;
   SatValueSelector* satValueSelector;
+  QClipboard* clip;
   
   QColor getColorHSV(QString HSV);
   QColor getColorRGB(QString RGB);

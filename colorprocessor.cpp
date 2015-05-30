@@ -1,9 +1,12 @@
 
 #include "colorprocessor.h"
 
+#include <QApplication>
+
 ColorProcessor::ColorProcessor(HueBar *hueBar, SatValueSelector *satValueSelector, QObject* parent) : QObject(parent){
   this->hueBar=hueBar;
   this->satValueSelector=satValueSelector;
+  clip=QApplication::clipboard();
 }
 
 // -------------------------------------------- color strings --------------------------------------------
@@ -132,4 +135,16 @@ void ColorProcessor::updateColor(QColor color){
   satValueSelector->setSV(s, v);
 
   emit updateFinished();
+}
+
+// -------------------------------------------- copy color text --------------------------------------------
+
+void ColorProcessor::copyText(QString text){
+  clip->setText(text);
+}
+
+QString ColorProcessor::pasteText(){
+  QString text=clip->text();
+  text=text.replace("#", "");
+  return text;
 }
