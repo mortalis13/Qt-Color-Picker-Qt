@@ -31,6 +31,9 @@ void MainWindow::init(){
   ui->leHex->setTextMargins(margins);
 
   ui->leHSV->setType(ColorText::HSV);
+  ui->leRGB->setType(ColorText::RGB);
+  ui->leCMYK->setType(ColorText::CMYK);
+  ui->leHex->setType(ColorText::Hex);
 
   ui->hueBar->setH(0);
 }
@@ -161,5 +164,5 @@ void MainWindow::setHex(QString text){
 // --------------------------------------------- service ---------------------------------------------
 
 void MainWindow::log(QString msg){
-  ui->statusBar->showMessage(msg);
+  ui->statusBar->showMessage(msg, 3000);
 }

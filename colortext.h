@@ -15,6 +15,7 @@ public:
 
 private:
   ColorType colorType;
+  QString separator;
 
 public:
   explicit ColorText(QWidget *parent = 0);
@@ -39,6 +40,9 @@ private:
   void selectNextComponent();
   void selectPrevComponent();
   void selectComponent(bool next);
+  QStringList getComponentsFromHex(QString hex);
+  int getGroupNumber(int group, int len, bool next);
+  int getHexGroup(int pos);
 };
 
 #endif // COLORTEXT_H
