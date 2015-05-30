@@ -36,5 +36,5 @@ void ColorSample::paintEvent(QPaintEvent *event)
 
 void ColorSample::drawBorder(QPainter& p){
   QRectF rectangle(0, 0, width(), height());
-  Services::drawRoundRect(p, rectangle, border, 10, borderColor);
+  Services::drawInnerRoundRect(p, rectangle, border, 10, borderColor);
 }
