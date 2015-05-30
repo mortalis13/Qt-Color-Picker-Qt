@@ -20,9 +20,12 @@ public:
 private slots:
   void updateColorText(QColor color);
 
+  void updateColorHSV(QString HSV);
+  void updateColorRGB(QString RGB);
 private:
   Ui::MainWindow *ui;
   ColorProcessor *colorProcessor;
+  QString editingField;
 
   void addActions();
   void init();

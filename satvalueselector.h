@@ -11,12 +11,17 @@ class SatValueSelector : public QWidget
 public:
   explicit SatValueSelector(QWidget *parent = 0);
 
+  void setSaturation(int s);
+  void setValue(int v);
+  void updateColor();
+
 signals:
   void colorChanged(QColor);
 
 public slots:
-  void changeHue(QColor color);
 
+  void changeHueManually(QColor color);
+  void changeHueFromText(QColor color);
 protected:
   void paintEvent(QPaintEvent *e);
   void mousePressEvent(QMouseEvent* e);
@@ -24,6 +29,8 @@ protected:
   void mouseReleaseEvent(QMouseEvent* e);
 
 private:  
+  void changeHue(QColor color);
+
   QColor color;
   QList<QImage> hues;
   QImage hueLayerImage;
@@ -57,7 +64,6 @@ private:
   
   void movePointer(QMouseEvent *e);
 
-  void updateColor(QMouseEvent *e);
   void loadHuesFromFile();
   void paintFromList(QPainter *p);
   

@@ -349,7 +349,7 @@
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>257 36 185</string>
+               <string/>
               </property>
               <property name="readOnly">
                <bool>false</bool>
@@ -443,7 +443,7 @@
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>255 9 67</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -534,7 +534,7 @@
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>100 100 100 100</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -625,7 +625,7 @@
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>a86d52</string>
+               <string/>
               </property>
              </widget>
             </item>

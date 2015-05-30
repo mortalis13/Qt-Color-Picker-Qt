@@ -27,6 +27,30 @@ SatValueSelector::SatValueSelector(QWidget *parent) :
   v=max;
 }
 
+void SatValueSelector::setSaturation(int s)
+{
+  this->s=s;
+  repaint();
+}
+
+void SatValueSelector::setValue(int v)
+{
+  this->v=v;
+  repaint();
+}
+
+void SatValueSelector::changeHueFromText(QColor color){
+  changeHue(color);
+}
+
+void SatValueSelector::changeHueManually(QColor color){
+  changeHue(color);
+
+  QColor newColor;
+  newColor.setHsv(h, s, v);
+  emit colorChanged(newColor);
+}
+
 void SatValueSelector::changeHue(QColor color)
 {
   hueLayerDrawn=false;
@@ -35,11 +59,11 @@ void SatValueSelector::changeHue(QColor color)
   normalizeHsv();
   correctPointer();
 
-  QColor newColor;
-  newColor.setHsv(h, s, v);
+//  QColor newColor;
+//  newColor.setHsv(h, s, v);
+//  emit colorChanged(newColor);
 
   update();
-  emit colorChanged(newColor);
 }
 
 void SatValueSelector::paintEvent(QPaintEvent *event)
@@ -79,6 +103,9 @@ void SatValueSelector::drawBorder(QPainter& p){
 }
 
 void SatValueSelector::correctPointer(){
+  pointerX=s+border;
+  pointerY=max-v+border;
+
   pointerX=qMax(border, pointerX);
   pointerX=qMin(max+border, pointerX);
 
@@ -126,15 +153,17 @@ void SatValueSelector::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSiz
 void SatValueSelector::mousePressEvent(QMouseEvent *e)
 {
   hideCursor(e);
-  updateColor(e);
   movePointer(e);
+  updateColor();
+  repaint();
 }
 
 void SatValueSelector::mouseMoveEvent(QMouseEvent *e)
 {
   hideCursor(e);
-  updateColor(e);
   movePointer(e);
+  updateColor();
+  repaint();
 }
 
 void SatValueSelector::mouseReleaseEvent(QMouseEvent *e)
@@ -161,12 +190,12 @@ void SatValueSelector::restoreCursor(){
 void SatValueSelector::movePointer(QMouseEvent* e){
   pointerX=e->x();
   pointerY=e->y();
-  repaint();
+//  repaint();
 }
 
-void SatValueSelector::updateColor(QMouseEvent* e){
-  s=e->x() - border;
-  v=max - (e->y() - border);
+void SatValueSelector::updateColor(){
+  s=pointerX - border;
+  v=max - (pointerY - border);
 
   s=qMax(0, s);             // s=qMin( max, qMax(0, s) );
   s=qMin(max, s);

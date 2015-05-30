@@ -10,9 +10,12 @@ public:
   explicit HueBar(QWidget *parent = 0);
 
   QSize sizeHint() const;
+  void setHue(int hue);
 
+  void setHueFromText(int hue);
 signals:
-  void hueChanged(QColor);
+  void hueChangedManually(QColor);
+  void hueChangedFromText(QColor);
 
 public slots:
   void changePointerSize(double size);

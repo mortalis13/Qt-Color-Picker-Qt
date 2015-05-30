@@ -70,9 +70,7 @@ void HueBar::drawBorder(QPainter& p){
 }
 
 void HueBar::correctPointer(){
-//  if(pointerY-border<0) pointerY=border;
-//  if(pointerY-border>maxH) pointerY=maxH+border;
-
+  pointerY=h+border;
   pointerY=qMax(0+border, pointerY);
   pointerY=qMin(maxH+border, pointerY);
 }
@@ -180,7 +178,7 @@ void HueBar::updateColor(QMouseEvent* e){
   h=qMin(maxH, h);
 
   color.setHsv(h, s, v);
-  emit hueChanged(color);
+  emit hueChangedManually(color);
 
 //  qDebug() << QString("Coordinates: %1, %2").arg(e->x()).arg(e->y());
 }
@@ -188,6 +186,26 @@ void HueBar::updateColor(QMouseEvent* e){
 QSize HueBar::sizeHint() const
 {
   return QSize( 60, 365 );
+}
+
+void HueBar::setHue(int hue)
+{
+  h=hue;
+  QColor color;
+  color.setHsv(h, s, v);
+  emit hueChangedManually(color);
+  update();
+}
+
+void HueBar::setHueFromText(int hue)
+{
+  h=hue;
+  QColor color;
+  color.setHsv(h, s, v);
+  emit hueChangedFromText(color);
+
+  correctPointer();
+  update();
 }
 
 void HueBar::changePointerSize(double size)
