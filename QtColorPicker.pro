@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     satvalueselector.cpp \
 testpaint.cpp \ 
 colorprocessor.cpp \
-    services.cpp
+    services.cpp \
+    colortext.cpp
 
 HEADERS  += mainwindow.h \
     huebar.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     satvalueselector.h \
 testpaint.h \
 colorprocessor.h \
-    services.h
+    services.h \
+    colortext.h
 
 FORMS    += mainwindow.ui \
     dialog.ui

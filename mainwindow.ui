@@ -324,7 +324,7 @@
              </widget>
             </item>
             <item alignment="Qt::AlignLeft">
-             <widget class="QLineEdit" name="leHSV">
+             <widget class="ColorText" name="leHSV">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -792,6 +792,11 @@
    <extends>QWidget</extends>
    <header>satvalueselector.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorText</class>
+   <extends>QLineEdit</extends>
+   <header>colortext.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

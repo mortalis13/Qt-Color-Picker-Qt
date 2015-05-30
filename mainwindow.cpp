@@ -30,6 +30,8 @@ void MainWindow::init(){
   ui->leCMYK->setTextMargins(margins);
   ui->leHex->setTextMargins(margins);
 
+  ui->leHSV->setType(ColorText::HSV);
+
   ui->hueBar->setH(0);
 }
 
