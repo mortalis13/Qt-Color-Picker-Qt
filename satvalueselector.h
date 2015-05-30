@@ -68,7 +68,7 @@ private:
   void normalizeHsv();
   void correctPointer();
   
-  void hideCursor();
+  void hideCursor(QMouseEvent *e);
   void restoreCursor();
 };
 

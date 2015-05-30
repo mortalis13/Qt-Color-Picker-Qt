@@ -55,6 +55,7 @@ private:
   void drawLeftTriangle(QPainter &p);
   void drawRightTriangle(QPainter &p);
   void drawRightTrapezoid(QPainter &p);
+  void correctPointer();
 };
 
 #endif // HUEBAR_H

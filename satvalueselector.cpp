@@ -27,22 +27,6 @@ SatValueSelector::SatValueSelector(QWidget *parent) :
   v=max;
 }
 
-void SatValueSelector::normalizeHsv(){
-  h=qMax(0, h);
-  h=qMin(maxH, h);
-
-  s=qMax(0, s);
-  s=qMin(max, s);
-
-  v=qMax(0, v);
-  v=qMin(max, v);
-}
-
-void SatValueSelector::correctPointer(){
-  pointerX=s+border;
-  pointerY=max-v+border;
-}
-
 void SatValueSelector::changeHue(QColor color)
 {
   hueLayerDrawn=false;
@@ -84,13 +68,33 @@ void SatValueSelector::paintEvent(QPaintEvent *event)
   drawBorder(p);
 }
 
+void SatValueSelector::drawPointer(QPainter& p){
+  correctPointer();
+  drawCircle(p);
+}
+
 void SatValueSelector::drawBorder(QPainter& p){
   QRectF rectangle(selectorX-border, 0, selectorWidth+2*border, height());
   drawRoundRect(p, rectangle, border, 10, borderColor);
 }
 
-void SatValueSelector::drawPointer(QPainter& p){
-  drawCircle(p);
+void SatValueSelector::correctPointer(){
+  pointerX=qMax(border, pointerX);
+  pointerX=qMin(max+border, pointerX);
+
+  pointerY=qMax(border, pointerY);
+  pointerY=qMin(max+border, pointerY);
+}
+
+void SatValueSelector::normalizeHsv(){
+  h=qMax(0, h);
+  h=qMin(maxH, h);
+
+  s=qMax(0, s);
+  s=qMin(max, s);
+
+  v=qMax(0, v);
+  v=qMin(max, v);
 }
 
 void SatValueSelector::drawCircle(QPainter& p){
@@ -121,14 +125,14 @@ void SatValueSelector::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSiz
 
 void SatValueSelector::mousePressEvent(QMouseEvent *e)
 {
-  hideCursor();
+  hideCursor(e);
   updateColor(e);
   movePointer(e);
 }
 
 void SatValueSelector::mouseMoveEvent(QMouseEvent *e)
 {
-  hideCursor();
+  hideCursor(e);
   updateColor(e);
   movePointer(e);
 }
@@ -138,7 +142,15 @@ void SatValueSelector::mouseReleaseEvent(QMouseEvent *e)
   restoreCursor();
 }
 
-void SatValueSelector::hideCursor(){
+void SatValueSelector::hideCursor(QMouseEvent *e){
+  int x=e->x();
+  int y=e->y();
+
+  if( (x<border || x>max+border) || (y<border || y>max+border) ) {
+    restoreCursor();
+    return;
+  }
+
   this->setCursor( QCursor(Qt::BlankCursor) );
 }
 
@@ -156,8 +168,11 @@ void SatValueSelector::updateColor(QMouseEvent* e){
   s=e->x() - border;
   v=max - (e->y() - border);
 
-  if(s<0 || s>max) return;
-  if(v<0 || v>max) return;
+  s=qMax(0, s);             // s=qMin( max, qMax(0, s) );
+  s=qMin(max, s);
+
+  v=qMax(0, v);
+  v=qMin(max, v);
 
   color.setHsv(h, s, v);
   emit colorChanged(color);

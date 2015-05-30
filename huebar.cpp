@@ -54,8 +54,14 @@ void HueBar::paintEvent(QPaintEvent *event)
   
   p.drawPixmap(barX, barY, hueBarPixmap);
 
-  drawBorder(p);
   drawPointer(p);
+  drawBorder(p);
+}
+
+void HueBar::drawPointer(QPainter& p){
+  correctPointer();
+//  drawRightTriangle(p);
+  drawRightTrapezoid(p);
 }
 
 void HueBar::drawBorder(QPainter& p){
@@ -63,9 +69,12 @@ void HueBar::drawBorder(QPainter& p){
   drawRoundRect(p, rectangle, border, 10, borderColor);
 }
 
-void HueBar::drawPointer(QPainter& p){
-//  drawRightTriangle(p);
-  drawRightTrapezoid(p);
+void HueBar::correctPointer(){
+//  if(pointerY-border<0) pointerY=border;
+//  if(pointerY-border>maxH) pointerY=maxH+border;
+
+  pointerY=qMax(0+border, pointerY);
+  pointerY=qMin(maxH+border, pointerY);
 }
 
 void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor)
@@ -89,10 +98,10 @@ void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int bor
 
 void HueBar::drawRightTrapezoid(QPainter& p){
   QPen pen(Qt::NoPen);
-  QBrush brush(pointerColor);
   pen.setCapStyle(Qt::FlatCap);
-  p.setBrush(brush);
+  QBrush brush(pointerColor);
   p.setPen(pen);
+  p.setBrush(brush);
 
   QPolygonF triangle;
 
@@ -166,7 +175,9 @@ void HueBar::updateColor(QMouseEvent* e){
   QColor color;
 
   h=e->y()-border;
-  if(h<0 || h>maxH) return;
+
+  h=qMax(0, h);
+  h=qMin(maxH, h);
 
   color.setHsv(h, s, v);
   emit hueChanged(color);
