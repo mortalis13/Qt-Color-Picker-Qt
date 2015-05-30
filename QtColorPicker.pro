@@ -17,15 +17,17 @@ SOURCES += main.cpp\
     huebar.cpp \
     colorsample.cpp \
     satvalueselector.cpp \
+testpaint.cpp \ 
 colorprocessor.cpp \
-testpaint.cpp 
+    services.cpp
 
 HEADERS  += mainwindow.h \
     huebar.h \
     colorsample.h \
     satvalueselector.h \
-    colorprocessor.h \
-testpaint.h
+testpaint.h \
+colorprocessor.h \
+    services.h
 
 FORMS    += mainwindow.ui \
     dialog.ui

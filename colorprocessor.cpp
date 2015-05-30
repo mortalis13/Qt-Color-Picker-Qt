@@ -1,10 +1,12 @@
 
 #include "colorprocessor.h"
 
-ColorProcessor::ColorProcessor(HueBar *hueBar, SatValueSelector *satValueSelector){
+ColorProcessor::ColorProcessor(HueBar *hueBar, SatValueSelector *satValueSelector, QObject* parent) : QObject(parent){
   this->hueBar=hueBar;
   this->satValueSelector=satValueSelector;
 }
+
+// -------------------------------------------- color strings --------------------------------------------
 
 QString ColorProcessor::getHSV(QColor color){
   QString res;
@@ -19,13 +21,12 @@ QString ColorProcessor::getHSV(QColor color){
 
 QString ColorProcessor::getRGB(QColor color){
   QString res;
-  
+
   int r=color.red();
   int g=color.green();
   int b=color.blue();
 
   res=QString("%1 %2 %3").arg(r).arg(g).arg(b);
-  
   return res;
 }
 
@@ -38,18 +39,18 @@ QString ColorProcessor::getCMYK(QColor color){
   int k=color.black();
 
   res=QString("%1 %2 %3 %4").arg(c).arg(m).arg(y).arg(k);
-
   return res;
 }
 
 QString ColorProcessor::getHex(QColor color){
   QString res;
-  
+
   res=color.name();
   res=res.replace("#", "");
-
   return res;
 }
+
+// -------------------------------------------- color objects --------------------------------------------
 
 QColor ColorProcessor::getColorHSV(QString HSV){
   QStringList list;
@@ -79,34 +80,56 @@ QColor ColorProcessor::getColorRGB(QString RGB){
   return color;
 }
 
+QColor ColorProcessor::getColorCMYK(QString CMYK){
+  QStringList list;
+  QColor color;
+
+  list=CMYK.split(" ");
+  int c=list[0].toInt();
+  int m=list[1].toInt();
+  int y=list[2].toInt();
+  int k=list[3].toInt();
+
+  color.setCmyk(c, m, y, k);
+
+  return color;
+}
+
+QColor ColorProcessor::getColorHex(QString Hex){
+  QColor color;
+  color.setNamedColor("#"+Hex);
+  return color;
+}
+
+// -------------------------------------------- update color --------------------------------------------
+
 void ColorProcessor::updateColorHSV(QString HSV){
   QColor color=getColorHSV(HSV);
-
-  int h=color.hue();
-  int s=color.saturation();
-  int v=color.value();
-
-//  qDebug() << QString("%1, %2, %3").arg(h).arg(s).arg(v);
-
-  hueBar->setHueFromText(h);
-  satValueSelector->setSaturation(s);
-  satValueSelector->setValue(v);
-
-  satValueSelector->updateColor();
+  updateColor(color);
 }
 
 void ColorProcessor::updateColorRGB(QString RGB){
   QColor color=getColorRGB(RGB);
+  updateColor(color);
+}
 
+void ColorProcessor::updateColorCMYK(QString CMYK){
+  QColor color=getColorCMYK(CMYK);
+  updateColor(color);
+}
+
+void ColorProcessor::updateColorHex(QString Hex){
+  QColor color=getColorHex(Hex);
+  updateColor(color);
+}
+
+void ColorProcessor::updateColor(QColor color){
   int h=color.hue();
   int s=color.saturation();
   int v=color.value();
 
-//  qDebug() << QString("%1, %2, %3").arg(h).arg(s).arg(v);
+  hueBar->setH(h);
+  satValueSelector->setSV(s, v);
 
-  hueBar->setHueFromText(h);
-  satValueSelector->setSaturation(s);
-  satValueSelector->setValue(v);
-
-  satValueSelector->updateColor();
+  emit updateFinished();
 }

@@ -24,7 +24,6 @@ private:
   int border;
   
   void drawBorder(QPainter& p);
-  void drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
   
 };
 

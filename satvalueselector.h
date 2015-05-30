@@ -13,15 +13,15 @@ public:
 
   void setSaturation(int s);
   void setValue(int v);
+  void setSV(int s, int v);
   void updateColor();
 
 signals:
   void colorChanged(QColor);
 
 public slots:
-
-  void changeHueManually(QColor color);
-  void changeHueFromText(QColor color);
+  void changeHue(QColor color);
+  
 protected:
   void paintEvent(QPaintEvent *e);
   void mousePressEvent(QMouseEvent* e);
@@ -29,53 +29,28 @@ protected:
   void mouseReleaseEvent(QMouseEvent* e);
 
 private:  
-  void changeHue(QColor color);
-
-  QColor color;
-  QList<QImage> hues;
-  QImage hueLayerImage;
-  
-  QColor borderColor;
-  QColor pointerBorderColor;
-  QColor pointerFillColor;
-  
-  bool hueLayerDrawn;
-  
-  int selectorX;
-  int selectorWidth;
-  
-  int pointerWidth;
-  int pointerBorder;
-  
-  int pointerX;
-  int pointerY;
-  int pointerR;
-
-  int border;
-
-  int max;
-  int maxH;
-  int h,s,v;
-
-  int mx, my;
-  int maxValue;
-
-  void drawRoundRect(QPainter &p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
-  
+  void drawPointer(QPainter &p);
+  void correctPointer();
   void movePointer(QMouseEvent *e);
 
-  void loadHuesFromFile();
-  void paintFromList(QPainter *p);
-  
-  void drawPointer(QPainter &p);
   void drawBorder(QPainter& p);
   void drawCircle(QPainter &p);
   
-  void normalizeHsv();
-  void correctPointer();
-  
   void hideCursor(QMouseEvent *e);
   void restoreCursor();
+  
+private:  
+  bool hueLayerDrawn;
+  QImage hueLayerImage;
+  
+  int h,s,v;
+  
+  int selectorX;
+  int selectorY;
+  
+  int pointerX;
+  int pointerY;
+
 };
 
 #endif // SATVALUESELECTOR_H

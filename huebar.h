@@ -9,16 +9,12 @@ class HueBar : public QWidget
 public:
   explicit HueBar(QWidget *parent = 0);
 
-  QSize sizeHint() const;
-  void setHue(int hue);
-
-  void setHueFromText(int hue);
+  void setH(int h);
+  
 signals:
-  void hueChangedManually(QColor);
-  void hueChangedFromText(QColor);
+  void hueChanged(QColor);
 
 public slots:
-  void changePointerSize(double size);
 
 protected:
   void paintEvent(QPaintEvent*);
@@ -26,39 +22,26 @@ protected:
   void mouseMoveEvent(QMouseEvent*);
 
 private:
+  void updateColor();
+  
+  void drawPointer(QPainter &p);
+  void movePointer(QMouseEvent *e);
+  void correctPointer();
+  
+  void drawBorder(QPainter& p);
+  void drawRightTrapezoid(QPainter &p);
+  
+private:
   bool hueBarDrawn;
   
   QPixmap hueBarPixmap;
   
-  int max;
-  int maxH;
-
-  int barWidth;
-  int barX;
-  int barY;
-  int pointerWidth;
-
-  int border;
   int h,s,v;
-
+  
+  // int barX;
+  // int barY;
   int pointerY;
-  int triangleDy;
-  int pointerDy1, pointerDy2;
 
-  QColor pointerColor;
-  QColor borderColor;
-
-  void updateColor(QMouseEvent *e);
-  void drawRoundRect(QPainter &p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor);
-  void movePointer(QMouseEvent *e);
-  
-  void drawPointer(QPainter &p);
-  void drawBorder(QPainter& p);
-  
-  void drawLeftTriangle(QPainter &p);
-  void drawRightTriangle(QPainter &p);
-  void drawRightTrapezoid(QPainter &p);
-  void correctPointer();
 };
 
 #endif // HUEBAR_H

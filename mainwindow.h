@@ -19,9 +19,13 @@ public:
 
 private slots:
   void updateColorText(QColor color);
+  void updateColorFinished();
 
   void updateColorHSV(QString HSV);
   void updateColorRGB(QString RGB);
+  void updateColorCMYK(QString CMYK);
+  void updateColorHex(QString Hex);
+  
 private:
   Ui::MainWindow *ui;
   ColorProcessor *colorProcessor;

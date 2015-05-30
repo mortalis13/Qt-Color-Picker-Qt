@@ -4,29 +4,43 @@
 #include <QDebug>
 #include <QMouseEvent>
 
+#include "services.h"
+
+
+// --------------------------------------------- consts ---------------------------------------------
+
+const int maxH=360;
+const int maxSV=255;
+
+const int border=2;
+const int borderRadius=10;
+
+const int barX=border;
+const int barY=border;
+const int barWidth=40;
+
+const int minPointerY=border;
+const int maxPointerY=maxH + minPointerY;
+
+const int pointerWidth=10;
+const int pointerDy1=1.5;
+const int pointerDy2=5;
+
+const QColor borderColor(80,80,80,200);
+const QColor pointerColor("#333");
+
+
+// ----------------------------------------------------------------------------------------------------
+
 HueBar::HueBar(QWidget *parent) : QWidget(parent)
 {
   hueBarDrawn=false;
   
-  max=255;
-  maxH=360;
-
-  barWidth=40;
-  border=2;
-
   pointerY=0;
-  pointerWidth=10;
-
-  triangleDy=3;
-  pointerDy1=1.5;
-  pointerDy2=5;
-
-  borderColor.setRgb(80,80,80,200);
-  pointerColor.setNamedColor("#333");
-
+  
   h=0;
-  s=max;
-  v=max;
+  s=maxSV;
+  v=maxSV;
 }
 
 void HueBar::paintEvent(QPaintEvent *event)
@@ -35,9 +49,6 @@ void HueBar::paintEvent(QPaintEvent *event)
 
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
-
-  barX=border;
-  barY=border;
   
   if(!hueBarDrawn){
     hueBarPixmap=QPixmap(barWidth, maxH+1);
@@ -58,40 +69,40 @@ void HueBar::paintEvent(QPaintEvent *event)
   drawBorder(p);
 }
 
+void HueBar::mousePressEvent(QMouseEvent *e)
+{
+  movePointer(e);
+  updateColor();
+}
+
+void HueBar::mouseMoveEvent(QMouseEvent *e)
+{
+  movePointer(e);
+  updateColor();
+}
+
+// ---------------------------------------------- service ----------------------------------------------
+
 void HueBar::drawPointer(QPainter& p){
   correctPointer();
 //  drawRightTriangle(p);
   drawRightTrapezoid(p);
 }
 
-void HueBar::drawBorder(QPainter& p){
-  QRectF rectangle(barX-border, 0, barWidth+2*border, height());
-  drawRoundRect(p, rectangle, border, 10, borderColor);
-}
-
 void HueBar::correctPointer(){
-  pointerY=h+border;
-  pointerY=qMax(0+border, pointerY);
-  pointerY=qMin(maxH+border, pointerY);
+  pointerY = h + minPointerY;
+  pointerY = qMax( minPointerY, pointerY );
+  pointerY = qMin( maxPointerY, pointerY );
 }
 
-void HueBar::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor)
-{
-  QPen pen;
-  pen.setWidth(borderSize);
-  pen.setColor(borderColor);
-  pen.setJoinStyle(Qt::RoundJoin);
+void HueBar::movePointer(QMouseEvent* e){
+  pointerY=e->y();
+  update();
+}
 
-  p.setPen(pen);
-  p.setBrush(Qt::NoBrush);
-
-  QRectF rect(sizeRect.x() + borderSize/2, sizeRect.y() + borderSize/2,
-              sizeRect.width() - borderSize, sizeRect.height() - borderSize);
-
-  if(borderSize % 2 == 0)
-    p.drawRoundedRect(rect, borderSize, borderSize);
-  else
-    p.drawRoundedRect(rect.translated(0.5, 0.5), borderRadius, borderRadius);
+void HueBar::drawBorder(QPainter& p){
+  QRectF rectangle( barX, barY, barWidth, maxH );                               // set inner rect coordinates (the border will be outer)
+  Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
 void HueBar::drawRightTrapezoid(QPainter& p){
@@ -103,10 +114,10 @@ void HueBar::drawRightTrapezoid(QPainter& p){
 
   QPolygonF triangle;
 
-  QPoint p1(width() - pointerWidth, pointerY + pointerDy1);
-  QPoint p2(width() - pointerWidth, pointerY - pointerDy1);
-  QPoint p3(width(), pointerY - pointerDy2);
-  QPoint p4(width(), pointerY + pointerDy2);
+  QPoint p1( width() - pointerWidth, pointerY + pointerDy1 );
+  QPoint p2( width() - pointerWidth, pointerY - pointerDy1 );
+  QPoint p3( width(), pointerY - pointerDy2 );
+  QPoint p4( width(), pointerY + pointerDy2 );
 
   triangle << p1 << p2 << p3 << p4;
   QPainterPath path;
@@ -114,102 +125,25 @@ void HueBar::drawRightTrapezoid(QPainter& p){
   p.drawPath(path);
 }
 
-void HueBar::drawLeftTriangle(QPainter& p){
-  QPen pen(Qt::NoPen);
-  QBrush brush(pointerColor);
-  pen.setCapStyle(Qt::FlatCap);
-  p.setBrush(brush);
-  p.setPen(pen);
-
-  QPolygonF triangle;
-
-  QPoint p1(border+pointerWidth, pointerY);
-  QPoint p2(border, pointerY - triangleDy);
-  QPoint p3(border, pointerY + triangleDy);
-
-  triangle << p1 << p2 << p3;
-  QPainterPath path;
-  path.addPolygon(triangle);
-  p.drawPath(path);
-}
-
-void HueBar::drawRightTriangle(QPainter& p){
-  QPen pen(Qt::NoPen);
-  QBrush brush(pointerColor);
-  pen.setCapStyle(Qt::FlatCap);
-  p.setBrush(brush);
-  p.setPen(pen);
-
-  QPolygonF triangle;
-
-  QPoint p1(width()-border-pointerWidth, pointerY);
-  QPoint p2(width()-border, pointerY - triangleDy);
-  QPoint p3(width()-border, pointerY + triangleDy);
-
-  triangle << p1 << p2 << p3;
-  QPainterPath path;
-  path.addPolygon(triangle);
-  p.drawPath(path);
-}
-
-void HueBar::mousePressEvent(QMouseEvent *e)
-{
-  updateColor(e);
-  movePointer(e);
-}
-
-void HueBar::mouseMoveEvent(QMouseEvent *e)
-{
-  updateColor(e);
-  movePointer(e);
-}
-
-void HueBar::movePointer(QMouseEvent* e){
-  pointerY=e->y();
-  update();
-}
-
-void HueBar::updateColor(QMouseEvent* e){
+void HueBar::updateColor(){
   QColor color;
 
-  h=e->y()-border;
-
-  h=qMax(0, h);
-  h=qMin(maxH, h);
+  h = pointerY-border;
+  h = qMax(0, h);
+  h = qMin(maxH, h);
 
   color.setHsv(h, s, v);
-  emit hueChangedManually(color);
-
-//  qDebug() << QString("Coordinates: %1, %2").arg(e->x()).arg(e->y());
+  emit hueChanged(color);
 }
 
-QSize HueBar::sizeHint() const
-{
-  return QSize( 60, 365 );
-}
+// ---------------------------------------------- set/get ----------------------------------------------
 
-void HueBar::setHue(int hue)
+void HueBar::setH(int h)
 {
-  h=hue;
+  this->h=h;
   QColor color;
   color.setHsv(h, s, v);
-  emit hueChangedManually(color);
-  update();
-}
 
-void HueBar::setHueFromText(int hue)
-{
-  h=hue;
-  QColor color;
-  color.setHsv(h, s, v);
-  emit hueChangedFromText(color);
-
-  correctPointer();
-  update();
-}
-
-void HueBar::changePointerSize(double size)
-{
-  triangleDy=size;
+  emit hueChanged(color);
   update();
 }

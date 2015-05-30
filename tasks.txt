@@ -1,2 +1,3 @@
 - drag by any point
 - copy hex on Sample click
+- saturation/value pointer on the sides of selector
