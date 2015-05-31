@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QEnterEvent>
 
-#include "services.h"
+#include "Service/services.h"
 
 
 // --------------------------------------------- consts ---------------------------------------------
@@ -21,7 +21,6 @@ ColorSample::ColorSample(QWidget *parent) :
 {
   color.setHsv(0, 255, 255);
   borderColor=defaultBorderColor;
-  shadow=NULL;
 }
 
 

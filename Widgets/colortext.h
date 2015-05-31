@@ -4,7 +4,7 @@
 #include <QLineEdit>
 #include <QKeyEvent>
 
-#include "vars.h"
+#include "Service/vars.h"
 
 class ColorText : public QLineEdit
 {

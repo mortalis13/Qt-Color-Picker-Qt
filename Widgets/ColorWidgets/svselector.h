@@ -5,6 +5,7 @@
 #include <QList>
 #include <QPixmap>
 
+
 class SVSelector : public QWidget
 {
   Q_OBJECT

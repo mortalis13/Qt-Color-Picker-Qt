@@ -7,10 +7,10 @@
 #include <QObject>
 #include <QClipboard>
 
-#include "hselector.h"
-#include "svselector.h"
+#include "Widgets/ColorWidgets/hselector.h"
+#include "Widgets/ColorWidgets/svselector.h"
 
-#include "vars.h"
+#include "Service/vars.h"
 
 
 class ColorProcessor : public QObject

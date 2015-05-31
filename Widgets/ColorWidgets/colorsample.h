@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QMouseEvent>
-#include <QGraphicsDropShadowEffect>
 
 
 class ColorSample : public QWidget
@@ -34,7 +33,6 @@ private:
 
   QColor color;
   QColor borderColor;
-  QGraphicsDropShadowEffect *shadow;
   
 };
 

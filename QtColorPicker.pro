@@ -13,27 +13,35 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    colorsample.cpp \
-testpaint.cpp \ 
-colorprocessor.cpp \
-    services.cpp \
-    colortext.cpp \
-    validator.cpp \
-    vars.cpp \
-    hselector.cpp \
-    svselector.cpp
+        Views/mainwindow.cpp \
+\
+        Widgets/ColorWidgets/colorsample.cpp \
+        Widgets/ColorWidgets/hselector.cpp \
+        Widgets/ColorWidgets/svselector.cpp \
+        Widgets/colortext.cpp \
+\
+        Service/services.cpp \
+        Service/validator.cpp \
+        Service/vars.cpp \
+\
+        Models/colorprocessor.cpp \
+\
+        Test/testpaint.cpp \
 
-HEADERS  += mainwindow.h \
-    colorsample.h \
-testpaint.h \
-colorprocessor.h \
-    services.h \
-    colortext.h \
-    validator.h \
-    vars.h \
-    hselector.h \
-    svselector.h
+HEADERS  += Views/mainwindow.h \
+\
+        Widgets/ColorWidgets/colorsample.h \
+        Widgets/ColorWidgets/hselector.h \
+        Widgets/ColorWidgets/svselector.h \
+        Widgets/colortext.h \
+\
+        Service/services.h \
+        Service/validator.h \
+        Service/vars.h \
+\
+        Models/colorprocessor.h \
+\
+        Test/testpaint.h \
 
-FORMS    += mainwindow.ui \
-    dialog.ui
+FORMS    += Views/mainwindow.ui \
+            Views/dialog.ui

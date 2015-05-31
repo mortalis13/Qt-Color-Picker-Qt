@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "colorprocessor.h"
+#include "Models/colorprocessor.h"
 
 namespace Ui {
 class MainWindow;

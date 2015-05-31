@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QMouseEvent>
 
-#include "services.h"
+#include "Service/services.h"
 
 
 // --------------------------------------------- consts ---------------------------------------------

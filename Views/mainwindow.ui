@@ -779,27 +779,27 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>ColorSample</class>
-   <extends>QWidget</extends>
-   <header>colorsample.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ColorText</class>
-   <extends>QLineEdit</extends>
-   <header>colortext.h</header>
-  </customwidget>
-  <customwidget>
    <class>HSelector</class>
    <extends>QWidget</extends>
-   <header>hselector.h</header>
+   <header>Widgets/ColorWidgets/hselector.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SVSelector</class>
    <extends>QWidget</extends>
-   <header>svselector.h</header>
+   <header>Widgets/ColorWidgets/svselector.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorSample</class>
+   <extends>QWidget</extends>
+   <header>Widgets/ColorWidgets/colorsample.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorText</class>
+   <extends>QLineEdit</extends>
+   <header>Widgets/colortext.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

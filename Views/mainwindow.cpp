@@ -5,7 +5,7 @@
 #include <QPainter>
 #include <QPalette>
 
-#include "hselector.h"
+#include "Widgets/ColorWidgets/hselector.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
