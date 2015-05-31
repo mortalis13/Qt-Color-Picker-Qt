@@ -3,12 +3,12 @@
 
 #include <QWidget>
 
-class HueBar : public QWidget
+class HSelector : public QWidget
 {
   Q_OBJECT
   
 public:
-  explicit HueBar(QWidget *parent = 0);
+  explicit HSelector(QWidget *parent = 0);
 
   void setH(int h);
   
@@ -21,6 +21,7 @@ protected:
   void paintEvent(QPaintEvent*);
   void mousePressEvent(QMouseEvent*);
   void mouseMoveEvent(QMouseEvent*);
+  void mouseReleaseEvent(QMouseEvent *e);
 
 private:
   void updateColor();
@@ -33,8 +34,8 @@ private:
   void drawRightTrapezoid(QPainter &p);
   
 private:
-  bool hueBarDrawn;
-  QPixmap hueBarPixmap;
+  bool hSelectorDrawn;
+  QPixmap hSelectorPixmap;
   
   int h,s,v;
   int pointerY;

@@ -5,15 +5,20 @@
 
 #include "services.h"
 
+
+// --------------------------------------------- consts ---------------------------------------------
+
+const int border=2;
+const int borderRadius=10;
+const QColor borderColor(80,80,80,200);
+
+
+// ----------------------------------------------------------------------------------------------------
+
 ColorSample::ColorSample(QWidget *parent) :
   QWidget(parent)
 {
-  border=2;
-  
-//  color.setHsv(0, 0, 0);
   color.setHsv(0, 255, 255);
-  
-  borderColor.setRgb(80,80,80,200);
 }
 
 void ColorSample::changeColor(QColor color)
@@ -36,5 +41,5 @@ void ColorSample::paintEvent(QPaintEvent *event)
 
 void ColorSample::drawBorder(QPainter& p){
   QRectF rectangle(0, 0, width(), height());
-  Services::drawInnerRoundRect(p, rectangle, border, 10, borderColor);
+  Services::drawInnerRoundRect(p, rectangle, border, borderRadius, borderColor);
 }

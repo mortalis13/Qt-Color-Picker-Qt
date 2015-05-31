@@ -1,16 +1,18 @@
-#include "huebar.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 #include <QPainter>
 #include <QPalette>
+
+#include "hselector.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  colorProcessor=new ColorProcessor(ui->hueBar, ui->satValueSelector);
+  colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
 
   addActions();
   init();
@@ -37,14 +39,14 @@ void MainWindow::init(){
   
   // correctFields();
 
-  ui->hueBar->setH(0);
+  ui->hSelector->setH(0);
 }
 
 void MainWindow::addActions(){
-  connect( ui->hueBar, SIGNAL(hueChanged(QColor)), ui->satValueSelector, SLOT(changeHue(QColor)) );
+  connect( ui->hSelector, SIGNAL(hueChanged(QColor)), ui->svSelector, SLOT(changeHue(QColor)) );
 
-  connect( ui->satValueSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
-  connect( ui->satValueSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
+  connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
+  connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
 
   connect( ui->leHSV, SIGNAL(textEdited(QString)), this, SLOT(updateColorHSV(QString)) );
   connect( ui->leRGB, SIGNAL(textEdited(QString)), this, SLOT(updateColorRGB(QString)) );

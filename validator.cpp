@@ -143,13 +143,10 @@ bool Validator::checkComponentVal(int val, Vars::ColorType colorType, int group,
     switch(group){
     case 0:
       return (val>=minH && val<=maxH);
-      break;
     case 1:
       return (val>=minS && val<=maxS);
-      break;
     case 2:
       return (val>=minV && val<=maxV);
-      break;
     }
   }
 
@@ -161,16 +158,12 @@ bool Validator::checkComponentVal(int val, Vars::ColorType colorType, int group,
     switch(group){
     case 0:
       return (val>=minC && val<=maxC);
-      break;
     case 1:
       return (val>=minM && val<=maxM);
-      break;
     case 2:
       return (val>=minY && val<=maxY);
-      break;
     case 3:
       return (val>=minK && val<=maxK);
-      break;
     }
   }
 
@@ -180,6 +173,8 @@ bool Validator::checkComponentVal(int val, Vars::ColorType colorType, int group,
     else if(hexLen==6)
       return (val>=minHex && val<=maxHex);
   }
+
+  return false;
 }
 
 QColor Validator::correctColor(QColor color){

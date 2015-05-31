@@ -1,4 +1,4 @@
-#include "huebar.h"
+#include "hselector.h"
 
 #include <QPainter>
 #include <QDebug>
@@ -32,9 +32,9 @@ const QColor pointerColor("#333");
 
 // ----------------------------------------------------------------------------------------------------
 
-HueBar::HueBar(QWidget *parent) : QWidget(parent)
+HSelector::HSelector(QWidget *parent) : QWidget(parent)
 {
-  hueBarDrawn=false;
+  hSelectorDrawn=false;
   
   pointerY=0;
   
@@ -43,16 +43,16 @@ HueBar::HueBar(QWidget *parent) : QWidget(parent)
   v=maxSV;
 }
 
-void HueBar::paintEvent(QPaintEvent *event)
+void HSelector::paintEvent(QPaintEvent *event)
 {
   QColor color;
 
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
   
-  if(!hueBarDrawn){
-    hueBarPixmap=QPixmap(barWidth, maxH+1);
-    QPainter tempP(&hueBarPixmap);
+  if(!hSelectorDrawn){
+    hSelectorPixmap=QPixmap(barWidth, maxH+1);
+    QPainter tempP(&hSelectorPixmap);
 
     for(int h=0; h<=maxH; ++h){
       color.setHsv(h, s, v);
@@ -60,52 +60,58 @@ void HueBar::paintEvent(QPaintEvent *event)
       tempP.drawLine(0, h, barWidth, h);
     }
     
-    hueBarDrawn=true;
+    hSelectorDrawn=true;
   }
   
-  p.drawPixmap(barX, barY, hueBarPixmap);
+  p.drawPixmap(barX, barY, hSelectorPixmap);
 
   drawPointer(p);
   drawBorder(p);
 }
 
-void HueBar::mousePressEvent(QMouseEvent *e)
+void HSelector::mousePressEvent(QMouseEvent *e)
 {
   movePointer(e);
   updateColor();
 }
 
-void HueBar::mouseMoveEvent(QMouseEvent *e)
+void HSelector::mouseMoveEvent(QMouseEvent *e)
 {
   movePointer(e);
   updateColor();
 }
+
+void HSelector::mouseReleaseEvent(QMouseEvent *e)
+{
+
+}
+
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void HueBar::drawPointer(QPainter& p){
+void HSelector::drawPointer(QPainter& p){
   correctPointer();
 //  drawRightTriangle(p);
   drawRightTrapezoid(p);
 }
 
-void HueBar::correctPointer(){
+void HSelector::correctPointer(){
   pointerY = h + minPointerY;
   pointerY = qMax( minPointerY, pointerY );
   pointerY = qMin( maxPointerY, pointerY );
 }
 
-void HueBar::movePointer(QMouseEvent* e){
+void HSelector::movePointer(QMouseEvent* e){
   pointerY=e->y();
   update();
 }
 
-void HueBar::drawBorder(QPainter& p){
+void HSelector::drawBorder(QPainter& p){
   QRectF rectangle( barX, barY, barWidth, maxH );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
-void HueBar::drawRightTrapezoid(QPainter& p){
+void HSelector::drawRightTrapezoid(QPainter& p){
   QPen pen(Qt::NoPen);
   pen.setCapStyle(Qt::FlatCap);
   QBrush brush(pointerColor);
@@ -125,7 +131,7 @@ void HueBar::drawRightTrapezoid(QPainter& p){
   p.drawPath(path);
 }
 
-void HueBar::updateColor(){
+void HSelector::updateColor(){
   QColor color;
 
   h = pointerY-border;
@@ -138,7 +144,7 @@ void HueBar::updateColor(){
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HueBar::setH(int h)
+void HSelector::setH(int h)
 {
   this->h=h;
   QColor color;

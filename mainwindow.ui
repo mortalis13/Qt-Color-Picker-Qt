@@ -157,7 +157,7 @@
            </spacer>
           </item>
           <item row="0" column="0" alignment="Qt::AlignTop">
-           <widget class="SatValueSelector" name="satValueSelector" native="true">
+           <widget class="SVSelector" name="svSelector" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -176,7 +176,7 @@
            </widget>
           </item>
           <item row="0" column="2" rowspan="4" alignment="Qt::AlignTop">
-           <widget class="HueBar" name="hueBar" native="true">
+           <widget class="HSelector" name="hSelector" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -239,6 +239,9 @@
            </spacer>
           </item>
          </layout>
+         <zorder>svSelector</zorder>
+         <zorder>colorSample</zorder>
+         <zorder>hSelector</zorder>
         </widget>
        </item>
        <item>
@@ -776,27 +779,27 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>HueBar</class>
-   <extends>QWidget</extends>
-   <header>huebar.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ColorSample</class>
    <extends>QWidget</extends>
    <header>colorsample.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SatValueSelector</class>
-   <extends>QWidget</extends>
-   <header>satvalueselector.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ColorText</class>
    <extends>QLineEdit</extends>
    <header>colortext.h</header>
+  </customwidget>
+  <customwidget>
+   <class>HSelector</class>
+   <extends>QWidget</extends>
+   <header>hselector.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SVSelector</class>
+   <extends>QWidget</extends>
+   <header>svselector.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

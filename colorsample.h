@@ -18,12 +18,11 @@ protected:
   void paintEvent(QPaintEvent *event);
 
 private:
-  QColor color;
-  QColor borderColor;
-  
-  int border;
-  
   void drawBorder(QPainter& p);
+
+
+private:
+  QColor color;
   
 };
 

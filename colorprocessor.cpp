@@ -10,9 +10,9 @@
 
 // ------------------------------------------------------------------------------------------------
 
-ColorProcessor::ColorProcessor(HueBar *hueBar, SatValueSelector *satValueSelector, QObject* parent) : QObject(parent){
-  this->hueBar=hueBar;
-  this->satValueSelector=satValueSelector;
+ColorProcessor::ColorProcessor(HSelector *hSelector, SVSelector *svSelector, QObject* parent) : QObject(parent){
+  this->hSelector=hSelector;
+  this->svSelector=svSelector;
   clip=QApplication::clipboard();
 }
 
@@ -155,8 +155,8 @@ void ColorProcessor::updateColor(QColor color){
   int s=color.saturation();
   int v=color.value();
 
-  hueBar->setH(h);
-  satValueSelector->setSV(s, v);
+  hSelector->setH(h);
+  svSelector->setSV(s, v);
 
   emit updateFinished();
 }
@@ -175,7 +175,7 @@ QString ColorProcessor::pasteText(){
   int len=text.length();
   if(len!=6 && len!=3) return QString();
 
-  int val=text.toInt(&ok, 16);
+  text.toInt(&ok, 16);
   if(!ok) return QString();
   
   return text;

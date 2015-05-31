@@ -1,4 +1,4 @@
-#include "satvalueselector.h"
+#include "svselector.h"
 
 #include <QPainter>
 #include <QDebug>
@@ -30,7 +30,7 @@ const QColor pointerFillColor("#333");
 
 // ----------------------------------------------------------------------------------------------------
 
-SatValueSelector::SatValueSelector(QWidget *parent) :
+SVSelector::SVSelector(QWidget *parent) :
   QWidget(parent)
 {
   hueLayerDrawn=false;
@@ -46,7 +46,7 @@ SatValueSelector::SatValueSelector(QWidget *parent) :
   v=maxSV;
 }
 
-void SatValueSelector::paintEvent(QPaintEvent *event)
+void SVSelector::paintEvent(QPaintEvent *event)
 {
   QColor color;
   
@@ -70,7 +70,7 @@ void SatValueSelector::paintEvent(QPaintEvent *event)
   drawBorder(p);
 }
 
-void SatValueSelector::mousePressEvent(QMouseEvent *e)
+void SVSelector::mousePressEvent(QMouseEvent *e)
 {
   hideCursor(e);
   movePointer(e);
@@ -78,7 +78,7 @@ void SatValueSelector::mousePressEvent(QMouseEvent *e)
   repaint();
 }
 
-void SatValueSelector::mouseMoveEvent(QMouseEvent *e)
+void SVSelector::mouseMoveEvent(QMouseEvent *e)
 {
   hideCursor(e);
   movePointer(e);
@@ -86,19 +86,19 @@ void SatValueSelector::mouseMoveEvent(QMouseEvent *e)
   repaint();
 }
 
-void SatValueSelector::mouseReleaseEvent(QMouseEvent *e)
+void SVSelector::mouseReleaseEvent(QMouseEvent *e)
 {
   restoreCursor();
 }
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void SatValueSelector::drawPointer(QPainter& p){
+void SVSelector::drawPointer(QPainter& p){
   correctPointer();
   drawCircle(p);
 }
 
-void SatValueSelector::correctPointer(){
+void SVSelector::correctPointer(){
   pointerX = s + minPointerXY;
   pointerY = maxPointerXY - v;
   
@@ -109,24 +109,24 @@ void SatValueSelector::correctPointer(){
   pointerY = qMin( maxPointerXY, pointerY );
 }
 
-void SatValueSelector::movePointer(QMouseEvent* e){
+void SVSelector::movePointer(QMouseEvent* e){
   pointerX = e->x();
   pointerY = e->y();
 }
 
-void SatValueSelector::drawBorder(QPainter& p){
+void SVSelector::drawBorder(QPainter& p){
   QRectF rectangle( selectorX, selectorY, selectorSize, selectorSize );
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
-void SatValueSelector::drawCircle(QPainter& p){
+void SVSelector::drawCircle(QPainter& p){
   QPen pen(pointerBorderColor, pointerBorder);
   p.setPen(pen);
   p.setBrush(pointerFillColor);
   p.drawEllipse( QPoint(pointerX, pointerY), pointerR, pointerR );
 }
 
-void SatValueSelector::hideCursor(QMouseEvent *e){
+void SVSelector::hideCursor(QMouseEvent *e){
   int x=e->x();
   int y=e->y();
 
@@ -137,11 +137,11 @@ void SatValueSelector::hideCursor(QMouseEvent *e){
   this->setCursor( QCursor(Qt::BlankCursor) );
 }
 
-void SatValueSelector::restoreCursor(){
+void SVSelector::restoreCursor(){
   this->setCursor( QCursor(Qt::ArrowCursor) );
 }
 
-void SatValueSelector::updateColor(){
+void SVSelector::updateColor(){
   s = pointerX - border;
   v = maxSV - (pointerY - border);
 
@@ -158,7 +158,7 @@ void SatValueSelector::updateColor(){
 
 // ---------------------------------------------- slots ----------------------------------------------
 
-void SatValueSelector::changeHue(QColor color)
+void SVSelector::changeHue(QColor color)
 {
   hueLayerDrawn=false;
   
@@ -174,17 +174,17 @@ void SatValueSelector::changeHue(QColor color)
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void SatValueSelector::setSaturation(int s)
+void SVSelector::setSaturation(int s)
 {
   this->s=s;
 }
 
-void SatValueSelector::setValue(int v)
+void SVSelector::setValue(int v)
 {
   this->v=v;
 }
 
-void SatValueSelector::setSV(int s, int v){
+void SVSelector::setSV(int s, int v){
   setSaturation(s);
   setValue(v);
   repaint();

@@ -5,12 +5,12 @@
 #include <QList>
 #include <QPixmap>
 
-class SatValueSelector : public QWidget
+class SVSelector : public QWidget
 {
   Q_OBJECT
   
 public:
-  explicit SatValueSelector(QWidget *parent = 0);
+  explicit SVSelector(QWidget *parent = 0);
 
   void setSaturation(int s);
   void setValue(int v);
