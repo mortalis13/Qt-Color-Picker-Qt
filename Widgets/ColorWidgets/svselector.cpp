@@ -35,6 +35,7 @@ SVSelector::SVSelector(QWidget *parent) :
 {
   hueLayerDrawn=false;
   middlePresed=false;
+  shiftHeld=false;
   
   selectorX=border;
   selectorY=border;
@@ -81,9 +82,8 @@ void SVSelector::mousePressEvent(QMouseEvent *e)
   else{
     middlePresed=false;
     hideCursor(e);
-    movePointer(e);
+    movePointer( e->x(), e->y() );
     updateColor();
-    repaint();
   }
 }
 
@@ -94,9 +94,8 @@ void SVSelector::mouseMoveEvent(QMouseEvent *e)
   }
   else{
     hideCursor(e);
-    movePointer(e);
+    movePointer( e->x(), e->y() );
     updateColor();
-    repaint();
   }
 }
 
@@ -105,7 +104,42 @@ void SVSelector::mouseReleaseEvent(QMouseEvent *e)
   restoreCursor();
 }
 
+void SVSelector::wheelEvent(QWheelEvent *e)
+{
+  QPoint p=e->angleDelta();
+  int y=p.y();
+
+  if(shiftHeld){
+    if(y>0) incPointerX();
+    if(y<0) decPointerX();
+  }
+  else{
+    if(y<0) incPointerY();
+    if(y>0) decPointerY();
+  }
+
+  updateColor();
+  e->accept();
+}
+
+
 // ---------------------------------------------- service ----------------------------------------------
+
+void SVSelector::incPointerX(){
+  movePointer(pointerX+1, pointerY);
+}
+
+void SVSelector::decPointerX(){
+  movePointer(pointerX-1, pointerY);
+}
+
+void SVSelector::incPointerY(){
+  movePointer(pointerX, pointerY+1);
+}
+
+void SVSelector::decPointerY(){
+  movePointer(pointerX, pointerY-1);
+}
 
 void SVSelector::drawPointer(QPainter& p){
   correctPointer();
@@ -113,8 +147,8 @@ void SVSelector::drawPointer(QPainter& p){
 }
 
 void SVSelector::correctPointer(){
-  pointerX = s + minPointerXY;
-  pointerY = maxPointerXY - v;
+//  pointerX = s + minPointerXY;              // ???
+//  pointerY = maxPointerXY - v;
   
   pointerX = qMax( minPointerXY, pointerX );
   pointerX = qMin( maxPointerXY, pointerX );
@@ -123,9 +157,10 @@ void SVSelector::correctPointer(){
   pointerY = qMin( maxPointerXY, pointerY );
 }
 
-void SVSelector::movePointer(QMouseEvent* e){
-  pointerX = e->x();
-  pointerY = e->y();
+void SVSelector::movePointer(int x, int y){
+  pointerX = x;
+  pointerY = y;
+  repaint();
 }
 
 void SVSelector::drawBorder(QPainter& p){
@@ -184,6 +219,14 @@ void SVSelector::changeHue(QColor color)
   emit colorChanged(newColor);
 
   repaint();
+}
+
+void SVSelector::shiftPressed(){
+  shiftHeld=true;
+}
+
+void SVSelector::shiftReleased(){
+  shiftHeld=false;
 }
 
 // ---------------------------------------------- set/get ----------------------------------------------

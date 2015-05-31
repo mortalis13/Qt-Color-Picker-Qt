@@ -36,6 +36,9 @@ protected:
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
 
+  void keyPressEvent(QKeyEvent *e);
+
+  void keyReleaseEvent(QKeyEvent *e);
 private:
   Ui::MainWindow *ui;
   ColorProcessor *colorProcessor;
@@ -48,6 +51,8 @@ private:
 
 signals:
   void mouseMovedOnWindow();
+  void shiftPressed();
+  void shiftReleased();
 
 private slots:
   void updateColorText(QColor color);

@@ -158,47 +158,6 @@ void ColorText::selectComponent(bool next){
 }
 
 
-// --------------------------------------------- events ---------------------------------------------
-
-void ColorText::keyPressEvent(QKeyEvent *e)
-{
-  QString keyText = e->text();
-  int key=e->key();
-
-  if(key==Qt::Key_Up){
-    keyText="Up";
-    increaseComponent();
-  }
-  else if(key==Qt::Key_Down){
-    keyText="Down";
-    decreaseComponent();
-  }
-  else{
-    QLineEdit::keyPressEvent(e);
-  }
-
-}
-
-bool ColorText::event(QEvent *e)
-{
-  if(e->type() == QEvent::KeyPress){
-    QKeyEvent *ke = static_cast<QKeyEvent *>(e);
-
-    if ( ke->key() == Qt::Key_Tab ) {
-      selectNextComponent();
-      return true;
-    }
-    else if ( ke->key() == Qt::Key_Backtab ) {
-      selectPrevComponent();
-      return true;
-    }
-
-  }
-
-  return QLineEdit::event(e);
-}
-
-
 // --------------------------------------------- service ---------------------------------------------
 
 QStringList ColorText::getComponentsFromHex(QString hex){
@@ -241,4 +200,41 @@ int ColorText::getGroupNumber(int group, int groupLen, bool next){
   }
 
   return group;
+}
+
+
+// --------------------------------------------- events ---------------------------------------------
+
+void ColorText::keyPressEvent(QKeyEvent *e)
+{
+  int key=e->key();
+
+  if(key == Qt::Key_Up){
+    increaseComponent();
+  }
+  else if(key == Qt::Key_Down){
+    decreaseComponent();
+  }
+  else{
+    QLineEdit::keyPressEvent(e);
+  }
+}
+
+bool ColorText::event(QEvent *e)
+{
+  if(e->type() == QEvent::KeyPress){
+    QKeyEvent *ke = static_cast<QKeyEvent *>(e);
+
+    if ( ke->key() == Qt::Key_Tab ) {
+      selectNextComponent();
+      return true;
+    }
+    else if ( ke->key() == Qt::Key_Backtab ) {
+      selectPrevComponent();
+      return true;
+    }
+
+  }
+
+  return QLineEdit::event(e);
 }

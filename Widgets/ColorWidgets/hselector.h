@@ -20,11 +20,13 @@ protected:
 
   void mouseReleaseEvent(QMouseEvent *e);
 
+  void wheelEvent(QWheelEvent * e);
+
 private:
   void updateColor();
   
   void drawPointer(QPainter &p);
-  void movePointer(QMouseEvent *e);
+  void movePointer(int y);
   void correctPointer();
   
   void drawBorder(QPainter& p);
@@ -40,6 +42,8 @@ private:
   int pointerY;
 
 
+  void incPointer();
+  void decPointer();
 signals:
   void hueChanged(QColor);
   void middlePressedSignal(QMouseEvent* e);

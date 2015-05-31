@@ -35,6 +35,7 @@ public:
   void copyText(QString text);
   QString pasteText();
 
+  void incH();
 signals:
   void updateFinished();
 

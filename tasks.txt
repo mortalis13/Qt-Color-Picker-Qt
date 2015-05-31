@@ -1,15 +1,15 @@
-- copy hex on Sample click
-- press mid button on text to select all
-- hold mid button to move on sv selector
-- saturation/value pointers on the sides of selector
+- press mid button on text to select all or to select group
 - [hex] inc/dec each hex digit (not group)
-- show half of hue trapezoid when in the top/bottom max position (when it partially hides)
 
-- mouse scroll on selectors
-
+- saturation/value pointers on the sides of selector
+- show half of hue trapezoid when in the top/bottom max position (when it is partially hidden)
 - trim, remove \s+ after validation (when all comps are valid)
 - text fields scroll
+- text with commas (process, copy)
 
+# - hold mid button to move on sv selector
+# - copy hex on Sample click
+# - mouse scroll on selectors
 # - validate on up/down, tab/btab
 # - short hex
 # - drag by any point

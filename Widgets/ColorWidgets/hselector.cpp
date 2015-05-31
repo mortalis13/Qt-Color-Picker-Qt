@@ -78,7 +78,7 @@ void HSelector::mousePressEvent(QMouseEvent *e)
   }
   else{
     middlePresed=false;
-    movePointer(e);
+    movePointer(e->y());
     updateColor();
   }
 }
@@ -89,13 +89,23 @@ void HSelector::mouseMoveEvent(QMouseEvent *e)
     e->ignore();
   }
   else{
-    movePointer(e);
+    movePointer(e->y());
     updateColor();
   }
 }
 
 void HSelector::mouseReleaseEvent(QMouseEvent *e)
 {
+}
+
+void HSelector::wheelEvent(QWheelEvent *e)
+{
+  QPoint p=e->angleDelta();
+  if(p.y()<0) incPointer();
+  if(p.y()>0) decPointer();
+
+  updateColor();
+  e->accept();
 }
 
 
@@ -108,13 +118,21 @@ void HSelector::drawPointer(QPainter& p){
 }
 
 void HSelector::correctPointer(){
-  pointerY = h + minPointerY;
+//  pointerY = h + minPointerY;                       // ???
   pointerY = qMax( minPointerY, pointerY );
   pointerY = qMin( maxPointerY, pointerY );
 }
 
-void HSelector::movePointer(QMouseEvent* e){
-  pointerY=e->y();
+void HSelector::incPointer(){
+  movePointer(pointerY+1);
+}
+
+void HSelector::decPointer(){
+  movePointer(pointerY-1);
+}
+
+void HSelector::movePointer(int y){
+  pointerY=y;
   update();
 }
 

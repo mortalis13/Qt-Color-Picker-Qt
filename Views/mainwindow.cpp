@@ -78,6 +78,8 @@ void MainWindow::addActions(){
   // connect( ui->hSelector, SIGNAL(middleMovedSignal(QMouseEvent*)), this, SLOT(hMiddleMoved(QMouseEvent*)) );
 
   connect( this, SIGNAL(mouseMovedOnWindow()), ui->colorSample, SLOT(mouseMovedOnWindow()) );
+  connect( this, SIGNAL(shiftPressed()), ui->svSelector, SLOT(shiftPressed()) );
+  connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
 }
 
 // --------------------------------------------- slots ---------------------------------------------
@@ -233,7 +235,7 @@ void MainWindow::status(QString msg){
   ui->statusBar->showMessage(msg, 3000);
 }
 
-// --------------------------------------------- mouse drag ---------------------------------------------
+// --------------------------------------------- events ---------------------------------------------
 
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
@@ -267,5 +269,21 @@ void MainWindow::mouseMoveEvent(QMouseEvent *e)
     int moveY=gy-my-corrY;
 
     move(moveX, moveY);
+  }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+  int key=e->key();
+  if(key == Qt::Key_Shift){
+    emit shiftPressed();
+  }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *e)
+{
+  int key=e->key();
+  if(key == Qt::Key_Shift){
+    emit shiftReleased();
   }
 }

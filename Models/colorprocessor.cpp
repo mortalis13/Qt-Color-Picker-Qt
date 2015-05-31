@@ -180,3 +180,9 @@ QString ColorProcessor::pasteText(){
   
   return text;
 }
+
+// -------------------------------------------- inc/dec --------------------------------------------
+
+void ColorProcessor::incH(){
+
+}
