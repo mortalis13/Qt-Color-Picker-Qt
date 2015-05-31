@@ -35,6 +35,7 @@ private:
   void restoreCursor();
   
 private:  
+  bool middlePresed;
   bool hueLayerDrawn;
   QImage hueLayerImage;
   
@@ -49,6 +50,7 @@ private:
   
 signals:
   void colorChanged(QColor);
+  void middlePressedSignal(QMouseEvent* e);
 
 public slots:
   void changeHue(QColor color);  

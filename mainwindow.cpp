@@ -25,6 +25,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::init(){
 //  ui->statusBar->showMessage("Hex value copied");
+  mx=0;
+  my=0;
+
   QMargins margins(5,0,0,0);
 
   ui->leHSV->setTextMargins(margins);
@@ -55,13 +58,44 @@ void MainWindow::addActions(){
   
   connect( colorProcessor, SIGNAL(updateFinished()), this, SLOT(updateColorFinished()) );
 
-  connect ( ui->bHSV, SIGNAL(clicked()), this, SLOT(copyHSV()) );
-  connect ( ui->bRGB, SIGNAL(clicked()), this, SLOT(copyRGB()) );
-  connect ( ui->bCMYK, SIGNAL(clicked()), this, SLOT(copyCMYK()) );
-  connect ( ui->bHex, SIGNAL(clicked()), this, SLOT(copyHex()) );
-  connect ( ui->bHexHash, SIGNAL(clicked()), this, SLOT(copyHexHash()) );
+  connect( ui->bHSV, SIGNAL(clicked()), this, SLOT(copyHSV()) );
+  connect( ui->bRGB, SIGNAL(clicked()), this, SLOT(copyRGB()) );
+  connect( ui->bCMYK, SIGNAL(clicked()), this, SLOT(copyCMYK()) );
 
-  connect ( ui->bPasteHex, SIGNAL(clicked()), this, SLOT(pasteHex()) );
+  connect( ui->bHex, SIGNAL(clicked()), this, SLOT(copyHex()) );
+  connect( ui->bHexHash, SIGNAL(clicked()), this, SLOT(copyHexHash()) );
+
+  connect( ui->bPasteHex, SIGNAL(clicked()), this, SLOT(pasteHex()) );
+
+
+  connect( ui->colorSample, SIGNAL(samplePressedLeft()), this, SLOT(copyHex()) );
+  connect( ui->colorSample, SIGNAL(samplePressedRight()), this, SLOT(copyHexHash()) );
+//  connect( ui->colorSample, SIGNAL(samplePressedMiddle(QMouseEvent*)), this, SLOT(middleClick(QMouseEvent*)) );
+
+
+  connect( ui->hSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
+  connect( ui->svSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
+  // connect( ui->hSelector, SIGNAL(middleMovedSignal(QMouseEvent*)), this, SLOT(hMiddleMoved(QMouseEvent*)) );
+
+  connect( this, SIGNAL(mouseMovedOnWindow()), ui->colorSample, SLOT(mouseMovedOnWindow()) );
+}
+
+// --------------------------------------------- slots ---------------------------------------------
+
+void MainWindow::hsvMiddlePressed(QMouseEvent* e){
+  mouseDown=true;
+  mouseMoved=false;
+
+  mx=e->x();
+  my=e->y();
+}
+
+// void MainWindow::hMiddleMoved(QMouseEvent* e){
+//   mouseMoveEvent(e);
+// }
+
+void MainWindow::middleClick(QMouseEvent* e){
+  mouseReleaseEvent(e);
 }
 
 // --------------------------------------------- buttons ---------------------------------------------
@@ -204,6 +238,8 @@ void MainWindow::status(QString msg){
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
   mouseDown=true;
+  mouseMoved=false;
+
   mx=e->x();
   my=e->y();
 }
@@ -211,18 +247,25 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 {
   mouseDown=false;
-  if(e->button()==Qt::MiddleButton) close();
+  if(e->button()==Qt::MiddleButton && !mouseMoved) close();
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *e)
 {
   if(mouseDown){
+    mouseMoved=true;
+
+    emit mouseMovedOnWindow();
+
     int gx=e->globalX();
     int gy=e->globalY();
 
     int corrX=geometry().x()-x();
     int corrY=geometry().y()-y();
 
-    move(gx-mx-corrX, gy-my-corrY);
+    int moveX=gx-mx-corrX;
+    int moveY=gy-my-corrY;
+
+    move(moveX, moveY);
   }
 }

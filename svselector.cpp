@@ -34,6 +34,7 @@ SVSelector::SVSelector(QWidget *parent) :
   QWidget(parent)
 {
   hueLayerDrawn=false;
+  middlePresed=false;
   
   selectorX=border;
   selectorY=border;
@@ -72,18 +73,31 @@ void SVSelector::paintEvent(QPaintEvent *event)
 
 void SVSelector::mousePressEvent(QMouseEvent *e)
 {
-  hideCursor(e);
-  movePointer(e);
-  updateColor();
-  repaint();
+  if( e->button() == Qt::MiddleButton ){
+    middlePresed=true;
+    QMouseEvent* svMouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
+    emit middlePressedSignal(svMouseEvent);
+  }
+  else{
+    middlePresed=false;
+    hideCursor(e);
+    movePointer(e);
+    updateColor();
+    repaint();
+  }
 }
 
 void SVSelector::mouseMoveEvent(QMouseEvent *e)
 {
-  hideCursor(e);
-  movePointer(e);
-  updateColor();
-  repaint();
+  if(middlePresed){
+    e->ignore();
+  }
+  else{
+    hideCursor(e);
+    movePointer(e);
+    updateColor();
+    repaint();
+  }
 }
 
 void SVSelector::mouseReleaseEvent(QMouseEvent *e)

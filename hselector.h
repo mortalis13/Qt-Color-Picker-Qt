@@ -2,6 +2,7 @@
 #define HUEBAR_H
 
 #include <QWidget>
+#include <QMouseEvent>
 
 class HSelector : public QWidget
 {
@@ -12,15 +13,11 @@ public:
 
   void setH(int h);
   
-signals:
-  void hueChanged(QColor);
-
-public slots:
-
 protected:
   void paintEvent(QPaintEvent*);
   void mousePressEvent(QMouseEvent*);
   void mouseMoveEvent(QMouseEvent*);
+
   void mouseReleaseEvent(QMouseEvent *e);
 
 private:
@@ -33,12 +30,21 @@ private:
   void drawBorder(QPainter& p);
   void drawRightTrapezoid(QPainter &p);
   
+
 private:
+  bool middlePresed;
   bool hSelectorDrawn;
   QPixmap hSelectorPixmap;
   
   int h,s,v;
   int pointerY;
+
+
+signals:
+  void hueChanged(QColor);
+  void middlePressedSignal(QMouseEvent* e);
+
+public slots:
 
 };
 

@@ -35,9 +35,9 @@ const QColor pointerColor("#333");
 HSelector::HSelector(QWidget *parent) : QWidget(parent)
 {
   hSelectorDrawn=false;
-  
+  middlePresed=false;
+
   pointerY=0;
-  
   h=0;
   s=maxSV;
   v=maxSV;
@@ -71,19 +71,31 @@ void HSelector::paintEvent(QPaintEvent *event)
 
 void HSelector::mousePressEvent(QMouseEvent *e)
 {
-  movePointer(e);
-  updateColor();
+  if( e->button() == Qt::MiddleButton ){
+    middlePresed=true;
+    QMouseEvent* hMouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
+    emit middlePressedSignal(hMouseEvent);
+  }
+  else{
+    middlePresed=false;
+    movePointer(e);
+    updateColor();
+  }
 }
 
 void HSelector::mouseMoveEvent(QMouseEvent *e)
 {
-  movePointer(e);
-  updateColor();
+  if(middlePresed){
+    e->ignore();
+  }
+  else{
+    movePointer(e);
+    updateColor();
+  }
 }
 
 void HSelector::mouseReleaseEvent(QMouseEvent *e)
 {
-
 }
 
 

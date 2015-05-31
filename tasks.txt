@@ -5,8 +5,10 @@
 - [hex] inc/dec each hex digit (not group)
 - show half of hue trapezoid when in the top/bottom max position (when it partially hides)
 
-- trim, remove \s+ after validation (when all comps are valid)
+- mouse scroll on selectors
 
+- trim, remove \s+ after validation (when all comps are valid)
+- text fields scroll
 
 # - validate on up/down, tab/btab
 # - short hex

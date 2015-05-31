@@ -28,9 +28,6 @@ private:
   
   void status(QString msg);
 
-  bool mouseDown;
-  int mx, my;
-
   void correctFields();
   QString correctField(QString text);
   
@@ -43,7 +40,15 @@ private:
   Ui::MainWindow *ui;
   ColorProcessor *colorProcessor;
   QString editingField;
+
+  bool mouseDown;
+  bool mouseMoved;
+  int mx, my;
   
+
+signals:
+  void mouseMovedOnWindow();
+
 private slots:
   void updateColorText(QColor color);
   void updateColorFinished();
@@ -60,6 +65,9 @@ private slots:
   void copyHexHash();
   void pasteHex();  
 
+  void middleClick(QMouseEvent *e);
+  // void hMiddleMoved(QMouseEvent *e);
+  void hsvMiddlePressed(QMouseEvent *e);
 };
 
 #endif // MAINWINDOW_H
