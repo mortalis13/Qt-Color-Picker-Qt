@@ -35,7 +35,7 @@ private:
   void decreaseComponent();
   void changeComponentVal(bool inc);
 
-  bool checkVal(int val, int group=0, int hexLen=0);
+  // bool checkVal(int val, int group=0, int hexLen=0);
   int getGroup();
 
   void selectNextComponent();
@@ -44,6 +44,8 @@ private:
   QStringList getComponentsFromHex(QString hex);
   int getGroupNumber(int group, int groupLen, bool next);
   int getHexGroup(int pos, int len);
+  bool checkValueHex(QString text);
+  
 };
 
 #endif // COLORTEXT_H

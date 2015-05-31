@@ -20,7 +20,8 @@ SOURCES += main.cpp\
 testpaint.cpp \ 
 colorprocessor.cpp \
     services.cpp \
-    colortext.cpp
+    colortext.cpp \
+    validator.cpp
 
 HEADERS  += mainwindow.h \
     huebar.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
 testpaint.h \
 colorprocessor.h \
     services.h \
-    colortext.h
+    colortext.h \
+    validator.h
 
 FORMS    += mainwindow.ui \
     dialog.ui

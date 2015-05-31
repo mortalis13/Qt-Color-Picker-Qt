@@ -34,6 +34,8 @@ void MainWindow::init(){
   ui->leRGB->setType(ColorText::RGB);
   ui->leCMYK->setType(ColorText::CMYK);
   ui->leHex->setType(ColorText::Hex);
+  
+  correctFields();
 
   ui->hueBar->setH(0);
 }
@@ -164,6 +166,32 @@ void MainWindow::setHex(QString text){
 }
 
 // --------------------------------------------- service ---------------------------------------------
+
+void MainWindow::correctFields(){
+  QString text;
+  text=ui->leHSV->text();
+  text=correctField(text);
+  ui->leHSV->setText(text);
+  
+  text=ui->leRGB->text();
+  text=correctField(text);
+  ui->leRGB->setText(text);
+  
+  text=ui->leCMYK->text();
+  text=correctField(text);
+  ui->leCMYK->setText(text);
+  
+  text=ui->leHex->text();
+  text=correctField(text);
+  ui->leHex->setText(text);
+}
+
+QString MainWindow::correctField(QString text){         // +++ to Validator
+  text=text.trimmed();
+  text=text.replace("\\s+", " ");
+    
+  return text;
+}
 
 void MainWindow::status(QString msg){
   ui->statusBar->showMessage(msg, 3000);

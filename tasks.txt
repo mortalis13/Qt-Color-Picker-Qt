@@ -8,7 +8,4 @@
 - short hex
 # - hex ffffff => hue -1
 - validate on up/down, tab/btab
-
-
--------
-colortext.cpp : 121
+- trim, remove \s+ after validation (when all comps are valid)

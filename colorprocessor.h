@@ -15,6 +15,11 @@ class ColorProcessor : public QObject
   Q_OBJECT
 
 public:
+  enum ColorType{
+    HSV, RGB, CMYK, Hex
+  };
+  
+public:
   explicit ColorProcessor(HueBar* hueBar, SatValueSelector* satValueSelector, QObject* parent=0);
 
   QString getHSV(QColor color);
@@ -45,12 +50,13 @@ private:
   QColor getColorCMYK(QString CMYK);
   QColor getColorHex(QString Hex);
 
-  bool checkColorText(QString text, int size);
-  bool checkValueHSV(QString text);
-  bool checkValueRGB(QString text);
-  bool checkValueCMYK(QString text);
-  bool checkValueHex(QString text);
-  QColor correctColor(QColor color);
+  // bool checkColorText(QString text, int size);
+  // bool checkValueHSV(QString text);
+  // bool checkValueRGB(QString text);
+  // bool checkValueCMYK(QString text);
+  // bool checkValueHex(QString text);
+  
+  // QColor correctColor(QColor color);
 };
 
 #endif // COLORPROCESSOR_H

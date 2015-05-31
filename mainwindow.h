@@ -51,6 +51,8 @@ private:
   bool mouseDown;
   int mx, my;
 
+  void correctFields();
+  QString correctField(QString text);
 protected:
   void mouseMoveEvent(QMouseEvent* e);
   void mousePressEvent(QMouseEvent* e);

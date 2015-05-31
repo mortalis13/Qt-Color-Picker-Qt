@@ -2,6 +2,8 @@
 
 #include <QDebug>
 
+#include "validator.h"
+
 // -------------------------------------------- consts --------------------------------------------
 
 const int minH=0;
@@ -45,51 +47,49 @@ void ColorText::setType(ColorText::ColorType colorType)
 }
 
 
-bool ColorText::checkVal(int val, int group, int hexLen){
+// bool ColorText::checkVal(int val, int group, int hexLen, int colorType){
+//   if(colorType==HSV){
+//     switch(group){
+//     case 0:
+//       return (val>=minH && val<=maxH);
+//       break;
+//     case 1:
+//       return (val>=minS && val<=maxS);
+//       break;
+//     case 2:
+//       return (val>=minV && val<=maxV);
+//       break;
+//     }
+//   }
 
-  if(colorType==HSV){
-    switch(group){
-    case 0:
-      return (val>=minH && val<=maxH);
-      break;
-    case 1:
-      return (val>=minS && val<=maxS);
-      break;
-    case 2:
-      return (val>=minV && val<=maxV);
-      break;
-    }
-  }
+//   if(colorType==RGB){
+//     return (val>=minRGB && val<=maxRGB);
+//   }
 
-  if(colorType==RGB){
-    return (val>=minRGB && val<=maxRGB);
-  }
+//   if(colorType==CMYK){
+//     switch(group){
+//     case 0:
+//       return (val>=minC && val<=maxC);
+//       break;
+//     case 1:
+//       return (val>=minM && val<=maxM);
+//       break;
+//     case 2:
+//       return (val>=minY && val<=maxY);
+//       break;
+//     case 3:
+//       return (val>=minK && val<=maxK);
+//       break;
+//     }
+//   }
 
-  if(colorType==CMYK){
-    switch(group){
-    case 0:
-      return (val>=minC && val<=maxC);
-      break;
-    case 1:
-      return (val>=minM && val<=maxM);
-      break;
-    case 2:
-      return (val>=minY && val<=maxY);
-      break;
-    case 3:
-      return (val>=minK && val<=maxK);
-      break;
-    }
-  }
-
-  if(colorType==Hex){
-    if(hexLen==3)
-      return (val>=minSHex && val<=maxSHex);
-    else if(hexLen==6)
-      return (val>=minHex && val<=maxHex);
-  }
-
-}
+//   if(colorType==Hex){
+//     if(hexLen==3)
+//       return (val>=minSHex && val<=maxSHex);
+//     else if(hexLen==6)
+//       return (val>=minHex && val<=maxHex);
+//   }
+// }
 
 // --------------------------------------------- inc/dec component ---------------------------------------------
 
@@ -104,31 +104,33 @@ void ColorText::decreaseComponent(){
 void ColorText::changeComponentVal(bool inc){
   int val;
   int group=-1;
-  QString valText, newValText;
+  bool ok;
   QStringList comp;
+  QString valText, newValText;
 
   int pos=cursorPosition();
   QString colorText=text();
 
   if(colorType==Hex){
-    len=colorText.length();
+    if( !Validator::checkValueHex(colorText) ) return;
     
+    len=colorText.length();
     comp=getComponentsFromHex(colorText);
     group=getHexGroup(pos, len);
     
-    bool ok;
     val=comp[group].toInt(&ok, 16);
-    if(!ok) return;
     
     if(inc) val++;                                                        // ---
     else val--;
-    if( !checkVal(val, group, len) ) return;                       // ???
+    if( !Validator::checkComponentVal(val, colorType, group, len) ) return;
     
     comp[group]=QString("%1").arg( val, len/3, 16, QChar('0'));      
   }
   else{
+    if( !Validator::checkColorText(colorText, colorType) ) return;
+    if( !Validator::checkValueByType(colorText, colorType) ) return;
+    
     comp=colorText.split(separator);
-
     QRegExp rx(" ");
     int idx=0;
 
@@ -140,13 +142,12 @@ void ColorText::changeComponentVal(bool inc){
     if(idx==-1) group=comp.size()-1;
     if(group==-1) return;
 
-
     valText=comp[group];
     val=valText.toInt();
 
     if(inc) val++;                                                        // ---
     else val--;
-    if( !checkVal(val, group) ) return;
+    if( !Validator::checkComponentVal(val, colorType, group) ) return;
 
     newValText=QString::number(val);
 
@@ -188,6 +189,8 @@ void ColorText::selectComponent(bool next){
   QString colorText=text();
 
   if(colorType==Hex){
+    if( !Validator::checkValueHex(colorText) ) return;
+    
     len=colorText.length();
     comp=getComponentsFromHex(colorText);
     group=getHexGroup(pos, len);
@@ -197,8 +200,10 @@ void ColorText::selectComponent(bool next){
     gpos=group*(len/3);
   }
   else{
+    if( !Validator::checkColorText(colorText, colorType) ) return;
+    if( !Validator::checkValueByType(colorText, colorType) ) return;
+    
     comp=colorText.split(" ");
-
     QRegExp rx(" ");
     int idx=0;
 
@@ -305,3 +310,24 @@ int ColorText::getGroupNumber(int group, int groupLen, bool next){
 
   return group;
 }
+
+// bool ColorText::checkValueHex(QString text){    // +++ duplicate ColorProcessor
+//   int len=text.length();
+//   if( len!=6 && len!=3 ) return false;
+  
+//   bool ok;
+//   int factor=len/3;
+
+//   for(int i=0; i<3; i++){
+//     QString comp = text.mid(i*factor, factor);
+//     int val=comp.toInt(&ok, 16);
+//     if(!ok) return false;
+
+//     if(len==3)
+//       if(val<minSHex || val>maxSHex) return false;
+//     else
+//       if(val<minHex || val>maxHex) return false;
+//   }
+
+//   return true;
+// }
