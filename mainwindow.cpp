@@ -65,38 +65,40 @@ void MainWindow::addActions(){
 void MainWindow::copyHSV(){
   QString text=ui->leHSV->text();
   colorProcessor->copyText(text);
-  log("HSV copied");
+  status("HSV copied");
 }
 
 void MainWindow::copyRGB(){
   QString text=ui->leRGB->text();
   colorProcessor->copyText(text);
-  log("RGB copied");
+  status("RGB copied");
 }
 
 void MainWindow::copyCMYK(){
   QString text=ui->leCMYK->text();
   colorProcessor->copyText(text);
-  log("CMYK copied");
+  status("CMYK copied");
 }
 
 void MainWindow::copyHex(){
   QString text=ui->leHex->text();
   colorProcessor->copyText(text);
-  log("Hex copied");
+  status("Hex copied");
 }
 
 void MainWindow::copyHexHash(){
   QString text=ui->leHex->text();
   colorProcessor->copyText("#"+text);
-  log("Hex # copied");
+  status("Hex # copied");
 }
 
 void MainWindow::pasteHex(){
   QString text=colorProcessor->pasteText();
+  if(!text.length()) return;
+  
   ui->leHex->setText(text);
   ui->leHex->textEdited(text);
-  log("Hex value pasted");
+  status("Hex value pasted");
 }
 
 // --------------------------------------------- update color ---------------------------------------------
@@ -163,6 +165,34 @@ void MainWindow::setHex(QString text){
 
 // --------------------------------------------- service ---------------------------------------------
 
-void MainWindow::log(QString msg){
+void MainWindow::status(QString msg){
   ui->statusBar->showMessage(msg, 3000);
+}
+
+// --------------------------------------------- mouse drag ---------------------------------------------
+
+void MainWindow::mousePressEvent(QMouseEvent *e)
+{
+  mouseDown=true;
+  mx=e->x();
+  my=e->y();
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *e)
+{
+  mouseDown=false;
+  if(e->button()==Qt::MiddleButton) close();
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *e)
+{
+  if(mouseDown){
+    int gx=e->globalX();
+    int gy=e->globalY();
+
+    int corrX=geometry().x()-x();
+    int corrY=geometry().y()-y();
+
+    move(gx-mx-corrX, gy-my-corrY);
+  }
 }

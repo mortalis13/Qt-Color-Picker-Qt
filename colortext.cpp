@@ -2,6 +2,7 @@
 
 #include <QDebug>
 
+// -------------------------------------------- consts --------------------------------------------
 
 const int minH=0;
 const int maxH=360;
@@ -24,7 +25,11 @@ const int maxK=255;
 
 const int minHex=0;
 const int maxHex=255;
+const int minSHex=0;
+const int maxSHex=15;
 
+
+// ----------------------------------------------------------------------------------------------------
 
 ColorText::ColorText(QWidget *parent) : QLineEdit(parent)
 {
@@ -40,7 +45,7 @@ void ColorText::setType(ColorText::ColorType colorType)
 }
 
 
-bool ColorText::checkVal(int val, int group){
+bool ColorText::checkVal(int val, int group, int hexLen){
 
   if(colorType==HSV){
     switch(group){
@@ -78,7 +83,10 @@ bool ColorText::checkVal(int val, int group){
   }
 
   if(colorType==Hex){
-    return (val>=minHex && val<=maxHex);
+    if(hexLen==3)
+      return (val>=minSHex && val<=maxSHex);
+    else if(hexLen==6)
+      return (val>=minHex && val<=maxHex);
   }
 
 }
@@ -93,49 +101,33 @@ void ColorText::decreaseComponent(){
   changeComponentVal(false);
 }
 
-QStringList ColorText::getComponentsFromHex(QString hex){
-  QStringList list;
-
-  for(int i=0; i<3; i++)
-    list.append( hex.mid(i*2, 2) );
-
-  return list;
-}
-
 void ColorText::changeComponentVal(bool inc){
   int val;
   int group=-1;
   QString valText, newValText;
   QStringList comp;
 
-  bool q=true;
-
   int pos=cursorPosition();
   QString colorText=text();
 
   if(colorType==Hex){
+    len=colorText.length();
+    
     comp=getComponentsFromHex(colorText);
-
-    group=getHexGroup(pos);
-
-//    if( pos==0 || pos==1 || pos==2 ) group=0;
-//    if( pos==3 || pos==4 ) group=1;
-//    if( pos==5 || pos==6 ) group=2;
-
+    group=getHexGroup(pos, len);
+    
     bool ok;
     val=comp[group].toInt(&ok, 16);
-
     if(!ok) return;
-
+    
     if(inc) val++;                                                        // ---
     else val--;
-    if( !checkVal(val, group) ) return;
-
-    comp[group]=QString("%1").arg(val, 2, 16, QChar('0'));
+    if( !checkVal(val, group, len) ) return;                       // ???
+    
+    comp[group]=QString("%1").arg( val, len/3, 16, QChar('0'));      
   }
   else{
     comp=colorText.split(separator);
-
 
     QRegExp rx(" ");
     int idx=0;
@@ -151,8 +143,6 @@ void ColorText::changeComponentVal(bool inc){
 
     valText=comp[group];
     val=valText.toInt();
-
-//    if(q) return;
 
     if(inc) val++;                                                        // ---
     else val--;
@@ -176,8 +166,8 @@ void ColorText::changeComponentVal(bool inc){
   setCursorPosition(pos);
 
   textEdited(text());
-
 }
+
 
 // --------------------------------------------- select component ---------------------------------------------
 
@@ -189,29 +179,6 @@ void ColorText::selectPrevComponent(){
   selectComponent(false);
 }
 
-int ColorText::getGroupNumber(int group, int len, bool next){
-  if(next){
-    group++;
-    if(group==len) group=0;
-  }
-  else{
-    group--;
-    if(group==-1) group=len-1;
-  }
-
-  return group;
-}
-
-int ColorText::getHexGroup(int pos){
-  int group;
-
-  if( pos==0 || pos==1 || pos==2 ) group=0;
-  if( pos==3 || pos==4 ) group=1;
-  if( pos==5 || pos==6 ) group=2;
-
-  return group;
-}
-
 void ColorText::selectComponent(bool next){
   int gpos=0, glen;
   int group=-1;
@@ -221,29 +188,13 @@ void ColorText::selectComponent(bool next){
   QString colorText=text();
 
   if(colorType==Hex){
+    len=colorText.length();
     comp=getComponentsFromHex(colorText);
-
-    group=getHexGroup(pos);
-
-//    if( pos==0 || pos==1 || pos==2 ) group=0;
-//    if( pos==3 || pos==4 ) group=1;
-//    if( pos==5 || pos==6 ) group=2;
-
+    group=getHexGroup(pos, len);
     group=getGroupNumber(group, comp.size(), next);
-
-//    if(next){
-//      group++;
-//      if(group==comp.size()) group=0;
-//    }
-//    else{
-//      group--;
-//      if(group==-1) group=comp.size()-1;
-//    }
-
-    glen=2;
-    gpos=group*2;
-
-//    setSelection(gpos, glen);
+    
+    glen=len/3;
+    gpos=group*(len/3);
   }
   else{
     comp=colorText.split(" ");
@@ -257,18 +208,7 @@ void ColorText::selectComponent(bool next){
       idx+=rx.matchedLength();
     }
     if(idx==-1) group=comp.size()-1;
-
     if(group==-1) return;
-
-
-//    if(next){
-//      group++;
-//      if(group==comp.size()) group=0;
-//    }
-//    else{
-//      group--;
-//      if(group==-1) group=comp.size()-1;
-//    }
 
     group=getGroupNumber(group, comp.size(), next);
 
@@ -276,11 +216,9 @@ void ColorText::selectComponent(bool next){
     for(int i=0; i<group; i++)
       gpos += comp[i].length();
     gpos+=group;
-
   }
 
   setSelection(gpos, glen);
-
 }
 
 
@@ -322,4 +260,48 @@ bool ColorText::event(QEvent *e)
   }
 
   return QLineEdit::event(e);
+}
+
+// --------------------------------------------- service ---------------------------------------------
+
+QStringList ColorText::getComponentsFromHex(QString hex){
+  QStringList list;
+
+  int len=hex.length();
+  int factor=len/3;
+
+  for(int i=0; i<3; i++)
+    list.append( hex.mid(i*factor, factor) );
+
+  return list;
+}
+
+int ColorText::getHexGroup(int pos, int len){
+  int group;
+
+  if(len==3){
+    if( pos==0 || pos==1 ) group=0;
+    if( pos==2 ) group=1;
+    if( pos==3 ) group=2;
+  }
+  else if(len==6){
+    if( pos==0 || pos==1 || pos==2 ) group=0;
+    if( pos==3 || pos==4 ) group=1;
+    if( pos==5 || pos==6 ) group=2;
+  }
+
+  return group;
+}
+
+int ColorText::getGroupNumber(int group, int groupLen, bool next){
+  if(next){
+    group++;
+    if(group==groupLen) group=0;
+  }
+  else{
+    group--;
+    if(group==-1) group=groupLen-1;
+  }
+
+  return group;
 }

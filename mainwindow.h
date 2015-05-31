@@ -32,6 +32,7 @@ private slots:
   void copyHex();
   void copyHexHash();
   void pasteHex();
+
 private:
   Ui::MainWindow *ui;
   ColorProcessor *colorProcessor;
@@ -45,7 +46,16 @@ private:
   void setCMYK(QString text);
   void setHex(QString text);
   
-  void log(QString msg);
+  void status(QString msg);
+
+  bool mouseDown;
+  int mx, my;
+
+protected:
+  void mouseMoveEvent(QMouseEvent* e);
+  void mousePressEvent(QMouseEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
+
 };
 
 #endif // MAINWINDOW_H

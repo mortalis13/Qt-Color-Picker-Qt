@@ -1,3 +1,14 @@
-- drag by any point
+# - drag by any point
 - copy hex on Sample click
-- saturation/value pointer on the sides of selector
+- saturation/value pointers on the sides of selector
+- hold mid button to move on sv selector
+- press mid button on text to select all
+
+# - paste validation
+- short hex
+# - hex ffffff => hue -1
+- validate on up/down, tab/btab
+
+
+-------
+colortext.cpp : 121
