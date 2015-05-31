@@ -8,31 +8,7 @@
 
 // -------------------------------------------- consts --------------------------------------------
 
-// const int minH=0;
-// const int maxH=360;
-// const int minS=0;
-// const int maxS=255;
-// const int minV=0;
-// const int maxV=255;
-
-// const int minRGB=0;
-// const int maxRGB=255;
-
-// const int minC=0;
-// const int maxC=255;
-// const int minM=0;
-// const int maxM=255;
-// const int minY=0;
-// const int maxY=255;
-// const int minK=0;
-// const int maxK=255;
-
-// const int minHex=0;
-// const int maxHex=255;
-// const int minSHex=0;
-// const int maxSHex=15;
-
-// ----------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
 
 ColorProcessor::ColorProcessor(HueBar *hueBar, SatValueSelector *satValueSelector, QObject* parent) : QObject(parent){
   this->hueBar=hueBar;
@@ -87,11 +63,11 @@ QString ColorProcessor::getHex(QColor color){
 
 // -------------------------------------------- color objects --------------------------------------------
 
-QColor ColorProcessor::getColorHSV(QString HSV){
+QColor ColorProcessor::getColorHSV(QString HSV_Text){
   QStringList list;
   QColor color;
 
-  list=HSV.split(" ");
+  list=HSV_Text.split(" ");
   int h=list[0].toInt();
   int s=list[1].toInt();
   int v=list[2].toInt();
@@ -102,11 +78,11 @@ QColor ColorProcessor::getColorHSV(QString HSV){
   return color;
 }
 
-QColor ColorProcessor::getColorRGB(QString RGB){
+QColor ColorProcessor::getColorRGB(QString RGB_Text){
   QStringList list;
   QColor color;
 
-  list=RGB.split(" ");
+  list=RGB_Text.split(" ");
   int r=list[0].toInt();
   int g=list[1].toInt();
   int b=list[2].toInt();
@@ -117,11 +93,11 @@ QColor ColorProcessor::getColorRGB(QString RGB){
   return color;
 }
 
-QColor ColorProcessor::getColorCMYK(QString CMYK){
+QColor ColorProcessor::getColorCMYK(QString CMYK_Text){
   QStringList list;
   QColor color;
 
-  list=CMYK.split(" ");
+  list=CMYK_Text.split(" ");
   int c=list[0].toInt();
   int m=list[1].toInt();
   int y=list[2].toInt();
@@ -133,9 +109,9 @@ QColor ColorProcessor::getColorCMYK(QString CMYK){
   return color;
 }
 
-QColor ColorProcessor::getColorHex(QString Hex){
+QColor ColorProcessor::getColorHex(QString Hex_Text){
   QColor color;
-  color.setNamedColor("#"+Hex);
+  color.setNamedColor("#"+Hex_Text);
   color=Validator::correctColor(color);
 
   return color;
@@ -144,7 +120,7 @@ QColor ColorProcessor::getColorHex(QString Hex){
 // -------------------------------------------- update color --------------------------------------------
 
 void ColorProcessor::updateColorHSV(QString HSV_Text){
-  if( !Validator::checkColorText(HSV_Text, HSV) ) return;
+  if( !Validator::checkColorText(HSV_Text, Vars::HSV) ) return;
   if( !Validator::checkValueHSV(HSV_Text) ) return;
 
   QColor color=getColorHSV(HSV_Text);
@@ -152,7 +128,7 @@ void ColorProcessor::updateColorHSV(QString HSV_Text){
 }
 
 void ColorProcessor::updateColorRGB(QString RGB_Text){
-  if( !Validator::checkColorText(RGB_Text, RGB) ) return;
+  if( !Validator::checkColorText(RGB_Text, Vars::RGB) ) return;
   if( !Validator::checkValueRGB(RGB_Text) ) return;
 
   QColor color=getColorRGB(RGB_Text);
@@ -160,7 +136,7 @@ void ColorProcessor::updateColorRGB(QString RGB_Text){
 }
 
 void ColorProcessor::updateColorCMYK(QString CMYK_Text){
-  if( !Validator::checkColorText(CMYK_Text, CMYK) ) return;
+  if( !Validator::checkColorText(CMYK_Text, Vars::CMYK) ) return;
   if( !Validator::checkValueCMYK(CMYK_Text) ) return;
 
   QColor color=getColorCMYK(CMYK_Text);

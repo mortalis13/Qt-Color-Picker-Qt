@@ -6,6 +6,7 @@
 class HueBar : public QWidget
 {
   Q_OBJECT
+  
 public:
   explicit HueBar(QWidget *parent = 0);
 
@@ -33,13 +34,9 @@ private:
   
 private:
   bool hueBarDrawn;
-  
   QPixmap hueBarPixmap;
   
   int h,s,v;
-  
-  // int barX;
-  // int barY;
   int pointerY;
 
 };

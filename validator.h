@@ -4,21 +4,17 @@
 #include <QObject>
 #include <QColor>
 
+#include "vars.h"
+
+
 class Validator : public QObject
 {
   Q_OBJECT
   
-  static int getSizeByType(int colorType);
-
-public:
-  enum ColorType{
-    HSV, RGB, CMYK, Hex
-  };
-  
 public:
   explicit Validator(QObject *parent = 0);
   
-  static bool checkColorText(QString text, int colorType=HSV);
+  static bool checkColorText(QString text, Vars::ColorType colorType=Vars::HSV);
   
   static bool checkValueHSV(QString text);
   static bool checkValueRGB(QString text);
@@ -27,8 +23,13 @@ public:
   
   static QColor correctColor(QColor color);
   
-  static bool checkComponentVal(int val, int colorType=HSV, int group=0, int hexLen=0);
-  static bool checkValueByType(QString text, int colorType=HSV);
+  static bool checkComponentVal(int val, Vars::ColorType colorType=Vars::HSV, int group=0, int hexLen=0);
+  static bool checkValueByType(QString text, Vars::ColorType colorType=Vars::HSV);
+  
+  
+private:
+  static int getSizeByType(Vars::ColorType colorType);
+  
   
 signals:
 

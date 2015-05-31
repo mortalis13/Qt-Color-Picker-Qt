@@ -4,24 +4,21 @@
 #include <QLineEdit>
 #include <QKeyEvent>
 
+#include "vars.h"
+
 class ColorText : public QLineEdit
 {
   Q_OBJECT
 
-public:
-  enum ColorType{
-    HSV, RGB, CMYK, Hex
-  };
-
 private:
-  ColorType colorType;
+  Vars::ColorType colorType;
   QString separator;
   int len;
 
 public:
   explicit ColorText(QWidget *parent = 0);
 
-  void setType(ColorType colorType);
+  void setType(Vars::ColorType colorType);
 signals:
 
 public slots:
@@ -35,7 +32,6 @@ private:
   void decreaseComponent();
   void changeComponentVal(bool inc);
 
-  // bool checkVal(int val, int group=0, int hexLen=0);
   int getGroup();
 
   void selectNextComponent();

@@ -21,7 +21,8 @@ testpaint.cpp \
 colorprocessor.cpp \
     services.cpp \
     colortext.cpp \
-    validator.cpp
+    validator.cpp \
+    vars.cpp
 
 HEADERS  += mainwindow.h \
     huebar.h \
@@ -31,7 +32,8 @@ testpaint.h \
 colorprocessor.h \
     services.h \
     colortext.h \
-    validator.h
+    validator.h \
+    vars.h
 
 FORMS    += mainwindow.ui \
     dialog.ui

@@ -10,15 +10,13 @@
 #include "huebar.h"
 #include "satvalueselector.h"
 
+#include "vars.h"
+
+
 class ColorProcessor : public QObject
 {
   Q_OBJECT
 
-public:
-  enum ColorType{
-    HSV, RGB, CMYK, Hex
-  };
-  
 public:
   explicit ColorProcessor(HueBar* hueBar, SatValueSelector* satValueSelector, QObject* parent=0);
 
@@ -45,18 +43,11 @@ private:
   SatValueSelector* satValueSelector;
   QClipboard* clip;
   
-  QColor getColorHSV(QString HSV);
-  QColor getColorRGB(QString RGB);
-  QColor getColorCMYK(QString CMYK);
-  QColor getColorHex(QString Hex);
+  QColor getColorHSV(QString HSV_Text);
+  QColor getColorRGB(QString RGB_Text);
+  QColor getColorCMYK(QString CMYK_Text);
+  QColor getColorHex(QString Hex_Text);
 
-  // bool checkColorText(QString text, int size);
-  // bool checkValueHSV(QString text);
-  // bool checkValueRGB(QString text);
-  // bool checkValueCMYK(QString text);
-  // bool checkValueHex(QString text);
-  
-  // QColor correctColor(QColor color);
 };
 
 #endif // COLORPROCESSOR_H

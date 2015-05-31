@@ -36,20 +36,7 @@ Validator::Validator(QObject *parent) :
 {
 }
 
-int Validator::getSizeByType(int colorType){
-  switch(colorType){
-    case HSV:
-      return 3;
-    case RGB:
-      return 3;
-    case CMYK:
-      return 4;
-    default:
-      return 0;
-  }
-}
-
-bool Validator::checkColorText(QString text, int colorType){
+bool Validator::checkColorText(QString text, Vars::ColorType colorType){
   int size=getSizeByType(colorType);
   
   QStringList list;
@@ -70,15 +57,15 @@ bool Validator::checkColorText(QString text, int colorType){
   return true;
 }
 
-bool Validator::checkValueByType(QString text, int colorType){
+bool Validator::checkValueByType(QString text, Vars::ColorType colorType){
   switch(colorType){
-    case HSV:
+    case Vars::HSV:
       return checkValueHSV(text);
-    case RGB:
+    case Vars::RGB:
       return checkValueRGB(text);
-    case CMYK:
+    case Vars::CMYK:
       return checkValueCMYK(text);
-    case Hex:
+    case Vars::Hex:
       return checkValueHex(text);
   }
 }
@@ -151,6 +138,50 @@ bool Validator::checkValueHex(QString text){
   return true;
 }
 
+bool Validator::checkComponentVal(int val, Vars::ColorType colorType, int group, int hexLen){
+  if(colorType==Vars::HSV){
+    switch(group){
+    case 0:
+      return (val>=minH && val<=maxH);
+      break;
+    case 1:
+      return (val>=minS && val<=maxS);
+      break;
+    case 2:
+      return (val>=minV && val<=maxV);
+      break;
+    }
+  }
+
+  if(colorType==Vars::RGB){
+    return (val>=minRGB && val<=maxRGB);
+  }
+
+  if(colorType==Vars::CMYK){
+    switch(group){
+    case 0:
+      return (val>=minC && val<=maxC);
+      break;
+    case 1:
+      return (val>=minM && val<=maxM);
+      break;
+    case 2:
+      return (val>=minY && val<=maxY);
+      break;
+    case 3:
+      return (val>=minK && val<=maxK);
+      break;
+    }
+  }
+
+  if(colorType==Vars::Hex){
+    if(hexLen==3)
+      return (val>=minSHex && val<=maxSHex);
+    else if(hexLen==6)
+      return (val>=minHex && val<=maxHex);
+  }
+}
+
 QColor Validator::correctColor(QColor color){
   QColor c;
 
@@ -171,47 +202,17 @@ QColor Validator::correctColor(QColor color){
   return c;
 }
 
+// --------------------------------------------- service ---------------------------------------------
 
-bool Validator::checkComponentVal(int val, int colorType, int group, int hexLen){
-  if(colorType==HSV){
-    switch(group){
-    case 0:
-      return (val>=minH && val<=maxH);
-      break;
-    case 1:
-      return (val>=minS && val<=maxS);
-      break;
-    case 2:
-      return (val>=minV && val<=maxV);
-      break;
-    }
-  }
-
-  if(colorType==RGB){
-    return (val>=minRGB && val<=maxRGB);
-  }
-
-  if(colorType==CMYK){
-    switch(group){
-    case 0:
-      return (val>=minC && val<=maxC);
-      break;
-    case 1:
-      return (val>=minM && val<=maxM);
-      break;
-    case 2:
-      return (val>=minY && val<=maxY);
-      break;
-    case 3:
-      return (val>=minK && val<=maxK);
-      break;
-    }
-  }
-
-  if(colorType==Hex){
-    if(hexLen==3)
-      return (val>=minSHex && val<=maxSHex);
-    else if(hexLen==6)
-      return (val>=minHex && val<=maxHex);
+int Validator::getSizeByType(Vars::ColorType colorType){
+  switch(colorType){
+    case Vars::HSV:
+      return 3;
+    case Vars::RGB:
+      return 3;
+    case Vars::CMYK:
+      return 4;
+    default:
+      return 0;
   }
 }

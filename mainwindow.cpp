@@ -30,12 +30,12 @@ void MainWindow::init(){
   ui->leCMYK->setTextMargins(margins);
   ui->leHex->setTextMargins(margins);
 
-  ui->leHSV->setType(ColorText::HSV);
-  ui->leRGB->setType(ColorText::RGB);
-  ui->leCMYK->setType(ColorText::CMYK);
-  ui->leHex->setType(ColorText::Hex);
+  ui->leHSV->setType(Vars::HSV);
+  ui->leRGB->setType(Vars::RGB);
+  ui->leCMYK->setType(Vars::CMYK);
+  ui->leHex->setType(Vars::Hex);
   
-  correctFields();
+  // correctFields();
 
   ui->hueBar->setH(0);
 }

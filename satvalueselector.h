@@ -8,6 +8,7 @@
 class SatValueSelector : public QWidget
 {
   Q_OBJECT
+  
 public:
   explicit SatValueSelector(QWidget *parent = 0);
 
@@ -16,12 +17,6 @@ public:
   void setSV(int s, int v);
   void updateColor();
 
-signals:
-  void colorChanged(QColor);
-
-public slots:
-  void changeHue(QColor color);
-  
 protected:
   void paintEvent(QPaintEvent *e);
   void mousePressEvent(QMouseEvent* e);
@@ -50,6 +45,13 @@ private:
   
   int pointerX;
   int pointerY;
+  
+  
+signals:
+  void colorChanged(QColor);
+
+public slots:
+  void changeHue(QColor color);  
 
 };
 

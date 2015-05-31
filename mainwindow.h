@@ -17,27 +17,7 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
-private slots:
-  void updateColorText(QColor color);
-  void updateColorFinished();
-
-  void updateColorHSV(QString HSV);
-  void updateColorRGB(QString RGB);
-  void updateColorCMYK(QString CMYK);
-  void updateColorHex(QString Hex);
-  
-  void copyHSV();
-  void copyRGB();
-  void copyCMYK();
-  void copyHex();
-  void copyHexHash();
-  void pasteHex();
-
 private:
-  Ui::MainWindow *ui;
-  ColorProcessor *colorProcessor;
-  QString editingField;
-
   void addActions();
   void init();
   
@@ -53,10 +33,32 @@ private:
 
   void correctFields();
   QString correctField(QString text);
+  
 protected:
   void mouseMoveEvent(QMouseEvent* e);
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
+
+private:
+  Ui::MainWindow *ui;
+  ColorProcessor *colorProcessor;
+  QString editingField;
+  
+private slots:
+  void updateColorText(QColor color);
+  void updateColorFinished();
+
+  void updateColorHSV(QString HSV);
+  void updateColorRGB(QString RGB);
+  void updateColorCMYK(QString CMYK);
+  void updateColorHex(QString Hex);
+  
+  void copyHSV();
+  void copyRGB();
+  void copyCMYK();
+  void copyHex();
+  void copyHexHash();
+  void pasteHex();  
 
 };
 
