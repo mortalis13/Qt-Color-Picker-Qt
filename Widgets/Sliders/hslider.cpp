@@ -26,18 +26,13 @@ const int sliderX=border;
 const int sliderY=border;
 const int barWidth=40;
 
-// const int minPointerX=border;
-// const int maxPointerX=maxH + minPointerX;
-
 const int pointerWidth=10;
 const int pointerDy1=1.5;
 const int pointerDy2=5;
 
 const QColor borderColor(80,80,80,200);
-//const QColor borderColor("#55eeee00");
 
 const QColor pointerColor("#333");
-
 
 // ---
 
@@ -111,11 +106,8 @@ void HSlider::calcVars(){
 
   if(sliderW!=prevSliderW){
     widthChanged=true;
-
 //    int x=normalizePointerX(h);
 //    sliderVal=x;
-
-//    pointerX = ((double) pointerX/prevSliderW) * sliderW;
   }
   prevSliderW=sliderW;
 
@@ -128,12 +120,9 @@ void HSlider::mousePressEvent(QMouseEvent *e)
 {
   if( e->button() == Qt::MiddleButton ){
     middlePresed=true;
-    // QMouseEvent* hMouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
-    // emit middlePressedSignal(hMouseEvent);
   }
   else{
     middlePresed=false;
-//    hideCursor(e);
     movePointer( e->x() );
     updateColor();
   }
@@ -145,7 +134,6 @@ void HSlider::mouseMoveEvent(QMouseEvent *e)
     e->ignore();
   }
   else{
-//    hideCursor(e);
     movePointer( e->x() );
     updateColor();
   }
@@ -153,7 +141,6 @@ void HSlider::mouseMoveEvent(QMouseEvent *e)
 
 void HSlider::mouseReleaseEvent(QMouseEvent *e)
 {
-//  restoreCursor();
 }
 
 void HSlider::wheelEvent(QWheelEvent *e)
@@ -175,7 +162,6 @@ void HSlider::wheelEvent(QWheelEvent *e)
 
 void HSlider::drawPointer(QPainter& p){
   correctPointer();
-//  drawRightTrapezoid(p);
 
   pointerY = height()/2;
 
@@ -210,29 +196,28 @@ double HSlider::normalizeH(int val){
 }
 
 void HSlider::correctPointer(){
-  int x=normalizePointerX(h);
-  sliderVal=x;
-
   pointerX = sliderVal + minPointerX;
   pointerX = qMax( minPointerX, pointerX );
   pointerX = qMin( maxPointerX, pointerX );
 }
 
 void HSlider::updateColor(){
-   QColor color;
+  QColor color;
 
-   sliderVal = pointerX - minPointerX;
-   sliderVal = qMax(0, sliderVal);
-   sliderVal = qMin(maxRange, sliderVal);
+  sliderVal = pointerX - minPointerX;
+  sliderVal = qMax(0, sliderVal);
+  sliderVal = qMin(maxRange, sliderVal);
 
-   h = normalizeH( sliderVal );
-   h = qMax(0.0, h);
-   h = qMin(maxHF, h);
+  h = normalizeH( sliderVal );
+  h = qMax(0.0, h);
+  h = qMin(maxHF, h);
+  
+  color.setHsvF(h, s, v);
+  emit hueChanged(color);
+}
 
-//   qDebug() << QString("sliderVal: %1, h: %2").arg(sliderVal).arg(h);
-
-   color.setHsvF(h, s, v);
-   emit hueChanged(color);
+void HSlider::log(QString format, QVariant var){
+//  qDebug() << QString(format).arg(var);
 }
 
 void HSlider::incPointer(int val){
@@ -272,11 +257,14 @@ void HSlider::restoreCursor(){
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HSlider::setH(double h)
+void HSlider::setH(int h, double hf)
 {
-  this->h=h;
+  double d=(double) h/maxH;
+  sliderVal=qCeil(hf*maxRange);
+  
+  this->h=hf;
   QColor color;
-  color.setHsvF(h, s, v);
+  color.setHsvF(hf, s, v);
 
 //  emit hueChanged(color);
   update();

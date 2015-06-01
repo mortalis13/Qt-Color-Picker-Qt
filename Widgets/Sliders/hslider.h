@@ -10,7 +10,7 @@ public:
   explicit HSlider(QWidget *parent = 0);
 
 //  void setH(double h);
-  void setH(double h);
+  void setH(int h, double hf);
 
 protected:
   void paintEvent(QPaintEvent* e);
@@ -34,6 +34,8 @@ private:
 
   void hideCursor(QMouseEvent *e);
   void restoreCursor();
+
+  void log(QString format, QVariant var);
 
 
 private:

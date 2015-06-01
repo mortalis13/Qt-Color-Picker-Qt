@@ -157,8 +157,6 @@ void HSelector::drawRightTrapezoid(QPainter& p){
 
   QPolygonF triangle;
 
-//  qDebug() << "pointerY: " << pointerY;
-
   QPoint p1( width() - pointerWidth, pointerY + pointerDy1 );
   QPoint p2( width() - pointerWidth, pointerY - pointerDy1 );
   QPoint p3( width(), pointerY - pointerDy2 );

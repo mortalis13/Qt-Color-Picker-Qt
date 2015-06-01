@@ -1,6 +1,8 @@
 #include "sliders.h"
 #include "ui_sliders.h"
 
+#include <QDebug>
+
 Sliders::Sliders(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::Sliders)
@@ -39,7 +41,8 @@ void Sliders::changeHue(QColor color){
 }
 
 void Sliders::changeHueFromSelector(QColor color){
-  ui->hSlider->setH(color.hueF());
+  // ui->hSlider->setH(color.hueF());
+  ui->hSlider->setH( color.hue(), color.hueF() );
 }
 
 
