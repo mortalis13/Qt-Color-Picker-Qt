@@ -19,8 +19,8 @@ const int barX=border;
 const int barY=border;
 const int barWidth=40;
 
-const int minPointerY=border;
-const int maxPointerY=maxH + minPointerY;
+const int minPointerY = border;
+const int maxPointerY = maxH + minPointerY;
 
 const int pointerWidth=10;
 const int pointerDy1=1.5;
@@ -156,6 +156,8 @@ void HSelector::drawRightTrapezoid(QPainter& p){
   p.setBrush(brush);
 
   QPolygonF triangle;
+
+//  qDebug() << "pointerY: " << pointerY;
 
   QPoint p1( width() - pointerWidth, pointerY + pointerDy1 );
   QPoint p2( width() - pointerWidth, pointerY - pointerDy1 );

@@ -38,8 +38,8 @@ protected:
   void mouseReleaseEvent(QMouseEvent* e);
 
   void keyPressEvent(QKeyEvent *e);
-
   void keyReleaseEvent(QKeyEvent *e);
+  
 private:
   Ui::MainWindow *ui;
   QString editingField;
@@ -58,6 +58,8 @@ signals:
   void shiftReleased();
 
 private slots:
+  void changeHue(QColor color);
+
   void updateColorText(QColor color);
   void updateColorFinished();
 

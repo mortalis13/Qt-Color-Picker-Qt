@@ -14,8 +14,9 @@
 
 const int maxH=360;
 const int maxSV=255;
-const double maxHF=1.0;
-const double maxSVF=1.0;
+//const double maxH=1.0;
+//const double maxSV=1.0;
+
 
 const double ratio=1.0/maxH;
 
@@ -56,8 +57,6 @@ HSlider::HSlider(QWidget *parent) :
 {
   hSliderDrawn=false;
   middlePresed=false;
-  ctrlHeld=false;
-  widthChanged=false;
   
   pointerX=0;
   pointerY=0;
@@ -65,8 +64,8 @@ HSlider::HSlider(QWidget *parent) :
   sliderVal=0;
   
   h=0;
-  s=maxSVF;
-  v=maxSVF;
+  s=maxSV;
+  v=maxSV;
 }
 
 void HSlider::paintEvent(QPaintEvent *e)
@@ -75,53 +74,34 @@ void HSlider::paintEvent(QPaintEvent *e)
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
   
-  calcVars();
 
-  if(!hSliderDrawn || widthChanged){
-    hSliderPixmap=QPixmap(sliderW, sliderH);
-    QPainter tempP( &hSliderPixmap );
-
-    QPointF p1( sliderX, sliderH/2 );
-    QPointF p2( sliderX+sliderW, sliderH/2 );
-    QLinearGradient grad(p1, p2);
-
-    for(double hs=0; hs<1.0; hs+=ratio){
-      color.setHsvF(hs, 1, 1);
-      grad.setColorAt(hs, color);
-    }
-
-    tempP.setPen(Qt::NoPen);
-    tempP.setBrush( QBrush(grad) );
-    tempP.drawRect(0, 0, sliderW, sliderH);
-
-    hSliderDrawn=true;
-    widthChanged=false;
-  }
-  p.drawPixmap(sliderX, sliderY, hSliderPixmap);
-
-  drawPointer(p);
-  drawBorder(p);
-}
-
-void HSlider::calcVars(){
   sliderX=border;
   sliderY=border;
   sliderW=width()-2*border;
   sliderH=height()-2*border;
-
-  if(sliderW!=prevSliderW){
-    widthChanged=true;
-
-//    int x=normalizePointerX(h);
-//    sliderVal=x;
-
-//    pointerX = ((double) pointerX/prevSliderW) * sliderW;
-  }
-  prevSliderW=sliderW;
-
+  
   maxRange = sliderW - 1;
+
   minPointerX = sliderX;
   maxPointerX = minPointerX + maxRange;
+
+
+  QPointF p1( sliderX, sliderH/2 );
+  QPointF p2( sliderX+sliderW, sliderH/2 );
+  QLinearGradient grad(p1, p2);
+
+  for(double hs=0; hs<1.0; hs+=ratio){
+    color.setHsvF(hs, 1, 1);
+    grad.setColorAt(hs, color);
+//    qDebug() << QString("values: %1, %2").arg(hs).arg(color.hueF());
+  }
+
+  p.setPen(Qt::NoPen);
+  p.setBrush( QBrush(grad) );
+  p.drawRect(sliderX, sliderY, sliderW, sliderH);
+  
+  drawPointer(p);
+  drawBorder(p);
 }
 
 void HSlider::mousePressEvent(QMouseEvent *e)
@@ -158,16 +138,6 @@ void HSlider::mouseReleaseEvent(QMouseEvent *e)
 
 void HSlider::wheelEvent(QWheelEvent *e)
 {
-  QPoint p=e->angleDelta();
-  
-  int val=1;
-  if(ctrlHeld) val=10;
-  
-  if(p.y()>0) incPointer(val);
-  if(p.y()<0) decPointer(val);
-
-  updateColor();
-  e->accept();
 }
 
 
@@ -192,59 +162,21 @@ void HSlider::drawPointer(QPainter& p){
   p.drawLine( QPoint(pointerX, sliderY+sliderH), QPoint(pointerX, pointerY+pointerR+pointerBorder/2) );
 }
 
-int HSlider::normalizePointerX(double val){
-  double d=val*maxRange;
-  return qRound(d);
-
-//  for(int x=0; x<=maxRange; ++x){
-//    if( normalizeH(x) == h ){
-//      return x;
-//    }
-//  }
-//  return 0;
-}
-
-double HSlider::normalizeH(int val){
-  double h = (double)val/maxRange;
-  return h;
-}
-
 void HSlider::correctPointer(){
-  int x=normalizePointerX(h);
-  sliderVal=x;
-
   pointerX = sliderVal + minPointerX;
   pointerX = qMax( minPointerX, pointerX );
   pointerX = qMin( maxPointerX, pointerX );
 }
 
-void HSlider::updateColor(){
-   QColor color;
-
-   sliderVal = pointerX - minPointerX;
-   sliderVal = qMax(0, sliderVal);
-   sliderVal = qMin(maxRange, sliderVal);
-
-   h = normalizeH( sliderVal );
-   h = qMax(0.0, h);
-   h = qMin(maxHF, h);
-
-//   qDebug() << QString("sliderVal: %1, h: %2").arg(sliderVal).arg(h);
-
-   color.setHsvF(h, s, v);
-   emit hueChanged(color);
+void HSlider::incPointer(){
+  movePointer(pointerX+1);
 }
 
-void HSlider::incPointer(int val){
-  movePointer(pointerX+val);
-}
-
-void HSlider::decPointer(int val){
-  movePointer(pointerX-val);
+void HSlider::decPointer(){
+  movePointer(pointerX-1);
 }
 
 void HSlider::movePointer(int x){
-  emit pointerMoved(x);
   pointerX=x;
   update();
 }
@@ -269,25 +201,54 @@ void HSlider::restoreCursor(){
   this->setCursor( QCursor(Qt::ArrowCursor) );
 }
 
+int HSlider::normalizeH(int val){
+  double d = val * ( (double)maxH/maxRange );
+  int h=qRound(d);
+//  int h=qFloor(d);
+  return h;
+}
+
+void HSlider::updateColor(){
+   QColor color;
+
+   sliderVal = pointerX-border;
+   sliderVal = qMax(0, sliderVal);
+   sliderVal = qMin(maxRange, sliderVal);
+
+//   double h;
+
+   h = normalizeH( sliderVal );
+   h = qMax(0, h);
+   h = qMin(maxH, h);
+
+//   h = normalizeH( sliderVal );
+//   h = qMax(0, h);
+//   h = qMin(1,0, h);
+
+   qDebug() << QString("sliderVal: %1, h: %2").arg(sliderVal).arg(h);
+
+   color.setHsv(h, s, v);
+  // emit hueChanged(color);
+}
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HSlider::setH(double h)
+void HSlider::setH(int h)
 {
   this->h=h;
   QColor color;
-  color.setHsvF(h, s, v);
+  color.setHsv(h, s, v);
 
-//  emit hueChanged(color);
+  emit hueChanged(color);
   update();
 }
 
-// ---------------------------------------------- slots ----------------------------------------------
+//void HSlider::setH(double h)
+//{
+//  this->h=h;
+//  QColor color;
+//  color.setHsv(h, s, v);
 
-void HSlider::ctrlPressed(){
-  ctrlHeld=true;
-}
-
-void HSlider::ctrlReleased(){
-  ctrlHeld=false;
-}
+//  emit hueChanged(color);
+//  update();
+//}

@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
   colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
+  slidersWindow=new Sliders(this);
 
   addActions();
   init();
@@ -47,6 +48,7 @@ void MainWindow::init(){
 
 void MainWindow::addActions(){
   connect( ui->hSelector, SIGNAL(hueChanged(QColor)), ui->svSelector, SLOT(changeHue(QColor)) );
+  connect( ui->hSelector, SIGNAL(hueChanged(QColor)), slidersWindow, SLOT(changeHueFromSelector(QColor)) );
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
 
@@ -74,9 +76,11 @@ void MainWindow::addActions(){
   connect( this, SIGNAL(mouseMovedOnWindow()), ui->colorSample, SLOT(mouseMovedOnWindow()) );
   connect( this, SIGNAL(shiftPressed()), ui->svSelector, SLOT(shiftPressed()) );
   connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
-  connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
 
   connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
+
+  connect( slidersWindow, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
+
 }
 
 // --------------------------------------------- slots ---------------------------------------------
@@ -94,7 +98,6 @@ void MainWindow::middleClick(QMouseEvent* e){
 }
 
 void MainWindow::openSliders(){
-  slidersWindow=new Sliders(this);
   slidersWindow->show();
 }
 
@@ -284,4 +287,9 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
   if(key == Qt::Key_Shift){
     emit shiftReleased();
   }
+}
+
+void MainWindow::changeHue(QColor color)
+{
+  ui->hSelector->setH(color.hue());
 }
