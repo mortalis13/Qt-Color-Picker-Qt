@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "Models/colorprocessor.h"
+//#include "sliders.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,8 +42,10 @@ protected:
   void keyReleaseEvent(QKeyEvent *e);
 private:
   Ui::MainWindow *ui;
-  ColorProcessor *colorProcessor;
   QString editingField;
+
+  ColorProcessor *colorProcessor;
+//  Sliders* slidersWindow;
 
   bool mouseDown;
   bool mouseMoved;
@@ -71,8 +74,8 @@ private slots:
   void pasteHex();  
 
   void middleClick(QMouseEvent *e);
-  // void hMiddleMoved(QMouseEvent *e);
   void hsvMiddlePressed(QMouseEvent *e);
+  void openSliders();
 };
 
 #endif // MAINWINDOW_H

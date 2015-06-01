@@ -96,6 +96,7 @@ void HSelector::mouseMoveEvent(QMouseEvent *e)
 
 void HSelector::mouseReleaseEvent(QMouseEvent *e)
 {
+  e->ignore();
 }
 
 void HSelector::wheelEvent(QWheelEvent *e)

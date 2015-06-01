@@ -48,11 +48,10 @@ void ColorSample::mouseReleaseEvent(QMouseEvent *e)
     case Qt::RightButton:
       emit samplePressedRight();
       break;
-    case Qt::MiddleButton:
-      e->ignore();
-      break;
     }
   }
+
+  e->ignore();
   mouseMoving=false;
 }
 

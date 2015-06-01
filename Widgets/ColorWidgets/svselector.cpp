@@ -102,6 +102,7 @@ void SVSelector::mouseMoveEvent(QMouseEvent *e)
 void SVSelector::mouseReleaseEvent(QMouseEvent *e)
 {
   restoreCursor();
+  e->ignore();
 }
 
 void SVSelector::wheelEvent(QWheelEvent *e)

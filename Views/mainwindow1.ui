@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>672</width>
-    <height>414</height>
+    <height>406</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -50,7 +50,7 @@
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>14</height>
+        <height>10</height>
        </size>
       </property>
      </spacer>
@@ -251,7 +251,7 @@
        <item>
         <layout class="QVBoxLayout" name="loColorText">
          <property name="spacing">
-          <number>0</number>
+          <number>30</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -351,22 +351,6 @@
           </widget>
          </item>
          <item>
-          <spacer name="verticalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>30</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
           <widget class="QWidget" name="pRGB" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -456,22 +440,6 @@
             </item>
            </layout>
           </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>30</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item alignment="Qt::AlignTop">
           <widget class="QWidget" name="pCMYK" native="true">
@@ -563,22 +531,6 @@
             </item>
            </layout>
           </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item alignment="Qt::AlignTop">
           <widget class="QWidget" name="pHex" native="true">
@@ -722,100 +674,17 @@
           </widget>
          </item>
          <item>
-          <spacer name="verticalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>30</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QWidget" name="widget_2" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>36</height>
-            </size>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <property name="spacing">
-             <number>5</number>
-            </property>
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="bSliders">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Consolas</family>
-                <pointsize>11</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Sliders...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSlider" name="horizontalSlider">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
           <spacer name="vSpacer1">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
              <width>20</width>
-             <height>0</height>
+             <height>40</height>
             </size>
            </property>
           </spacer>
@@ -868,7 +737,7 @@
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>14</height>
+        <height>10</height>
        </size>
       </property>
      </spacer>

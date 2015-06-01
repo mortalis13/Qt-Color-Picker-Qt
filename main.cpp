@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
   MainWindow w;
   w.show();
 
-  QString style;
-  style="fusion";
+//  QString style;
+//  style="fusion";
 
-  QApplication::setStyle(style);
+//  QApplication::setStyle(style);
   return a.exec();
 }
 

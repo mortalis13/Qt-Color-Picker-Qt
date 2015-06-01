@@ -6,6 +6,7 @@
 - trim, remove \s+ after validation (when all comps are valid)
 - text fields scroll
 - text with commas (process, copy)
+- add swatches/color combo box (list)
 
 # - hold mid button to move on sv selector
 # - copy hex on Sample click
@@ -15,3 +16,8 @@
 # - drag by any point
 # - paste validation
 # - hex ffffff => hue -1
+
+- esc
+- field shortcuts
+- button shortcuts
+- change background
