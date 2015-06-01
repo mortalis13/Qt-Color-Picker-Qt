@@ -1,13 +1,13 @@
 #ifndef SLIDERS_H
 #define SLIDERS_H
 
-#include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
 class Sliders;
 }
 
-class Sliders : public QDialog
+class Sliders : public QMainWindow
 {
   Q_OBJECT
 
@@ -17,7 +17,6 @@ public:
 
 private:
   Ui::Sliders *ui;
-  void init();
 };
 
 #endif // SLIDERS_H

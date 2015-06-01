@@ -7,10 +7,6 @@
 
 #include "Widgets/ColorWidgets/hselector.h"
 
-#include "norwegianwoodstyle.h"
-#include <QStyleFactory>
-
-#include "qw.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -29,13 +25,10 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::init(){
-//  slidersWindow=new Sliders(this);
-
   mx=0;
   my=0;
 
-  QApplication::setStyle(QStyleFactory::create("fusion"));
-//  ui->horizontalSlider->setStyle(new NorwegianWoodStyle);
+  QApplication::setStyle("fusion");
 
   QMargins margins(5,0,0,0);
 
@@ -49,41 +42,39 @@ void MainWindow::init(){
   ui->leCMYK->setType(Vars::CMYK);
   ui->leHex->setType(Vars::Hex);
   
-  // correctFields();
-
   ui->hSelector->setH(0);
 }
 
 void MainWindow::addActions(){
-//  connect( ui->hSelector, SIGNAL(hueChanged(QColor)), ui->svSelector, SLOT(changeHue(QColor)) );
-//  connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
-//  connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
+  connect( ui->hSelector, SIGNAL(hueChanged(QColor)), ui->svSelector, SLOT(changeHue(QColor)) );
+  connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
+  connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
 
-//  connect( ui->leHSV, SIGNAL(textEdited(QString)), this, SLOT(updateColorHSV(QString)) );
-//  connect( ui->leRGB, SIGNAL(textEdited(QString)), this, SLOT(updateColorRGB(QString)) );
-//  connect( ui->leCMYK, SIGNAL(textEdited(QString)), this, SLOT(updateColorCMYK(QString)) );
-//  connect( ui->leHex, SIGNAL(textEdited(QString)), this, SLOT(updateColorHex(QString)) );
+  connect( ui->leHSV, SIGNAL(textEdited(QString)), this, SLOT(updateColorHSV(QString)) );
+  connect( ui->leRGB, SIGNAL(textEdited(QString)), this, SLOT(updateColorRGB(QString)) );
+  connect( ui->leCMYK, SIGNAL(textEdited(QString)), this, SLOT(updateColorCMYK(QString)) );
+  connect( ui->leHex, SIGNAL(textEdited(QString)), this, SLOT(updateColorHex(QString)) );
   
-//  connect( colorProcessor, SIGNAL(updateFinished()), this, SLOT(updateColorFinished()) );
+  connect( colorProcessor, SIGNAL(updateFinished()), this, SLOT(updateColorFinished()) );
 
-//  connect( ui->bHSV, SIGNAL(clicked()), this, SLOT(copyHSV()) );
-//  connect( ui->bRGB, SIGNAL(clicked()), this, SLOT(copyRGB()) );
-//  connect( ui->bCMYK, SIGNAL(clicked()), this, SLOT(copyCMYK()) );
+  connect( ui->bHSV, SIGNAL(clicked()), this, SLOT(copyHSV()) );
+  connect( ui->bRGB, SIGNAL(clicked()), this, SLOT(copyRGB()) );
+  connect( ui->bCMYK, SIGNAL(clicked()), this, SLOT(copyCMYK()) );
 
-//  connect( ui->bHex, SIGNAL(clicked()), this, SLOT(copyHex()) );
-//  connect( ui->bHexHash, SIGNAL(clicked()), this, SLOT(copyHexHash()) );
-//  connect( ui->bPasteHex, SIGNAL(clicked()), this, SLOT(pasteHex()) );
+  connect( ui->bHex, SIGNAL(clicked()), this, SLOT(copyHex()) );
+  connect( ui->bHexHash, SIGNAL(clicked()), this, SLOT(copyHexHash()) );
+  connect( ui->bPasteHex, SIGNAL(clicked()), this, SLOT(pasteHex()) );
 
-//  connect( ui->colorSample, SIGNAL(samplePressedLeft()), this, SLOT(copyHex()) );
-//  connect( ui->colorSample, SIGNAL(samplePressedRight()), this, SLOT(copyHexHash()) );
+  connect( ui->colorSample, SIGNAL(samplePressedLeft()), this, SLOT(copyHex()) );
+  connect( ui->colorSample, SIGNAL(samplePressedRight()), this, SLOT(copyHexHash()) );
 
-//  connect( ui->hSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
-//  connect( ui->svSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
+  connect( ui->hSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
+  connect( ui->svSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
 
-//  connect( this, SIGNAL(mouseMovedOnWindow()), ui->colorSample, SLOT(mouseMovedOnWindow()) );
-//  connect( this, SIGNAL(shiftPressed()), ui->svSelector, SLOT(shiftPressed()) );
-//  connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
-//  connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
+  connect( this, SIGNAL(mouseMovedOnWindow()), ui->colorSample, SLOT(mouseMovedOnWindow()) );
+  connect( this, SIGNAL(shiftPressed()), ui->svSelector, SLOT(shiftPressed()) );
+  connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
+  connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
 
   connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 }
@@ -103,15 +94,8 @@ void MainWindow::middleClick(QMouseEvent* e){
 }
 
 void MainWindow::openSliders(){
-//  Sliders* slidersWindow=new Sliders(this);
-//  slidersWindow->show();
-
-//  Dialog1* d=new Dialog1();
-//  d->show();
-
-  QW* qw=new QW(this);
-  qw->show();
-
+  slidersWindow=new Sliders(this);
+  slidersWindow->show();
 }
 
 // --------------------------------------------- buttons ---------------------------------------------

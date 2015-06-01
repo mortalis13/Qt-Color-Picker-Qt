@@ -28,12 +28,7 @@ SOURCES += main.cpp\
 \
         Test/testpaint.cpp \
     Views/sliders.cpp \
-    Service/sliderstyle.cpp \
-    \
-    norwegianwoodstyle.cpp \
-    Views/dialog.cpp \
-    dialog1.cpp \
-    Views/qw.cpp
+    Widgets/Sliders/hslider.cpp
 
 HEADERS  += Views/mainwindow.h \
 \
@@ -50,17 +45,10 @@ HEADERS  += Views/mainwindow.h \
 \
         Test/testpaint.h \
     Views/sliders.h \
-    Service/sliderstyle.h \
-    \
-    norwegianwoodstyle.h \
-    Views/dialog.h \
-    dialog1.h \
-    Views/qw.h
+    Widgets/Sliders/hslider.h
 
 FORMS    += Views/mainwindow.ui \
             Views/mainwindow1.ui \
             Views/mainwindow2.ui \
             Views/dialog.ui \
-    Views/sliders.ui \
-    dialog1.ui \
-    Views/qw.ui
+    Views/sliders.ui

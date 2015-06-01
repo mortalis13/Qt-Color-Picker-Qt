@@ -1,143 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Sliders</class>
- <widget class="QDialog" name="Sliders">
+ <widget class="QMainWindow" name="Sliders">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>386</width>
-    <height>264</height>
+    <width>291</width>
+    <height>209</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Sliders</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>341</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <property name="verticalSpacing">
-     <number>2</number>
-    </property>
-    <item row="0" column="0" alignment="Qt::AlignBottom">
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <family>Consolas</family>
-        <pointsize>11</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Hue</string>
-      </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QWidget" name="widget_2" native="true">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <family>Consolas</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Hue</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="HSlider" name="widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>Consolas</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="2" alignment="Qt::AlignBottom">
-     <widget class="QSpinBox" name="spinBox">
-      <property name="minimumSize">
-       <size>
-        <width>60</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Consolas</family>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="maximum">
-       <number>360</number>
-      </property>
-      <property name="value">
-       <number>360</number>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" alignment="Qt::AlignBottom">
-     <widget class="QSlider" name="slHue">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximum">
-       <number>360</number>
-      </property>
+    <item>
+     <spacer name="verticalSpacer">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Vertical</enum>
       </property>
-      <property name="invertedAppearance">
-       <bool>false</bool>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>217</height>
+       </size>
       </property>
-      <property name="invertedControls">
-       <bool>false</bool>
-      </property>
-      <property name="tickPosition">
-       <enum>QSlider::NoTicks</enum>
-      </property>
-     </widget>
+     </spacer>
     </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>HSlider</class>
+   <extends>QWidget</extends>
+   <header>Widgets\Sliders\hslider.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>slHue</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>spinBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>226</x>
-     <y>44</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>322</x>
-     <y>47</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>slHue</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>320</x>
-     <y>33</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>164</x>
-     <y>43</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

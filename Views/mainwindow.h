@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 #include "Models/colorprocessor.h"
-//#include "sliders.h"
+#include "sliders.h"
 
 namespace Ui {
 class MainWindow;
@@ -45,7 +45,7 @@ private:
   QString editingField;
 
   ColorProcessor *colorProcessor;
-//  Sliders* slidersWindow;
+  Sliders* slidersWindow;
 
   bool mouseDown;
   bool mouseMoved;

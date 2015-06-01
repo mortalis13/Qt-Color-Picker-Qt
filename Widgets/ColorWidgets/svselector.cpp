@@ -84,6 +84,8 @@ void SVSelector::mousePressEvent(QMouseEvent *e)
     hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
+
+//    repaint();
   }
 }
 
@@ -96,6 +98,8 @@ void SVSelector::mouseMoveEvent(QMouseEvent *e)
     hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
+
+//    repaint();
   }
 }
 
@@ -148,8 +152,8 @@ void SVSelector::drawPointer(QPainter& p){
 }
 
 void SVSelector::correctPointer(){
-//  pointerX = s + minPointerXY;              // ???
-//  pointerY = maxPointerXY - v;
+  pointerX = s + minPointerXY;              // to update pointer XY on text edit
+  pointerY = maxPointerXY - v;
   
   pointerX = qMax( minPointerXY, pointerX );
   pointerX = qMin( maxPointerXY, pointerX );
@@ -161,7 +165,9 @@ void SVSelector::correctPointer(){
 void SVSelector::movePointer(int x, int y){
   pointerX = x;
   pointerY = y;
-  repaint();
+
+  update();                     // if pointer doesn't move, move update() to both mousePress() and mouseMove() events
+//  repaint();                  // on repaint() here it doesn't move (it repaints before the correction)
 }
 
 void SVSelector::drawBorder(QPainter& p){

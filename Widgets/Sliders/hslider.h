@@ -1,18 +1,16 @@
-#ifndef HUEBAR_H
-#define HUEBAR_H
+#ifndef HSLIDER_H
+#define HSLIDER_H
 
 #include <QWidget>
-#include <QMouseEvent>
 
-class HSelector : public QWidget
+class HSlider : public QWidget
 {
   Q_OBJECT
-  
 public:
-  explicit HSelector(QWidget *parent = 0);
+  explicit HSlider(QWidget *parent = 0);
 
   void setH(int h);
-  
+
 protected:
   void paintEvent(QPaintEvent* e);
   void mousePressEvent(QMouseEvent* e);
@@ -20,35 +18,47 @@ protected:
 
   void mouseReleaseEvent(QMouseEvent *e);
   void wheelEvent(QWheelEvent* e);
-
+  
 private:
   void updateColor();
-  
+
   void drawPointer(QPainter &p);
   void correctPointer();
-  void movePointer(int y);
+  void movePointer(int x);
   void incPointer();
   void decPointer();
-  
+
   void drawBorder(QPainter& p);
   void drawRightTrapezoid(QPainter &p);
-  
+
+  void hideCursor(QMouseEvent *e);
+  void restoreCursor();
+
 
 private:
   bool middlePresed;
-  bool hSelectorDrawn;
-  QPixmap hSelectorPixmap;
+  bool hSliderDrawn;
+  QPixmap hSliderPixmap;
   
   int h,s,v;
-  int barSize;
+  
+  int pointerX;
   int pointerY;
+  
+  int minPointerX;
+  int maxPointerX;
+  
+  int sliderX;
+  int sliderY;
+  int sliderW;
+  int sliderH;
 
 signals:
   void hueChanged(QColor);
   void middlePressedSignal(QMouseEvent* e);
 
-public slots:
+public slots:  
 
 };
 
-#endif // HUEBAR_H
+#endif // HSLIDER_H
