@@ -52,6 +52,10 @@ void MainWindow::addActions(){
   
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
+  
+  connect( ui->svSelector, SIGNAL(saturationChanged(QColor)), slidersWindow, SLOT(changeSaturationFromSelector(QColor)) );
+  // connect( ui->svSelector, SIGNAL(valueChanged(QColor)), slidersWindow, SLOT(changeValueFromSelector(QColor)) );
+
 
   connect( ui->leHSV, SIGNAL(textEdited(QString)), this, SLOT(updateColorHSV(QString)) );
   connect( ui->leRGB, SIGNAL(textEdited(QString)), this, SLOT(updateColorRGB(QString)) );
@@ -80,9 +84,12 @@ void MainWindow::addActions(){
 
   connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 
+
   connect( slidersWindow, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
   connect( slidersWindow, SIGNAL(hueChanged(int)), this, SLOT(changeHue(int)) );
-
+  
+  connect( slidersWindow, SIGNAL(saturationChanged(QColor)), this, SLOT(changeSaturation(QColor)) );
+  connect( slidersWindow, SIGNAL(saturationChanged(int)), this, SLOT(changeSaturation(int)) );
 }
 
 // --------------------------------------------- slots ---------------------------------------------
@@ -103,6 +110,8 @@ void MainWindow::openSliders(){
   slidersWindow->show();
 }
 
+// ===== hue =====
+
 void MainWindow::changeHue(QColor color)
 {
   ui->hSelector->setH(color);
@@ -111,6 +120,18 @@ void MainWindow::changeHue(QColor color)
 void MainWindow::changeHue(int h)
 {
   ui->hSelector->setH(h);
+}
+
+// ===== saturation =====
+
+void MainWindow::changeSaturation(QColor color)
+{
+  ui->svSelector->setS(color);
+}
+
+void MainWindow::changeSaturation(int s)
+{
+  ui->svSelector->setS(s);
 }
 
 // --------------------------------------------- buttons ---------------------------------------------

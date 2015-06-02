@@ -19,23 +19,25 @@ Sliders::~Sliders()
 }
 
 void Sliders::init(){
-
+  
 }
 
 void Sliders::addActions(){
   connect( ui->hSlider, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
+  connect( ui->sSlider, SIGNAL(saturationChanged(QColor)), this, SLOT(changeSaturation(QColor)) );
 
   connect( ui->spHue, SIGNAL(valueChanged(int)), this, SLOT(changeHue(int)) );
+  connect( ui->spSaturation, SIGNAL(valueChanged(int)), this, SLOT(changeSaturation(int)) );
   
   connect( this, SIGNAL(ctrlPressed()), ui->hSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->hSlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->sSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->sSlider, SLOT(ctrlReleased()) );
 }
 
 // --------------------------------------------- slots ---------------------------------------------
 
-void Sliders::setH(int x){
-  // ui->lHue->setText(QString::number(x));
-}
+// ===== hue =====
 
 void Sliders::changeHue(int h){
   emit hueChanged(h);
@@ -48,6 +50,23 @@ void Sliders::changeHue(QColor color){
 void Sliders::changeHueFromSelector(QColor color){
   ui->hSlider->setH(color);
   ui->spHue->setValue(color.hue());
+  
+  ui->sSlider->changeHue(color);
+}
+
+// ===== saturation =====
+
+void Sliders::changeSaturation(int s){
+  emit saturationChanged(s);
+}
+
+void Sliders::changeSaturation(QColor color){
+  emit saturationChanged(color);
+}
+
+void Sliders::changeSaturationFromSelector(QColor color){
+  ui->sSlider->setS(color);
+  ui->spSaturation->setValue(color.saturation());
 }
 
 

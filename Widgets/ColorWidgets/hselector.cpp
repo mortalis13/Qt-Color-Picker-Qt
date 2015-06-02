@@ -187,10 +187,9 @@ void HSelector::setInitH(int h){
   setH(color);
 }
 
-
 void HSelector::setH(int h)
 {
-  if(this->h==360) this->h=0;
+  if(this->h == 360) this->h=0;
   if(this->h == h) return;
 
   QColor color;

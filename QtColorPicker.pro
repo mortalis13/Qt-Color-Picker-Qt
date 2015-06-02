@@ -28,7 +28,8 @@ SOURCES += main.cpp\
 \
         Test/testpaint.cpp \
     Views/sliders.cpp \
-    Widgets/Sliders/hslider.cpp
+    Widgets/Sliders/hslider.cpp \
+    Widgets/Sliders/sslider.cpp
 
 HEADERS  += Views/mainwindow.h \
 \
@@ -45,7 +46,8 @@ HEADERS  += Views/mainwindow.h \
 \
         Test/testpaint.h \
     Views/sliders.h \
-    Widgets/Sliders/hslider.h
+    Widgets/Sliders/hslider.h \
+    Widgets/Sliders/sslider.h
 
 FORMS    += Views/mainwindow.ui \
             Views/mainwindow1.ui \

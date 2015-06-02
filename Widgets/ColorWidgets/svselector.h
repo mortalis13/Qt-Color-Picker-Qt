@@ -13,8 +13,12 @@ class SVSelector : public QWidget
 public:
   explicit SVSelector(QWidget *parent = 0);
 
-  void setSaturation(int s);
-  void setValue(int v);
+  void setS(QColor color);
+  void setS(int s);
+  
+  void setV(QColor color);
+  void setV(int v);
+  
   void setSV(int s, int v);
   void updateColor();
 
@@ -61,6 +65,7 @@ private:
   
 signals:
   void colorChanged(QColor);
+  void saturationChanged(QColor);
   void middlePressedSignal(QMouseEvent* e);
 
 public slots:

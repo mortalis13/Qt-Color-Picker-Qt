@@ -1,4 +1,4 @@
-#include "hslider.h"
+#include "sslider.h"
 
 #include <QPainter>
 #include <QDebug>
@@ -17,7 +17,7 @@ const int maxSV=255;
 const qreal maxHF=1.0;
 const qreal maxSVF=1.0;
 
-const qreal ratio=1.0/maxH;
+const qreal ratio=1.0/maxSV;
 
 const int border=2;
 const int borderRadius=10;
@@ -46,7 +46,7 @@ const QColor pointerFillColor("#333");
 
 // ----------------------------------------------------------------------------------------------------
 
-HSlider::HSlider(QWidget *parent) :
+SSlider::SSlider(QWidget *parent) :
   QWidget(parent)
 {
   hSliderDrawn=false;
@@ -57,7 +57,7 @@ HSlider::HSlider(QWidget *parent) :
   pointerX=0;
   pointerY=0;
 
-  sliderVal=0;
+  sliderVal=maxSV;
   
   h=0;
   s=maxSVF;
@@ -66,7 +66,7 @@ HSlider::HSlider(QWidget *parent) :
   color.setHsvF(h, s, v);
 }
 
-void HSlider::paintEvent(QPaintEvent *e)
+void SSlider::paintEvent(QPaintEvent *e)
 {
   QColor color;
   QPainter p(this);
@@ -75,16 +75,16 @@ void HSlider::paintEvent(QPaintEvent *e)
   calcVars();
 
   if(!hSliderDrawn || widthChanged){
-    hSliderPixmap=QPixmap(sliderW, sliderH);
-    QPainter tempP( &hSliderPixmap );
+    sSliderPixmap=QPixmap(sliderW, sliderH);
+    QPainter tempP( &sSliderPixmap );
 
     QPointF p1( sliderX, sliderH/2 );
     QPointF p2( sliderX+sliderW, sliderH/2 );
     QLinearGradient grad(p1, p2);
 
-    for(qreal hs=0; hs<1.0; hs+=ratio){
-      color.setHsvF(hs, 1, 1);
-      grad.setColorAt(hs, color);
+    for(qreal ss=0; ss<1.0; ss+=ratio){
+      color.setHsvF(h, ss, 1);
+      grad.setColorAt(ss, color);
     }
 
     tempP.setPen(Qt::NoPen);
@@ -94,13 +94,13 @@ void HSlider::paintEvent(QPaintEvent *e)
     hSliderDrawn=true;
     widthChanged=false;
   }
-  p.drawPixmap(sliderX, sliderY, hSliderPixmap);
+  p.drawPixmap(sliderX, sliderY, sSliderPixmap);
 
   drawPointer(p);
   drawBorder(p);
 }
 
-void HSlider::mousePressEvent(QMouseEvent *e)
+void SSlider::mousePressEvent(QMouseEvent *e)
 {
   if( e->button() == Qt::MiddleButton ){
     middlePresed=true;
@@ -112,7 +112,7 @@ void HSlider::mousePressEvent(QMouseEvent *e)
   }
 }
 
-void HSlider::mouseMoveEvent(QMouseEvent *e)
+void SSlider::mouseMoveEvent(QMouseEvent *e)
 {
   if(middlePresed){
     e->ignore();
@@ -123,11 +123,11 @@ void HSlider::mouseMoveEvent(QMouseEvent *e)
   }
 }
 
-void HSlider::mouseReleaseEvent(QMouseEvent *e)
+void SSlider::mouseReleaseEvent(QMouseEvent *e)
 {
 }
 
-void HSlider::wheelEvent(QWheelEvent *e)
+void SSlider::wheelEvent(QWheelEvent *e)
 {
   QPoint p=e->angleDelta();
   
@@ -144,7 +144,7 @@ void HSlider::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void HSlider::calcVars(){
+void SSlider::calcVars(){
   sliderX=border;
   sliderY=border;
   sliderW=width()-2*border;
@@ -156,13 +156,13 @@ void HSlider::calcVars(){
   
   if(sliderW!=prevSliderW){
     widthChanged=true;
-    int x=normalizePointerX(h);
+    int x=normalizePointerX(s);
     sliderVal=x;
   }
   prevSliderW=sliderW;
 }
 
-void HSlider::drawPointer(QPainter& p){
+void SSlider::drawPointer(QPainter& p){
   correctPointer();
 
   pointerY = height()/2;
@@ -180,50 +180,50 @@ void HSlider::drawPointer(QPainter& p){
   p.drawLine( QPoint(pointerX, sliderY+sliderH), QPoint(pointerX, pointerY+pointerR+pointerBorder/2) );
 }
 
-int HSlider::normalizePointerX(qreal val){
+int SSlider::normalizePointerX(qreal val){
   qreal d=val*maxRange;
   return qCeil(d);
 }
 
-qreal HSlider::normalizeH(int val){
-  qreal h = (qreal)val/maxRange;
-  return h;
+qreal SSlider::normalizeS(int val){
+  qreal s = (qreal)val/maxRange;
+  return s;
 }
 
-void HSlider::correctPointer(){
+void SSlider::correctPointer(){
   pointerX = sliderVal + minPointerX;
   pointerX = qMax( minPointerX, pointerX );
   pointerX = qMin( maxPointerX, pointerX );
 }
 
-void HSlider::updateColor(){
+void SSlider::updateColor(){
   sliderVal = pointerX - minPointerX;
   sliderVal = qMax(0, sliderVal);
   sliderVal = qMin(maxRange, sliderVal);
 
-  h = normalizeH( sliderVal );
-  h = qMax(0.0, h);
-  h = qMin(maxHF, h);
+  s = normalizeS( sliderVal );
+  s = qMax(0.0, s);
+  s = qMin(maxSVF, s);
   
   color.setHsvF(h, s, v);
-  emit hueChanged(color);
+  emit saturationChanged(color);
 }
 
-void HSlider::incPointer(int val){
+void SSlider::incPointer(int val){
   movePointer(pointerX+val);
 }
 
-void HSlider::decPointer(int val){
+void SSlider::decPointer(int val){
   movePointer(pointerX-val);
 }
 
-void HSlider::movePointer(int x){
+void SSlider::movePointer(int x){
   emit pointerMoved(x);
   pointerX=x;
   update();
 }
 
-void HSlider::drawBorder(QPainter& p){
+void SSlider::drawBorder(QPainter& p){
   QRectF rectangle( sliderX, sliderY, sliderW, sliderH );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
@@ -231,46 +231,54 @@ void HSlider::drawBorder(QPainter& p){
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HSlider::setH(QColor color)
+void SSlider::setS(QColor color)
 {
-  if(this->color==color) return;
+  if(this->color==color){
+    return;
+  } 
   
-  h=color.hueF();
-  sliderVal=qCeil( h * maxRange );
+  s=color.saturationF();
+  sliderVal=qCeil( s*maxRange );
   
   update();
 }
 
-void HSlider::setH(qreal h)
+void SSlider::setS(qreal s)
 {
-  sliderVal=qCeil(h*maxRange);
+  sliderVal=qCeil( s*maxRange );
   
-  this->h=h;
+  this->s=s;
   QColor color;
   color.setHsvF(h, s, v);
 
-//  emit hueChanged(color);
   update();
 }
 
 
 // ---------------------------------------------- slots ----------------------------------------------
 
-void HSlider::ctrlPressed(){
+void SSlider::ctrlPressed(){
   ctrlHeld=true;
 }
 
-void HSlider::ctrlReleased(){
+void SSlider::ctrlReleased(){
   ctrlHeld=false;
+}
+
+void SSlider::changeHue(QColor color)
+{
+  hSliderDrawn=false;
+  h=color.hueF();
+  repaint();
 }
 
 
 // ---------------------------------------------- other ----------------------------------------------
 
-void HSlider::log(QString format, int var){
+void SSlider::log(QString format, int var){
  qDebug() << QString(format).arg(var);
 }
 
-void HSlider::log(QString format, qreal var){
+void SSlider::log(QString format, qreal var){
  qDebug() << QString(format).arg(var);
 }

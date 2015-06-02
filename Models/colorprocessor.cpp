@@ -25,8 +25,6 @@ QString ColorProcessor::getHSV(QColor color){
   int s=color.saturation();
   int v=color.value();
   
-  qDebug() << "h:" << h;
-
   res=QString("%1 %2 %3").arg(h).arg(s).arg(v);
   return res;
 }

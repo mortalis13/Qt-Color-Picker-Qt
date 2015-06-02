@@ -209,7 +209,9 @@ void SVSelector::updateColor(){
 
   QColor color;
   color.setHsv(h, s, v);
+  
   emit colorChanged(color);
+  emit saturationChanged(color);
 }
 
 // ---------------------------------------------- slots ----------------------------------------------
@@ -238,19 +240,42 @@ void SVSelector::shiftReleased(){
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void SVSelector::setSaturation(int s)
+void SVSelector::setS(int s)
 {
+  if(this->s == s){
+    return;
+  }
+  
   this->s=s;
+  repaint();
+  updateColor();
 }
 
-void SVSelector::setValue(int v)
+void SVSelector::setS(QColor color)
+{
+  s=color.saturation();
+  repaint();
+  updateColor();
+}
+
+void SVSelector::setV(QColor color)
+{
+  v=color.value();
+  repaint();
+  updateColor();
+}
+
+void SVSelector::setV(int v)
 {
   this->v=v;
+  repaint();
+  updateColor();
 }
 
 void SVSelector::setSV(int s, int v){
-  setSaturation(s);
-  setValue(v);
+  this->s=s;
+  this->v=v;
+  
   repaint();
   updateColor();
 }

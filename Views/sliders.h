@@ -18,10 +18,6 @@ public:
   ~Sliders();
 
 
-public slots:
-  void changeHue(int h);
-  void changeHue(QColor color);
-  void changeHueFromSelector(QColor color);
 protected:
   void mouseMoveEvent(QMouseEvent* e);
   void mousePressEvent(QMouseEvent* e);
@@ -46,11 +42,22 @@ private:
 signals:
   void hueChanged(int);
   void hueChanged(QColor);
+  
+  void saturationChanged(int);
+  void saturationChanged(QColor);
 
   void ctrlPressed();
   void ctrlReleased();
-private slots:
-  void setH(int x);
+  
+public slots:
+  void changeHue(int h);
+  void changeHue(QColor color);
+  void changeHueFromSelector(QColor color);
+  
+  void changeSaturation(int s);
+  void changeSaturation(QColor color);
+  void changeSaturationFromSelector(QColor color);  
+  
 };
 
 #endif // SLIDERS_H

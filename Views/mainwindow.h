@@ -60,6 +60,10 @@ signals:
 private slots:
   void changeHue(QColor color);
   void changeHue(int h);
+  
+  void changeSaturation(QColor color);
+  void changeSaturation(int s);
+  
 
   void updateColorText(QColor color);
   void updateColorFinished();
