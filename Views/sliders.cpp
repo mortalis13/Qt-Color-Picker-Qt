@@ -24,8 +24,9 @@ void Sliders::init(){
 
 void Sliders::addActions(){
   connect( ui->hSlider, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
-  connect( ui->hSlider, SIGNAL(pointerMoved(int)), this, SLOT(setH(int)) );
 
+  connect( ui->spHue, SIGNAL(valueChanged(int)), this, SLOT(changeHue(int)) );
+  
   connect( this, SIGNAL(ctrlPressed()), ui->hSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->hSlider, SLOT(ctrlReleased()) );
 }
@@ -33,7 +34,11 @@ void Sliders::addActions(){
 // --------------------------------------------- slots ---------------------------------------------
 
 void Sliders::setH(int x){
-  ui->lHue->setText(QString::number(x));
+  // ui->lHue->setText(QString::number(x));
+}
+
+void Sliders::changeHue(int h){
+  emit hueChanged(h);
 }
 
 void Sliders::changeHue(QColor color){
@@ -42,6 +47,7 @@ void Sliders::changeHue(QColor color){
 
 void Sliders::changeHueFromSelector(QColor color){
   ui->hSlider->setH(color);
+  ui->spHue->setValue(color.hue());
 }
 
 

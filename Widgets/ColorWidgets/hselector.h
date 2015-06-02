@@ -14,6 +14,7 @@ public:
   void setH(int h);
   void setH(QColor color);
   
+  void setInitH(int h);
 protected:
   void paintEvent(QPaintEvent* e);
   void mousePressEvent(QMouseEvent* e);
@@ -33,6 +34,9 @@ private:
   
   void drawBorder(QPainter& p);
   void drawRightTrapezoid(QPainter &p);
+  
+  void log(QString format, int var);
+  void log(QString format, qreal var);
   
 
 private:

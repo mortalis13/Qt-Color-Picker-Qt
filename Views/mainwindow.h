@@ -59,6 +59,7 @@ signals:
 
 private slots:
   void changeHue(QColor color);
+  void changeHue(int h);
 
   void updateColorText(QColor color);
   void updateColorFinished();

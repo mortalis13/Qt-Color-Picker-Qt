@@ -43,12 +43,13 @@ void MainWindow::init(){
   ui->leCMYK->setType(Vars::CMYK);
   ui->leHex->setType(Vars::Hex);
   
-  ui->hSelector->setH(0);
+  ui->hSelector->setInitH(0);
 }
 
 void MainWindow::addActions(){
   connect( ui->hSelector, SIGNAL(hueChanged(QColor)), ui->svSelector, SLOT(changeHue(QColor)) );
   connect( ui->hSelector, SIGNAL(hueChanged(QColor)), slidersWindow, SLOT(changeHueFromSelector(QColor)) );
+  
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
 
@@ -80,6 +81,7 @@ void MainWindow::addActions(){
   connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 
   connect( slidersWindow, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
+  connect( slidersWindow, SIGNAL(hueChanged(int)), this, SLOT(changeHue(int)) );
 
 }
 
@@ -104,6 +106,11 @@ void MainWindow::openSliders(){
 void MainWindow::changeHue(QColor color)
 {
   ui->hSelector->setH(color);
+}
+
+void MainWindow::changeHue(int h)
+{
+  ui->hSelector->setH(h);
 }
 
 // --------------------------------------------- buttons ---------------------------------------------

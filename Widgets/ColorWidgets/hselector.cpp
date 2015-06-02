@@ -174,15 +174,25 @@ void HSelector::updateColor(){
   h = pointerY-border;
   h = qMax(0, h);
   h = qMin(maxH, h);
-
+  
   color.setHsv(h, s, v);
   emit hueChanged(color);
 }
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
+void HSelector::setInitH(int h){
+  QColor color;
+  color.setHsv(h, s, v);
+  setH(color);
+}
+
+
 void HSelector::setH(int h)
 {
+  if(this->h==360) this->h=0;
+  if(this->h == h) return;
+
   QColor color;
   color.setHsv(h, s, v);
   setH(color);
@@ -195,3 +205,12 @@ void HSelector::setH(QColor color)
   update();
 }
 
+// ---------------------------------------------- other ----------------------------------------------
+
+void HSelector::log(QString format, int var){
+ qDebug() << QString(format).arg(var);
+}
+
+void HSelector::log(QString format, qreal var){
+ qDebug() << QString(format).arg(var);
+}

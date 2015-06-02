@@ -19,6 +19,7 @@ public:
 
 
 public slots:
+  void changeHue(int h);
   void changeHue(QColor color);
   void changeHueFromSelector(QColor color);
 protected:
@@ -43,6 +44,7 @@ private:
   
   
 signals:
+  void hueChanged(int);
   void hueChanged(QColor);
 
   void ctrlPressed();
