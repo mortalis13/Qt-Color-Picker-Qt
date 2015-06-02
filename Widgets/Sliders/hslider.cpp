@@ -14,10 +14,10 @@
 
 const int maxH=360;
 const int maxSV=255;
-const double maxHF=1.0;
-const double maxSVF=1.0;
+const qreal maxHF=1.0;
+const qreal maxSVF=1.0;
 
-const double ratio=1.0/maxH;
+const qreal ratio=1.0/maxH;
 
 const int border=2;
 const int borderRadius=10;
@@ -62,6 +62,8 @@ HSlider::HSlider(QWidget *parent) :
   h=0;
   s=maxSVF;
   v=maxSVF;
+  
+  color.setHsvF(h, s, v);
 }
 
 void HSlider::paintEvent(QPaintEvent *e)
@@ -80,7 +82,7 @@ void HSlider::paintEvent(QPaintEvent *e)
     QPointF p2( sliderX+sliderW, sliderH/2 );
     QLinearGradient grad(p1, p2);
 
-    for(double hs=0; hs<1.0; hs+=ratio){
+    for(qreal hs=0; hs<1.0; hs+=ratio){
       color.setHsvF(hs, 1, 1);
       grad.setColorAt(hs, color);
     }
@@ -96,24 +98,6 @@ void HSlider::paintEvent(QPaintEvent *e)
 
   drawPointer(p);
   drawBorder(p);
-}
-
-void HSlider::calcVars(){
-  sliderX=border;
-  sliderY=border;
-  sliderW=width()-2*border;
-  sliderH=height()-2*border;
-
-  if(sliderW!=prevSliderW){
-    widthChanged=true;
-//    int x=normalizePointerX(h);
-//    sliderVal=x;
-  }
-  prevSliderW=sliderW;
-
-  maxRange = sliderW - 1;
-  minPointerX = sliderX;
-  maxPointerX = minPointerX + maxRange;
 }
 
 void HSlider::mousePressEvent(QMouseEvent *e)
@@ -160,6 +144,24 @@ void HSlider::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
+void HSlider::calcVars(){
+  sliderX=border;
+  sliderY=border;
+  sliderW=width()-2*border;
+  sliderH=height()-2*border;
+
+  if(sliderW!=prevSliderW){
+    widthChanged=true;
+    int x=normalizePointerX(h);
+    sliderVal=x;
+  }
+  prevSliderW=sliderW;
+
+  maxRange = sliderW - 1;
+  minPointerX = sliderX;
+  maxPointerX = minPointerX + maxRange;
+}
+
 void HSlider::drawPointer(QPainter& p){
   correctPointer();
 
@@ -178,20 +180,13 @@ void HSlider::drawPointer(QPainter& p){
   p.drawLine( QPoint(pointerX, sliderY+sliderH), QPoint(pointerX, pointerY+pointerR+pointerBorder/2) );
 }
 
-int HSlider::normalizePointerX(double val){
-  double d=val*maxRange;
-  return qRound(d);
-
-//  for(int x=0; x<=maxRange; ++x){
-//    if( normalizeH(x) == h ){
-//      return x;
-//    }
-//  }
-//  return 0;
+int HSlider::normalizePointerX(qreal val){
+  qreal d=val*maxRange;
+  return qCeil(d);
 }
 
-double HSlider::normalizeH(int val){
-  double h = (double)val/maxRange;
+qreal HSlider::normalizeH(int val){
+  qreal h = (qreal)val/maxRange;
   return h;
 }
 
@@ -202,8 +197,6 @@ void HSlider::correctPointer(){
 }
 
 void HSlider::updateColor(){
-  QColor color;
-
   sliderVal = pointerX - minPointerX;
   sliderVal = qMax(0, sliderVal);
   sliderVal = qMin(maxRange, sliderVal);
@@ -214,10 +207,6 @@ void HSlider::updateColor(){
   
   color.setHsvF(h, s, v);
   emit hueChanged(color);
-}
-
-void HSlider::log(QString format, QVariant var){
-//  qDebug() << QString(format).arg(var);
 }
 
 void HSlider::incPointer(int val){
@@ -239,36 +228,32 @@ void HSlider::drawBorder(QPainter& p){
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
-void HSlider::hideCursor(QMouseEvent *e){
-  int x=e->x();
-  int y=e->y();
-
-  if( ( x<minPointerX || x>maxPointerX ) || ( y<sliderY || y>sliderY+sliderH ) ) {
-    restoreCursor();
-    return;
-  }
-  this->setCursor( QCursor(Qt::BlankCursor) );
-}
-
-void HSlider::restoreCursor(){
-  this->setCursor( QCursor(Qt::ArrowCursor) );
-}
-
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HSlider::setH(int h, double hf)
+void HSlider::setH(QColor color)
 {
-  double d=(double) h/maxH;
-  sliderVal=qCeil(hf*maxRange);
+  if(this->color==color) return;
   
-  this->h=hf;
+  h=color.hueF();
+  sliderVal=qCeil( h * maxRange );
+  
+  update();
+}
+
+void HSlider::setH(qreal h)
+{
+  sliderVal=qCeil(h*maxRange);
+  qDebug();
+  
+  this->h=h;
   QColor color;
-  color.setHsvF(hf, s, v);
+  color.setHsvF(h, s, v);
 
 //  emit hueChanged(color);
   update();
 }
+
 
 // ---------------------------------------------- slots ----------------------------------------------
 
@@ -278,4 +263,15 @@ void HSlider::ctrlPressed(){
 
 void HSlider::ctrlReleased(){
   ctrlHeld=false;
+}
+
+
+// ---------------------------------------------- other ----------------------------------------------
+
+void HSlider::log(QString format, int var){
+ qDebug() << QString(format).arg(var);
+}
+
+void HSlider::log(QString format, qreal var){
+ qDebug() << QString(format).arg(var);
 }

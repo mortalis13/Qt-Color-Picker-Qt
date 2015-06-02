@@ -61,7 +61,7 @@ void HSelector::paintEvent(QPaintEvent *event)
       color.setHsv(h, s, v);
       tempP.setPen(color);
 
-      double y = h * ( (double) barSize/maxH );
+      qreal y = h * ( (qreal) barSize/maxH );
       tempP.drawLine( QPointF(0, y), QPointF(barWidth, y) );          // for expanding size, needs rework for mapping Y to Hue
 //      tempP.drawLine(0, h, barWidth, h);
     }
@@ -183,10 +183,15 @@ void HSelector::updateColor(){
 
 void HSelector::setH(int h)
 {
-  this->h=h;
   QColor color;
   color.setHsv(h, s, v);
+  setH(color);
+}
 
+void HSelector::setH(QColor color)
+{
+  h=color.hue();
   emit hueChanged(color);
   update();
 }
+

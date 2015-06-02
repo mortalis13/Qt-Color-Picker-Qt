@@ -101,6 +101,11 @@ void MainWindow::openSliders(){
   slidersWindow->show();
 }
 
+void MainWindow::changeHue(QColor color)
+{
+  ui->hSelector->setH(color);
+}
+
 // --------------------------------------------- buttons ---------------------------------------------
 
 void MainWindow::copyHSV(){
@@ -287,9 +292,4 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
   if(key == Qt::Key_Shift){
     emit shiftReleased();
   }
-}
-
-void MainWindow::changeHue(QColor color)
-{
-  ui->hSelector->setH(color.hue());
 }

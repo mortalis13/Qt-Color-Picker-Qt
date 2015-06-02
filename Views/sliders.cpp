@@ -41,8 +41,7 @@ void Sliders::changeHue(QColor color){
 }
 
 void Sliders::changeHueFromSelector(QColor color){
-  // ui->hSlider->setH(color.hueF());
-  ui->hSlider->setH( color.hue(), color.hueF() );
+  ui->hSlider->setH(color);
 }
 
 

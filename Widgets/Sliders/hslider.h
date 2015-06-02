@@ -9,8 +9,8 @@ class HSlider : public QWidget
 public:
   explicit HSlider(QWidget *parent = 0);
 
-//  void setH(double h);
-  void setH(int h, double hf);
+  void setH(qreal h);
+  void setH(QColor color);
 
 protected:
   void paintEvent(QPaintEvent* e);
@@ -28,14 +28,15 @@ private:
   void movePointer(int x);
   void incPointer(int val=1);
   void decPointer(int val=1);
+  
+  void calcVars();
+  int normalizePointerX(qreal val);
+  qreal normalizeH(int val);
 
   void drawBorder(QPainter& p);
-  void drawRightTrapezoid(QPainter &p);
 
-  void hideCursor(QMouseEvent *e);
-  void restoreCursor();
-
-  void log(QString format, QVariant var);
+  void log(QString format, int var);
+  void log(QString format, qreal var);
 
 
 private:
@@ -44,11 +45,10 @@ private:
   bool ctrlHeld;
   bool widthChanged;
 
+  QColor color;
   QPixmap hSliderPixmap;
   
-//  int h,s,v;
-
-  double h,s,v;
+  qreal h,s,v;
   
   int pointerX;
   int pointerY;
@@ -65,10 +65,6 @@ private:
   int sliderVal;
   int maxRange;
 
-  double normalizeH(int val);
-
-  void calcVars();
-  int normalizePointerX(double val);
 
 signals:
   void hueChanged(QColor);
@@ -76,9 +72,8 @@ signals:
   void middlePressedSignal(QMouseEvent* e);
 
 public slots:  
-
-void ctrlPressed();
-void ctrlReleased();
+  void ctrlPressed();
+  void ctrlReleased();
 
 };
 

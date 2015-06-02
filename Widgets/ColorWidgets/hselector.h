@@ -12,6 +12,7 @@ public:
   explicit HSelector(QWidget *parent = 0);
 
   void setH(int h);
+  void setH(QColor color);
   
 protected:
   void paintEvent(QPaintEvent* e);
