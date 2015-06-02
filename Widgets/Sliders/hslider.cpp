@@ -83,7 +83,7 @@ void HSlider::paintEvent(QPaintEvent *e)
     QLinearGradient grad(p1, p2);
 
     for(qreal hs=0; hs<1.0; hs+=ratio){
-      color.setHsvF(hs, 1, 1);
+      color.setHsvF(hs, s, v);
       grad.setColorAt(hs, color);
     }
 
@@ -264,6 +264,19 @@ void HSlider::ctrlReleased(){
   ctrlHeld=false;
 }
 
+void HSlider::changeValue(QColor color)
+{
+  hSliderDrawn=false;
+  v=color.valueF();
+  repaint();
+}
+
+void HSlider::changeSaturation(QColor color)
+{
+  hSliderDrawn=false;
+  s=color.saturationF();
+  repaint();
+}
 
 // ---------------------------------------------- other ----------------------------------------------
 

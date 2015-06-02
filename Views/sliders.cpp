@@ -25,14 +25,18 @@ void Sliders::init(){
 void Sliders::addActions(){
   connect( ui->hSlider, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
   connect( ui->sSlider, SIGNAL(saturationChanged(QColor)), this, SLOT(changeSaturation(QColor)) );
+  connect( ui->vSlider, SIGNAL(valueChanged(QColor)), this, SLOT(changeValue(QColor)) );
 
   connect( ui->spHue, SIGNAL(valueChanged(int)), this, SLOT(changeHue(int)) );
   connect( ui->spSaturation, SIGNAL(valueChanged(int)), this, SLOT(changeSaturation(int)) );
+  connect( ui->spValue, SIGNAL(valueChanged(int)), this, SLOT(changeValue(int)) );
   
   connect( this, SIGNAL(ctrlPressed()), ui->hSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->hSlider, SLOT(ctrlReleased()) );
   connect( this, SIGNAL(ctrlPressed()), ui->sSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->sSlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->vSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->vSlider, SLOT(ctrlReleased()) );
 }
 
 // --------------------------------------------- slots ---------------------------------------------
@@ -52,6 +56,7 @@ void Sliders::changeHueFromSelector(QColor color){
   ui->spHue->setValue(color.hue());
   
   ui->sSlider->changeHue(color);
+  ui->vSlider->changeHue(color);
 }
 
 // ===== saturation =====
@@ -67,6 +72,27 @@ void Sliders::changeSaturation(QColor color){
 void Sliders::changeSaturationFromSelector(QColor color){
   ui->sSlider->setS(color);
   ui->spSaturation->setValue(color.saturation());
+  
+  ui->hSlider->changeSaturation(color);
+  ui->vSlider->changeSaturation(color);
+}
+
+// ===== value =====
+
+void Sliders::changeValue(int v){
+  emit valueChanged(v);
+}
+
+void Sliders::changeValue(QColor color){
+  emit valueChanged(color);
+}
+
+void Sliders::changeValueFromSelector(QColor color){
+  ui->vSlider->setV(color);
+  ui->spValue->setValue(color.value());
+  
+  ui->hSlider->changeValue(color);
+  ui->sSlider->changeValue(color);
 }
 
 

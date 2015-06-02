@@ -66,6 +66,8 @@ private:
 signals:
   void colorChanged(QColor);
   void saturationChanged(QColor);
+  void valueChanged(QColor);
+  
   void middlePressedSignal(QMouseEvent* e);
 
 public slots:

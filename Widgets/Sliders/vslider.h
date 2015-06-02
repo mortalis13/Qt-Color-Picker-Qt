@@ -1,20 +1,19 @@
-#ifndef HSLIDER_H
-#define HSLIDER_H
+#ifndef VSLIDER_H
+#define VSLIDER_H
 
 #include <QWidget>
 
-class HSlider : public QWidget
+class VSlider : public QWidget
 {
   Q_OBJECT
 public:
-  explicit HSlider(QWidget *parent = 0);
+  explicit VSlider(QWidget *parent = 0);
 
-  void setH(qreal h);
-  void setH(QColor color);
+  void setV(qreal v);
+  void setV(QColor color);
   
-  void changeValue(QColor color);
+  void changeHue(QColor color);
   void changeSaturation(QColor color);
-  
 
 protected:
   void paintEvent(QPaintEvent* e);
@@ -35,7 +34,7 @@ private:
   
   void calcVars();
   int normalizePointerX(qreal val);
-  qreal normalizeH(int val);
+  qreal normalizeV(int val);
 
   void drawBorder(QPainter& p);
 
@@ -45,12 +44,12 @@ private:
 
 private:
   bool middlePresed;
-  bool hSliderDrawn;
+  bool vSliderDrawn;
   bool ctrlHeld;
   bool widthChanged;
 
   QColor color;
-  QPixmap hSliderPixmap;
+  QPixmap vSliderPixmap;
   
   qreal h,s,v;
   
@@ -71,14 +70,14 @@ private:
 
 
 signals:
-  void hueChanged(QColor);
+  void valueChanged(QColor);
   void pointerMoved(int);
   void middlePressedSignal(QMouseEvent* e);
 
 public slots:  
   void ctrlPressed();
   void ctrlReleased();
-
+  
 };
 
-#endif // HSLIDER_H
+#endif // VSLIDER_H

@@ -64,6 +64,9 @@ private slots:
   void changeSaturation(QColor color);
   void changeSaturation(int s);
   
+  void changeValue(QColor color);
+  void changeValue(int v);
+  
 
   void updateColorText(QColor color);
   void updateColorFinished();

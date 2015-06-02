@@ -168,7 +168,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="pHue_3" native="true">
+     <widget class="QWidget" name="pValue" native="true">
       <layout class="QGridLayout" name="gridLayout_3">
        <property name="leftMargin">
         <number>0</number>
@@ -186,7 +186,7 @@
         <number>2</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="lHue_3">
+        <widget class="QLabel" name="lValue">
          <property name="font">
           <font>
            <family>Consolas</family>
@@ -201,7 +201,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="HSlider" name="hSlider_3" native="true">
+        <widget class="VSlider" name="vSlider" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -217,7 +217,7 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="spHue_3">
+        <widget class="QSpinBox" name="spValue">
          <property name="minimumSize">
           <size>
            <width>53</width>
@@ -267,6 +267,12 @@
    <class>SSlider</class>
    <extends>QWidget</extends>
    <header>Widgets\Sliders\sslider.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VSlider</class>
+   <extends>QWidget</extends>
+   <header>Widgets\Sliders\vslider.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

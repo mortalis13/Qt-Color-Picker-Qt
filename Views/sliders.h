@@ -45,6 +45,9 @@ signals:
   
   void saturationChanged(int);
   void saturationChanged(QColor);
+  
+  void valueChanged(int);
+  void valueChanged(QColor);
 
   void ctrlPressed();
   void ctrlReleased();
@@ -57,6 +60,10 @@ public slots:
   void changeSaturation(int s);
   void changeSaturation(QColor color);
   void changeSaturationFromSelector(QColor color);  
+  
+  void changeValue(int s);
+  void changeValue(QColor color);
+  void changeValueFromSelector(QColor color);  
   
 };
 

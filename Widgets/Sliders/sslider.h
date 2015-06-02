@@ -13,6 +13,7 @@ public:
   void setS(QColor color);
   
   void changeHue(QColor color);
+  void changeValue(QColor color);
 
 protected:
   void paintEvent(QPaintEvent* e);
@@ -43,7 +44,7 @@ private:
 
 private:
   bool middlePresed;
-  bool hSliderDrawn;
+  bool sSliderDrawn;
   bool ctrlHeld;
   bool widthChanged;
 

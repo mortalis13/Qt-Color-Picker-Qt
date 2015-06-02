@@ -212,6 +212,7 @@ void SVSelector::updateColor(){
   
   emit colorChanged(color);
   emit saturationChanged(color);
+  emit valueChanged(color);
 }
 
 // ---------------------------------------------- slots ----------------------------------------------
@@ -267,6 +268,10 @@ void SVSelector::setV(QColor color)
 
 void SVSelector::setV(int v)
 {
+  if(this->v == v){
+    return;
+  }
+  
   this->v=v;
   repaint();
   updateColor();
