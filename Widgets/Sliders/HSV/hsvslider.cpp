@@ -9,10 +9,6 @@
 
 const int maxH=360;
 const int maxSV=255;
-const qreal maxF=1.0;
-const qreal maxHF=1.0;
-const qreal maxSVF=1.0;
-
 const qreal ratio=1.0/maxH;
 
 
@@ -20,12 +16,12 @@ const qreal ratio=1.0/maxH;
 
 HSVSlider::HSVSlider(QWidget *parent) : ColorSlider(parent)
 {
-  h=0;
-  s=maxSVF;
-  v=maxSVF;
-  
   sliderType=Hue;
-  
+
+  h=0;
+  s=maxF;
+  v=maxF;
+
   color.setHsvF(h, s, v);
 }
 
@@ -34,39 +30,55 @@ void HSVSlider::paintEvent(QPaintEvent *e)
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
   
-  calcVars();
+  qreal val;
+  switch(sliderType){
+    case Hue:
+      val=h;
+      break;
+    case Saturation:
+      val=s;
+      break;
+    case Value:
+      val=v;
+      break;
+  }
+  calcVars(val);
 
   if(!sliderDrawn || widthChanged){
-    sliderPixmap=QPixmap(sliderW, sliderH);
-    QPainter tempP( &sliderPixmap );
-
-    QPointF p1( sliderX, sliderH/2 );
-    QPointF p2( sliderX+sliderW, sliderH/2 );
-    QLinearGradient grad(p1, p2);
-    
-    switch(sliderType){
-      case Hue:
-        paintHue(grad);
-        break;
-      case Saturation:
-        paintSaturation(grad);
-        break;
-      case Value:
-        paintValue(grad);
-        break;
-    }
-    
-    tempP.setPen(Qt::NoPen);
-    tempP.setBrush( QBrush(grad) );
-    tempP.drawRect(0, 0, sliderW, sliderH);
-
-    sliderDrawn=true;
-    widthChanged=false;
+    paintComponent();
   }
   p.drawPixmap(sliderX, sliderY, sliderPixmap);
 
   drawPointer(p);
   drawBorder(p);
+}
+
+void HSVSlider::paintComponent(){
+  sliderPixmap=QPixmap(sliderW, sliderH);
+  QPainter tempP( &sliderPixmap );
+
+  QPointF p1( sliderX, sliderH/2 );
+  QPointF p2( sliderX+sliderW, sliderH/2 );
+  QLinearGradient grad(p1, p2);
+  
+  switch(sliderType){
+    case Hue:
+      paintHue(grad);
+      break;
+    case Saturation:
+      paintSaturation(grad);
+      break;
+    case Value:
+      paintValue(grad);
+      break;
+  }
+  
+  tempP.setPen(Qt::NoPen);
+  tempP.setBrush( QBrush(grad) );
+  tempP.drawRect(0, 0, sliderW, sliderH);
+
+  sliderDrawn=true;
+  widthChanged=false;
 }
 
 void HSVSlider::paintHue(QLinearGradient &grad){
@@ -88,10 +100,8 @@ void HSVSlider::paintValue(QLinearGradient &grad){
 }
 
 void HSVSlider::updateColor(){
-  sliderVal = pointerX - minPointerX;
-  sliderVal = qMax(0, sliderVal);
-  sliderVal = qMin(maxRange, sliderVal);
-  
+  ColorSlider::updateColor();
+
   qreal val;
 
   val = normalizeVal( sliderVal );
@@ -119,60 +129,65 @@ void HSVSlider::updateColor(){
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HSVSlider::setH(QColor color) {
-  if(this->color.hue() == color.hue()) return;
+void HSVSlider::setColorComponent(QColor color, SliderType stype) {
+  if(this->color == color){
+    return;
+  }
   
-  h=color.hueF();
+  qreal val;
+  switch(stype){
+    case Hue:
+      h=color.hueF();
+      val=h;
+      break;
+    case Saturation:
+      s=color.saturationF();
+      val=s;
+      break;
+    case Value:
+      v=color.valueF();
+      val=v;
+      break;
+  }
+  
+  sliderVal=qCeil( val * maxRange );
   this->color=QColor::fromHsvF(h, s, v);
-  
-  sliderVal=qCeil( h * maxRange );
   update();
+}
+
+void HSVSlider::setH(QColor color) {
+  setColorComponent(color, Hue);
 }
 
 void HSVSlider::setS(QColor color) {
-  if(this->color==color) return;
-  
-  s=color.saturationF();
-  this->color=QColor::fromHsvF(h, s, v);
-  
-  sliderVal=qCeil( s*maxRange );
-  update();
+  setColorComponent(color, Saturation);
 }
 
 void HSVSlider::setV(QColor color) {
-  if(this->color==color) return;
-  
-  v=color.valueF();
-  this->color=QColor::fromHsvF(h, s, v);
-  
-  sliderVal=qCeil( v*maxRange );
-  update();
+  setColorComponent(color, Value);
 }
 
 // ---------------------------------------------- slots ----------------------------------------------
 
-void HSVSlider::changeHue(QColor color) {
-  sliderDrawn=false;
-  h=color.hueF();
-  
+void HSVSlider::updateSlider() {
   this->color=QColor::fromHsvF(h, s, v);
+  sliderDrawn=false;
   update();
+}
+  
+void HSVSlider::changeHue(QColor color) {
+  h=color.hueF();
+  updateSlider();
 }
 
 void HSVSlider::changeSaturation(QColor color) {
-  sliderDrawn=false;
   s=color.saturationF();
-  
-  this->color=QColor::fromHsvF(h, s, v);
-  update();
+  updateSlider();
 }
 
 void HSVSlider::changeValue(QColor color) {
-  sliderDrawn=false;
   v=color.valueF();
-  
-  this->color=QColor::fromHsvF(h, s, v);
-  update();
+  updateSlider();
 }
 
 // ---------------------------------------------- service ----------------------------------------------

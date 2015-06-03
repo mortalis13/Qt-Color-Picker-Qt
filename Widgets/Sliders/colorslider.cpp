@@ -89,7 +89,7 @@ void ColorSlider::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void ColorSlider::calcVars(){
+void ColorSlider::calcVars(qreal val){
   sliderX=border;
   sliderY=border;
   sliderW=width()-2*border;
@@ -101,8 +101,7 @@ void ColorSlider::calcVars(){
   
   if(sliderW!=prevSliderW){
     widthChanged=true;
-//    int x=normalizePointerX(h);
-//    sliderVal=x;
+    sliderVal=normalizePointerX(val);
   }
   prevSliderW=sliderW;
 }
@@ -149,6 +148,13 @@ void ColorSlider::drawPointer(QPainter& p){
 void ColorSlider::drawBorder(QPainter& p){
   QRectF rectangle( sliderX, sliderY, sliderW, sliderH );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
+}
+
+
+void ColorSlider::updateColor(){
+  sliderVal = pointerX - minPointerX;
+  sliderVal = qMax(0, sliderVal);
+  sliderVal = qMin(maxRange, sliderVal);
 }
 
 

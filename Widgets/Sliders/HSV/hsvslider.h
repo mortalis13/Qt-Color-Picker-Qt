@@ -35,6 +35,10 @@ protected:
   void updateColor();
   
 private:
+  void paintComponent();
+  void updateSlider();
+  void setColorComponent(QColor color, SliderType stype);
+  
   void paintHue(QLinearGradient &grad);
   void paintSaturation(QLinearGradient &grad);
   void paintValue(QLinearGradient &grad);

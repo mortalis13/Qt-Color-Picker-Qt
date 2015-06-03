@@ -27,12 +27,20 @@ void Sliders::init(){
   greenSpinManualEdit=true;
   blueSpinManualEdit=true;
   
+  
   ui->hSlider->setType(HSVSlider::Hue);
   ui->sSlider->setType(HSVSlider::Saturation);
   ui->vSlider->setType(HSVSlider::Value);
   
   ui->sSlider->init();
   ui->vSlider->init();
+  
+  
+  ui->rSlider->setType(RGBSlider::Red);
+  ui->gSlider->setType(RGBSlider::Green);
+  ui->bSlider->setType(RGBSlider::Blue);
+  
+  ui->rSlider->init();
 }
 
 void Sliders::addActions(){

@@ -23,10 +23,7 @@ SOURCES += main.cpp\
 \    
     Widgets/Sliders/colorslider.cpp \
     Widgets/Sliders/HSV/hsvslider.cpp \
-\
-    Widgets/Sliders/RGB/rslider.cpp \
-    Widgets/Sliders/RGB/gslider.cpp \
-    Widgets/Sliders/RGB/bslider.cpp \
+    Widgets/Sliders/RGB/rgbslider.cpp \
 \
     Service/services.cpp \
     Service/validator.cpp \
@@ -45,10 +42,7 @@ HEADERS  += Views/mainwindow.h \
 \
     Widgets/Sliders/colorslider.h \
     Widgets/Sliders/HSV/hsvslider.h \
-\    
-    Widgets/Sliders/RGB/rslider.h \
-    Widgets/Sliders/RGB/gslider.h \
-    Widgets/Sliders/RGB/bslider.h \
+    Widgets/Sliders/RGB/rgbslider.h \
 \    
     Service/services.h \
     Service/validator.h \

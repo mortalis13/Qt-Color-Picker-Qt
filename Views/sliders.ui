@@ -299,7 +299,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="RSlider" name="rSlider" native="true">
+           <widget class="RGBSlider" name="rSlider" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -360,7 +360,7 @@
            <number>2</number>
           </property>
           <item row="2" column="0">
-           <widget class="GSlider" name="gSlider" native="true">
+           <widget class="RGBSlider" name="gSlider" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -460,7 +460,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="BSlider" name="bSlider" native="true">
+           <widget class="RGBSlider" name="bSlider" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -514,27 +514,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>RSlider</class>
-   <extends>QWidget</extends>
-   <header>Widgets\Sliders\RGB\rslider.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>GSlider</class>
-   <extends>QWidget</extends>
-   <header>Widgets\Sliders\RGB\gslider.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BSlider</class>
-   <extends>QWidget</extends>
-   <header>Widgets\Sliders\RGB\bslider.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>HSVSlider</class>
    <extends>QWidget</extends>
    <header>Widgets\Sliders\HSV\hsvslider.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RGBSlider</class>
+   <extends>QWidget</extends>
+   <header>Widgets\Sliders\RGB\rgbslider.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

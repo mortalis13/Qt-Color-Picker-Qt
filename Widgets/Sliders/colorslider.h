@@ -10,7 +10,6 @@ public:
   explicit ColorSlider(QWidget *parent = 0);
 
   void updatePaint();
-  
 
 protected:
   void mousePressEvent(QMouseEvent* e);
@@ -20,7 +19,7 @@ protected:
   void wheelEvent(QWheelEvent* e);
   
 protected:
-  virtual void updateColor()=0;
+  virtual void updateColor();
 
   qreal normalizeVal(int val);
   int normalizePointerX(qreal val);
@@ -31,7 +30,7 @@ protected:
   void incPointer(int val=1);
   void decPointer(int val=1);
   
-  void calcVars();
+  void calcVars(qreal val);
   void drawBorder(QPainter& p);
 
   void log(QString format, int var);
@@ -39,6 +38,8 @@ protected:
 
 
 protected:
+  const qreal maxF=1.0;
+  
   bool sliderDrawn;
   QPixmap sliderPixmap;
   
