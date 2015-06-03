@@ -8,7 +8,7 @@
 - text with commas (process, copy)
 - add swatches/color combo box (list)
 - ctrl+scroll to inc/dec by 10
-
+- hint (value) on slider/selector hover
 
 # - hold mid button to move on sv selector
 # - copy hex on Sample click

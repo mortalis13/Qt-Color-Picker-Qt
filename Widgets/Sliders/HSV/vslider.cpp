@@ -238,6 +238,8 @@ void VSlider::setV(QColor color)
   } 
   
   v=color.valueF();
+  // this->color=QColor::fromHsvF(h, s, v);
+  
   sliderVal=qCeil( v*maxRange );
   
   update();
@@ -250,6 +252,8 @@ void VSlider::setV(qreal v)
   this->v=v;
   QColor color;
   color.setHsvF(h, s, v);
+
+  // this->color=color;
 
   update();
 }

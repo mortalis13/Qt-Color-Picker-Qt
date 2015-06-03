@@ -20,6 +20,7 @@ public:
 
 private:
   void addActions();
+  void addSlidersActions();
   void init();
   
   void setHSV(QString text);
@@ -66,6 +67,11 @@ private slots:
   
   void changeValue(QColor color);
   void changeValue(int v);
+  
+  
+  void changeRed(QColor color);
+  void changeRed(int r);
+  
   
 
   void updateColorText(QColor color);

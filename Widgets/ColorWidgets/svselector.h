@@ -19,7 +19,9 @@ public:
   void setV(QColor color);
   void setV(int v);
   
+  void setSV(QColor color);
   void setSV(int s, int v);
+  
   void updateColor();
 
 

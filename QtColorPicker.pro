@@ -28,9 +28,13 @@ SOURCES += main.cpp\
 \
         Test/testpaint.cpp \
     Views/sliders.cpp \
-    Widgets/Sliders/hslider.cpp \
-    Widgets/Sliders/sslider.cpp \
-    Widgets/Sliders/vslider.cpp
+    Widgets/Sliders/HSV/hslider.cpp \
+    Widgets/Sliders/HSV/sslider.cpp \
+    Widgets/Sliders/HSV/vslider.cpp \
+\
+    Widgets/Sliders/RGB/rslider.cpp \
+    Widgets/Sliders/RGB/gslider.cpp \
+    Widgets/Sliders/RGB/bslider.cpp \
 
 HEADERS  += Views/mainwindow.h \
 \
@@ -47,12 +51,14 @@ HEADERS  += Views/mainwindow.h \
 \
         Test/testpaint.h \
     Views/sliders.h \
-    Widgets/Sliders/hslider.h \
-    Widgets/Sliders/sslider.h \
-    Widgets/Sliders/vslider.h
-
+    Widgets/Sliders/HSV/hslider.h \
+    Widgets/Sliders/HSV/sslider.h \
+    Widgets/Sliders/HSV/vslider.h \
+\
+    Widgets/Sliders/RGB/rslider.h \
+    Widgets/Sliders/RGB/gslider.h \
+    Widgets/Sliders/RGB/bslider.h \
+    
 FORMS    += Views/mainwindow.ui \
-            Views/mainwindow1.ui \
-            Views/mainwindow2.ui \
             Views/dialog.ui \
     Views/sliders.ui

@@ -14,6 +14,8 @@ public:
   void setH(int h);
   void setH(QColor color);
   
+  void setHFromRed(int r);
+  
   void setInitH(int h);
 protected:
   void paintEvent(QPaintEvent* e);

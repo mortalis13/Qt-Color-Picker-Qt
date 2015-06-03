@@ -73,7 +73,7 @@ QColor ColorProcessor::getColorHSV(QString HSV_Text){
   int v=list[2].toInt();
 
   color.setHsv(h, s, v);
-  color=Validator::correctColor(color);
+  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -88,7 +88,7 @@ QColor ColorProcessor::getColorRGB(QString RGB_Text){
   int b=list[2].toInt();
 
   color.setRgb(r, g, b);
-  color=Validator::correctColor(color);
+  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -104,7 +104,7 @@ QColor ColorProcessor::getColorCMYK(QString CMYK_Text){
   int k=list[3].toInt();
 
   color.setCmyk(c, m, y, k);
-  color=Validator::correctColor(color);
+  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -112,7 +112,7 @@ QColor ColorProcessor::getColorCMYK(QString CMYK_Text){
 QColor ColorProcessor::getColorHex(QString Hex_Text){
   QColor color;
   color.setNamedColor("#"+Hex_Text);
-  color=Validator::correctColor(color);
+  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -184,5 +184,11 @@ QString ColorProcessor::pasteText(){
 // -------------------------------------------- inc/dec --------------------------------------------
 
 void ColorProcessor::incH(){
-
 }
+
+// -------------------------------------------- test --------------------------------------------
+
+// void ColorProcessor::updateColorFromRed(int r){
+//   QColor color=getColorRGB(RGB_Text);
+//   updateColor(color);
+// }

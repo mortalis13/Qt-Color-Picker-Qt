@@ -10,8 +10,13 @@ class ColorSample : public QWidget
   Q_OBJECT
 public:
   explicit ColorSample(QWidget *parent = 0);
+  
+  QColor getColor();
+  
 
 signals:
+  void colorChanged(QColor color);
+  
   void samplePressedLeft();
   void samplePressedRight();
 

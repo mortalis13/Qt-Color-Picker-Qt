@@ -184,7 +184,9 @@ void HSelector::updateColor(){
 void HSelector::setInitH(int h){
   QColor color;
   color.setHsv(h, s, v);
-  setH(color);
+  this->h=color.hue();
+  emit hueChanged(color);
+  update();
 }
 
 void HSelector::setH(int h)
@@ -199,7 +201,22 @@ void HSelector::setH(int h)
 
 void HSelector::setH(QColor color)
 {
-  h=color.hue();
+  // qDebug() << QString("this->h: %1").arg(this->h);
+  // qDebug() << QString("color.h: %1").arg(color.hue());
+  // qDebug();
+  
+  // int h=color.hue();
+  // if(this->h == 360) this->h=0;
+  // if(this->h == h){
+  //   // qDebug() << "equal";
+  //   return;
+  // }
+  
+  // qDebug() << "after-equal";
+  // qDebug();
+  
+  
+  this->h=color.hue();
   emit hueChanged(color);
   update();
 }
@@ -212,4 +229,17 @@ void HSelector::log(QString format, int var){
 
 void HSelector::log(QString format, qreal var){
  qDebug() << QString(format).arg(var);
+}
+
+// -------------------------------------------- test --------------------------------------------
+
+void HSelector::setHFromRed(int r){
+  QColor color;
+  color.setHsv(h, s, v);
+  color.setRed(r);
+  
+  int h=color.hue();
+  if(this->h == h) return;
+  
+  setH(color);
 }

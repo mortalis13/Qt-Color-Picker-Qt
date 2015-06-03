@@ -1,0 +1,18 @@
+updateColor :: r: 89
+updateColor :: r: 90
+
+"currentColor: 89, 198, 42"
+"changeRed :: color.red(): 90"
+"changeRed :: currentColor: 90, 198, 42"
+"changeRed :: currentColor:hsv: 101, 201, 198"
+"changeRed :: currentColor.red: 90"
+
+"setSV :: color.red: 90"
+"setSV :: color.h: 101"
+"setSV :: c.red: 91"
+"setSV :: hsv: 101, 201, 198"
+
+"SVSelector::updateColor :: hsv: 101, 201, 198"
+"SVSelector::updateColor :: color.red(): 91"
+
+setR :: r: 91

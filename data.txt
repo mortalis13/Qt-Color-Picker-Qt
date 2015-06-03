@@ -1,0 +1,37 @@
+r: 0.361273
+r: 0.368627
+r: 94
+sliderVal: 94
+
+"currentColor: 92, 152, 64"
+"color.red(): 94"
+"currentColor: 94, 152, 64"
+
+setR
+setR
+
+
+r: 0.371206
+r: 0.376471
+r: 96
+sliderVal: 96
+
+"currentColor: 95, 152, 64"
+"color.red(): 96"
+"currentColor: 96, 152, 64"
+
+setR
+setR
+
+
+r: 0.376974
+r: 0.384314
+r: 98
+sliderVal: 98
+
+"currentColor: 96, 152, 64"
+"color.red(): 98"
+"currentColor: 98, 152, 64"
+
+setR
+setR

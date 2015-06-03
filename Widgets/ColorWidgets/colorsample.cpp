@@ -79,6 +79,9 @@ void ColorSample::mouseMovedOnWindow(){
 void ColorSample::changeColor(QColor color)
 {
   this->color=color;
+  // qDebug() << "changeColor::red:" << color.red();
+  
+  emit colorChanged(color);
   update();
 }
 
@@ -87,4 +90,10 @@ void ColorSample::changeColor(QColor color)
 void ColorSample::drawBorder(QPainter& p){
   QRectF rectangle(0, 0, width(), height());
   Services::drawInnerRoundRect(p, rectangle, border, borderRadius, borderColor);
+}
+
+// --------------------------------------------- set/get ---------------------------------------------
+
+QColor ColorSample::getColor(){
+  return color;
 }

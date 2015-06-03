@@ -30,6 +30,8 @@ protected:
 private:
   Ui::Sliders *ui;
 
+  bool redSpinManualEdit;
+
   bool mouseDown;
   bool mouseMoved;
   int mx, my;  
@@ -48,6 +50,17 @@ signals:
   
   void valueChanged(int);
   void valueChanged(QColor);
+  
+  
+  void redChanged(int);
+  void redChanged(QColor);
+  
+  void greenChanged(int);
+  void greenChanged(QColor);
+  
+  void blueChanged(int);
+  void blueChanged(QColor);
+  
 
   void ctrlPressed();
   void ctrlReleased();
@@ -64,6 +77,19 @@ public slots:
   void changeValue(int s);
   void changeValue(QColor color);
   void changeValueFromSelector(QColor color);  
+  
+  
+  void changeRed(int r);
+  void changeRed(QColor color);
+  void changeRedFromSelector(QColor color);
+  
+  void changeGreen(int g);
+  void changeGreen(QColor color);
+  void changeGreenFromSelector(QColor color);
+  
+  void changeBlue(int b);
+  void changeBlue(QColor color);
+  void changeBlueFromSelector(QColor color);
   
 };
 

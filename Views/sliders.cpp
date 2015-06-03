@@ -19,17 +19,27 @@ Sliders::~Sliders()
 }
 
 void Sliders::init(){
-  
+  redSpinManualEdit=true;
 }
 
 void Sliders::addActions(){
   connect( ui->hSlider, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
   connect( ui->sSlider, SIGNAL(saturationChanged(QColor)), this, SLOT(changeSaturation(QColor)) );
   connect( ui->vSlider, SIGNAL(valueChanged(QColor)), this, SLOT(changeValue(QColor)) );
+  
+  connect( ui->rSlider, SIGNAL(redChanged(QColor)), this, SLOT(changeRed(QColor)) );
+  connect( ui->gSlider, SIGNAL(greenChanged(QColor)), this, SLOT(changeGreen(QColor)) );
+  connect( ui->bSlider, SIGNAL(blueChanged(QColor)), this, SLOT(changeBlue(QColor)) );
+
 
   connect( ui->spHue, SIGNAL(valueChanged(int)), this, SLOT(changeHue(int)) );
   connect( ui->spSaturation, SIGNAL(valueChanged(int)), this, SLOT(changeSaturation(int)) );
   connect( ui->spValue, SIGNAL(valueChanged(int)), this, SLOT(changeValue(int)) );
+  
+  connect( ui->spRed, SIGNAL(valueChanged(int)), this, SLOT(changeRed(int)) );
+  connect( ui->spGreen, SIGNAL(valueChanged(int)), this, SLOT(changeGreen(int)) );
+  connect( ui->spBlue, SIGNAL(valueChanged(int)), this, SLOT(changeBlue(int)) );
+  
   
   connect( this, SIGNAL(ctrlPressed()), ui->hSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->hSlider, SLOT(ctrlReleased()) );
@@ -39,7 +49,12 @@ void Sliders::addActions(){
   connect( this, SIGNAL(ctrlReleased()), ui->vSlider, SLOT(ctrlReleased()) );
 }
 
+// --------------------------------------------- ----- ---------------------------------------------
 // --------------------------------------------- slots ---------------------------------------------
+// --------------------------------------------- ----- ---------------------------------------------
+
+
+// --------------------------------------------- HSV ---------------------------------------------
 
 // ===== hue =====
 
@@ -93,6 +108,74 @@ void Sliders::changeValueFromSelector(QColor color){
   
   ui->hSlider->changeValue(color);
   ui->sSlider->changeValue(color);
+}
+
+
+// --------------------------------------------- RGB ---------------------------------------------
+
+// ===== red =====
+
+void Sliders::changeRed(int r){
+  // if(redSpinManualEdit){
+  //   // emit redChanged(r);
+  //   redSpinManualEdit=true;
+  // }
+}
+
+void Sliders::changeRed(QColor color){
+  // qDebug() << "changeRed";
+  emit redChanged(color);
+  ui->spRed->setValue(color.red());
+}
+
+void Sliders::changeRedFromSelector(QColor color){
+  redSpinManualEdit=false;
+  
+  QColor filter(color.red(), 0, 0);
+  
+  // qDebug() << "changeRedFromSelector::r:" << color.red();
+  
+  ui->rSlider->setR(filter);
+  ui->spRed->setValue(color.red());
+  
+  // ui->gSlider->changeRed(color);
+  // ui->bSlider->changeRed(color);
+}
+
+// ===== green =====
+
+void Sliders::changeGreen(int g){
+  emit greenChanged(g);
+}
+
+void Sliders::changeGreen(QColor color){
+  emit greenChanged(color);
+}
+
+void Sliders::changeGreenFromSelector(QColor color){
+  ui->gSlider->setG(color);
+  ui->spGreen->setValue(color.green());
+  
+  ui->rSlider->changeGreen(color);
+  ui->bSlider->changeGreen(color);
+}
+
+// ===== blue =====
+
+void Sliders::changeBlue(int b){
+  emit blueChanged(b);
+}
+
+void Sliders::changeBlue(QColor color){
+  emit blueChanged(color);
+}
+
+void Sliders::changeBlueFromSelector(QColor color){
+  ui->bSlider->setB(color);
+  ui->spBlue->setValue(color.blue());
+  
+  ui->rSlider->changeBlue(color);
+  ui->gSlider->changeBlue(color);
 }
 
 

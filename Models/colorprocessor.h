@@ -24,6 +24,11 @@ public:
   QString getRGB(QColor color);
   QString getCMYK(QColor color);
   QString getHex(QColor color);
+  
+  QColor getColorHSV(QString HSV_Text);
+  QColor getColorRGB(QString RGB_Text);
+  QColor getColorCMYK(QString CMYK_Text);
+  QColor getColorHex(QString Hex_Text);
 
   void updateColorHSV(QString HSV);
   void updateColorRGB(QString RGB);
@@ -44,11 +49,6 @@ private:
   SVSelector* svSelector;
   QClipboard* clip;
   
-  QColor getColorHSV(QString HSV_Text);
-  QColor getColorRGB(QString RGB_Text);
-  QColor getColorCMYK(QString CMYK_Text);
-  QColor getColorHex(QString Hex_Text);
-
 };
 
 #endif // COLORPROCESSOR_H
