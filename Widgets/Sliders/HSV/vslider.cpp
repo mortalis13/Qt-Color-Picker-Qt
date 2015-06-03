@@ -82,10 +82,8 @@ void VSlider::paintEvent(QPaintEvent *e)
     QPointF p2( sliderX+sliderW, sliderH/2 );
     QLinearGradient grad(p1, p2);
 
-    for(qreal vs=0; vs<1.0; vs+=ratio){
-      color.setHsvF(h, s, vs);
-      grad.setColorAt(vs, color);
-    }
+    grad.setColorAt( 0, QColor::fromHsvF(h, s, 0) );
+    grad.setColorAt( 1, QColor::fromHsvF(h, s, 1) );
 
     tempP.setPen(Qt::NoPen);
     tempP.setBrush( QBrush(grad) );

@@ -75,6 +75,8 @@ void RSlider::paintEvent(QPaintEvent *e)
   calcVars();
 
   if(!rSliderDrawn || widthChanged){
+    qDebug() << "repaint";
+    
     rSliderPixmap=QPixmap(sliderW, sliderH);
     QPainter tempP( &rSliderPixmap );
 
@@ -82,10 +84,8 @@ void RSlider::paintEvent(QPaintEvent *e)
     QPointF p2( sliderX+sliderW, sliderH/2 );
     QLinearGradient grad(p1, p2);
 
-    for(qreal rs=0; rs<1.0; rs+=ratio){
-      color.setRgbF(rs, g, b);
-      grad.setColorAt(rs, color);
-    }
+    grad.setColorAt( 0, QColor::fromRgbF(0, g, b) );
+    grad.setColorAt( 1, QColor::fromRgbF(1, g, b) );
 
     tempP.setPen(Qt::NoPen);
     tempP.setBrush( QBrush(grad) );

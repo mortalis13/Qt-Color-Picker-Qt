@@ -91,7 +91,8 @@ void MainWindow::addSlidersActions(){
   connect( ui->hSelector, SIGNAL(hueChanged(QColor)), slidersWindow, SLOT(changeHueFromSelector(QColor)) );
   connect( ui->svSelector, SIGNAL(saturationChanged(QColor)), slidersWindow, SLOT(changeSaturationFromSelector(QColor)) );
   connect( ui->svSelector, SIGNAL(valueChanged(QColor)), slidersWindow, SLOT(changeValueFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeHSVFromSelector(QColor)) );
+  
+  // // connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeHSVFromSelector(QColor)) );
   
   
   // === RGB ===
