@@ -14,6 +14,7 @@ public:
   
   void changeValue(QColor color);
   void changeSaturation(QColor color);
+  void updatePaint();
   
 
 protected:

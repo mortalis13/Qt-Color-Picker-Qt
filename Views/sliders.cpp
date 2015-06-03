@@ -19,6 +19,10 @@ Sliders::~Sliders()
 }
 
 void Sliders::init(){
+  hueSpinManualEdit=true;
+  saturationSpinManualEdit=true;
+  valueSpinManualEdit=true;
+  
   redSpinManualEdit=true;
   greenSpinManualEdit=true;
   blueSpinManualEdit=true;
@@ -58,10 +62,38 @@ void Sliders::addActions(){
 
 // --------------------------------------------- HSV ---------------------------------------------
 
+void Sliders::changeHSVFromSelector(QColor color){
+  ui->hSlider->changeSaturation(color);
+  ui->hSlider->changeValue(color);
+  
+  ui->sSlider->changeHue(color);
+  ui->sSlider->changeValue(color);
+  
+  ui->vSlider->changeHue(color);
+  ui->vSlider->changeSaturation(color);
+  
+  ui->hSlider->setH(color);
+  ui->sSlider->setS(color);
+  ui->vSlider->setV(color);
+
+  ui->hSlider->updatePaint();
+  ui->sSlider->updatePaint();
+  ui->vSlider->updatePaint();
+
+
+  ui->spHue->setValue(color.hue());
+  ui->spSaturation->setValue(color.saturation());
+  ui->spValue->setValue(color.value());
+}
+
 // ===== hue =====
 
 void Sliders::changeHue(int h){
-  emit hueChanged(h);
+  if(hueSpinManualEdit){
+    QColor filter=QColor::fromHsv(h, 0, 0);
+    changeHue(filter);
+  }
+  hueSpinManualEdit=true;
 }
 
 void Sliders::changeHue(QColor color){
@@ -69,6 +101,8 @@ void Sliders::changeHue(QColor color){
 }
 
 void Sliders::changeHueFromSelector(QColor color){
+  hueSpinManualEdit=false;
+  
   ui->hSlider->setH(color);
   ui->spHue->setValue(color.hue());
   
@@ -79,7 +113,11 @@ void Sliders::changeHueFromSelector(QColor color){
 // ===== saturation =====
 
 void Sliders::changeSaturation(int s){
-  emit saturationChanged(s);
+  if(saturationSpinManualEdit){
+    QColor filter=QColor::fromHsv(0, s, 0);
+    changeSaturation(filter);
+  }
+  saturationSpinManualEdit=true;
 }
 
 void Sliders::changeSaturation(QColor color){
@@ -87,6 +125,8 @@ void Sliders::changeSaturation(QColor color){
 }
 
 void Sliders::changeSaturationFromSelector(QColor color){
+  saturationSpinManualEdit=false;
+  
   ui->sSlider->setS(color);
   ui->spSaturation->setValue(color.saturation());
   
@@ -97,7 +137,11 @@ void Sliders::changeSaturationFromSelector(QColor color){
 // ===== value =====
 
 void Sliders::changeValue(int v){
-  emit valueChanged(v);
+  if(valueSpinManualEdit){
+    QColor filter=QColor::fromHsv(0, 0, v);
+    changeValue(filter);
+  }
+  valueSpinManualEdit=true;
 }
 
 void Sliders::changeValue(QColor color){
@@ -105,6 +149,8 @@ void Sliders::changeValue(QColor color){
 }
 
 void Sliders::changeValueFromSelector(QColor color){
+  valueSpinManualEdit=false;
+  
   ui->vSlider->setV(color);
   ui->spValue->setValue(color.value());
   

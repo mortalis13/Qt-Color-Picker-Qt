@@ -14,6 +14,7 @@ public:
   
   void changeHue(QColor color);
   void changeValue(QColor color);
+  void updatePaint();
 
 protected:
   void paintEvent(QPaintEvent* e);

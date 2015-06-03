@@ -33,6 +33,11 @@ private:
   void correctFields();
   QString correctField(QString text);
   
+  void connectColorSampleRGB();
+  void disconnectColorSampleRGB();
+  
+  void changeRGB(int pos, int val);
+  
 protected:
   void mouseMoveEvent(QMouseEvent* e);
   void mousePressEvent(QMouseEvent* e);
@@ -60,23 +65,12 @@ signals:
 
 private slots:
   void changeHue(QColor color);
-  void changeHue(int h);
-  
   void changeSaturation(QColor color);
-  void changeSaturation(int s);
-  
   void changeValue(QColor color);
-  void changeValue(int v);
-  
   
   void changeRed(QColor color);
-  void changeRed(int r);
-  
   void changeGreen(QColor color);
-  void changeGreen(int g);
-  
   void changeBlue(QColor color);
-  void changeBlue(int b);
   
   
   void updateColorText(QColor color);

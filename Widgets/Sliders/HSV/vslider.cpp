@@ -238,7 +238,7 @@ void VSlider::setV(QColor color)
   } 
   
   v=color.valueF();
-  // this->color=QColor::fromHsvF(h, s, v);
+  this->color=QColor::fromHsvF(h, s, v);
   
   sliderVal=qCeil( v*maxRange );
   
@@ -253,7 +253,7 @@ void VSlider::setV(qreal v)
   QColor color;
   color.setHsvF(h, s, v);
 
-  // this->color=color;
+  this->color=color;
 
   update();
 }
@@ -273,14 +273,20 @@ void VSlider::changeHue(QColor color)
 {
   vSliderDrawn=false;
   h=color.hueF();
-  repaint();
+  
+  update();
 }
 
 void VSlider::changeSaturation(QColor color)
 {
   vSliderDrawn=false;
   s=color.saturationF();
-  repaint();
+  
+  update();
+}
+
+void VSlider::updatePaint(){
+  update();
 }
 
 

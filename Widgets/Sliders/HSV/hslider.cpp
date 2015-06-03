@@ -233,10 +233,12 @@ void HSlider::drawBorder(QPainter& p){
 
 void HSlider::setH(QColor color)
 {
-  if(this->color==color) return;
+  if(this->color.hue() == color.hue()){
+    return;
+  } 
   
   h=color.hueF();
-  // this->color=QColor::fromHsvF(h, s, v);
+  this->color=QColor::fromHsvF(h, s, v);
   
   sliderVal=qCeil( h * maxRange );
   
@@ -251,7 +253,7 @@ void HSlider::setH(qreal h)
   QColor color;
   color.setHsvF(h, s, v);
 
-  // this->color=color;
+  this->color=color;
 
 //  emit hueChanged(color);
   update();
@@ -268,19 +270,28 @@ void HSlider::ctrlReleased(){
   ctrlHeld=false;
 }
 
-void HSlider::changeValue(QColor color)
-{
-  hSliderDrawn=false;
-  v=color.valueF();
-  repaint();
-}
-
 void HSlider::changeSaturation(QColor color)
 {
   hSliderDrawn=false;
   s=color.saturationF();
-  repaint();
+  
+  this->color=QColor::fromHsvF(h, s, v);
+  update();
 }
+
+void HSlider::changeValue(QColor color)
+{
+  hSliderDrawn=false;
+  v=color.valueF();
+  
+  this->color=QColor::fromHsvF(h, s, v);
+  update();
+}
+
+void HSlider::updatePaint(){
+  update();
+}
+
 
 // ---------------------------------------------- other ----------------------------------------------
 

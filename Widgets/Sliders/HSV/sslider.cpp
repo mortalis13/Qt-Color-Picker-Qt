@@ -240,7 +240,7 @@ void SSlider::setS(QColor color)
   }
   
   s=color.saturationF();
-  // this->color=QColor::fromHsvF(h, s, v);
+  this->color=QColor::fromHsvF(h, s, v);
   
   sliderVal=qCeil( s*maxRange );
   
@@ -255,7 +255,7 @@ void SSlider::setS(qreal s)
   QColor color;
   color.setHsvF(h, s, v);
   
-  // this->color=color;
+  this->color=color;
 
   update();
 }
@@ -275,14 +275,20 @@ void SSlider::changeHue(QColor color)
 {
   sSliderDrawn=false;
   h=color.hueF();
-  repaint();
+  
+  update();
 }
 
 void SSlider::changeValue(QColor color)
 {
   sSliderDrawn=false;
   v=color.valueF();
-  repaint();
+  
+  update();
+}
+
+void SSlider::updatePaint(){
+  update();
 }
 
 

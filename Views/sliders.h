@@ -30,6 +30,10 @@ protected:
 private:
   Ui::Sliders *ui;
 
+  bool hueSpinManualEdit;
+  bool saturationSpinManualEdit;
+  bool valueSpinManualEdit;
+  
   bool redSpinManualEdit;
   bool greenSpinManualEdit;
   bool blueSpinManualEdit;
@@ -71,6 +75,8 @@ signals:
   void ctrlReleased();
   
 public slots:
+  void changeHSVFromSelector(QColor color);
+  
   void changeHue(int h);
   void changeHue(QColor color);
   void changeHueFromSelector(QColor color);
