@@ -72,8 +72,13 @@ private slots:
   void changeRed(QColor color);
   void changeRed(int r);
   
+  void changeGreen(QColor color);
+  void changeGreen(int g);
   
-
+  void changeBlue(QColor color);
+  void changeBlue(int b);
+  
+  
   void updateColorText(QColor color);
   void updateColorFinished();
 

@@ -79,8 +79,6 @@ void ColorSample::mouseMovedOnWindow(){
 void ColorSample::changeColor(QColor color)
 {
   this->color=color;
-  // qDebug() << "changeColor::red:" << color.red();
-  
   emit colorChanged(color);
   update();
 }

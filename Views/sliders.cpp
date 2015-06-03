@@ -20,6 +20,8 @@ Sliders::~Sliders()
 
 void Sliders::init(){
   redSpinManualEdit=true;
+  greenSpinManualEdit=true;
+  blueSpinManualEdit=true;
 }
 
 void Sliders::addActions(){
@@ -116,46 +118,57 @@ void Sliders::changeValueFromSelector(QColor color){
 // ===== red =====
 
 void Sliders::changeRed(int r){
-  // if(redSpinManualEdit){
-  //   // emit redChanged(r);
-  //   redSpinManualEdit=true;
-  // }
+  if(redSpinManualEdit){
+    QColor filter(r, 0, 0);
+    changeRed(filter);
+  }
+  redSpinManualEdit=true;
 }
 
 void Sliders::changeRed(QColor color){
-  // qDebug() << "changeRed";
   emit redChanged(color);
-  ui->spRed->setValue(color.red());
+  updateRedValues(color);
 }
 
 void Sliders::changeRedFromSelector(QColor color){
+  updateRedValues(color);
+}
+
+void Sliders::updateRedValues(QColor color){
+  ui->rSlider->setR(color);
+  
   redSpinManualEdit=false;
-  
-  QColor filter(color.red(), 0, 0);
-  
-  // qDebug() << "changeRedFromSelector::r:" << color.red();
-  
-  ui->rSlider->setR(filter);
   ui->spRed->setValue(color.red());
   
-  // ui->gSlider->changeRed(color);
-  // ui->bSlider->changeRed(color);
+  ui->gSlider->changeRed(color);
+  ui->bSlider->changeRed(color);
 }
 
 // ===== green =====
 
 void Sliders::changeGreen(int g){
-  emit greenChanged(g);
+  if(greenSpinManualEdit){
+    QColor filter(0, g, 0);
+    changeGreen(filter);
+  }
+  greenSpinManualEdit=true;
 }
 
 void Sliders::changeGreen(QColor color){
   emit greenChanged(color);
+  updateGreenValues(color);
 }
 
 void Sliders::changeGreenFromSelector(QColor color){
+  updateGreenValues(color);
+}
+
+void Sliders::updateGreenValues(QColor color){
   ui->gSlider->setG(color);
+
+  greenSpinManualEdit=false;
   ui->spGreen->setValue(color.green());
-  
+
   ui->rSlider->changeGreen(color);
   ui->bSlider->changeGreen(color);
 }
@@ -163,15 +176,26 @@ void Sliders::changeGreenFromSelector(QColor color){
 // ===== blue =====
 
 void Sliders::changeBlue(int b){
-  emit blueChanged(b);
+  if(blueSpinManualEdit){
+    QColor filter(0, 0, b);
+    changeBlue(filter);
+  }
+  blueSpinManualEdit=true;
 }
 
 void Sliders::changeBlue(QColor color){
   emit blueChanged(color);
+  updateBlueValues(color);
 }
 
 void Sliders::changeBlueFromSelector(QColor color){
+  updateBlueValues(color);
+}
+
+void Sliders::updateBlueValues(QColor color){
   ui->bSlider->setB(color);
+  
+  blueSpinManualEdit=false;
   ui->spBlue->setValue(color.blue());
   
   ui->rSlider->changeBlue(color);

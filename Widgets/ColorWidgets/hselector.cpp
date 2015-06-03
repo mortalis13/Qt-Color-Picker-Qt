@@ -201,20 +201,11 @@ void HSelector::setH(int h)
 
 void HSelector::setH(QColor color)
 {
-  // qDebug() << QString("this->h: %1").arg(this->h);
-  // qDebug() << QString("color.h: %1").arg(color.hue());
-  // qDebug();
-  
-  // int h=color.hue();
-  // if(this->h == 360) this->h=0;
-  // if(this->h == h){
-  //   // qDebug() << "equal";
-  //   return;
-  // }
-  
-  // qDebug() << "after-equal";
-  // qDebug();
-  
+  int h=color.hue();
+  if(this->h == 360) this->h=0;
+  if(this->h == h){
+    return;
+  }
   
   this->h=color.hue();
   emit hueChanged(color);

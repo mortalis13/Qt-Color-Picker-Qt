@@ -15,6 +15,8 @@ public:
   void changeGreen(QColor color);
   void changeBlue(QColor color);
 
+  void updateColor();
+  
 protected:
   void paintEvent(QPaintEvent* e);
   void mousePressEvent(QMouseEvent* e);
@@ -24,7 +26,6 @@ protected:
   void wheelEvent(QWheelEvent* e);
   
 private:
-  void updateColor();
 
   void drawPointer(QPainter &p);
   void correctPointer();

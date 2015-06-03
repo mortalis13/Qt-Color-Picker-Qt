@@ -31,6 +31,8 @@ private:
   Ui::Sliders *ui;
 
   bool redSpinManualEdit;
+  bool greenSpinManualEdit;
+  bool blueSpinManualEdit;
 
   bool mouseDown;
   bool mouseMoved;
@@ -39,6 +41,9 @@ private:
   void addActions();
   void init();
   
+  void updateRedValues(QColor color);
+  void updateGreenValues(QColor color);
+  void updateBlueValues(QColor color);
   
   
 signals:

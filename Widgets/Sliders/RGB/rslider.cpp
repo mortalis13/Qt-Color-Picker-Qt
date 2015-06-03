@@ -232,24 +232,12 @@ void RSlider::drawBorder(QPainter& p){
 
 void RSlider::setR(QColor color)
 {
-  // qDebug() << QString("setR :: this.color: %1, %2, %3").arg(this->color.red()).arg(this->color.green()).arg(this->color.blue());
-  // qDebug() << QString("setR :: color: %1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue());
-  
   if(this->color==color){
-    // qDebug("equal");
     return;
   }
   
-  // qDebug() << "setR";
-  
   r=color.redF();
-  
-  // qDebug() << "r:" << r;
-  // qDebug() << "setR :: r:" << color.red();
-  // qDebug();
-  
   this->color=QColor::fromRgbF(r, g, b);
-  
   sliderVal=qCeil( r*maxRange );
   
   update();

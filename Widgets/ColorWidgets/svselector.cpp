@@ -81,7 +81,7 @@ void SVSelector::mousePressEvent(QMouseEvent *e)
   }
   else{
     middlePresed=false;
-    hideCursor(e);
+    // hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
 
@@ -95,7 +95,7 @@ void SVSelector::mouseMoveEvent(QMouseEvent *e)
     e->ignore();
   }
   else{
-    hideCursor(e);
+    // hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
 
@@ -210,10 +210,6 @@ void SVSelector::updateColor(){
   QColor color;
   color.setHsv(h, s, v);
   
-  // qDebug() << QString("SVSelector::updateColor :: hsv: %1, %2, %3").arg(h).arg(s).arg(v);
-  // qDebug() << QString("SVSelector::updateColor :: color.red(): %1").arg(color.red());
-  // qDebug();
-  
   emit colorChanged(color);
   emit saturationChanged(color);
   emit valueChanged(color);
@@ -286,13 +282,6 @@ void SVSelector::setV(int v)
 void SVSelector::setSV(QColor color){
   s=color.saturation();
   v=color.value();
-  
-  QColor c=QColor::fromHsv(h,s,v);
-  qDebug() << QString("setSV :: color.red: %1").arg(color.red());
-  qDebug() << QString("setSV :: color.h: %1").arg(color.hue());
-  qDebug() << QString("setSV :: c.red: %1").arg(c.red());
-  qDebug() << QString("setSV :: hsv: %1, %2, %3").arg(h).arg(s).arg(v);
-  qDebug();
   
   repaint();
   updateColor();
