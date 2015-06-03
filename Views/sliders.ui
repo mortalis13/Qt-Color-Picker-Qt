@@ -52,7 +52,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="HSlider" name="hSlider" native="true">
+           <widget class="HSVSlider" name="hSlider" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -125,7 +125,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="SSlider" name="sSlider" native="true">
+           <widget class="HSVSlider" name="sSlider" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -201,7 +201,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="VSlider" name="vSlider" native="true">
+           <widget class="HSVSlider" name="vSlider" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -514,24 +514,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>HSlider</class>
-   <extends>QWidget</extends>
-   <header>Widgets\Sliders\HSV\hslider.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>SSlider</class>
-   <extends>QWidget</extends>
-   <header>Widgets\Sliders\HSV\sslider.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>VSlider</class>
-   <extends>QWidget</extends>
-   <header>Widgets\Sliders\HSV\vslider.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>RSlider</class>
    <extends>QWidget</extends>
    <header>Widgets\Sliders\RGB\rslider.h</header>
@@ -547,6 +529,12 @@
    <class>BSlider</class>
    <extends>QWidget</extends>
    <header>Widgets\Sliders\RGB\bslider.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HSVSlider</class>
+   <extends>QWidget</extends>
+   <header>Widgets\Sliders\HSV\hsvslider.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

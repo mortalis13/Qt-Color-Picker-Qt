@@ -1,31 +1,29 @@
-#ifndef SSLIDER_H
-#define SSLIDER_H
+#ifndef COLORSLIDER_H
+#define COLORSLIDER_H
 
 #include <QWidget>
 
-class SSlider : public QWidget
+class ColorSlider : public QWidget
 {
   Q_OBJECT
 public:
-  explicit SSlider(QWidget *parent = 0);
+  explicit ColorSlider(QWidget *parent = 0);
 
-  void setS(qreal s);
-  void setS(QColor color);
-  
-  void changeHue(QColor color);
-  void changeValue(QColor color);
   void updatePaint();
+  
 
 protected:
-  void paintEvent(QPaintEvent* e);
   void mousePressEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
 
   void mouseReleaseEvent(QMouseEvent *e);
   void wheelEvent(QWheelEvent* e);
   
-private:
-  void updateColor();
+protected:
+  virtual void updateColor()=0;
+
+  qreal normalizeVal(int val);
+  int normalizePointerX(qreal val);
 
   void drawPointer(QPainter &p);
   void correctPointer();
@@ -34,25 +32,21 @@ private:
   void decPointer(int val=1);
   
   void calcVars();
-  int normalizePointerX(qreal val);
-  qreal normalizeS(int val);
-
   void drawBorder(QPainter& p);
 
   void log(QString format, int var);
   void log(QString format, qreal var);
 
 
-private:
+protected:
+  bool sliderDrawn;
+  QPixmap sliderPixmap;
+  
   bool middlePresed;
-  bool sSliderDrawn;
   bool ctrlHeld;
   bool widthChanged;
 
   QColor color;
-  QPixmap sSliderPixmap;
-  
-  qreal h,s,v;
   
   int pointerX;
   int pointerY;
@@ -71,14 +65,12 @@ private:
 
 
 signals:
-  void saturationChanged(QColor);
-  void pointerMoved(int);
   void middlePressedSignal(QMouseEvent* e);
 
 public slots:  
   void ctrlPressed();
   void ctrlReleased();
-  
+
 };
 
-#endif // SSLIDER_H
+#endif // COLORSLIDER_H

@@ -75,8 +75,6 @@ void RSlider::paintEvent(QPaintEvent *e)
   calcVars();
 
   if(!rSliderDrawn || widthChanged){
-    qDebug() << "repaint";
-    
     rSliderPixmap=QPixmap(sliderW, sliderH);
     QPainter tempP( &rSliderPixmap );
 
