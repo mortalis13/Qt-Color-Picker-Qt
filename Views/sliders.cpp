@@ -27,6 +27,11 @@ void Sliders::init(){
   greenSpinManualEdit=true;
   blueSpinManualEdit=true;
   
+  cyanSpinManualEdit=true;
+  magentaSpinManualEdit=true;
+  yellowSpinManualEdit=true;
+  blackSpinManualEdit=true;
+  
   
   ui->hSlider->setType(HSVSlider::Hue);
   ui->sSlider->setType(HSVSlider::Saturation);
@@ -41,6 +46,15 @@ void Sliders::init(){
   ui->bSlider->setType(RGBSlider::Blue);
   
   ui->rSlider->init();
+  
+  
+  ui->cSlider->setType(CMYKSlider::Cyan);
+  ui->mSlider->setType(CMYKSlider::Magenta);
+  ui->ySlider->setType(CMYKSlider::Yellow);
+  ui->kSlider->setType(CMYKSlider::Black);
+  
+  ui->mSlider->init();
+  ui->ySlider->init();
 }
 
 void Sliders::addActions(){
@@ -52,6 +66,11 @@ void Sliders::addActions(){
   connect( ui->gSlider, SIGNAL(greenChanged(QColor)), this, SLOT(changeGreen(QColor)) );
   connect( ui->bSlider, SIGNAL(blueChanged(QColor)), this, SLOT(changeBlue(QColor)) );
 
+  connect( ui->cSlider, SIGNAL(cyanChanged(QColor)), this, SLOT(changeCyan(QColor)) );
+  connect( ui->mSlider, SIGNAL(magentaChanged(QColor)), this, SLOT(changeMagenta(QColor)) );
+  connect( ui->ySlider, SIGNAL(yellowChanged(QColor)), this, SLOT(changeYellow(QColor)) );
+  connect( ui->kSlider, SIGNAL(blackChanged(QColor)), this, SLOT(changeBlack(QColor)) );
+
 
   connect( ui->spHue, SIGNAL(valueChanged(int)), this, SLOT(changeHue(int)) );
   connect( ui->spSaturation, SIGNAL(valueChanged(int)), this, SLOT(changeSaturation(int)) );
@@ -60,6 +79,11 @@ void Sliders::addActions(){
   connect( ui->spRed, SIGNAL(valueChanged(int)), this, SLOT(changeRed(int)) );
   connect( ui->spGreen, SIGNAL(valueChanged(int)), this, SLOT(changeGreen(int)) );
   connect( ui->spBlue, SIGNAL(valueChanged(int)), this, SLOT(changeBlue(int)) );
+  
+  connect( ui->spCyan, SIGNAL(valueChanged(int)), this, SLOT(changeCyan(int)) );
+  connect( ui->spMagenta, SIGNAL(valueChanged(int)), this, SLOT(changeMagenta(int)) );
+  connect( ui->spYellow, SIGNAL(valueChanged(int)), this, SLOT(changeYellow(int)) );
+  connect( ui->spBlack, SIGNAL(valueChanged(int)), this, SLOT(changeBlack(int)) );
   
   
   connect( this, SIGNAL(ctrlPressed()), ui->hSlider, SLOT(ctrlPressed()) );
@@ -261,6 +285,129 @@ void Sliders::updateBlueValues(QColor color){
   
   ui->rSlider->changeBlue(color);
   ui->gSlider->changeBlue(color);
+}
+
+
+// --------------------------------------------- CMYK ---------------------------------------------
+
+// ===== cyan =====
+
+void Sliders::changeCyan(int c){
+  if(cyanSpinManualEdit){
+    QColor filter=QColor::fromCmyk(c, 0, 0, 0);
+    changeCyan(filter);
+  }
+  cyanSpinManualEdit=true;
+}
+
+void Sliders::changeCyan(QColor color){
+  emit cyanChanged(color);
+  updateCyanValues(color);
+}
+
+void Sliders::changeCyanFromSelector(QColor color){
+  updateCyanValues(color);
+}
+
+void Sliders::updateCyanValues(QColor color){
+  ui->cSlider->setC(color);
+  
+  cyanSpinManualEdit=false;
+  ui->spCyan->setValue(color.cyan());
+  
+  ui->ySlider->changeCyan(color);
+  ui->mSlider->changeCyan(color);
+  ui->kSlider->changeCyan(color);
+}
+
+// ===== magenta =====
+
+void Sliders::changeMagenta(int m){
+  if(magentaSpinManualEdit){
+    QColor filter=QColor::fromCmyk(0, m, 0, 0);
+    changeMagenta(filter);
+  }
+  magentaSpinManualEdit=true;
+}
+
+void Sliders::changeMagenta(QColor color){
+  emit magentaChanged(color);
+  updateMagentaValues(color);
+}
+
+void Sliders::changeMagentaFromSelector(QColor color){
+  updateMagentaValues(color);
+}
+
+void Sliders::updateMagentaValues(QColor color){
+  ui->mSlider->setM(color);
+  
+  magentaSpinManualEdit=false;
+  ui->spMagenta->setValue(color.magenta());
+  
+  ui->cSlider->changeMagenta(color);
+  ui->ySlider->changeMagenta(color);
+  ui->kSlider->changeMagenta(color);
+}
+
+// ===== yellow =====
+
+void Sliders::changeYellow(int y){
+  if(yellowSpinManualEdit){
+    QColor filter=QColor::fromCmyk(0, 0, y, 0);
+    changeYellow(filter);
+  }
+  yellowSpinManualEdit=true;
+}
+
+void Sliders::changeYellow(QColor color){
+  emit yellowChanged(color);
+  updateYellowValues(color);
+}
+
+void Sliders::changeYellowFromSelector(QColor color){
+  updateYellowValues(color);
+}
+
+void Sliders::updateYellowValues(QColor color){
+  ui->ySlider->setY(color);
+  
+  yellowSpinManualEdit=false;
+  ui->spYellow->setValue(color.yellow());
+  
+  ui->cSlider->changeYellow(color);
+  ui->mSlider->changeYellow(color);
+  ui->kSlider->changeYellow(color);
+}
+
+// ===== black =====
+
+void Sliders::changeBlack(int k){
+  if(blackSpinManualEdit){
+    QColor filter=QColor::fromCmyk(0, 0, 0, k);
+    changeBlack(filter);
+  }
+  blackSpinManualEdit=true;
+}
+
+void Sliders::changeBlack(QColor color){
+  emit blackChanged(color);
+  updateBlackValues(color);
+}
+
+void Sliders::changeBlackFromSelector(QColor color){
+  updateBlackValues(color);
+}
+
+void Sliders::updateBlackValues(QColor color){
+  ui->kSlider->setK(color);
+  
+  blackSpinManualEdit=false;
+  ui->spBlack->setValue(color.black());
+  
+  ui->cSlider->changeBlack(color);
+  ui->mSlider->changeBlack(color);
+  ui->ySlider->changeBlack(color);
 }
 
 

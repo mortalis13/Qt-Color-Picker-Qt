@@ -35,8 +35,11 @@ private:
   
   void connectColorSampleRGB();
   void disconnectColorSampleRGB();
-  
   void changeRGB(int pos, int val);
+  
+  void connectColorSampleCMYK();
+  void disconnectColorSampleCMYK();
+  void changeCMYK(int pos, int val);
   
 protected:
   void mouseMoveEvent(QMouseEvent* e);
@@ -71,6 +74,11 @@ private slots:
   void changeRed(QColor color);
   void changeGreen(QColor color);
   void changeBlue(QColor color);
+  
+  void changeCyan(QColor color);
+  void changeMagenta(QColor color);
+  void changeYellow(QColor color);
+  void changeBlack(QColor color);
   
   
   void updateColorText(QColor color);

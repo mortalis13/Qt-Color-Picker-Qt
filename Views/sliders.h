@@ -37,6 +37,11 @@ private:
   bool redSpinManualEdit;
   bool greenSpinManualEdit;
   bool blueSpinManualEdit;
+  
+  bool cyanSpinManualEdit;
+  bool magentaSpinManualEdit;
+  bool yellowSpinManualEdit;
+  bool blackSpinManualEdit;
 
   bool mouseDown;
   bool mouseMoved;
@@ -49,7 +54,11 @@ private:
   void updateGreenValues(QColor color);
   void updateBlueValues(QColor color);
   
-  
+  void updateCyanValues(QColor color);
+  void updateMagentaValues(QColor color);
+  void updateYellowValues(QColor color);
+  void updateBlackValues(QColor color);
+
 signals:
   void hueChanged(int);
   void hueChanged(QColor);
@@ -69,6 +78,19 @@ signals:
   
   void blueChanged(int);
   void blueChanged(QColor);
+  
+
+  void cyanChanged(int);
+  void cyanChanged(QColor);
+  
+  void magentaChanged(int);
+  void magentaChanged(QColor);
+  
+  void yellowChanged(int);
+  void yellowChanged(QColor);
+  
+  void blackChanged(int);
+  void blackChanged(QColor);
   
 
   void ctrlPressed();
@@ -101,6 +123,23 @@ public slots:
   void changeBlue(int b);
   void changeBlue(QColor color);
   void changeBlueFromSelector(QColor color);
+  
+  
+  void changeCyan(int c);
+  void changeCyan(QColor color);
+  void changeCyanFromSelector(QColor color);
+  
+  void changeMagenta(int m);
+  void changeMagenta(QColor color);
+  void changeMagentaFromSelector(QColor color);
+  
+  void changeYellow(int y);
+  void changeYellow(QColor color);
+  void changeYellowFromSelector(QColor color);
+  
+  void changeBlack(int k);
+  void changeBlack(QColor color);
+  void changeBlackFromSelector(QColor color);
   
 };
 
