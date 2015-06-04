@@ -1,53 +1,57 @@
-#ifndef COLORMODEL_H
-#define COLORMODEL_H
+#ifndef MAINCONTROLLER_H
+#define MAINCONTROLLER_H
 
-#include <QtCore>
 #include <QColor>
-
 #include <QObject>
 
 #include "Views/mainwindow.h"
-#include "Views/sliders.h"
-
 #include "Controllers/sliderscontroller.h"
-
 #include "Models/colorprocessor.h"
+
 #include "Widgets/ColorWidgets/hselector.h"
 #include "Widgets/ColorWidgets/svselector.h"
 
-#include "Service/vars.h"
 
 class MainWindow;
 
-class ColorModel : public QObject
+class MainController : public QObject
 {
   Q_OBJECT
 
+private:
+  HSelector* hSelector;
+  SVSelector* svSelector;
+
+  ColorProcessor* colorProcessor;
+  SlidersController *slidersController;
+  
+  MainWindow* view;
+    
+  
 public:
-  explicit ColorModel(HSelector* hSelector, SVSelector* svSelector,
+  explicit MainController(HSelector* hSelector, SVSelector* svSelector,
                       ColorProcessor *colorProcessor, SlidersController *slidersController, 
                       MainWindow *view, 
                       QObject* parent=0);
-
 private:
-  void addActions();
-  
-  void connectHSV();
-  void connectRGB();
-  void disconnectRGB();
-  void connectCMYK();
-  void disconnectCMYK();
-  
+
   void changeRGB(int pos, int val);
   void changeCMYK(int pos, int val);
-
-
+  
 signals:
   void hueChanged(QColor);
   void saturationChanged(QColor);
   void valueChanged(QColor);
-  void RGBChanged(QColor);
-  void CMYKChanged(QColor);
+  
+  void redChanged(QColor);
+  void greenChanged(QColor);
+  void blueChanged(QColor);
+
+  void cyanChanged(QColor);
+  void magentaChanged(QColor);
+  void yellowChanged(QColor);
+  void blackChanged(QColor);  
+ 
 
 public slots:
   void changeHue(QColor color);
@@ -61,18 +65,9 @@ public slots:
   void changeCyan(QColor color);
   void changeMagenta(QColor color);
   void changeYellow(QColor color);
-  void changeBlack(QColor color);
-
-private:
-  HSelector* hSelector;
-  SVSelector* svSelector;
-
-  ColorProcessor* colorProcessor;
-  SlidersController *slidersController;
-  // SlidersColorModel *slidersColorModel;
+  void changeBlack(QColor color); 
   
-  MainWindow* view;
   
 };
 
-#endif // COLORMODEL_H
+#endif // MAINCONTROLLER_H

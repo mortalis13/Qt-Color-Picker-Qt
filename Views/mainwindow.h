@@ -4,9 +4,9 @@
 #include <QMainWindow>
 
 #include "Models/colorprocessor.h"
-#include "Models/colormodel.h"
 
 #include "Controllers/sliderscontroller.h"
+#include "Controllers/maincontroller.h"
 
 #include "sliders.h"
 
@@ -14,7 +14,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class ColorModel;
+class MainController;
 
 class MainWindow : public QMainWindow
 {
@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow
 
 private:
   SlidersController *slidersController;
+  MainController *mainController;
 
 public:
   explicit MainWindow(QWidget *parent = 0);
@@ -62,7 +63,6 @@ private:
   QString editingField;
 
   ColorProcessor *colorProcessor;
-  ColorModel *colorModel;
   Sliders* slidersWindow;
 
   bool mouseDown;
@@ -96,6 +96,8 @@ private slots:
   void middleClick(QMouseEvent *e);
   void hsvMiddlePressed(QMouseEvent *e);
   void openSliders();
+  
+  
 };
 
 #endif // MAINWINDOW_H

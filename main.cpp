@@ -1,7 +1,6 @@
 #include <QApplication>
 
 #include "Views/mainwindow.h"
-#include "Models/colormodel.h"
 
 int main(int argc, char *argv[])
 {

@@ -1,26 +1,13 @@
 #ifndef SLIDERSCONTROLLER_H
 #define SLIDERSCONTROLLER_H
 
-#include <QtCore>
 #include <QColor>
-
 #include <QObject>
 
 #include "Views/sliders.h"
 
-#include "Models/colorprocessor.h"
-//#include "Models/sliderscolormodel.h"
-
-#include "Widgets/ColorWidgets/hselector.h"
-#include "Widgets/ColorWidgets/svselector.h"
-
 
 class Sliders;
-// class SlidersColorModel;
-
-namespace Ui {
-class Sliders;
-}
 
 class SlidersController : public QObject
 {
@@ -28,7 +15,6 @@ class SlidersController : public QObject
 
 private:
   Sliders* slidersView;
-  // SlidersColorModel* slidersColorModel;
 
   bool hueSpinManualEdit;
   bool saturationSpinManualEdit;
@@ -45,11 +31,16 @@ private:
   
   
 public:
-  // explicit SlidersController(SlidersColorModel* slidersColorModel, QObject* parent=0);
   explicit SlidersController(QObject* parent=0);
   
   void setView(Sliders* slidersView);
   
+  void connectRGB();
+  void disconnectRGB();
+  void connectCMYK();
+  void disconnectCMYK();
+
+
 private:
   void addActions();
   void init();
@@ -65,6 +56,10 @@ private:
   
 
 signals:
+  void RGBChanged(QColor);
+  void CMYKChanged(QColor);
+  
+  
   void hueChanged(int);
   void hueChanged(QColor);
   

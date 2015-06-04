@@ -6,13 +6,12 @@
 
 #include "Controllers/sliderscontroller.h"
 
+
 namespace Ui {
 class Sliders;
 }
 
-
 class SlidersController;
-
 
 class Sliders : public QMainWindow
 {

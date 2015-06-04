@@ -3,11 +3,8 @@
 
 // ------------------------------------------------------------------------------------------------
 
-// SlidersController::SlidersController(SlidersController* slidersColorModel, QObject* parent) : QObject(parent)
 SlidersController::SlidersController(QObject* parent) : QObject(parent)
 {
-  // this->slidersColorModel=slidersColorModel;
-  
   addActions();
   init();
 }
@@ -27,37 +24,35 @@ void SlidersController::init(){
   blackSpinManualEdit=true;
 }
 
+void SlidersController::addActions(){
+  connectRGB();
+  connectCMYK();
+}
+
 void SlidersController::setView(Sliders* slidersView){
   this->slidersView=slidersView;
 }
 
-void SlidersController::addActions(){
-  // connect( this, SIGNAL(hueChanged(QColor)), slidersColorModel, SLOT(changeHue(QColor)) );
-  // connect( this, SIGNAL(saturationChanged(QColor)), slidersColorModel, SLOT(changeSaturation(QColor)) );
-  // connect( this, SIGNAL(valueChanged(QColor)), slidersColorModel, SLOT(changeValue(QColor)) );
-  
-  // connect( this, SIGNAL(redChanged(QColor)), slidersColorModel, SLOT(changeRed(QColor)) );
-  // connect( this, SIGNAL(greenChanged(QColor)), slidersColorModel, SLOT(changeGreen(QColor)) );
-  // connect( this, SIGNAL(blueChanged(QColor)), slidersColorModel, SLOT(changeBlue(QColor)) );
 
-  // connect( this, SIGNAL(cyanChanged(QColor)), slidersColorModel, SLOT(changeCyan(QColor)) );
-  // connect( this, SIGNAL(magentaChanged(QColor)), slidersColorModel, SLOT(changeMagenta(QColor)) );
-  // connect( this, SIGNAL(yellowChanged(QColor)), slidersColorModel, SLOT(changeYellow(QColor)) );
-  // connect( this, SIGNAL(blackChanged(QColor)), slidersColorModel, SLOT(changeBlack(QColor)) );
+void SlidersController::connectRGB(){
+  connect( this, SIGNAL(RGBChanged(QColor)), this, SLOT(changeRedFromSelector(QColor)) );
+  connect( this, SIGNAL(RGBChanged(QColor)), this, SLOT(changeGreenFromSelector(QColor)) );
+  connect( this, SIGNAL(RGBChanged(QColor)), this, SLOT(changeBlueFromSelector(QColor)) );
+}
 
+void SlidersController::disconnectRGB(){
+  disconnect( this, SIGNAL(RGBChanged(QColor)), 0, 0 );
+}
 
-  // connect( this, SIGNAL(hueChanged(int)), slidersColorModel, SLOT(changeHue(int)) );
-  // connect( this, SIGNAL(saturationChanged(int)), slidersColorModel, SLOT(changeSaturation(int)) );
-  // connect( this, SIGNAL(valueChanged(int)), slidersColorModel, SLOT(changeValue(int)) );
-  
-  // connect( this, SIGNAL(redChanged(int)), slidersColorModel, SLOT(changeRed(int)) );
-  // connect( this, SIGNAL(greenChanged(int)), slidersColorModel, SLOT(changeGreen(int)) );
-  // connect( this, SIGNAL(blueChanged(int)), slidersColorModel, SLOT(changeBlue(int)) );
-  
-  // connect( this, SIGNAL(cyanChanged(int)), slidersColorModel, SLOT(changeCyan(int)) );
-  // connect( this, SIGNAL(magentaChanged(int)), slidersColorModel, SLOT(changeMagenta(int)) );
-  // connect( this, SIGNAL(yellowChanged(int)), slidersColorModel, SLOT(changeYellow(int)) );
-  // connect( this, SIGNAL(blackChanged(int)), slidersColorModel, SLOT(changeBlack(int)) );
+void SlidersController::connectCMYK(){
+  connect( this, SIGNAL(CMYKChanged(QColor)), this, SLOT(changeCyanFromSelector(QColor)) );
+  connect( this, SIGNAL(CMYKChanged(QColor)), this, SLOT(changeMagentaFromSelector(QColor)) );
+  connect( this, SIGNAL(CMYKChanged(QColor)), this, SLOT(changeYellowFromSelector(QColor)) );
+  connect( this, SIGNAL(CMYKChanged(QColor)), this, SLOT(changeBlackFromSelector(QColor)) );
+}
+
+void SlidersController::disconnectCMYK(){
+  disconnect( this, SIGNAL(CMYKChanged(QColor)), 0, 0 );
 }
 
 
@@ -347,4 +342,3 @@ void SlidersController::updateBlackValues(QColor color){
   slidersView->ui->mSlider->changeBlack(color);
   slidersView->ui->ySlider->changeBlack(color);
 }
-
