@@ -12,6 +12,11 @@ class SVSelector : public ColorWidget
 {
   Q_OBJECT
   
+private:
+  // QColor color;
+  // int h,s,v;
+  
+  
 public:
   explicit SVSelector(QWidget *parent = 0);
 
@@ -43,41 +48,17 @@ private:
   void incPointerY();
 
   void drawBorder(QPainter& p);
-  // void drawCircle(QPainter &p);
-  
-  // void hideCursor(QMouseEvent *e);
-  // void restoreCursor();
 
-  
-private:  
-  // bool middlePresed;
-  // bool shiftHeld;
-  // bool hueLayerDrawn;
-  
-  // QImage hueLayerImage;
-  // QColor color;
-  
-  // int h,s,v;
-  
-  // int selectorX;
-  // int selectorY;
-  
-  // int pointerX;
-  // int pointerY;
-  
   
 signals:
   void colorChanged(QColor);
   void saturationChanged(QColor);
   void valueChanged(QColor);
-  
-  // void middlePressedSignal(QMouseEvent* e);
 
 public slots:
   void changeHue(QColor color);  
 
-  // void shiftPressed();
-  // void shiftReleased();
+
 };
 
 #endif // SATVALUESELECTOR_H

@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = QtColorPicker
 TEMPLATE = app
 
+QMAKE_CXXFLAGS -= -Wunused-parameter
+CONFIG += c++11
 
 SOURCES += main.cpp\
     Views/mainwindow.cpp \

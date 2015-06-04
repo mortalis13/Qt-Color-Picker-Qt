@@ -19,6 +19,8 @@ ColorWidget::ColorWidget(QWidget *parent) : QWidget(parent) {
   h=0;
   s=maxSV;
   v=maxSV;
+  
+  color.setHsv(h, s, v);
 }
 
 

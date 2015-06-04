@@ -50,7 +50,7 @@ bool Validator::checkColorText(QString text, Vars::ColorType colorType){
 
   foreach(QString comp, list){
     bool ok;
-    int val=comp.toInt(&ok);
+    comp.toInt(&ok);
     if(!ok) return false;
   }
 
@@ -68,6 +68,7 @@ bool Validator::checkValueByType(QString text, Vars::ColorType colorType){
     case Vars::Hex:
       return checkValueHex(text);
   }
+  return false;
 }
 
 bool Validator::checkValueHSV(QString text){
@@ -129,10 +130,12 @@ bool Validator::checkValueHex(QString text){
     int val=comp.toInt(&ok, 16);
     if(!ok) return false;
 
-    if(len==3)
+    if(len==3){
       if(val<minSHex || val>maxSHex) return false;
-    else
+    }
+    else{
       if(val<minHex || val>maxHex) return false;
+    }
   }
 
   return true;

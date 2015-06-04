@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>337</width>
-    <height>679</height>
+    <height>693</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,6 +33,9 @@
     <item>
      <widget class="QWidget" name="pHSV" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="topMargin">
+        <number>9</number>
+       </property>
        <item>
         <widget class="QWidget" name="pHue" native="true">
          <layout class="QGridLayout" name="gridLayout">
@@ -79,6 +82,9 @@
               <width>260</width>
               <height>36</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
             </property>
            </widget>
           </item>
@@ -152,6 +158,9 @@
               <width>260</width>
               <height>36</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
             </property>
            </widget>
           </item>
@@ -229,6 +238,9 @@
               <height>36</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
+            </property>
            </widget>
           </item>
           <item row="1" column="1">
@@ -262,7 +274,60 @@
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer_2">
+     <spacer name="vs1">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>10</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="Line" name="line">
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="vs2">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -280,6 +345,9 @@
     <item>
      <widget class="QWidget" name="pRGB" native="true">
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QWidget" name="pRed" native="true">
          <layout class="QGridLayout" name="gridLayout_4">
@@ -326,6 +394,9 @@
               <width>260</width>
               <height>36</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
             </property>
            </widget>
           </item>
@@ -387,6 +458,9 @@
               <width>260</width>
               <height>36</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
             </property>
            </widget>
           </item>
@@ -488,6 +562,9 @@
               <height>36</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -512,7 +589,7 @@
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer_3">
+     <spacer name="vs3">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -528,8 +605,64 @@
      </spacer>
     </item>
     <item>
-     <widget class="QWidget" name="pRGB_2" native="true">
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="Line" name="line_2">
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="vs4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>10</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QWidget" name="pCMYK" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QWidget" name="pRed_2" native="true">
          <layout class="QGridLayout" name="gridLayout_7">
@@ -576,6 +709,9 @@
               <width>260</width>
               <height>36</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
             </property>
            </widget>
           </item>
@@ -637,6 +773,9 @@
               <width>260</width>
               <height>36</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
             </property>
            </widget>
           </item>
@@ -753,6 +892,9 @@
               <height>36</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -829,6 +971,9 @@
               <height>36</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background:#3a3</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -838,14 +983,17 @@
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer">
+     <spacer name="vsBottom">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::MinimumExpanding</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>217</height>
+        <height>9</height>
        </size>
       </property>
      </spacer>
@@ -875,4 +1023,21 @@
  </customwidgets>
  <resources/>
  <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>10</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>false</bool>
+  </property>
+ </designerdata>
 </ui>

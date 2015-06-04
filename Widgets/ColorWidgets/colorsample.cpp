@@ -45,6 +45,8 @@ void ColorSample::mouseReleaseEvent(QMouseEvent *e)
     case Qt::RightButton:
       emit samplePressedRight();
       break;
+    default:
+      return;
     }
   }
 

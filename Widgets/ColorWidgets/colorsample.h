@@ -10,6 +10,11 @@
 class ColorSample : public ColorWidget
 {
   Q_OBJECT
+  
+private:
+  bool mouseMoving;
+  QColor borderColor;
+  
 public:
   explicit ColorSample(QWidget *parent = 0);
   
@@ -34,10 +39,6 @@ protected:
 private:
   void drawBorder(QPainter& p);
 
-private:
-  bool mouseMoving;
-  QColor borderColor;
-  
 };
 
 #endif // COLORSAMPLE_H
