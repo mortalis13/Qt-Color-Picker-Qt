@@ -5,7 +5,6 @@
 
 #include "Models/colorprocessor.h"
 #include "Models/colormodel.h"
-#include "Models/sliderscolormodel.h"
 
 #include "Controllers/sliderscontroller.h"
 
@@ -16,14 +15,12 @@ class MainWindow;
 }
 
 class ColorModel;
-class SlidersColorModel;
 
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
 private:
-  SlidersColorModel *slidersColorModel;
   SlidersController *slidersController;
 
 public:
@@ -39,14 +36,6 @@ public:
   QString getRGB();
   QString getCMYK();
   QString getHex();
-
-  void connectColorSampleRGB();
-  void disconnectColorSampleRGB();
-  // void changeRGB(int pos, int val);
-
-  void connectColorSampleCMYK();
-  void disconnectColorSampleCMYK();
-  // void changeCMYK(int pos, int val);
 
 
 private:
@@ -93,20 +82,6 @@ public slots:
   void updateColorHex(QString Hex);
 
 private slots:
-//  void changeHue(QColor color);
-//  void changeSaturation(QColor color);
-//  void changeValue(QColor color);
-  
-//  void changeRed(QColor color);
-//  void changeGreen(QColor color);
-//  void changeBlue(QColor color);
-  
-//  void changeCyan(QColor color);
-//  void changeMagenta(QColor color);
-//  void changeYellow(QColor color);
-//  void changeBlack(QColor color);
-  
-  
   void updateColorText(QColor color);
   void updateColorFinished();
 

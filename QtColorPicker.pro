@@ -32,7 +32,6 @@ SOURCES += main.cpp\
 \
     Models/colorprocessor.cpp \
     Models/colormodel.cpp \
-    Models/sliderscolormodel.cpp \
     Controllers/sliderscontroller.cpp
 
 
@@ -55,7 +54,6 @@ HEADERS  += Views/mainwindow.h \
 \
     Models/colorprocessor.h \
     Models/colormodel.h \
-    Models/sliderscolormodel.h \
     Controllers/sliderscontroller.h
     
     

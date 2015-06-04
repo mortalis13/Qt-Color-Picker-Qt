@@ -9,6 +9,8 @@
 #include "Views/mainwindow.h"
 #include "Views/sliders.h"
 
+#include "Controllers/sliderscontroller.h"
+
 #include "Models/colorprocessor.h"
 #include "Widgets/ColorWidgets/hselector.h"
 #include "Widgets/ColorWidgets/svselector.h"
@@ -23,7 +25,7 @@ class ColorModel : public QObject
 
 public:
   explicit ColorModel(HSelector* hSelector, SVSelector* svSelector,
-                      ColorProcessor *colorProcessor, SlidersColorModel *slidersColorModel, 
+                      ColorProcessor *colorProcessor, SlidersController *slidersController, 
                       MainWindow *view, 
                       QObject* parent=0);
 
@@ -66,7 +68,8 @@ private:
   SVSelector* svSelector;
 
   ColorProcessor* colorProcessor;
-  SlidersColorModel *slidersColorModel;
+  SlidersController *slidersController;
+  // SlidersColorModel *slidersColorModel;
   
   MainWindow* view;
   

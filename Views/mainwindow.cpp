@@ -15,15 +15,16 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
   colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
   
-  slidersColorModel=new SlidersColorModel();
-  slidersController=new SlidersController(slidersColorModel);
+  slidersController=new SlidersController();
+  // slidersController=new SlidersController(slidersColorModel);
   
   slidersWindow=new Sliders(slidersController, this);
+  slidersController->setView(slidersWindow);
   
-  slidersColorModel->setView(slidersWindow);
-//  slidersWindow->setModel(slidersColorModel);
+  // slidersColorModel=new SlidersColorModel();
+  // slidersColorModel->setView(slidersWindow);
   
-  colorModel=new ColorModel(ui->hSelector, ui->svSelector, colorProcessor, slidersColorModel, this);
+  colorModel=new ColorModel(ui->hSelector, ui->svSelector, colorProcessor, slidersController, this);
 
   addActions();
   addSlidersActions();
@@ -93,9 +94,9 @@ void MainWindow::addActions(){
 void MainWindow::addSlidersActions(){
   // === HSV ===
   
-  connect( slidersColorModel, SIGNAL(hueChanged(QColor)), colorModel, SLOT(changeHue(QColor)) );
-  connect( slidersColorModel, SIGNAL(saturationChanged(QColor)), colorModel, SLOT(changeSaturation(QColor)) );
-  connect( slidersColorModel, SIGNAL(valueChanged(QColor)), colorModel, SLOT(changeValue(QColor)) );
+  connect( slidersController, SIGNAL(hueChanged(QColor)), colorModel, SLOT(changeHue(QColor)) );
+  connect( slidersController, SIGNAL(saturationChanged(QColor)), colorModel, SLOT(changeSaturation(QColor)) );
+  connect( slidersController, SIGNAL(valueChanged(QColor)), colorModel, SLOT(changeValue(QColor)) );
   
   connect( ui->hSelector, SIGNAL(hueChanged(QColor)), colorModel, SIGNAL(hueChanged(QColor)) );
   connect( ui->svSelector, SIGNAL(saturationChanged(QColor)), colorModel, SIGNAL(saturationChanged(QColor)) );
@@ -104,19 +105,19 @@ void MainWindow::addSlidersActions(){
   
   // === RGB ===
   
-  connect( slidersColorModel, SIGNAL(redChanged(QColor)), colorModel, SLOT(changeRed(QColor)) );
-  connect( slidersColorModel, SIGNAL(greenChanged(QColor)), colorModel, SLOT(changeGreen(QColor)) );
-  connect( slidersColorModel, SIGNAL(blueChanged(QColor)), colorModel, SLOT(changeBlue(QColor)) );
+  connect( slidersController, SIGNAL(redChanged(QColor)), colorModel, SLOT(changeRed(QColor)) );
+  connect( slidersController, SIGNAL(greenChanged(QColor)), colorModel, SLOT(changeGreen(QColor)) );
+  connect( slidersController, SIGNAL(blueChanged(QColor)), colorModel, SLOT(changeBlue(QColor)) );
   
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), colorModel, SIGNAL(RGBChanged(QColor)) );
   
   
   // === CMYK ===
   
-  connect( slidersColorModel, SIGNAL(cyanChanged(QColor)), colorModel, SLOT(changeCyan(QColor)) );
-  connect( slidersColorModel, SIGNAL(magentaChanged(QColor)), colorModel, SLOT(changeMagenta(QColor)) );
-  connect( slidersColorModel, SIGNAL(yellowChanged(QColor)), colorModel, SLOT(changeYellow(QColor)) );
-  connect( slidersColorModel, SIGNAL(blackChanged(QColor)), colorModel, SLOT(changeBlack(QColor)) );
+  connect( slidersController, SIGNAL(cyanChanged(QColor)), colorModel, SLOT(changeCyan(QColor)) );
+  connect( slidersController, SIGNAL(magentaChanged(QColor)), colorModel, SLOT(changeMagenta(QColor)) );
+  connect( slidersController, SIGNAL(yellowChanged(QColor)), colorModel, SLOT(changeYellow(QColor)) );
+  connect( slidersController, SIGNAL(blackChanged(QColor)), colorModel, SLOT(changeBlack(QColor)) );
   
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), colorModel, SIGNAL(CMYKChanged(QColor)) );
 }
