@@ -30,13 +30,21 @@ private:
   
 public:
   explicit MainController(HSelector* hSelector, SVSelector* svSelector,
-                      ColorProcessor *colorProcessor, SlidersController *slidersController, 
+                      ColorProcessor *colorProcessor, 
                       MainWindow *view, 
                       QObject* parent=0);
+  
+  void addSlidersController(SlidersController *slidersController);
+  
+  
 private:
-
   void changeRGB(int pos, int val);
   void changeCMYK(int pos, int val);
+  
+  void connectRGB();
+  void disconnectRGB();
+  void connectCMYK();
+  void disconnectCMYK();
   
 signals:
   void hueChanged(QColor);

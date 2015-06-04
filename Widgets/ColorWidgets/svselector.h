@@ -5,8 +5,10 @@
 #include <QList>
 #include <QPixmap>
 
+#include "colorwidget.h"
 
-class SVSelector : public QWidget
+
+class SVSelector : public ColorWidget
 {
   Q_OBJECT
   
@@ -14,15 +16,10 @@ public:
   explicit SVSelector(QWidget *parent = 0);
 
   void setS(QColor color);
-  void setS(int s);
-  
   void setV(QColor color);
-  void setV(int v);
-  
-  void setSV(QColor color);
   void setSV(int s, int v);
   
-  void updateColor();
+  void reupdateColor();
 
 
 protected:
@@ -34,6 +31,8 @@ protected:
 
 
 private:
+  void updateColor();
+  
   void drawPointer(QPainter &p);
   void correctPointer();
   void movePointer(int x, int y);
@@ -44,25 +43,27 @@ private:
   void incPointerY();
 
   void drawBorder(QPainter& p);
-  void drawCircle(QPainter &p);
+  // void drawCircle(QPainter &p);
   
-  void hideCursor(QMouseEvent *e);
-  void restoreCursor();
+  // void hideCursor(QMouseEvent *e);
+  // void restoreCursor();
 
   
 private:  
-  bool middlePresed;
-  bool shiftHeld;
-  bool hueLayerDrawn;
-  QImage hueLayerImage;
+  // bool middlePresed;
+  // bool shiftHeld;
+  // bool hueLayerDrawn;
   
-  int h,s,v;
+  // QImage hueLayerImage;
+  // QColor color;
   
-  int selectorX;
-  int selectorY;
+  // int h,s,v;
   
-  int pointerX;
-  int pointerY;
+  // int selectorX;
+  // int selectorY;
+  
+  // int pointerX;
+  // int pointerY;
   
   
 signals:
@@ -70,13 +71,13 @@ signals:
   void saturationChanged(QColor);
   void valueChanged(QColor);
   
-  void middlePressedSignal(QMouseEvent* e);
+  // void middlePressedSignal(QMouseEvent* e);
 
 public slots:
   void changeHue(QColor color);  
 
-  void shiftPressed();
-  void shiftReleased();
+  // void shiftPressed();
+  // void shiftReleased();
 };
 
 #endif // SATVALUESELECTOR_H

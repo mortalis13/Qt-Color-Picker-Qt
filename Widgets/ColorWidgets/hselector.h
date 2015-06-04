@@ -4,24 +4,30 @@
 #include <QWidget>
 #include <QMouseEvent>
 
-class HSelector : public QWidget
+#include "colorwidget.h"
+
+
+class HSelector : public ColorWidget
 {
   Q_OBJECT
+  
+private:
+  int barSize;
+  
   
 public:
   explicit HSelector(QWidget *parent = 0);
 
   void setH(int h);
   void setH(QColor color);
-  
-  void setHFromRed(int r);
-  
   void setInitH(int h);
+  
+  void reupdateColor();
+  
 protected:
   void paintEvent(QPaintEvent* e);
   void mousePressEvent(QMouseEvent* e);
   void mouseMoveEvent(QMouseEvent* e);
-
   void mouseReleaseEvent(QMouseEvent *e);
   void wheelEvent(QWheelEvent* e);
 
@@ -35,26 +41,11 @@ private:
   void decPointer();
   
   void drawBorder(QPainter& p);
-  void drawRightTrapezoid(QPainter &p);
   
-  void log(QString format, int var);
-  void log(QString format, qreal var);
-  
-
-private:
-  bool middlePresed;
-  bool hSelectorDrawn;
-  QPixmap hSelectorPixmap;
-  
-  int h,s,v;
-  int barSize;
-  int pointerY;
 
 signals:
   void hueChanged(QColor);
-  void middlePressedSignal(QMouseEvent* e);
 
-public slots:
 
 };
 

@@ -7,45 +7,11 @@
 #include "Service/services.h"
 
 
-// --------------------------------------------- consts ---------------------------------------------
-
-const int maxH=360;
-const int maxSV=255;
-
-const int border=2;
-const int borderRadius=10;
-
-const int minPointerXY = border;
-const int maxPointerXY = maxSV+border;
-
-const int selectorSize=maxSV+1;
-
-const int pointerR=5;
-const int pointerBorder=2;
-
-const QColor borderColor(80,80,80,200);
-const QColor pointerBorderColor("#ddd");
-const QColor pointerFillColor("#333");
-
-
 // ----------------------------------------------------------------------------------------------------
 
-SVSelector::SVSelector(QWidget *parent) :
-  QWidget(parent)
+SVSelector::SVSelector(QWidget *parent) : ColorWidget(parent)
 {
-  hueLayerDrawn=false;
-  middlePresed=false;
-  shiftHeld=false;
-  
-  selectorX=border;
-  selectorY=border;
-  
   pointerX=maxSV;
-  pointerY=0;
-
-  h=0;
-  s=maxSV;
-  v=maxSV;
 }
 
 void SVSelector::paintEvent(QPaintEvent *event)
@@ -55,7 +21,7 @@ void SVSelector::paintEvent(QPaintEvent *event)
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
 
-  if(!hueLayerDrawn){
+  if(!selectorDrawn){
     hueLayerImage=QImage(maxSV+1, maxSV+1, QImage::Format_RGB32);
     for(int s=0; s<=maxSV; s++){
       for(int v=0; v<=maxSV; v++){
@@ -64,7 +30,7 @@ void SVSelector::paintEvent(QPaintEvent *event)
       }
     }
     
-    hueLayerDrawn=true;
+    selectorDrawn=true;
   }
   p.drawImage(border, border, hueLayerImage);
   
@@ -84,8 +50,6 @@ void SVSelector::mousePressEvent(QMouseEvent *e)
     // hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
-
-//    repaint();
   }
 }
 
@@ -98,8 +62,6 @@ void SVSelector::mouseMoveEvent(QMouseEvent *e)
     // hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
-
-//    repaint();
   }
 }
 
@@ -130,6 +92,11 @@ void SVSelector::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
+void SVSelector::drawPointer(QPainter& p){
+  correctPointer();
+  drawCircle(p);
+}
+
 void SVSelector::incPointerX(){
   movePointer(pointerX+1, pointerY);
 }
@@ -144,11 +111,6 @@ void SVSelector::incPointerY(){
 
 void SVSelector::decPointerY(){
   movePointer(pointerX, pointerY-1);
-}
-
-void SVSelector::drawPointer(QPainter& p){
-  correctPointer();
-  drawCircle(p);
 }
 
 void SVSelector::correctPointer(){
@@ -175,28 +137,6 @@ void SVSelector::drawBorder(QPainter& p){
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
-void SVSelector::drawCircle(QPainter& p){
-  QPen pen(pointerBorderColor, pointerBorder);
-  p.setPen(pen);
-  p.setBrush(pointerFillColor);
-  p.drawEllipse( QPoint(pointerX, pointerY), pointerR, pointerR );
-}
-
-void SVSelector::hideCursor(QMouseEvent *e){
-  int x=e->x();
-  int y=e->y();
-
-  if( ( x<minPointerXY || x>maxPointerXY ) || ( y<minPointerXY || y>maxPointerXY ) ) {
-    restoreCursor();
-    return;
-  }
-  this->setCursor( QCursor(Qt::BlankCursor) );
-}
-
-void SVSelector::restoreCursor(){
-  this->setCursor( QCursor(Qt::ArrowCursor) );
-}
-
 void SVSelector::updateColor(){
   s = pointerX - border;
   v = maxSV - (pointerY - border);
@@ -207,10 +147,15 @@ void SVSelector::updateColor(){
   v = qMax(0, v);
   v = qMin(maxSV, v);
 
-  QColor color;
   color.setHsv(h, s, v);
   
   emit colorChanged(color);
+  emit saturationChanged(color);
+  emit valueChanged(color);
+}
+
+void SVSelector::reupdateColor()
+{
   emit saturationChanged(color);
   emit valueChanged(color);
 }
@@ -219,7 +164,7 @@ void SVSelector::updateColor(){
 
 void SVSelector::changeHue(QColor color)
 {
-  hueLayerDrawn=false;
+  selectorDrawn=false;
   
   h=color.hue();
   correctPointer();
@@ -231,26 +176,7 @@ void SVSelector::changeHue(QColor color)
   repaint();
 }
 
-void SVSelector::shiftPressed(){
-  shiftHeld=true;
-}
-
-void SVSelector::shiftReleased(){
-  shiftHeld=false;
-}
-
 // ---------------------------------------------- set/get ----------------------------------------------
-
-void SVSelector::setS(int s)
-{
-  if(this->s == s){
-    return;
-  }
-  
-  this->s=s;
-  repaint();
-  updateColor();
-}
 
 void SVSelector::setS(QColor color)
 {
@@ -259,30 +185,9 @@ void SVSelector::setS(QColor color)
   updateColor();
 }
 
-
 void SVSelector::setV(QColor color)
 {
   v=color.value();
-  repaint();
-  updateColor();
-}
-
-void SVSelector::setV(int v)
-{
-  if(this->v == v){
-    return;
-  }
-  
-  this->v=v;
-  repaint();
-  updateColor();
-}
-
-
-void SVSelector::setSV(QColor color){
-  s=color.saturation();
-  v=color.value();
-  
   repaint();
   updateColor();
 }

@@ -4,19 +4,20 @@
 #include <QWidget>
 #include <QMouseEvent>
 
+#include "colorwidget.h"
 
-class ColorSample : public QWidget
+
+class ColorSample : public ColorWidget
 {
   Q_OBJECT
 public:
   explicit ColorSample(QWidget *parent = 0);
   
-  QColor getColor();
+  void reupdateColor();
   
 
 signals:
   void colorChanged(QColor color);
-  
   void samplePressedLeft();
   void samplePressedRight();
 
@@ -35,8 +36,6 @@ private:
 
 private:
   bool mouseMoving;
-
-  QColor color;
   QColor borderColor;
   
 };

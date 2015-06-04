@@ -2,7 +2,7 @@
 
 
 MainController::MainController(HSelector *hSelector, SVSelector *svSelector,
-                       ColorProcessor *colorProcessor, SlidersController *slidersController, 
+                       ColorProcessor *colorProcessor, 
                        MainWindow *view,
                        QObject* parent) : QObject(parent)
 {
@@ -10,7 +10,32 @@ MainController::MainController(HSelector *hSelector, SVSelector *svSelector,
   this->svSelector=svSelector;
   this->view=view;
   this->colorProcessor=colorProcessor;
+  
+  slidersController=NULL;
+}
+
+void MainController::addSlidersController(SlidersController *slidersController){
   this->slidersController=slidersController;
+}
+
+void MainController::connectRGB(){
+  if(slidersController!=NULL)
+    slidersController->connectRGB();
+}
+
+void MainController::disconnectRGB(){
+  if(slidersController!=NULL)
+    slidersController->disconnectRGB();
+}
+
+void MainController::connectCMYK(){
+  if(slidersController!=NULL)
+    slidersController->connectCMYK();
+}
+
+void MainController::disconnectCMYK(){
+  if(slidersController!=NULL)
+    slidersController->disconnectCMYK();
 }
 
 
@@ -50,11 +75,11 @@ void MainController::changeRGB(int pos, int val){
       break;  
   }
   
-  slidersController->disconnectRGB();
+  disconnectRGB();
   QString RGB=colorProcessor->getRGB(currentColor);
   view->setRGB(RGB);
   view->updateColorRGB(RGB);
-  slidersController->connectRGB();
+  connectRGB();
 }
 
 // ===== red =====
@@ -100,11 +125,11 @@ void MainController::changeCMYK(int pos, int val){
   }
   currentColor.setCmyk(c, m, y, k);
   
-  slidersController->disconnectCMYK();
+  disconnectCMYK();
   QString CMYK=colorProcessor->getCMYK(currentColor);
   view->setCMYK(CMYK);
   view->updateColorCMYK(CMYK);
-  slidersController->connectCMYK();
+  connectCMYK();
 }
 
 // ===== cyan =====

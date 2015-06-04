@@ -44,6 +44,7 @@ private:
   void addSlidersActions();
   void init();
     
+  void updateSliders();
   void status(QString msg);
 
   void correctFields();
@@ -85,7 +86,6 @@ private slots:
   void updateColorText(QColor color);
   void updateColorFinished();
 
-  
   void copyHSV();
   void copyRGB();
   void copyCMYK();

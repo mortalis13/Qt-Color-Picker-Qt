@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #include <QPainter>
-#include <QPalette>
 
 #include "Widgets/ColorWidgets/hselector.h"
 
@@ -14,16 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
   colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
-  
-  slidersController=new SlidersController();
-  
-  slidersWindow=new Sliders(slidersController, this);
-  slidersController->setView(slidersWindow);
-  
-  mainController=new MainController(ui->hSelector, ui->svSelector, colorProcessor, slidersController, this);
+  mainController=new MainController(ui->hSelector, ui->svSelector, colorProcessor, this);
 
   addActions();
-  addSlidersActions();
   init();
 }
 
@@ -133,7 +124,22 @@ void MainWindow::middleClick(QMouseEvent* e){
   mouseReleaseEvent(e);
 }
 
+void MainWindow::updateSliders(){
+  ui->hSelector->reupdateColor();
+  ui->svSelector->reupdateColor();
+  ui->colorSample->reupdateColor();
+}
+
 void MainWindow::openSliders(){
+  slidersController=new SlidersController();
+  slidersWindow=new Sliders(slidersController, this);
+  
+  slidersController->setView(slidersWindow);
+  mainController->addSlidersController(slidersController);
+  
+  addSlidersActions();
+  updateSliders();
+  
   int corrX=frameGeometry().width()-width();
 
   int sx=x();

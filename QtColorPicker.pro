@@ -16,6 +16,7 @@ SOURCES += main.cpp\
     Views/mainwindow.cpp \
     Views/sliders.cpp \
 \
+    Widgets/ColorWidgets/colorwidget.cpp \
     Widgets/ColorWidgets/colorsample.cpp \
     Widgets/ColorWidgets/hselector.cpp \
     Widgets/ColorWidgets/svselector.cpp \
@@ -39,6 +40,7 @@ SOURCES += main.cpp\
 HEADERS  += Views/mainwindow.h \
     Views/sliders.h \
 \
+    Widgets/ColorWidgets/colorwidget.h \
     Widgets/ColorWidgets/colorsample.h \
     Widgets/ColorWidgets/hselector.h \
     Widgets/ColorWidgets/svselector.h \

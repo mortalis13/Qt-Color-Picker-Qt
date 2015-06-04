@@ -7,19 +7,16 @@
 #include "Service/services.h"
 
 
-// --------------------------------------------- consts ---------------------------------------------
+// ----------------------------------------------- consts -----------------------------------------------
 
-const int border=2;
-const int borderRadius=10;
-const QColor defaultBorderColor(80,80,80,200);
+const QColor defaultBorderColor=QColor(80,80,80,200);
 
 
 // ----------------------------------------------------------------------------------------------------
 
-ColorSample::ColorSample(QWidget *parent) :
-  QWidget(parent)
+ColorSample::ColorSample(QWidget *parent) : ColorWidget(parent)
 {
-  color.setHsv(0, 255, 255);
+  color.setHsv(0, maxSV, maxSV);
   borderColor=defaultBorderColor;
 }
 
@@ -83,15 +80,14 @@ void ColorSample::changeColor(QColor color)
   update();
 }
 
+void ColorSample::reupdateColor()
+{
+  emit colorChanged(color);
+}
+
 // --------------------------------------------- service ---------------------------------------------
 
 void ColorSample::drawBorder(QPainter& p){
   QRectF rectangle(0, 0, width(), height());
   Services::drawInnerRoundRect(p, rectangle, border, borderRadius, borderColor);
-}
-
-// --------------------------------------------- set/get ---------------------------------------------
-
-QColor ColorSample::getColor(){
-  return color;
 }
