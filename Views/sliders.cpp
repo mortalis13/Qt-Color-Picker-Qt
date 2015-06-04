@@ -85,6 +85,22 @@ void Sliders::addActions(){
   connect( this, SIGNAL(ctrlReleased()), ui->sSlider, SLOT(ctrlReleased()) );
   connect( this, SIGNAL(ctrlPressed()), ui->vSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->vSlider, SLOT(ctrlReleased()) );
+  
+  connect( this, SIGNAL(ctrlPressed()), ui->rSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->rSlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->gSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->gSlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->bSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->bSlider, SLOT(ctrlReleased()) );
+  
+  connect( this, SIGNAL(ctrlPressed()), ui->cSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->cSlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->mSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->mSlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->ySlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->ySlider, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->kSlider, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->kSlider, SLOT(ctrlReleased()) );
 }
 
 void Sliders::addShortcuts(){

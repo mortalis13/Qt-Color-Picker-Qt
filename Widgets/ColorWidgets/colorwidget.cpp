@@ -12,7 +12,9 @@
 ColorWidget::ColorWidget(QWidget *parent) : QWidget(parent) {
   selectorDrawn=false;
   middlePresed=false;
+  
   shiftHeld=false;
+  ctrlHeld=false;
  
   pointerY=0;
   
@@ -81,6 +83,14 @@ void ColorWidget::shiftPressed(){
 
 void ColorWidget::shiftReleased(){
   shiftHeld=false;
+}
+
+void ColorWidget::ctrlPressed(){
+  ctrlHeld=true;
+}
+
+void ColorWidget::ctrlReleased(){
+  ctrlHeld=false;
 }
 
 // ---------------------------------------------- other ----------------------------------------------

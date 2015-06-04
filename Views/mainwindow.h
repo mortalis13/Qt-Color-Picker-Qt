@@ -84,6 +84,8 @@ signals:
   void mouseReleasedOnWindow();
   void shiftPressed();
   void shiftReleased();
+  void ctrlPressed();
+  void ctrlReleased();
 
 public slots:
   void updateColorHSV(QString HSV);

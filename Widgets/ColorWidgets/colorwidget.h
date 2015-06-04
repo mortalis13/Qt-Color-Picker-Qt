@@ -51,8 +51,9 @@ protected:
   
 protected:  
   bool middlePresed;
-  bool shiftHeld;
   bool selectorDrawn;
+  bool shiftHeld;
+  bool ctrlHeld;
   
   QPixmap hSelectorPixmap;
   QImage hueLayerImage;
@@ -87,6 +88,8 @@ signals:
 public slots:
   void shiftPressed();
   void shiftReleased();
+  void ctrlPressed();
+  void ctrlReleased();
   
   
 };

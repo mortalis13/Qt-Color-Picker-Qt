@@ -39,8 +39,8 @@ private:
   void drawPointer(QPainter &p);
   void correctPointer();
   void movePointer(int y);
-  void incPointer();
-  void decPointer();
+  void incPointer(int val);
+  void decPointer(int val);
   
   void drawBorder(QPainter& p);
   

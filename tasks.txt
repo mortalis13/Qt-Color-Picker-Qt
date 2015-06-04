@@ -7,7 +7,6 @@
 - text fields scroll
 - text with commas (process, copy)
 - add swatches/color combo box (list)
-- ctrl+scroll to inc/dec by 10 
 - hint (value) on slider/selector hover
 - ctrl+tab to tab on text fields
 
@@ -19,6 +18,7 @@
 # - drag by any point
 # - paste validation
 # - hex ffffff => hue -1
+# - ctrl+scroll to inc/dec by 10 
 
 # - esc
 # - field shortcuts

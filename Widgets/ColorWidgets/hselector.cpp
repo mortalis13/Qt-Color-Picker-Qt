@@ -78,8 +78,12 @@ void HSelector::mouseReleaseEvent(QMouseEvent *e)
 void HSelector::wheelEvent(QWheelEvent *e)
 {
   QPoint p=e->angleDelta();
-  if(p.y()<0) incPointer();
-  if(p.y()>0) decPointer();
+  
+  int val=1;
+  if(ctrlHeld) val=10;
+  
+  if(p.y()<0) incPointer(val);
+  if(p.y()>0) decPointer(val);
 
   updateColor();
   e->accept();
@@ -99,12 +103,12 @@ void HSelector::correctPointer(){
   pointerY = qMin( maxPointerY, pointerY );
 }
 
-void HSelector::incPointer(){
-  movePointer(pointerY+1);
+void HSelector::incPointer(int val){
+  movePointer(pointerY+val);
 }
 
-void HSelector::decPointer(){
-  movePointer(pointerY-1);
+void HSelector::decPointer(int val){
+  movePointer(pointerY-val);
 }
 
 void HSelector::movePointer(int y){

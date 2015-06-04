@@ -75,14 +75,17 @@ void SVSelector::wheelEvent(QWheelEvent *e)
 {
   QPoint p=e->angleDelta();
   int y=p.y();
+  
+  int val=1;
+  if(ctrlHeld) val=10;
 
   if(shiftHeld){
-    if(y>0) incPointerX();
-    if(y<0) decPointerX();
+    if(y>0) incPointerX(val);
+    if(y<0) decPointerX(val);
   }
   else{
-    if(y<0) incPointerY();
-    if(y>0) decPointerY();
+    if(y<0) incPointerY(val);
+    if(y>0) decPointerY(val);
   }
 
   updateColor();
@@ -97,20 +100,20 @@ void SVSelector::drawPointer(QPainter& p){
   drawCircle(p);
 }
 
-void SVSelector::incPointerX(){
-  movePointer(pointerX+1, pointerY);
+void SVSelector::incPointerX(int val){
+  movePointer(pointerX+val, pointerY);
 }
 
-void SVSelector::decPointerX(){
-  movePointer(pointerX-1, pointerY);
+void SVSelector::decPointerX(int val){
+  movePointer(pointerX-val, pointerY);
 }
 
-void SVSelector::incPointerY(){
-  movePointer(pointerX, pointerY+1);
+void SVSelector::incPointerY(int val){
+  movePointer(pointerX, pointerY+val);
 }
 
-void SVSelector::decPointerY(){
-  movePointer(pointerX, pointerY-1);
+void SVSelector::decPointerY(int val){
+  movePointer(pointerX, pointerY-val);
 }
 
 void SVSelector::correctPointer(){

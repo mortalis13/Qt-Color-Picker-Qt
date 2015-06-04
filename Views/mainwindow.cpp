@@ -82,6 +82,11 @@ void MainWindow::addActions(){
   connect( this, SIGNAL(mouseReleasedOnWindow()), ui->colorSample, SLOT(mouseReleasedOnWindow()) );
   connect( this, SIGNAL(shiftPressed()), ui->svSelector, SLOT(shiftPressed()) );
   connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
+  
+  connect( this, SIGNAL(ctrlPressed()), ui->svSelector, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->svSelector, SLOT(ctrlReleased()) );
+  connect( this, SIGNAL(ctrlPressed()), ui->hSelector, SLOT(ctrlPressed()) );
+  connect( this, SIGNAL(ctrlReleased()), ui->hSelector, SLOT(ctrlReleased()) );
 
   // connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 }
@@ -416,6 +421,9 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
   if(key == Qt::Key_Shift){
     emit shiftPressed();
   }
+  if(key == Qt::Key_Control){
+    emit ctrlPressed();
+  }
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e)
@@ -423,5 +431,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
   int key=e->key();
   if(key == Qt::Key_Shift){
     emit shiftReleased();
+  }
+  if(key == Qt::Key_Control){
+    emit ctrlReleased();
   }
 }
