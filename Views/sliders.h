@@ -43,6 +43,7 @@ protected:
 
 private:
   void addActions();
+  void addShortcuts();
   void init();
   
 signals:

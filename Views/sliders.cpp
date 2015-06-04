@@ -2,6 +2,8 @@
 #include "ui_sliders.h"
 
 #include <QDebug>
+#include <QShortcut>
+
 
 Sliders::Sliders(SlidersController *slidersController, QWidget *parent) :
   QMainWindow(parent),
@@ -12,6 +14,7 @@ Sliders::Sliders(SlidersController *slidersController, QWidget *parent) :
   this->slidersController=slidersController;
 
   addActions();
+  addShortcuts();
   init();
 }
 
@@ -21,6 +24,8 @@ Sliders::~Sliders()
 }
 
 void Sliders::init(){
+  // setAttribute(Qt::WA_DeleteOnClose);
+  
   ui->hSlider->setType(HSVSlider::Hue);
   ui->sSlider->setType(HSVSlider::Saturation);
   ui->vSlider->setType(HSVSlider::Value);
@@ -80,6 +85,11 @@ void Sliders::addActions(){
   connect( this, SIGNAL(ctrlReleased()), ui->sSlider, SLOT(ctrlReleased()) );
   connect( this, SIGNAL(ctrlPressed()), ui->vSlider, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->vSlider, SLOT(ctrlReleased()) );
+}
+
+void Sliders::addShortcuts(){
+  QShortcut *quit=new QShortcut(QKeySequence("Esc"), this);
+  connect( quit, SIGNAL(activated()), this, SLOT(close()) );
 }
 
 

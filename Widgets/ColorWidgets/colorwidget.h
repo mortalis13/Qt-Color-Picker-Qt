@@ -12,6 +12,10 @@ class ColorWidget : public QWidget
 protected:
   const int maxH=360;
   const int maxSV=255;
+  const qreal maxF=1.0;
+  
+  const qreal ratio=1.0/maxH;
+  
 
   const int border=2;
   const int borderRadius=10;
@@ -55,6 +59,8 @@ protected:
   QColor color;
   
   int h,s,v;
+  qreal hf,sf,vf;
+  
   int pointerX;
   int pointerY;
     

@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSignalMapper>
+
+#include <QLineEdit>
 
 #include "Models/colorprocessor.h"
 
@@ -21,8 +24,22 @@ class MainWindow : public QMainWindow
   Q_OBJECT
 
 private:
+  QSignalMapper *mapper;
+  
+  Ui::MainWindow *ui;
+  
   SlidersController *slidersController;
   MainController *mainController;
+  
+  ColorProcessor *colorProcessor;
+  Sliders* slidersWindow;
+  
+  QString editingField;
+
+  bool mouseDown;
+  bool mouseMoved;
+  int mx, my;
+  
 
 public:
   explicit MainWindow(QWidget *parent = 0);
@@ -41,10 +58,12 @@ public:
 
 private:
   void addActions();
+  void addShortcuts();
   void addSlidersActions();
   void init();
     
   void updateSliders();
+  void stickSliders();
   void status(QString msg);
 
   void correctFields();
@@ -59,20 +78,10 @@ protected:
   void keyPressEvent(QKeyEvent *e);
   void keyReleaseEvent(QKeyEvent *e);
   
-private:
-  Ui::MainWindow *ui;
-  QString editingField;
-
-  ColorProcessor *colorProcessor;
-  Sliders* slidersWindow;
-
-  bool mouseDown;
-  bool mouseMoved;
-  int mx, my;
-  
 
 signals:
   void mouseMovedOnWindow();
+  void mouseReleasedOnWindow();
   void shiftPressed();
   void shiftReleased();
 
@@ -83,6 +92,8 @@ public slots:
   void updateColorHex(QString Hex);
 
 private slots:
+  void selectField(QWidget* w);
+  
   void updateColorText(QColor color);
   void updateColorFinished();
 
@@ -95,6 +106,9 @@ private slots:
 
   void middleClick(QMouseEvent *e);
   void hsvMiddlePressed(QMouseEvent *e);
+  
+  void toggleSliders();
+  void closeSliders();
   void openSliders();
   
   

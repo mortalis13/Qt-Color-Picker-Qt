@@ -25,10 +25,12 @@ signals:
   void colorChanged(QColor color);
   void samplePressedLeft();
   void samplePressedRight();
+  void samplePressedMiddle();
 
 public slots:
   void changeColor(QColor color);
   void mouseMovedOnWindow();
+  void mouseReleasedOnWindow();
 
 protected:
   void paintEvent(QPaintEvent *event);

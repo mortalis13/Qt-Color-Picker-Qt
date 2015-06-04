@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QPainter>
+#include <QShortcut>
 
 #include "Widgets/ColorWidgets/hselector.h"
 
@@ -13,8 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
   colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
   mainController=new MainController(ui->hSelector, ui->svSelector, colorProcessor, this);
+  
+  slidersWindow=NULL;
 
   addActions();
+  addShortcuts();
   init();
 }
 
@@ -24,10 +28,12 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::init(){
+  QApplication::setStyle("fusion");
+  
   mx=0;
   my=0;
-
-  QApplication::setStyle("fusion");
+  
+  mouseDown=false;
 
   QMargins margins(5,0,0,0);
 
@@ -67,15 +73,17 @@ void MainWindow::addActions(){
 
   connect( ui->colorSample, SIGNAL(samplePressedLeft()), this, SLOT(copyHex()) );
   connect( ui->colorSample, SIGNAL(samplePressedRight()), this, SLOT(copyHexHash()) );
+  connect( ui->colorSample, SIGNAL(samplePressedMiddle()), this, SLOT(toggleSliders()) );
 
   connect( ui->hSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
   connect( ui->svSelector, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(hsvMiddlePressed(QMouseEvent*)) );
 
   connect( this, SIGNAL(mouseMovedOnWindow()), ui->colorSample, SLOT(mouseMovedOnWindow()) );
+  connect( this, SIGNAL(mouseReleasedOnWindow()), ui->colorSample, SLOT(mouseReleasedOnWindow()) );
   connect( this, SIGNAL(shiftPressed()), ui->svSelector, SLOT(shiftPressed()) );
   connect( this, SIGNAL(shiftReleased()), ui->svSelector, SLOT(shiftReleased()) );
 
-  connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
+  // connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 }
 
 void MainWindow::addSlidersActions(){
@@ -109,6 +117,48 @@ void MainWindow::addSlidersActions(){
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersController, SIGNAL(CMYKChanged(QColor)) );
 }
 
+void MainWindow::addShortcuts(){
+  QShortcut* HSV=new QShortcut(QKeySequence("Ctrl+H"), this);
+  QShortcut* RGB=new QShortcut(QKeySequence("Ctrl+R"), this);
+  QShortcut* CMYK=new QShortcut(QKeySequence("Ctrl+M"), this);
+  QShortcut* Hex=new QShortcut(QKeySequence("Ctrl+E"), this);
+  
+  mapper=new QSignalMapper(this);
+  mapper->setMapping(HSV, ui->leHSV);
+  mapper->setMapping(RGB, ui->leRGB);
+  mapper->setMapping(CMYK, ui->leCMYK);
+  mapper->setMapping(Hex, ui->leHex);
+  
+  connect( HSV, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( RGB, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( CMYK, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( Hex, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( mapper, SIGNAL(mapped(QWidget*)), this, SLOT(selectField(QWidget*)) );
+  
+  
+  QShortcut* HSV_Button=new QShortcut(QKeySequence("Ctrl+Shift+H"), this);
+  connect( HSV_Button, SIGNAL(activated()), ui->bHSV, SLOT(click()) );
+  
+  QShortcut* RGB_Button=new QShortcut(QKeySequence("Ctrl+Shift+R"), this);
+  connect( RGB_Button, SIGNAL(activated()), ui->bRGB, SLOT(click()) );
+  
+  QShortcut* CMYK_Button=new QShortcut(QKeySequence("Ctrl+Shift+M"), this);
+  connect( CMYK_Button, SIGNAL(activated()), ui->bCMYK, SLOT(click()) );
+  
+  QShortcut* Hex_Button=new QShortcut(QKeySequence("Ctrl+Shift+E"), this);
+  connect( Hex_Button, SIGNAL(activated()), ui->bHex, SLOT(click()) );
+
+  
+  QShortcut *quit=new QShortcut(QKeySequence("Esc"), this);
+  connect( quit, SIGNAL(activated()), this, SLOT(close()) );
+}
+
+void MainWindow::selectField(QWidget* w){
+  QLineEdit* field=(QLineEdit*) w;
+  field->setFocus();
+  field->selectAll();
+}
+
 
 // --------------------------------------------- slots ---------------------------------------------
 
@@ -130,16 +180,7 @@ void MainWindow::updateSliders(){
   ui->colorSample->reupdateColor();
 }
 
-void MainWindow::openSliders(){
-  slidersController=new SlidersController();
-  slidersWindow=new Sliders(slidersController, this);
-  
-  slidersController->setView(slidersWindow);
-  mainController->addSlidersController(slidersController);
-  
-  addSlidersActions();
-  updateSliders();
-  
+void MainWindow::stickSliders(){
   int corrX=frameGeometry().width()-width();
 
   int sx=x();
@@ -149,6 +190,33 @@ void MainWindow::openSliders(){
   
   slidersWindow->move(sx, sy);
   slidersWindow->show();
+}
+
+void MainWindow::toggleSliders(){
+  if(slidersWindow==NULL || !slidersWindow->isVisible())
+    openSliders();
+  else
+    closeSliders();
+}
+
+void MainWindow::closeSliders(){
+  slidersWindow->hide();
+}
+
+void MainWindow::openSliders(){
+  if(slidersWindow==NULL){
+    slidersController=new SlidersController();
+    slidersWindow=new Sliders(slidersController, this);
+    
+    slidersController->setView(slidersWindow);
+    mainController->addSlidersController(slidersController);
+    
+    addSlidersActions();
+    updateSliders();
+  }
+  
+  if(slidersWindow!=NULL)
+    stickSliders();
 }
 
 
@@ -319,6 +387,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 {
   mouseDown=false;
   if(e->button()==Qt::MiddleButton && !mouseMoved) close();
+  emit mouseReleasedOnWindow();
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *e)

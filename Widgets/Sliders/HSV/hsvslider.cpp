@@ -57,8 +57,9 @@ void HSVSlider::paintComponent(){
   sliderPixmap=QPixmap(sliderW, sliderH);
   QPainter tempP( &sliderPixmap );
 
-  QPointF p1( sliderX, sliderH/2 );
-  QPointF p2( sliderX+sliderW, sliderH/2 );
+  QPointF p1( sliderX, 0 );
+  QPointF p2( sliderX+sliderW, 0 );
+  
   QLinearGradient grad(p1, p2);
   
   switch(sliderType){

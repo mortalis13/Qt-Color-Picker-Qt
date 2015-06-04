@@ -14,29 +14,31 @@ HSelector::HSelector(QWidget *parent) : ColorWidget(parent) {
 
 void HSelector::paintEvent(QPaintEvent *event)
 {
-  QColor color;
-
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
 
-  barSize=height()-2*border-1;
+  barSize=height()-2*border;
   
   if(!selectorDrawn){
-    hSelectorPixmap=QPixmap(barWidth, barSize+1);
+    hSelectorPixmap=QPixmap(barWidth, barSize);
     QPainter tempP(&hSelectorPixmap);
-
-    for(int h=0; h<=maxH; ++h){
-      color.setHsv(h, s, v);
-      tempP.setPen(color);
-
-      qreal y = h * ( (qreal) barSize/maxH );
-      tempP.drawLine( QPointF(0, y), QPointF(barWidth, y) );          // for expanding size, needs rework for mapping Y to Hue
-//      tempP.drawLine(0, h, barWidth, h);
+    
+    QPointF p1( 0, selectorY );
+    QPointF p2( 0, height()-border );
+    QLinearGradient grad(p1, p2);
+    
+    QColor color;
+    for(qreal hs=0; hs<1.0; hs+=ratio){
+      color.setHsvF(hs, sf, vf);
+      grad.setColorAt(hs, color);
     }
+    
+    tempP.setPen(Qt::NoPen);
+    tempP.setBrush( QBrush(grad) );
+    tempP.drawRect(0, 0, barWidth, barSize);
     
     selectorDrawn=true;
   }
-  
   p.drawPixmap(selectorX, selectorY, hSelectorPixmap);
 
   drawPointer(p);
@@ -111,7 +113,7 @@ void HSelector::movePointer(int y){
 }
 
 void HSelector::drawBorder(QPainter& p){
-  QRectF rectangle( selectorX, selectorX, barWidth, barSize+1 );                               // set inner rect coordinates (the border will be outer)
+  QRectF rectangle( selectorX, selectorX, barWidth, barSize );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 

@@ -1,5 +1,4 @@
 
-
 - press mid button on text to select all or to select group
 - [hex] inc/dec each hex digit (not group)
 - saturation/value pointers on the sides of selector
@@ -8,7 +7,7 @@
 - text fields scroll
 - text with commas (process, copy)
 - add swatches/color combo box (list)
-- ctrl+scroll to inc/dec by 10
+- ctrl+scroll to inc/dec by 10 
 - hint (value) on slider/selector hover
 - ctrl+tab to tab on text fields
 
@@ -21,8 +20,9 @@
 # - paste validation
 # - hex ffffff => hue -1
 
-- esc
-- field shortcuts
-- button shortcuts
-- change background
-- draw gradient on hue selector instead of lines
+# - esc
+# - field shortcuts
+# - button shortcuts
+# - change background
+# - draw gradient on hue selector instead of lines
+# - startup window position

@@ -37,19 +37,29 @@ void ColorSample::paintEvent(QPaintEvent *event)
 
 void ColorSample::mouseReleaseEvent(QMouseEvent *e)
 {
+  // if(e->button()==Qt::MiddleButton){
+  //   emit samplePressedMiddle();
+  //   e->accept();
+  //   return;
+  // }
+    
   if(!mouseMoving){
-    switch(e->button()){
+    switch( e->button() ){
     case Qt::LeftButton:
       emit samplePressedLeft();
       break;
     case Qt::RightButton:
       emit samplePressedRight();
       break;
+    case Qt::MiddleButton:
+      emit samplePressedMiddle();
+      e->accept();
+      return;
     default:
       return;
     }
   }
-
+  
   e->ignore();
   mouseMoving=false;
 }
@@ -73,6 +83,10 @@ void ColorSample::leaveEvent(QEvent *e)
 
 void ColorSample::mouseMovedOnWindow(){
   mouseMoving=true;
+}
+
+void ColorSample::mouseReleasedOnWindow(){
+  mouseMoving=false;
 }
 
 void ColorSample::changeColor(QColor color)

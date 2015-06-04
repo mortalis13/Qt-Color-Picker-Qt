@@ -1,13 +1,27 @@
 #include <QApplication>
+#include <QDesktopWidget>
 
 #include "Views/mainwindow.h"
+
+
+void setPosition(MainWindow &view){
+  QDesktopWidget *w=QApplication::desktop();
+  int primary=w->primaryScreen();
+  QRect dim=w->screenGeometry(1);
+
+  int mx=dim.width()/2 - view.width()/2;
+  int my=30;
+
+  view.move(view.x(), my);
+}
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  
   MainWindow view;
+
   view.show();
+  setPosition(view);
 
   return a.exec();
 }
