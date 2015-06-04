@@ -14,6 +14,7 @@ Sliders::Sliders(SlidersController *slidersController, QWidget *parent) :
   this->slidersController=slidersController;
 
   addActions();
+  addKeyActions();
   addShortcuts();
   init();
 }
@@ -77,6 +78,21 @@ void Sliders::addActions(){
   connect( ui->spMagenta, SIGNAL(valueChanged(int)), slidersController, SLOT(changeMagenta(int)) );
   connect( ui->spYellow, SIGNAL(valueChanged(int)), slidersController, SLOT(changeYellow(int)) );
   connect( ui->spBlack, SIGNAL(valueChanged(int)), slidersController, SLOT(changeBlack(int)) );
+}
+
+void Sliders::addKeyActions(){
+  connect( ui->hSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->sSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->vSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  
+  connect( ui->rSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->gSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->bSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+
+  connect( ui->cSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->mSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->ySlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
+  connect( ui->kSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
   
   
   connect( this, SIGNAL(ctrlPressed()), ui->hSlider, SLOT(ctrlPressed()) );
@@ -109,6 +125,17 @@ void Sliders::addShortcuts(){
 }
 
 
+// --------------------------------------------- slots ---------------------------------------------
+
+void Sliders::sliderMiddlePressed(QMouseEvent* e){
+  mouseDown=true;
+  mouseMoved=false;
+
+  mx=e->x();
+  my=e->y();
+}
+
+
 // --------------------------------------------- events ---------------------------------------------
 
 void Sliders::mousePressEvent(QMouseEvent *e)
@@ -130,8 +157,6 @@ void Sliders::mouseMoveEvent(QMouseEvent *e)
 {
   if(mouseDown){
     mouseMoved=true;
-
-//    emit mouseMovedOnWindow();
 
     int gx=e->globalX();
     int gy=e->globalY();

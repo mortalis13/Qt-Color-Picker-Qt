@@ -43,15 +43,21 @@ protected:
 
 private:
   void addActions();
+  void addKeyActions();
   void addShortcuts();
   void init();
+  
   
 signals:
 
   void ctrlPressed();
   void ctrlReleased();
   
-
+  
+private slots:
+  void sliderMiddlePressed(QMouseEvent* e);
+  
+  
 };
 
 #endif // SLIDERS_H

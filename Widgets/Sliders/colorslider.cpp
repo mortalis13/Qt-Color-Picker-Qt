@@ -49,6 +49,8 @@ void ColorSlider::mousePressEvent(QMouseEvent *e)
 {
   if( e->button() == Qt::MiddleButton ){
     middlePresed=true;
+    QMouseEvent* mouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
+    emit middlePressedSignal(mouseEvent);
   }
   else{
     middlePresed=false;
@@ -70,6 +72,7 @@ void ColorSlider::mouseMoveEvent(QMouseEvent *e)
 
 void ColorSlider::mouseReleaseEvent(QMouseEvent *e)
 {
+  e->ignore();
 }
 
 void ColorSlider::wheelEvent(QWheelEvent *e)
