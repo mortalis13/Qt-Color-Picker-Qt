@@ -1,17 +1,15 @@
-#include "Views/mainwindow.h"
-
 #include <QApplication>
+
+#include "Views/mainwindow.h"
+#include "Models/colormodel.h"
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  MainWindow w;
-  w.show();
+  
+  MainWindow view;
+  view.show();
 
-//  QString style;
-//  style="fusion";
-
-//  QApplication::setStyle(style);
   return a.exec();
 }
 

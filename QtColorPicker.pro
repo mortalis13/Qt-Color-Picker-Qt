@@ -31,6 +31,9 @@ SOURCES += main.cpp\
     Service/vars.cpp \
 \
     Models/colorprocessor.cpp \
+    Models/colormodel.cpp \
+    Models/sliderscolormodel.cpp \
+    Controllers/sliderscontroller.cpp
 
 
 HEADERS  += Views/mainwindow.h \
@@ -51,6 +54,9 @@ HEADERS  += Views/mainwindow.h \
     Service/vars.h \
 \
     Models/colorprocessor.h \
+    Models/colormodel.h \
+    Models/sliderscolormodel.h \
+    Controllers/sliderscontroller.h
     
     
 FORMS    += Views/mainwindow.ui \

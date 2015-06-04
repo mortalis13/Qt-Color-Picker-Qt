@@ -14,7 +14,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
   colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
-  slidersWindow=new Sliders(this);
+  
+  slidersColorModel=new SlidersColorModel();
+  slidersController=new SlidersController(slidersColorModel);
+  
+  slidersWindow=new Sliders(slidersController, this);
+  
+  slidersColorModel->setView(slidersWindow);
+//  slidersWindow->setModel(slidersColorModel);
+  
+  colorModel=new ColorModel(ui->hSelector, ui->svSelector, colorProcessor, slidersColorModel, this);
 
   addActions();
   addSlidersActions();
@@ -84,39 +93,32 @@ void MainWindow::addActions(){
 void MainWindow::addSlidersActions(){
   // === HSV ===
   
-  connect( slidersWindow, SIGNAL(hueChanged(QColor)), this, SLOT(changeHue(QColor)) );
-  connect( slidersWindow, SIGNAL(saturationChanged(QColor)), this, SLOT(changeSaturation(QColor)) );
-  connect( slidersWindow, SIGNAL(valueChanged(QColor)), this, SLOT(changeValue(QColor)) );
+  connect( slidersColorModel, SIGNAL(hueChanged(QColor)), colorModel, SLOT(changeHue(QColor)) );
+  connect( slidersColorModel, SIGNAL(saturationChanged(QColor)), colorModel, SLOT(changeSaturation(QColor)) );
+  connect( slidersColorModel, SIGNAL(valueChanged(QColor)), colorModel, SLOT(changeValue(QColor)) );
   
-  connect( ui->hSelector, SIGNAL(hueChanged(QColor)), slidersWindow, SLOT(changeHueFromSelector(QColor)) );
-  connect( ui->svSelector, SIGNAL(saturationChanged(QColor)), slidersWindow, SLOT(changeSaturationFromSelector(QColor)) );
-  connect( ui->svSelector, SIGNAL(valueChanged(QColor)), slidersWindow, SLOT(changeValueFromSelector(QColor)) );
-  
-  // connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeHSVFromSelector(QColor)) );
+  connect( ui->hSelector, SIGNAL(hueChanged(QColor)), colorModel, SIGNAL(hueChanged(QColor)) );
+  connect( ui->svSelector, SIGNAL(saturationChanged(QColor)), colorModel, SIGNAL(saturationChanged(QColor)) );
+  connect( ui->svSelector, SIGNAL(valueChanged(QColor)), colorModel, SIGNAL(valueChanged(QColor)) );
   
   
   // === RGB ===
   
-  connect( slidersWindow, SIGNAL(redChanged(QColor)), this, SLOT(changeRed(QColor)) );
-  connect( slidersWindow, SIGNAL(greenChanged(QColor)), this, SLOT(changeGreen(QColor)) );
-  connect( slidersWindow, SIGNAL(blueChanged(QColor)), this, SLOT(changeBlue(QColor)) );
+  connect( slidersColorModel, SIGNAL(redChanged(QColor)), colorModel, SLOT(changeRed(QColor)) );
+  connect( slidersColorModel, SIGNAL(greenChanged(QColor)), colorModel, SLOT(changeGreen(QColor)) );
+  connect( slidersColorModel, SIGNAL(blueChanged(QColor)), colorModel, SLOT(changeBlue(QColor)) );
   
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeRedFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeGreenFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeBlueFromSelector(QColor)) );
+  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), colorModel, SIGNAL(RGBChanged(QColor)) );
   
   
   // === CMYK ===
   
-  connect( slidersWindow, SIGNAL(cyanChanged(QColor)), this, SLOT(changeCyan(QColor)) );
-  connect( slidersWindow, SIGNAL(magentaChanged(QColor)), this, SLOT(changeMagenta(QColor)) );
-  connect( slidersWindow, SIGNAL(yellowChanged(QColor)), this, SLOT(changeYellow(QColor)) );
-  connect( slidersWindow, SIGNAL(blackChanged(QColor)), this, SLOT(changeBlack(QColor)) );
+  connect( slidersColorModel, SIGNAL(cyanChanged(QColor)), colorModel, SLOT(changeCyan(QColor)) );
+  connect( slidersColorModel, SIGNAL(magentaChanged(QColor)), colorModel, SLOT(changeMagenta(QColor)) );
+  connect( slidersColorModel, SIGNAL(yellowChanged(QColor)), colorModel, SLOT(changeYellow(QColor)) );
+  connect( slidersColorModel, SIGNAL(blackChanged(QColor)), colorModel, SLOT(changeBlack(QColor)) );
   
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeCyanFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeMagentaFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeYellowFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeBlackFromSelector(QColor)) );
+  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), colorModel, SIGNAL(CMYKChanged(QColor)) );
 }
 
 
@@ -144,147 +146,6 @@ void MainWindow::openSliders(){
   
   slidersWindow->move(sx, sy);
   slidersWindow->show();
-}
-
-
-// --------------------------------------------- HSV ---------------------------------------------
-
-// ===== hue =====
-void MainWindow::changeHue(QColor color){
-  ui->hSelector->setH(color);
-}
-
-// ===== saturation =====
-void MainWindow::changeSaturation(QColor color){
-  ui->svSelector->setS(color);
-}
-
-// ===== value =====
-void MainWindow::changeValue(QColor color){
-  ui->svSelector->setV(color);
-}
-
-
-// --------------------------------------------- RGB ---------------------------------------------
-
-void MainWindow::connectColorSampleRGB(){
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeRedFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeGreenFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeBlueFromSelector(QColor)) );
-}
-
-void MainWindow::disconnectColorSampleRGB(){
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeRedFromSelector(QColor)) );
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeGreenFromSelector(QColor)) );
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeBlueFromSelector(QColor)) );
-  
-  // disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, 0 );
-}
-
-void MainWindow::changeRGB(int pos, int val){
-  QString RGB_Text=ui->leRGB->text();
-  QColor currentColor=colorProcessor->getColorRGB(RGB_Text);
-  
-  switch(pos){
-    case 0:
-      currentColor.setRed(val);
-      break;  
-    case 1:
-      currentColor.setGreen(val);
-      break;  
-    case 2:
-      currentColor.setBlue(val);
-      break;  
-  }
-  
-  disconnectColorSampleRGB();
-  QString RGB=colorProcessor->getRGB(currentColor);
-  setRGB(RGB);
-  updateColorRGB(RGB);
-  connectColorSampleRGB();
-}
-
-// ===== red =====
-void MainWindow::changeRed(QColor color){
-  changeRGB(0, color.red());
-}
-
-// ===== green =====
-void MainWindow::changeGreen(QColor color){
-  changeRGB(1, color.green());
-}
-
-// ===== blue =====
-void MainWindow::changeBlue(QColor color){
-  changeRGB(2, color.blue());
-}
-
-
-// --------------------------------------------- CMYK ---------------------------------------------
-
-void MainWindow::connectColorSampleCMYK(){
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeCyanFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeMagentaFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeYellowFromSelector(QColor)) );
-  connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeBlackFromSelector(QColor)) );
-}
-
-void MainWindow::disconnectColorSampleCMYK(){
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeCyanFromSelector(QColor)) );
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeMagentaFromSelector(QColor)) );
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeYellowFromSelector(QColor)) );
-  disconnect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersWindow, SLOT(changeBlackFromSelector(QColor)) );
-}
-
-void MainWindow::changeCMYK(int pos, int val){
-  QString CMYK_Text=ui->leCMYK->text();
-  QColor currentColor=colorProcessor->getColorCMYK(CMYK_Text);
-  
-  int c=currentColor.cyan();
-  int m=currentColor.magenta();
-  int y=currentColor.yellow();
-  int k=currentColor.black();
-  
-  switch(pos){
-    case 0:
-      currentColor.setCmyk(val, m, y, k);
-      break;  
-    case 1:
-      currentColor.setCmyk(c, val, y, k);
-      break;  
-    case 2:
-      currentColor.setCmyk(c, m, val, k);
-      break;  
-    case 3:
-      currentColor.setCmyk(c, m, y, val);
-      break;  
-  }
-  
-  disconnectColorSampleCMYK();
-  QString CMYK=colorProcessor->getCMYK(currentColor);
-  setCMYK(CMYK);
-  updateColorCMYK(CMYK);
-  connectColorSampleCMYK();
-}
-
-// ===== cyan =====
-void MainWindow::changeCyan(QColor color){
-  changeCMYK(0, color.cyan());
-}
-
-// ===== magenta =====
-void MainWindow::changeMagenta(QColor color){
-  changeCMYK(1, color.magenta());
-}
-
-// ===== yellow =====
-void MainWindow::changeYellow(QColor color){
-  changeCMYK(2, color.yellow());
-}
-
-// ===== black =====
-void MainWindow::changeBlack(QColor color){
-  changeCMYK(3, color.black());
 }
 
 
@@ -389,6 +250,23 @@ void MainWindow::setCMYK(QString text){
 void MainWindow::setHex(QString text){
   if(editingField=="Hex") return;
   ui->leHex->setText(text);
+}
+
+
+QString MainWindow::getHSV(){
+  return ui->leHSV->text();
+}
+
+QString MainWindow::getRGB(){
+  return ui->leRGB->text();
+}
+
+QString MainWindow::getCMYK(){
+  return ui->leCMYK->text();
+}
+
+QString MainWindow::getHex(){
+  return ui->leHex->text();
 }
 
 // --------------------------------------------- service ---------------------------------------------
