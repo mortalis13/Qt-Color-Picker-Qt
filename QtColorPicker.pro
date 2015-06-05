@@ -14,6 +14,9 @@ TEMPLATE = app
 QMAKE_CXXFLAGS -= -Wunused-parameter
 CONFIG += c++11
 
+win32:RC_ICONS += icon.ico
+
+
 SOURCES += main.cpp\
     Views/mainwindow.cpp \
     Views/sliders.cpp \
