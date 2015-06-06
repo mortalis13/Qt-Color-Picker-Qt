@@ -54,4 +54,4 @@ The source of this library is in this [GitHub repository](https://github.com/WPN
 ## Screenshots
 
 ![QtColorPicker-main](/files/QtColorPicker-main.png)  
-![QtColorPicker-sliders.png](/files/QtColorPicker-sliders.png)
+![QtColorPicker-sliders](/files/QtColorPicker-sliders.png)
