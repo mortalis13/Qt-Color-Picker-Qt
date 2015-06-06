@@ -49,6 +49,8 @@ void HSelector::mousePressEvent(QMouseEvent *e)
 {
   if( e->button() == Qt::MiddleButton ){
     middlePresed=true;
+    e->ignore();
+    
     QMouseEvent* mouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
     emit middlePressedSignal(mouseEvent);
   }

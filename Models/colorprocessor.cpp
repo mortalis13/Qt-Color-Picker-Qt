@@ -180,15 +180,3 @@ QString ColorProcessor::pasteText(){
   
   return text;
 }
-
-// -------------------------------------------- inc/dec --------------------------------------------
-
-void ColorProcessor::incH(){
-}
-
-// -------------------------------------------- test --------------------------------------------
-
-// void ColorProcessor::updateColorFromRed(int r){
-//   QColor color=getColorRGB(RGB_Text);
-//   updateColor(color);
-// }

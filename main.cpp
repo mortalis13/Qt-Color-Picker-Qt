@@ -7,12 +7,15 @@
 void setPosition(MainWindow &view){
   QDesktopWidget *w=QApplication::desktop();
   int primary=w->primaryScreen();
-  QRect dim=w->screenGeometry(1);
+  QRect dim=w->screenGeometry(primary);
 
-  int mx=dim.width()/2 - view.width()/2;
-  int my=30;
+  int mx,my, corr=20;
 
-  view.move(view.x(), my);
+  mx=view.x();
+  mx=dim.width() - view.width() - corr;
+  my=corr;
+
+  view.move(mx, my);
 }
 
 int main(int argc, char *argv[])

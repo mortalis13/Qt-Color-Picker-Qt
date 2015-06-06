@@ -2,7 +2,6 @@
 
 #include <QPainter>
 #include <QDebug>
-#include <QEnterEvent>
 
 #include "Service/services.h"
 
@@ -37,12 +36,6 @@ void ColorSample::paintEvent(QPaintEvent *event)
 
 void ColorSample::mouseReleaseEvent(QMouseEvent *e)
 {
-  // if(e->button()==Qt::MiddleButton){
-  //   emit samplePressedMiddle();
-  //   e->accept();
-  //   return;
-  // }
-    
   if(!mouseMoving){
     switch( e->button() ){
     case Qt::LeftButton:

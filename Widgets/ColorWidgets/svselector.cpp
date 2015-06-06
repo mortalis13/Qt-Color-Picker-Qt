@@ -42,8 +42,7 @@ void SVSelector::mousePressEvent(QMouseEvent *e)
 {
   if( e->button() == Qt::MiddleButton ){
     middlePresed=true;
-    QMouseEvent* mouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
-    emit middlePressedSignal(mouseEvent);
+    e->ignore();
   }
   else{
     middlePresed=false;
@@ -176,7 +175,8 @@ void SVSelector::changeHue(QColor color)
   newColor.setHsv(h, s, v);
   emit colorChanged(newColor);
 
-  repaint();
+  update();
+  // repaint();
 }
 
 // ---------------------------------------------- set/get ----------------------------------------------
@@ -184,14 +184,20 @@ void SVSelector::changeHue(QColor color)
 void SVSelector::setS(QColor color)
 {
   s=color.saturation();
-  repaint();
+  
+  correctPointer();
+  update();
+
   updateColor();
 }
 
 void SVSelector::setV(QColor color)
 {
   v=color.value();
-  repaint();
+  
+  correctPointer();
+  update();
+
   updateColor();
 }
 
@@ -199,6 +205,8 @@ void SVSelector::setSV(int s, int v){
   this->s=s;
   this->v=v;
   
-  repaint();
+  correctPointer();
+  update();
+
   updateColor();
 }

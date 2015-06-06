@@ -10,6 +10,18 @@
     <height>693</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>693</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>693</height>
+   </size>
+  </property>
   <property name="palette">
    <palette>
     <active>
@@ -154,10 +166,22 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spHue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -230,10 +254,22 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spSaturation">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -309,10 +345,22 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spValue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -466,10 +514,22 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spRed">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -530,10 +590,22 @@
           </item>
           <item row="2" column="1">
            <widget class="QSpinBox" name="spGreen">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -590,10 +662,22 @@
           </property>
           <item row="2" column="1">
            <widget class="QSpinBox" name="spBlue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -781,10 +865,22 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spCyan">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -845,10 +941,22 @@
           </item>
           <item row="2" column="1">
            <widget class="QSpinBox" name="spMagenta">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -905,10 +1013,22 @@
           </property>
           <item row="2" column="1">
            <widget class="QSpinBox" name="spYellow">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -984,10 +1104,22 @@
           </property>
           <item row="2" column="1">
            <widget class="QSpinBox" name="spBlack">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>53</width>
               <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>53</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
