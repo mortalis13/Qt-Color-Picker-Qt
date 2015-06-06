@@ -49,3 +49,9 @@
 The program was created with [Qt 5.3.1](http://download.qt.io/official_releases/qt/5.3/5.3.1/) using MinGW compiler in [Qt Creator 3.1.2](http://download.qt.io/official_releases/qtcreator/3.1/3.1.2/).  
 The Qt libraries used for the program are taken from the **Qt 5.2.2** custom build to reduce total distribution size.  
 The source of this library is in this [GitHub repository](https://github.com/WPN-XM/qt-mini-deploy).  
+
+
+## Screenshots
+
+![QtColorPicker-main](/files/QtColorPicker-main.png)
+![QtColorPicker-sliders.png](/files/QtColorPicker-sliders.png)
