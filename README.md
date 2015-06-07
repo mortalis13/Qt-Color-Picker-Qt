@@ -53,3 +53,6 @@ The program was created with [Qt 5.3.1](http://download.qt.io/official_releases/
 
 ![QtColorPicker-main](/files/QtColorPicker-main.png)  
 ![QtColorPicker-sliders](/files/QtColorPicker-sliders.png)
+
+
+[SourceForge page](https://sourceforge.net/projects/qtcolorpicker/)
