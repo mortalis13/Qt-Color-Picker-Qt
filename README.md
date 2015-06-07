@@ -47,3 +47,9 @@
 ## Build
 
 The program was created with [Qt 5.3.1](http://download.qt.io/official_releases/qt/5.3/5.3.1/) using MinGW compiler in [Qt Creator 3.1.2](http://download.qt.io/official_releases/qtcreator/3.1/3.1.2/).
+
+
+## Screenshots
+
+![QtColorPicker-main](/files/QtColorPicker-main.png)  
+![QtColorPicker-sliders](/files/QtColorPicker-sliders.png)
