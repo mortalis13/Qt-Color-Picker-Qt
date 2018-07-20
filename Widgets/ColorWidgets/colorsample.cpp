@@ -38,19 +38,25 @@ void ColorSample::mouseReleaseEvent(QMouseEvent *e)
 {
   if(!mouseMoving){
     switch( e->button() ){
-    case Qt::LeftButton:
-      emit samplePressedLeft();
-      break;
-    case Qt::RightButton:
-      emit samplePressedRight();
-      break;
-    case Qt::MiddleButton:
-      emit samplePressedMiddle();
-      e->accept();
-      return;
-    default:
-      return;
+      case Qt::LeftButton:
+        emit samplePressedLeft();
+        break;
+      case Qt::RightButton:
+        emit samplePressedRight();
+        break;
+      case Qt::MiddleButton:
+        emit samplePressedMiddle();
+        e->accept();
+        return;
+      default:
+        return;
     }
+  }
+  
+  if (e->button() == Qt::MiddleButton) {
+    emit samplePressedMiddle();
+    e->accept();
+    return;
   }
   
   e->ignore();

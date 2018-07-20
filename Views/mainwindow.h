@@ -11,7 +11,7 @@
 #include "Controllers/sliderscontroller.h"
 #include "Controllers/maincontroller.h"
 
-#include "sliders.h"
+#include "sliderswindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +32,7 @@ private:
   MainController *mainController;
   
   ColorProcessor *colorProcessor;
-  Sliders* slidersWindow;
+  SlidersWindow* slidersWindow;
   
   QString editingField;
 
@@ -78,6 +78,7 @@ protected:
   void keyPressEvent(QKeyEvent *e);
   void keyReleaseEvent(QKeyEvent *e);
   
+  bool eventFilter(QObject *obj, QEvent *event);
 
 signals:
   void mouseMovedOnWindow();
@@ -113,6 +114,10 @@ private slots:
   void closeSliders();
   void openSliders();
   
+  void focusNextField();
+  void focusPrevField();
+  
+  void showPickerClicked();
   
 };
 

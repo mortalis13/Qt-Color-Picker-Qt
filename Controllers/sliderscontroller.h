@@ -4,17 +4,17 @@
 #include <QColor>
 #include <QObject>
 
-#include "Views/sliders.h"
+#include "Views/sliderswindow.h"
 
 
-class Sliders;
+class SlidersWindow;
 
 class SlidersController : public QObject
 {
   Q_OBJECT
 
 private:
-  Sliders* slidersView;
+  SlidersWindow* slidersView;
 
   bool hueSpinManualEdit;
   bool saturationSpinManualEdit;
@@ -33,7 +33,7 @@ private:
 public:
   explicit SlidersController(QObject* parent=0);
   
-  void setView(Sliders* slidersView);
+  void setView(SlidersWindow* slidersView);
   
   void connectRGB();
   void disconnectRGB();

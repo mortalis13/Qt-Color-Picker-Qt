@@ -4,9 +4,6 @@
 
 #include "Service/validator.h"
 
-// -------------------------------------------- consts --------------------------------------------
-
-// ------------------------------------------------------------------------------------------------
 
 ColorText::ColorText(QWidget *parent) : QLineEdit(parent)
 {
@@ -14,32 +11,30 @@ ColorText::ColorText(QWidget *parent) : QLineEdit(parent)
   separator=" ";
 }
 
-void ColorText::setType(Vars::ColorType colorType)
-{
+void ColorText::setType(Vars::ColorType colorType) {
   this->colorType=colorType;
   if(colorType==Vars::Hex)
     separator="";
 }
 
 
+void ColorText::updateText(QString text) {
+  int pos=cursorPosition();
+  setText(text);
+  setCursorPosition(pos);
+}
+
+
+
 // --------------------------------------------- inc/dec component ---------------------------------------------
 
-void ColorText::increaseComponent(){
-  changeComponentVal(true);
-}
-
-void ColorText::decreaseComponent(){
-  changeComponentVal(false);
-}
-
-void ColorText::changeComponentVal(bool inc){
+void ColorText::changeComponentVal(int pos, bool inc){
   int val;
   int group=-1;
   bool ok;
   QStringList comp;
   QString valText, newValText;
 
-  int pos=cursorPosition();
   QString colorText=text();
 
   if(colorType==Vars::Hex){
@@ -208,28 +203,57 @@ int ColorText::getGroupNumber(int group, int groupLen, bool next){
 void ColorText::keyPressEvent(QKeyEvent *e)
 {
   int key=e->key();
-
+  
+  int pos = cursorPosition();
+  
   if(key == Qt::Key_Up){
-    increaseComponent();
+    changeComponentVal(pos, true);
   }
   else if(key == Qt::Key_Down){
-    decreaseComponent();
+    changeComponentVal(pos, false);
   }
   else{
     QLineEdit::keyPressEvent(e);
   }
 }
 
+void ColorText::wheelEvent(QWheelEvent *e) {
+  int delta = e->delta();
+  int x = e->x();
+  int y = e->y();
+  
+  int pos = cursorPositionAt(QPoint(x, y));
+  
+  
+  changeComponentVal(pos, delta > 0);
+
+  // qDebug() << QString("WHEEL: %1, [%2;%3], %4").arg(delta).arg(x).arg(y).arg(pos);
+  
+  e->accept();
+}
+
 bool ColorText::event(QEvent *e)
 {
   if(e->type() == QEvent::KeyPress){
     QKeyEvent *ke = static_cast<QKeyEvent *>(e);
-
+    
     if ( ke->key() == Qt::Key_Tab ) {
+      if (ke->modifiers() == Qt::ControlModifier) {
+        // nextInFocusChain()->setFocus(Qt::TabFocusReason);
+        emit focusNextField();
+        return true;
+      }
+      
       selectNextComponent();
       return true;
     }
     else if ( ke->key() == Qt::Key_Backtab ) {
+      if (ke->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier)) {
+        // previousInFocusChain()->setFocus(Qt::BacktabFocusReason);
+        emit focusPrevField();
+        return true;
+      }
+      
       selectPrevComponent();
       return true;
     }

@@ -1,5 +1,5 @@
-#ifndef SLIDERS_H
-#define SLIDERS_H
+#ifndef SLIDERSWINDOW_H
+#define SLIDERSWINDOW_H
 
 #include <QMainWindow>
 #include <QMouseEvent>
@@ -8,17 +8,17 @@
 
 
 namespace Ui {
-class Sliders;
+class SlidersWindow;
 }
 
 class SlidersController;
 
-class Sliders : public QMainWindow
+class SlidersWindow : public QMainWindow
 {
   Q_OBJECT
 
 public:
-  Ui::Sliders *ui;
+  Ui::SlidersWindow *ui;
   
 private:
   bool mouseDown;
@@ -28,8 +28,8 @@ private:
   SlidersController *slidersController;  
   
 public:
-  explicit Sliders(SlidersController *slidersController, QWidget *parent = 0);
-  ~Sliders();
+  explicit SlidersWindow(SlidersController *slidersController, QWidget *parent = 0);
+  ~SlidersWindow();
 
   
 protected:

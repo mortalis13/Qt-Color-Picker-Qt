@@ -54,6 +54,7 @@ void ColorWidget::drawRightTrapezoid(QPainter& p){
   QPoint p4( width(), pointerY + pointerDy2 );
 
   triangle << p1 << p2 << p3 << p4;
+  
   QPainterPath path;
   path.addPolygon(triangle);
   p.drawPath(path);

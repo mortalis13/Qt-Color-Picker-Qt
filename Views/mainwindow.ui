@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>672</width>
+    <width>636</width>
     <height>414</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>672</width>
+    <width>636</width>
     <height>414</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>672</width>
+    <width>636</width>
     <height>414</height>
    </size>
   </property>
@@ -93,7 +93,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>QtColorPicker</string>
+   <string>QtColorPicker v1.0.2</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -155,7 +155,7 @@
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::MinimumExpanding</enum>
+          <enum>QSizePolicy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -296,7 +296,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>25</width>
+              <width>10</width>
               <height>20</height>
              </size>
             </property>
@@ -318,7 +318,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
+           <width>10</width>
            <height>20</height>
           </size>
          </property>
@@ -372,7 +372,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>120</width>
+                <width>110</width>
                 <height>36</height>
                </size>
               </property>
@@ -400,7 +400,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>160</width>
                 <height>36</height>
                </size>
               </property>
@@ -472,7 +472,7 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item alignment="Qt::AlignLeft">
+            <item>
              <widget class="QPushButton" name="bRGB">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -482,7 +482,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>120</width>
+                <width>110</width>
                 <height>36</height>
                </size>
               </property>
@@ -510,7 +510,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>160</width>
                 <height>36</height>
                </size>
               </property>
@@ -549,7 +549,7 @@
            </property>
           </spacer>
          </item>
-         <item alignment="Qt::AlignTop">
+         <item>
           <widget class="QWidget" name="pCMYK" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -589,7 +589,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>120</width>
+                <width>110</width>
                 <height>36</height>
                </size>
               </property>
@@ -617,7 +617,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>160</width>
                 <height>36</height>
                </size>
               </property>
@@ -686,34 +686,6 @@
             <property name="spacing">
              <number>10</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QPushButton" name="bHex">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>36</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Trebuchet MS</family>
-                <pointsize>11</pointsize>
-                <weight>75</weight>
-                <italic>false</italic>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Hex</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="ColorText" name="leHex">
               <property name="sizePolicy">
@@ -724,7 +696,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>160</width>
                 <height>36</height>
                </size>
               </property>
@@ -741,34 +713,6 @@
               </property>
               <property name="text">
                <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0" alignment="Qt::AlignLeft">
-             <widget class="QPushButton" name="bHexHash">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>36</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Trebuchet MS</family>
-                <pointsize>11</pointsize>
-                <weight>75</weight>
-                <italic>false</italic>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Hex #</string>
               </property>
              </widget>
             </item>
@@ -791,6 +735,62 @@
               </property>
               <property name="text">
                <string>Paste Hex</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="bHex">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Trebuchet MS</family>
+                <pointsize>11</pointsize>
+                <weight>75</weight>
+                <italic>false</italic>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Hex</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="bHexHash">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Trebuchet MS</family>
+                <pointsize>11</pointsize>
+                <weight>75</weight>
+                <italic>false</italic>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Hex #</string>
               </property>
              </widget>
             </item>
@@ -824,7 +824,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>36</height>
+             <height>50</height>
             </size>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -870,7 +870,7 @@
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::MinimumExpanding</enum>
+          <enum>QSizePolicy::Minimum</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -965,14 +965,15 @@
  </customwidgets>
  <tabstops>
   <tabstop>bHSV</tabstop>
-  <tabstop>leHSV</tabstop>
   <tabstop>bRGB</tabstop>
-  <tabstop>leRGB</tabstop>
   <tabstop>bCMYK</tabstop>
-  <tabstop>leCMYK</tabstop>
   <tabstop>bHex</tabstop>
-  <tabstop>leHex</tabstop>
   <tabstop>bHexHash</tabstop>
+  <tabstop>leHSV</tabstop>
+  <tabstop>leRGB</tabstop>
+  <tabstop>leCMYK</tabstop>
+  <tabstop>leHex</tabstop>
+  <tabstop>bPasteHex</tabstop>
  </tabstops>
  <resources/>
  <connections/>

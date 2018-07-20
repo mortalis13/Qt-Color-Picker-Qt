@@ -19,18 +19,22 @@ public:
   explicit ColorText(QWidget *parent = 0);
 
   void setType(Vars::ColorType colorType);
+  void updateText(QString text);
+  
 signals:
+  void focusNextField();
+  void focusPrevField();
+  
 
 public slots:
 
 protected:
   void keyPressEvent(QKeyEvent *e);
+  void wheelEvent(QWheelEvent *e);
   bool event(QEvent *e);
 
 private:
-  void increaseComponent();
-  void decreaseComponent();
-  void changeComponentVal(bool inc);
+  void changeComponentVal(int pos, bool inc);
 
   int getGroup();
 

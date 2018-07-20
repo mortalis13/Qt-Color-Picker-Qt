@@ -12,7 +12,7 @@ class HSelector : public ColorWidget
   Q_OBJECT
   
 private:
-  int barSize;
+  int barHeight;
   // QColor color;
   // int h,s,v;
   

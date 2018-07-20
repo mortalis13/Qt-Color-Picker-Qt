@@ -6,9 +6,6 @@
 #include "Service/validator.h"
 
 
-// -------------------------------------------- consts --------------------------------------------
-
-// ------------------------------------------------------------------------------------------------
 
 ColorProcessor::ColorProcessor(HSelector *hSelector, SVSelector *svSelector, QObject* parent) : QObject(parent){
   this->hSelector=hSelector;
@@ -20,6 +17,7 @@ ColorProcessor::ColorProcessor(HSelector *hSelector, SVSelector *svSelector, QOb
 
 QString ColorProcessor::getHSV(QColor color){
   QString res;
+  Validator::correctHSV(color);
 
   int h=color.hue();
   int s=color.saturation();
@@ -31,6 +29,7 @@ QString ColorProcessor::getHSV(QColor color){
 
 QString ColorProcessor::getRGB(QColor color){
   QString res;
+  Validator::correctRGB(color);
 
   int r=color.red();
   int g=color.green();
@@ -42,6 +41,7 @@ QString ColorProcessor::getRGB(QColor color){
 
 QString ColorProcessor::getCMYK(QColor color){
   QString res;
+  Validator::correctCMYK(color);
 
   int c=color.cyan();
   int m=color.magenta();
@@ -73,7 +73,6 @@ QColor ColorProcessor::getColorHSV(QString HSV_Text){
   int v=list[2].toInt();
 
   color.setHsv(h, s, v);
-  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -88,7 +87,6 @@ QColor ColorProcessor::getColorRGB(QString RGB_Text){
   int b=list[2].toInt();
 
   color.setRgb(r, g, b);
-  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -104,7 +102,6 @@ QColor ColorProcessor::getColorCMYK(QString CMYK_Text){
   int k=list[3].toInt();
 
   color.setCmyk(c, m, y, k);
-  // color=Validator::correctColor(color);
 
   return color;
 }
@@ -112,7 +109,6 @@ QColor ColorProcessor::getColorCMYK(QString CMYK_Text){
 QColor ColorProcessor::getColorHex(QString Hex_Text){
   QColor color;
   color.setNamedColor("#"+Hex_Text);
-  // color=Validator::correctColor(color);
 
   return color;
 }

@@ -1,0 +1,8 @@
+1.0.2
+
+-F1-F6 - copy buttons
+-F1-F4 - focus text fields
+-copied text has ','
+-sliders layout
+-paste text in various formats ('1 2 3', '1,2,3', '1, 2, 3')
+-inc/dec color components by scrolling

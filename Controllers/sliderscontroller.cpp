@@ -1,5 +1,5 @@
 #include "sliderscontroller.h"
-#include "ui_sliders.h"
+#include "ui_sliderswindow.h"
 
 // ------------------------------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ void SlidersController::addActions(){
   connectCMYK();
 }
 
-void SlidersController::setView(Sliders* slidersView){
+void SlidersController::setView(SlidersWindow* slidersView){
   this->slidersView=slidersView;
 }
 

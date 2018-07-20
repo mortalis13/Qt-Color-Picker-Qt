@@ -17,11 +17,11 @@ void HSelector::paintEvent(QPaintEvent *event)
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
 
-  barSize=height()-2*border;
+  barHeight=height()-2*border;
   
   if(!selectorDrawn){
-    hSelectorPixmap=QPixmap(barWidth, barSize);
-    QPainter tempP(&hSelectorPixmap);
+    hSelectorPixmap=QPixmap(barWidth, barHeight);
+    QPainter huePainter(&hSelectorPixmap);
     
     QPointF p1( 0, selectorY );
     QPointF p2( 0, height()-border );
@@ -33,12 +33,13 @@ void HSelector::paintEvent(QPaintEvent *event)
       grad.setColorAt(hs, color);
     }
     
-    tempP.setPen(Qt::NoPen);
-    tempP.setBrush( QBrush(grad) );
-    tempP.drawRect(0, 0, barWidth, barSize);
+    huePainter.setPen(Qt::NoPen);
+    huePainter.setBrush( QBrush(grad) );
+    huePainter.drawRect(0, 0, barWidth, barHeight);
     
     selectorDrawn=true;
   }
+  
   p.drawPixmap(selectorX, selectorY, hSelectorPixmap);
 
   drawPointer(p);
@@ -101,8 +102,7 @@ void HSelector::drawPointer(QPainter& p){
 
 void HSelector::correctPointer(){
   pointerY = h + minPointerY;                       // to update pointer Y on text edit
-  pointerY = qMax( minPointerY, pointerY );
-  pointerY = qMin( maxPointerY, pointerY );
+  pointerY = qMin(maxPointerY, qMax(minPointerY, pointerY));
 }
 
 void HSelector::incPointer(int val){
@@ -119,7 +119,7 @@ void HSelector::movePointer(int y){
 }
 
 void HSelector::drawBorder(QPainter& p){
-  QRectF rectangle( selectorX, selectorX, barWidth, barSize );                               // set inner rect coordinates (the border will be outer)
+  QRectF rectangle( selectorX, selectorX, barWidth, barHeight );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 

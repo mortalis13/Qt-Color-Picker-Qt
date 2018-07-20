@@ -4,11 +4,11 @@
 - saturation/value pointers on the sides of selector
 - show half of hue trapezoid when in the top/bottom max position (when it is partially hidden)
 - trim, remove \s+ after validation (when all comps are valid)
-- text fields scroll
-- text with commas (process, copy)
+*- text fields scroll
+*- text with commas (process, copy)
 - add swatches/color combo box (list)
 - hint (value) on slider/selector hover
-- ctrl+tab to tab on text fields
+*- ctrl+tab to tab on text fields
 
 # - hold mid button to move on sv selector
 # - copy hex on Sample click

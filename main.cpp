@@ -3,6 +3,7 @@
 
 #include "Views/mainwindow.h"
 
+// v1.0.2
 
 void setPosition(MainWindow &view){
   QDesktopWidget *w=QApplication::desktop();

@@ -3,8 +3,14 @@
 
 #include <QPainter>
 #include <QShortcut>
+#include <QScreen>
 
 #include "Widgets/ColorWidgets/hselector.h"
+#include "Service/validator.h"
+
+#include "pickerview.h"
+#include "testwidget.h"
+#include "testdialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,6 +33,13 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
+  qDebug() << "Event Filter: " << event->type();
+  return QObject::eventFilter(obj, event);
+}
+
+
 void MainWindow::init(){
   QApplication::setStyle("fusion");
   
@@ -48,6 +61,8 @@ void MainWindow::init(){
   ui->leHex->setType(Vars::Hex);
   
   ui->hSelector->setInitH(0);
+  
+  // qApp->installEventFilter(this);
 }
 
 void MainWindow::addActions(){
@@ -56,10 +71,20 @@ void MainWindow::addActions(){
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
   // connect( ui->svSelector, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
 
-  connect( ui->leHSV, SIGNAL(textEdited(QString)), this, SLOT(updateColorHSV(QString)) );
-  connect( ui->leRGB, SIGNAL(textEdited(QString)), this, SLOT(updateColorRGB(QString)) );
+  connect( ui->leHSV,  SIGNAL(textEdited(QString)), this, SLOT(updateColorHSV(QString)) );
+  connect( ui->leRGB,  SIGNAL(textEdited(QString)), this, SLOT(updateColorRGB(QString)) );
   connect( ui->leCMYK, SIGNAL(textEdited(QString)), this, SLOT(updateColorCMYK(QString)) );
-  connect( ui->leHex, SIGNAL(textEdited(QString)), this, SLOT(updateColorHex(QString)) );
+  connect( ui->leHex,  SIGNAL(textEdited(QString)), this, SLOT(updateColorHex(QString)) );
+  
+  connect( ui->leHSV,  SIGNAL(focusNextField()), this, SLOT(focusNextField()) );
+  connect( ui->leRGB,  SIGNAL(focusNextField()), this, SLOT(focusNextField()) );
+  connect( ui->leCMYK, SIGNAL(focusNextField()), this, SLOT(focusNextField()) );
+  connect( ui->leHex,  SIGNAL(focusNextField()), this, SLOT(focusNextField()) );
+  
+  connect( ui->leHSV,  SIGNAL(focusPrevField()), this, SLOT(focusPrevField()) );
+  connect( ui->leRGB,  SIGNAL(focusPrevField()), this, SLOT(focusPrevField()) );
+  connect( ui->leCMYK, SIGNAL(focusPrevField()), this, SLOT(focusPrevField()) );
+  connect( ui->leHex,  SIGNAL(focusPrevField()), this, SLOT(focusPrevField()) );
   
   connect( colorProcessor, SIGNAL(updateFinished()), this, SLOT(updateColorFinished()) );
 
@@ -87,13 +112,14 @@ void MainWindow::addActions(){
   connect( this, SIGNAL(ctrlReleased()), ui->svSelector, SLOT(ctrlReleased()) );
   connect( this, SIGNAL(ctrlPressed()), ui->hSelector, SLOT(ctrlPressed()) );
   connect( this, SIGNAL(ctrlReleased()), ui->hSelector, SLOT(ctrlReleased()) );
+  
+  // connect( ui->bShowPicker, SIGNAL(clicked()), this, SLOT(showPickerClicked()) );
 
   // connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 }
 
 void MainWindow::addSlidersActions(){
   // === HSV ===
-  
   connect( slidersController, SIGNAL(hueChanged(QColor)), mainController, SLOT(changeHue(QColor)) );
   connect( slidersController, SIGNAL(saturationChanged(QColor)), mainController, SLOT(changeSaturation(QColor)) );
   connect( slidersController, SIGNAL(valueChanged(QColor)), mainController, SLOT(changeValue(QColor)) );
@@ -102,18 +128,14 @@ void MainWindow::addSlidersActions(){
   connect( ui->svSelector, SIGNAL(saturationChanged(QColor)), slidersController, SLOT(changeSaturationFromSelector(QColor)) );
   connect( ui->svSelector, SIGNAL(valueChanged(QColor)), slidersController, SLOT(changeValueFromSelector(QColor)) );
   
-  
   // === RGB ===
-  
   connect( slidersController, SIGNAL(redChanged(QColor)), mainController, SLOT(changeRed(QColor)) );
   connect( slidersController, SIGNAL(greenChanged(QColor)), mainController, SLOT(changeGreen(QColor)) );
   connect( slidersController, SIGNAL(blueChanged(QColor)), mainController, SLOT(changeBlue(QColor)) );
   
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersController, SIGNAL(RGBChanged(QColor)) );
   
-  
   // === CMYK ===
-  
   connect( slidersController, SIGNAL(cyanChanged(QColor)), mainController, SLOT(changeCyan(QColor)) );
   connect( slidersController, SIGNAL(magentaChanged(QColor)), mainController, SLOT(changeMagenta(QColor)) );
   connect( slidersController, SIGNAL(yellowChanged(QColor)), mainController, SLOT(changeYellow(QColor)) );
@@ -123,35 +145,41 @@ void MainWindow::addSlidersActions(){
 }
 
 void MainWindow::addShortcuts(){
-  QShortcut* HSV=new QShortcut(QKeySequence("Ctrl+H"), this);
-  QShortcut* RGB=new QShortcut(QKeySequence("Ctrl+R"), this);
-  QShortcut* CMYK=new QShortcut(QKeySequence("Ctrl+M"), this);
-  QShortcut* Hex=new QShortcut(QKeySequence("Ctrl+E"), this);
+  QShortcut* HSV_Text=new QShortcut(QKeySequence("Shift+F1"), this);
+  QShortcut* RGB_Text=new QShortcut(QKeySequence("Shift+F2"), this);
+  QShortcut* CMYK_Text=new QShortcut(QKeySequence("Shift+F3"), this);
+  QShortcut* Hex_Text=new QShortcut(QKeySequence("Shift+F4"), this);
   
   mapper=new QSignalMapper(this);
-  mapper->setMapping(HSV, ui->leHSV);
-  mapper->setMapping(RGB, ui->leRGB);
-  mapper->setMapping(CMYK, ui->leCMYK);
-  mapper->setMapping(Hex, ui->leHex);
+  mapper->setMapping(HSV_Text, ui->leHSV);
+  mapper->setMapping(RGB_Text, ui->leRGB);
+  mapper->setMapping(CMYK_Text, ui->leCMYK);
+  mapper->setMapping(Hex_Text, ui->leHex);
   
-  connect( HSV, SIGNAL(activated()), mapper, SLOT(map()) );
-  connect( RGB, SIGNAL(activated()), mapper, SLOT(map()) );
-  connect( CMYK, SIGNAL(activated()), mapper, SLOT(map()) );
-  connect( Hex, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( HSV_Text, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( RGB_Text, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( CMYK_Text, SIGNAL(activated()), mapper, SLOT(map()) );
+  connect( Hex_Text, SIGNAL(activated()), mapper, SLOT(map()) );
   connect( mapper, SIGNAL(mapped(QWidget*)), this, SLOT(selectField(QWidget*)) );
   
   
-  QShortcut* HSV_Button=new QShortcut(QKeySequence("Ctrl+Shift+H"), this);
+  QShortcut* HSV_Button=new QShortcut(QKeySequence("F1"), this);
   connect( HSV_Button, SIGNAL(activated()), ui->bHSV, SLOT(click()) );
   
-  QShortcut* RGB_Button=new QShortcut(QKeySequence("Ctrl+Shift+R"), this);
+  QShortcut* RGB_Button=new QShortcut(QKeySequence("F2"), this);
   connect( RGB_Button, SIGNAL(activated()), ui->bRGB, SLOT(click()) );
   
-  QShortcut* CMYK_Button=new QShortcut(QKeySequence("Ctrl+Shift+M"), this);
+  QShortcut* CMYK_Button=new QShortcut(QKeySequence("F3"), this);
   connect( CMYK_Button, SIGNAL(activated()), ui->bCMYK, SLOT(click()) );
   
-  QShortcut* Hex_Button=new QShortcut(QKeySequence("Ctrl+Shift+E"), this);
+  QShortcut* Hex_Button=new QShortcut(QKeySequence("F4"), this);
   connect( Hex_Button, SIGNAL(activated()), ui->bHex, SLOT(click()) );
+
+  QShortcut* HexHash_Button=new QShortcut(QKeySequence("F5"), this);
+  connect( HexHash_Button, SIGNAL(activated()), ui->bHexHash, SLOT(click()) );
+
+  QShortcut* PasteHex_Button=new QShortcut(QKeySequence("F6"), this);
+  connect( PasteHex_Button, SIGNAL(activated()), ui->bPasteHex, SLOT(click()) );
 
   
   QShortcut *quit=new QShortcut(QKeySequence("Esc"), this);
@@ -185,18 +213,6 @@ void MainWindow::updateSliders(){
   ui->colorSample->reupdateColor();
 }
 
-void MainWindow::stickSliders(){
-  int corrX=frameGeometry().width()-width();
-
-  int sx=x();
-  int sy=y();
-  int w=slidersWindow->width()+corrX;
-  sx-=w;
-  
-  slidersWindow->move(sx, sy);
-  slidersWindow->show();
-}
-
 void MainWindow::toggleSliders(){
   if(slidersWindow==NULL || !slidersWindow->isVisible())
     openSliders();
@@ -211,7 +227,7 @@ void MainWindow::closeSliders(){
 void MainWindow::openSliders(){
   if(slidersWindow==NULL){
     slidersController=new SlidersController();
-    slidersWindow=new Sliders(slidersController, this);
+    slidersWindow=new SlidersWindow(slidersController, this);
     
     slidersController->setView(slidersWindow);
     mainController->addSlidersController(slidersController);
@@ -220,8 +236,75 @@ void MainWindow::openSliders(){
     updateSliders();
   }
   
-  if(slidersWindow!=NULL)
+  if(slidersWindow!=NULL) {
     stickSliders();
+    slidersWindow->show();
+  }
+}
+
+void MainWindow::stickSliders(){
+  int corrX=frameGeometry().width()-width();
+
+  int sx=x();
+  int sy=y();
+  int w=slidersWindow->width()+corrX;
+  sx-=w;
+  
+  // qDebug() << QString("Sliders: %1, %2").arg(sx).arg(sy);
+  
+  sx = qMax(0, sx);
+  
+  slidersWindow->move(sx, sy);
+}
+
+
+void MainWindow::focusNextField(){
+  if (ui->leHSV->hasFocus()) {
+    ui->leRGB->setFocus(Qt::TabFocusReason);
+  }
+  else if (ui->leRGB->hasFocus()) {
+    ui->leCMYK->setFocus(Qt::TabFocusReason);
+  }
+  else if (ui->leCMYK->hasFocus()) {
+    ui->leHex->setFocus(Qt::TabFocusReason);
+  }
+  else if (ui->leHex->hasFocus()) {
+    ui->leHSV->setFocus(Qt::TabFocusReason);
+  }
+}
+
+void MainWindow::focusPrevField(){
+  if (ui->leHSV->hasFocus()) {
+    ui->leHex->setFocus(Qt::BacktabFocusReason);
+  }
+  else if (ui->leHex->hasFocus()) {
+    ui->leCMYK->setFocus(Qt::BacktabFocusReason);
+  }
+  else if (ui->leCMYK->hasFocus()) {
+    ui->leRGB->setFocus(Qt::BacktabFocusReason);
+  }
+  else if (ui->leRGB->hasFocus()) {
+    ui->leHSV->setFocus(Qt::BacktabFocusReason);
+  }
+}
+
+void MainWindow::showPickerClicked(){
+  // PickerView* w = new PickerView(this);
+  TestWidget* w = new TestWidget(this);
+  // TestWidget* w = new TestWidget;
+  // TestDialog* w = new TestDialog(this);
+  
+  w->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+  
+  QPoint pos = QCursor::pos();
+  int wx = pos.x() - w->width()/2;
+  int wy = pos.y() - w->height()/2;
+  
+  // w->move(10, 10);
+  w->move(wx, wy);
+  w->show();
+  
+  // w->grabMouse();
 }
 
 
@@ -229,18 +312,21 @@ void MainWindow::openSliders(){
 
 void MainWindow::copyHSV(){
   QString text=ui->leHSV->text();
+  text=text.replace(" ", ", ");
   colorProcessor->copyText(text);
   status("HSV copied");
 }
 
 void MainWindow::copyRGB(){
   QString text=ui->leRGB->text();
+  text=text.replace(" ", ", ");
   colorProcessor->copyText(text);
   status("RGB copied");
 }
 
 void MainWindow::copyCMYK(){
   QString text=ui->leCMYK->text();
+  text=text.replace(" ", ", ");
   colorProcessor->copyText(text);
   status("CMYK copied");
 }
@@ -260,7 +346,7 @@ void MainWindow::copyHexHash(){
 void MainWindow::pasteHex(){
   QString text=colorProcessor->pasteText();
   if(!text.length()) return;
-  
+
   ui->leHex->setText(text);
   ui->leHex->textEdited(text);
   status("Hex value pasted");
@@ -272,24 +358,32 @@ void MainWindow::updateColorFinished(){
   editingField="";
 }
 
-void MainWindow::updateColorHSV(QString HSV){
+void MainWindow::updateColorHSV(QString text){
   editingField="HSV";
-  colorProcessor->updateColorHSV(HSV);
+  text = Validator::correctColorText(text);
+  ui->leHSV->updateText(text);
+  colorProcessor->updateColorHSV(text);
 }
 
-void MainWindow::updateColorRGB(QString RGB){
+void MainWindow::updateColorRGB(QString text){
   editingField="RGB";
-  colorProcessor->updateColorRGB(RGB);
+  text = Validator::correctColorText(text);
+  ui->leRGB->updateText(text);
+  colorProcessor->updateColorRGB(text);
 }
 
-void MainWindow::updateColorCMYK(QString CMYK){
+void MainWindow::updateColorCMYK(QString text){
   editingField="CMYK";
-  colorProcessor->updateColorCMYK(CMYK);
+  text = Validator::correctColorText(text);
+  ui->leCMYK->updateText(text);
+  colorProcessor->updateColorCMYK(text);
 }
 
-void MainWindow::updateColorHex(QString Hex){
+void MainWindow::updateColorHex(QString text){
   editingField="Hex";
-  colorProcessor->updateColorHex(Hex);
+  text = Validator::correctColorText(text);
+  ui->leHex->updateText(text);
+  colorProcessor->updateColorHex(text);
 }
 
 // --------------------------------------------- update color text ---------------------------------------------
@@ -368,7 +462,7 @@ void MainWindow::correctFields(){
 
 QString MainWindow::correctField(QString text){         // +++ to Validator
   text=text.trimmed();
-  text=text.replace("\\s+", " ");
+  text=text.replace(QRegExp("\\s+"), " ");
     
   return text;
 }

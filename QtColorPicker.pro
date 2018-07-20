@@ -19,7 +19,8 @@ win32:RC_ICONS += icon.ico
 
 SOURCES += main.cpp\
     Views/mainwindow.cpp \
-    Views/sliders.cpp \
+    Views/sliderswindow.cpp \
+    Views/pickerview.cpp \
 \
     Widgets/ColorWidgets/colorwidget.cpp \
     Widgets/ColorWidgets/colorsample.cpp \
@@ -39,11 +40,14 @@ SOURCES += main.cpp\
     Models/colorprocessor.cpp \
 \    
     Controllers/sliderscontroller.cpp \
-    Controllers/maincontroller.cpp
+    Controllers/maincontroller.cpp \
+    Views/testwidget.cpp \
+    Views/testdialog.cpp
 
 
 HEADERS  += Views/mainwindow.h \
-    Views/sliders.h \
+    Views/sliderswindow.h \
+    Views/pickerview.h \
 \
     Widgets/ColorWidgets/colorwidget.h \
     Widgets/ColorWidgets/colorsample.h \
@@ -63,8 +67,13 @@ HEADERS  += Views/mainwindow.h \
     Models/colorprocessor.h \
 \    
     Controllers/sliderscontroller.h \
-    Controllers/maincontroller.h
+    Controllers/maincontroller.h \
+    Views/testwidget.h \
+    Views/testdialog.h
     
     
 FORMS    += Views/mainwindow.ui \
-    Views/sliders.ui
+    Views/test_form.ui \
+    Views/sliderswindow.ui \
+    Views/testwidget.ui \
+    Views/testdialog.ui

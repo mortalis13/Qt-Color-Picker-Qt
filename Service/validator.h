@@ -21,7 +21,11 @@ public:
   static bool checkValueCMYK(QString text);
   static bool checkValueHex(QString text);
   
-  static QColor correctColor(QColor color);
+  static void correctHSV(QColor& color);
+  static void correctRGB(QColor& color);
+  static void correctCMYK(QColor& color);
+  
+  static QString correctColorText(QString text);
   
   static bool checkComponentVal(int val, Vars::ColorType colorType=Vars::HSV, int group=0, int hexLen=0);
   static bool checkValueByType(QString text, Vars::ColorType colorType=Vars::HSV);
