@@ -114,7 +114,6 @@ void MainWindow::addActions(){
   connect( this, SIGNAL(ctrlReleased()), ui->hSelector, SLOT(ctrlReleased()) );
   
   // connect( ui->bShowPicker, SIGNAL(clicked()), this, SLOT(showPickerClicked()) );
-
   // connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 }
 
@@ -149,6 +148,10 @@ void MainWindow::addShortcuts(){
   QShortcut* RGB_Text=new QShortcut(QKeySequence("Shift+F2"), this);
   QShortcut* CMYK_Text=new QShortcut(QKeySequence("Shift+F3"), this);
   QShortcut* Hex_Text=new QShortcut(QKeySequence("Shift+F4"), this);
+  
+  connect( ui->colorSample, SIGNAL(samplePressedMiddle()), this, SLOT(toggleSliders()) );
+  QShortcut* toggleSlider_Key=new QShortcut(QKeySequence("Ctrl+S"), this);
+  connect( toggleSlider_Key, SIGNAL(activated()), this, SLOT(toggleSliders()) );
   
   mapper=new QSignalMapper(this);
   mapper->setMapping(HSV_Text, ui->leHSV);
