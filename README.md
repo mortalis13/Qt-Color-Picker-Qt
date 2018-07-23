@@ -44,8 +44,8 @@
 
 ## Download
 
-[All releases](https://github.com/mortalis13/Qt-Color-Picker-Qt/releases)
-
+[All releases](https://github.com/mortalis13/Qt-Color-Picker-Qt/releases) <br>
+[SourceForge](https://sourceforge.net/projects/qtcolorpicker/files) <br>
 [Softpedia v1.0.0](http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/QtColorPicker.shtml)
 
 ## Build
