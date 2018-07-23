@@ -149,7 +149,6 @@ void MainWindow::addShortcuts(){
   QShortcut* CMYK_Text=new QShortcut(QKeySequence("Shift+F3"), this);
   QShortcut* Hex_Text=new QShortcut(QKeySequence("Shift+F4"), this);
   
-  connect( ui->colorSample, SIGNAL(samplePressedMiddle()), this, SLOT(toggleSliders()) );
   QShortcut* toggleSlider_Key=new QShortcut(QKeySequence("Ctrl+S"), this);
   connect( toggleSlider_Key, SIGNAL(activated()), this, SLOT(toggleSliders()) );
   
