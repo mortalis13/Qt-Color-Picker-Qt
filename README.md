@@ -46,6 +46,7 @@
 
 [All releases](https://github.com/mortalis13/Qt-Color-Picker-Qt/releases)
 
+[Softpedia v1.0.0](http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/QtColorPicker.shtml)
 
 ## Build
 
