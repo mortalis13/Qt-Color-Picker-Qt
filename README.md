@@ -17,31 +17,34 @@
 - Separate component values in the text fields can be *increased/decreased* with **Up/Down** keys
 - In text fields selection of the *next/previous* component can be performed with **Tab/Shift+Tab** keys
 - Mouse scrolling can be used to *increase/decrease* values by 1 and by 10 with **Ctrl** key for selectors, sliders and spinners (to change **Saturation** on the selector with scrolling **Shift** is held)
-- **Left/right click** on the color sample can be used to copy **Hex** color without and with leading # respectively
+- **Left/Right click** on the color sample can be used to copy **Hex** color without and with leading # respectively
 
 
 ## Usage
 
-- To *increase/decrease* value of a color component in text fields set text cursor near it or select it and press **Up/Down** keys
+- To *increase/decrease* value of a color component in text fields set text cursor near it or select it and press **Up/Down** keys or mouse scroll
 - To select *next/previous* color component in the same field press **Tab/Shift+Tab**
-- To toggle **Sliders window** click with middle mouse button on the color sample
+- To toggle **Sliders window** click with middle mouse button on the color sample or use **Ctrl+S**
 - To **close** any window **middle click** somewhere on it
 - To **move** any window drag it with any mouse button by any part (except *selector, sliders, spinners, buttons and text fields* on which the middle button can be used)
 
 
 ## Shortcuts
 
-- **Ctrl+H** - Focus **HSV** field
-- **Ctrl+R** - Focus **RGB** field
-- **Ctrl+M** - Focus **CMYK** field
-- **Ctrl+E** - Focus **Hex** field
+- **F1 - F5** - copy color values (HSV, RGB, CMYK, Hex, # Hex)
+- **F6** - paste Hex value
+- **Shift+F1 - Shift+F4** - focus text fields (HSV, RGB, CMYK, Hex)
+- **Ctrl+S** - open/close Sliders window
+- **Esc** or mouse wheel press - exit
+- mouse wheel press on the color sample - open/close Sliders window
+- left/right mouse click on the color sample - copy Hex value (without/with leading #)
+- mouse scroll on the vertical Hue selector - change the Hue value by 1
+- mouse scroll on the rectangular Saturation/Value selector - change Value component by 1, with **Shift** - change Saturation component
+- mouse scroll with **Ctrl** - change values by 10
 
-- **Ctrl+Shift+H** - Copy **HSV** value
-- **Ctrl+Shift+R** - Copy **RGB** value
-- **Ctrl+Shift+M** - Copy **CMYK** value
-- **Ctrl+Shift+E** - Copy **Hex** value
+## Download
 
-- **Esc** - Close current window
+[All releases](https://github.com/mortalis13/Qt-Color-Picker-Qt/releases)
 
 
 ## Build
@@ -51,8 +54,5 @@ The program was created with [Qt 5.3.1](http://download.qt.io/official_releases/
 
 ## Screenshots
 
-![QtColorPicker-main](/files/QtColorPicker-main.png)  
-![QtColorPicker-sliders](/files/QtColorPicker-sliders.png)
-
-
-[SourceForge page](https://sourceforge.net/projects/qtcolorpicker/)
+![QtColorPicker-main](/files/qtcolorpicker-1.png)  
+![QtColorPicker-sliders](/files/qtcolorpicker-2.png)
