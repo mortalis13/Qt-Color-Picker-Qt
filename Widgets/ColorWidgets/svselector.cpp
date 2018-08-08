@@ -11,7 +11,7 @@
 
 SVSelector::SVSelector(QWidget *parent) : ColorWidget(parent)
 {
-  pointerX=maxSV;
+  pointerX = maxSV;
 }
 
 void SVSelector::paintEvent(QPaintEvent *event)
@@ -21,16 +21,16 @@ void SVSelector::paintEvent(QPaintEvent *event)
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
 
-  if(!selectorDrawn){
-    hueLayerImage=QImage(maxSV+1, maxSV+1, QImage::Format_RGB32);
-    for(int s=0; s<=maxSV; s++){
-      for(int v=0; v<=maxSV; v++){
+  if (!selectorDrawn) {
+    hueLayerImage = QImage(maxSV+1, maxSV+1, QImage::Format_RGB32);
+    for (int s = 0; s <= maxSV; s++) {
+      for (int v = 0; v <= maxSV; v++) {
         color.setHsv(h, s, v);
         hueLayerImage.setPixel(s, maxSV-v, color.rgb());
       }
     }
     
-    selectorDrawn=true;
+    selectorDrawn = true;
   }
   p.drawImage(border, border, hueLayerImage);
   
@@ -40,12 +40,12 @@ void SVSelector::paintEvent(QPaintEvent *event)
 
 void SVSelector::mousePressEvent(QMouseEvent *e)
 {
-  if( e->button() == Qt::MiddleButton ){
-    middlePresed=true;
+  if ( e->button() == Qt::MiddleButton ) {
+    middlePresed = true;
     e->ignore();
   }
-  else{
-    middlePresed=false;
+  else {
+    middlePresed = false;
     hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
@@ -54,10 +54,10 @@ void SVSelector::mousePressEvent(QMouseEvent *e)
 
 void SVSelector::mouseMoveEvent(QMouseEvent *e)
 {
-  if(middlePresed){
+  if (middlePresed) {
     e->ignore();
   }
-  else{
+  else {
     hideCursor(e);
     movePointer( e->x(), e->y() );
     updateColor();
@@ -72,19 +72,19 @@ void SVSelector::mouseReleaseEvent(QMouseEvent *e)
 
 void SVSelector::wheelEvent(QWheelEvent *e)
 {
-  QPoint p=e->angleDelta();
-  int y=p.y();
+  QPoint p = e->angleDelta();
+  int y = p.y();
   
-  int val=1;
-  if(ctrlHeld) val=10;
+  int val = 1;
+  if (ctrlHeld) val = 10;
 
-  if(shiftHeld){
-    if(y>0) incPointerX(val);
-    if(y<0) decPointerX(val);
+  if (shiftHeld) {
+    if (y>0) incPointerX(val);
+    if (y<0) decPointerX(val);
   }
-  else{
-    if(y<0) incPointerY(val);
-    if(y>0) decPointerY(val);
+  else {
+    if (y<0) incPointerY(val);
+    if (y>0) decPointerY(val);
   }
 
   updateColor();
@@ -94,28 +94,28 @@ void SVSelector::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void SVSelector::drawPointer(QPainter& p){
+void SVSelector::drawPointer(QPainter& p) {
   correctPointer();
   drawCircle(p);
 }
 
-void SVSelector::incPointerX(int val){
+void SVSelector::incPointerX(int val) {
   movePointer(pointerX+val, pointerY);
 }
 
-void SVSelector::decPointerX(int val){
+void SVSelector::decPointerX(int val) {
   movePointer(pointerX-val, pointerY);
 }
 
-void SVSelector::incPointerY(int val){
+void SVSelector::incPointerY(int val) {
   movePointer(pointerX, pointerY+val);
 }
 
-void SVSelector::decPointerY(int val){
+void SVSelector::decPointerY(int val) {
   movePointer(pointerX, pointerY-val);
 }
 
-void SVSelector::correctPointer(){
+void SVSelector::correctPointer() {
   pointerX = s + minPointerXY;              // to update pointer XY on text edit
   pointerY = maxPointerXY - v;
   
@@ -126,7 +126,7 @@ void SVSelector::correctPointer(){
   pointerY = qMin( maxPointerXY, pointerY );
 }
 
-void SVSelector::movePointer(int x, int y){
+void SVSelector::movePointer(int x, int y) {
   pointerX = x;
   pointerY = y;
 
@@ -134,16 +134,16 @@ void SVSelector::movePointer(int x, int y){
 //  repaint();                  // on repaint() here it doesn't move (it repaints before the correction)
 }
 
-void SVSelector::drawBorder(QPainter& p){
+void SVSelector::drawBorder(QPainter& p) {
   QRectF rectangle( selectorX, selectorY, selectorSize, selectorSize );
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
-void SVSelector::updateColor(){
+void SVSelector::updateColor() {
   s = pointerX - border;
   v = maxSV - (pointerY - border);
 
-  s = qMax(0, s);             // s=qMin( maxSV, qMax(0, s) );
+  s = qMax(0, s);             // s = qMin( maxSV, qMax(0, s) );
   s = qMin(maxSV, s);
 
   v = qMax(0, v);
@@ -166,9 +166,9 @@ void SVSelector::reupdateColor()
 
 void SVSelector::changeHue(QColor color)
 {
-  selectorDrawn=false;
+  selectorDrawn = false;
   
-  h=color.hue();
+  h = color.hue();
   correctPointer();
   
   QColor newColor;
@@ -183,7 +183,7 @@ void SVSelector::changeHue(QColor color)
 
 void SVSelector::setS(QColor color)
 {
-  s=color.saturation();
+  s = color.saturation();
   
   correctPointer();
   update();
@@ -193,7 +193,7 @@ void SVSelector::setS(QColor color)
 
 void SVSelector::setV(QColor color)
 {
-  v=color.value();
+  v = color.value();
   
   correctPointer();
   update();
@@ -201,9 +201,9 @@ void SVSelector::setV(QColor color)
   updateColor();
 }
 
-void SVSelector::setSV(int s, int v){
-  this->s=s;
-  this->v=v;
+void SVSelector::setSV(int s, int v) {
+  this->s = s;
+  this->v = v;
   
   correctPointer();
   update();

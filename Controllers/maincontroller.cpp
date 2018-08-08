@@ -6,35 +6,35 @@ MainController::MainController(HSelector *hSelector, SVSelector *svSelector,
                        MainWindow *view,
                        QObject* parent) : QObject(parent)
 {
-  this->hSelector=hSelector;
-  this->svSelector=svSelector;
-  this->view=view;
-  this->colorProcessor=colorProcessor;
+  this->hSelector = hSelector;
+  this->svSelector = svSelector;
+  this->view = view;
+  this->colorProcessor = colorProcessor;
   
-  slidersController=NULL;
+  slidersController = NULL;
 }
 
-void MainController::addSlidersController(SlidersController *slidersController){
-  this->slidersController=slidersController;
+void MainController::addSlidersController(SlidersController *slidersController) {
+  this->slidersController = slidersController;
 }
 
-void MainController::connectRGB(){
-  if(slidersController!=NULL)
+void MainController::connectRGB() {
+  if (slidersController!=NULL)
     slidersController->connectRGB();
 }
 
-void MainController::disconnectRGB(){
-  if(slidersController!=NULL)
+void MainController::disconnectRGB() {
+  if (slidersController!=NULL)
     slidersController->disconnectRGB();
 }
 
-void MainController::connectCMYK(){
-  if(slidersController!=NULL)
+void MainController::connectCMYK() {
+  if (slidersController!=NULL)
     slidersController->connectCMYK();
 }
 
-void MainController::disconnectCMYK(){
-  if(slidersController!=NULL)
+void MainController::disconnectCMYK() {
+  if (slidersController!=NULL)
     slidersController->disconnectCMYK();
 }
 
@@ -42,28 +42,28 @@ void MainController::disconnectCMYK(){
 // --------------------------------------------- HSV ---------------------------------------------
 
 // ===== hue =====
-void MainController::changeHue(QColor color){
+void MainController::changeHue(QColor color) {
   hSelector->setH(color);
 }
 
 // ===== saturation =====
-void MainController::changeSaturation(QColor color){
+void MainController::changeSaturation(QColor color) {
   svSelector->setS(color);
 }
 
 // ===== value =====
-void MainController::changeValue(QColor color){
+void MainController::changeValue(QColor color) {
   svSelector->setV(color);
 }
 
 
 // --------------------------------------------- RGB ---------------------------------------------
 
-void MainController::changeRGB(int pos, int val){
-  QString RGB_Text=view->getRGB();
-  QColor currentColor=colorProcessor->getColorRGB(RGB_Text);
+void MainController::changeRGB(int pos, int val) {
+  QString RGB_Text = view->getRGB();
+  QColor currentColor = colorProcessor->getColorRGB(RGB_Text);
   
-  switch(pos){
+  switch (pos) {
     case 0:
       currentColor.setRed(val);
       break;  
@@ -76,78 +76,78 @@ void MainController::changeRGB(int pos, int val){
   }
   
   disconnectRGB();
-  QString RGB=colorProcessor->getRGB(currentColor);
+  QString RGB = colorProcessor->getRGB(currentColor);
   view->setRGB(RGB);
   view->updateColorRGB(RGB);
   connectRGB();
 }
 
 // ===== red =====
-void MainController::changeRed(QColor color){
+void MainController::changeRed(QColor color) {
   changeRGB(0, color.red());
 }
 
 // ===== green =====
-void MainController::changeGreen(QColor color){
+void MainController::changeGreen(QColor color) {
   changeRGB(1, color.green());
 }
 
 // ===== blue =====
-void MainController::changeBlue(QColor color){
+void MainController::changeBlue(QColor color) {
   changeRGB(2, color.blue());
 }
 
 
 // --------------------------------------------- CMYK ---------------------------------------------
 
-void MainController::changeCMYK(int pos, int val){
-  QString CMYK_Text=view->getCMYK();
-  QColor currentColor=colorProcessor->getColorCMYK(CMYK_Text);
+void MainController::changeCMYK(int pos, int val) {
+  QString CMYK_Text = view->getCMYK();
+  QColor currentColor = colorProcessor->getColorCMYK(CMYK_Text);
   
-  int c=currentColor.cyan();
-  int m=currentColor.magenta();
-  int y=currentColor.yellow();
-  int k=currentColor.black();
+  int c = currentColor.cyan();
+  int m = currentColor.magenta();
+  int y = currentColor.yellow();
+  int k = currentColor.black();
   
-  switch(pos){
+  switch (pos) {
     case 0:
-      c=val;
+      c = val;
       break;  
     case 1:
-      m=val;
+      m = val;
       break;  
     case 2:
-      y=val;
+      y = val;
       break;  
     case 3:
-      k=val;
+      k = val;
       break;  
   }
   currentColor.setCmyk(c, m, y, k);
   
   disconnectCMYK();
-  QString CMYK=colorProcessor->getCMYK(currentColor);
+  QString CMYK = colorProcessor->getCMYK(currentColor);
   view->setCMYK(CMYK);
   view->updateColorCMYK(CMYK);
   connectCMYK();
 }
 
 // ===== cyan =====
-void MainController::changeCyan(QColor color){
+void MainController::changeCyan(QColor color) {
   changeCMYK(0, color.cyan());
 }
 
 // ===== magenta =====
-void MainController::changeMagenta(QColor color){
+void MainController::changeMagenta(QColor color) {
   changeCMYK(1, color.magenta());
 }
 
 // ===== yellow =====
-void MainController::changeYellow(QColor color){
+void MainController::changeYellow(QColor color) {
   changeCMYK(2, color.yellow());
 }
 
 // ===== black =====
-void MainController::changeBlack(QColor color){
+void MainController::changeBlack(QColor color) {
   changeCMYK(3, color.black());
 }

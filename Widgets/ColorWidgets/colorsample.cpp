@@ -8,7 +8,7 @@
 
 // ----------------------------------------------- consts -----------------------------------------------
 
-const QColor defaultBorderColor=QColor(80,80,80,200);
+const QColor defaultBorderColor = QColor(80,80,80,200);
 
 
 // ----------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const QColor defaultBorderColor=QColor(80,80,80,200);
 ColorSample::ColorSample(QWidget *parent) : ColorWidget(parent)
 {
   color.setHsv(0, maxSV, maxSV);
-  borderColor=defaultBorderColor;
+  borderColor = defaultBorderColor;
 }
 
 
@@ -36,8 +36,8 @@ void ColorSample::paintEvent(QPaintEvent *event)
 
 void ColorSample::mouseReleaseEvent(QMouseEvent *e)
 {
-  if(!mouseMoving){
-    switch( e->button() ){
+  if (!mouseMoving) {
+    switch ( e->button() ) {
       case Qt::LeftButton:
         emit samplePressedLeft();
         break;
@@ -60,7 +60,7 @@ void ColorSample::mouseReleaseEvent(QMouseEvent *e)
   }
   
   e->ignore();
-  mouseMoving=false;
+  mouseMoving = false;
 }
 
 void ColorSample::enterEvent(QEvent *e)
@@ -72,7 +72,7 @@ void ColorSample::enterEvent(QEvent *e)
 
 void ColorSample::leaveEvent(QEvent *e)
 {
-  borderColor=defaultBorderColor;
+  borderColor = defaultBorderColor;
   setCursor(Qt::ArrowCursor);
   update();
 }
@@ -80,17 +80,17 @@ void ColorSample::leaveEvent(QEvent *e)
 
 // --------------------------------------------- slots ---------------------------------------------
 
-void ColorSample::mouseMovedOnWindow(){
-  mouseMoving=true;
+void ColorSample::mouseMovedOnWindow() {
+  mouseMoving = true;
 }
 
-void ColorSample::mouseReleasedOnWindow(){
-  mouseMoving=false;
+void ColorSample::mouseReleasedOnWindow() {
+  mouseMoving = false;
 }
 
 void ColorSample::changeColor(QColor color)
 {
-  this->color=color;
+  this->color = color;
   emit colorChanged(color);
   update();
 }
@@ -102,7 +102,7 @@ void ColorSample::reupdateColor()
 
 // --------------------------------------------- service ---------------------------------------------
 
-void ColorSample::drawBorder(QPainter& p){
+void ColorSample::drawBorder(QPainter& p) {
   QRectF rectangle(0, 0, width(), height());
   Services::drawInnerRoundRect(p, rectangle, border, borderRadius, borderColor);
 }

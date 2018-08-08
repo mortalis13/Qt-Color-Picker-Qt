@@ -17,10 +17,10 @@ void HSelector::paintEvent(QPaintEvent *event)
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
 
-  barHeight=height()-2*border;
+  barHeight = height()-2*border;
   
-  if(!selectorDrawn){
-    hSelectorPixmap=QPixmap(barWidth, barHeight);
+  if (!selectorDrawn) {
+    hSelectorPixmap = QPixmap(barWidth, barHeight);
     QPainter huePainter(&hSelectorPixmap);
     
     QPointF p1( 0, selectorY );
@@ -28,7 +28,7 @@ void HSelector::paintEvent(QPaintEvent *event)
     QLinearGradient grad(p1, p2);
     
     QColor color;
-    for(qreal hs=0; hs<1.0; hs+=ratio){
+    for (qreal hs = 0; hs<1.0; hs+=ratio) {
       color.setHsvF(hs, sf, vf);
       grad.setColorAt(hs, color);
     }
@@ -37,7 +37,7 @@ void HSelector::paintEvent(QPaintEvent *event)
     huePainter.setBrush( QBrush(grad) );
     huePainter.drawRect(0, 0, barWidth, barHeight);
     
-    selectorDrawn=true;
+    selectorDrawn = true;
   }
   
   p.drawPixmap(selectorX, selectorY, hSelectorPixmap);
@@ -48,15 +48,15 @@ void HSelector::paintEvent(QPaintEvent *event)
 
 void HSelector::mousePressEvent(QMouseEvent *e)
 {
-  if( e->button() == Qt::MiddleButton ){
-    middlePresed=true;
+  if ( e->button() == Qt::MiddleButton ) {
+    middlePresed = true;
     e->ignore();
     
-    QMouseEvent* mouseEvent=new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
+    QMouseEvent* mouseEvent = new QMouseEvent(e->type(), e->windowPos(), e->button(), e->buttons(), e->modifiers());
     emit middlePressedSignal(mouseEvent);
   }
-  else{
-    middlePresed=false;
+  else {
+    middlePresed = false;
     movePointer(e->y());
     updateColor();
   }
@@ -64,10 +64,10 @@ void HSelector::mousePressEvent(QMouseEvent *e)
 
 void HSelector::mouseMoveEvent(QMouseEvent *e)
 {
-  if(middlePresed){
+  if (middlePresed) {
     e->ignore();
   }
-  else{
+  else {
     movePointer(e->y());
     updateColor();
   }
@@ -80,13 +80,13 @@ void HSelector::mouseReleaseEvent(QMouseEvent *e)
 
 void HSelector::wheelEvent(QWheelEvent *e)
 {
-  QPoint p=e->angleDelta();
+  QPoint p = e->angleDelta();
   
-  int val=1;
-  if(ctrlHeld) val=10;
+  int val = 1;
+  if (ctrlHeld) val = 10;
   
-  if(p.y()<0) incPointer(val);
-  if(p.y()>0) decPointer(val);
+  if (p.y()<0) incPointer(val);
+  if (p.y()>0) decPointer(val);
 
   updateColor();
   e->accept();
@@ -95,35 +95,35 @@ void HSelector::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void HSelector::drawPointer(QPainter& p){
+void HSelector::drawPointer(QPainter& p) {
   correctPointer();
   drawRightTrapezoid(p);
 }
 
-void HSelector::correctPointer(){
+void HSelector::correctPointer() {
   pointerY = h + minPointerY;                       // to update pointer Y on text edit
   pointerY = qMin(maxPointerY, qMax(minPointerY, pointerY));
 }
 
-void HSelector::incPointer(int val){
+void HSelector::incPointer(int val) {
   movePointer(pointerY+val);
 }
 
-void HSelector::decPointer(int val){
+void HSelector::decPointer(int val) {
   movePointer(pointerY-val);
 }
 
-void HSelector::movePointer(int y){
-  pointerY=y;
+void HSelector::movePointer(int y) {
+  pointerY = y;
   update();
 }
 
-void HSelector::drawBorder(QPainter& p){
+void HSelector::drawBorder(QPainter& p) {
   QRectF rectangle( selectorX, selectorX, barWidth, barHeight );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
-void HSelector::updateColor(){
+void HSelector::updateColor() {
   h = pointerY-border;
   h = qMax(0, h);
   h = qMin(maxH, h);
@@ -132,24 +132,24 @@ void HSelector::updateColor(){
   emit hueChanged(color);
 }
 
-void HSelector::reupdateColor(){
+void HSelector::reupdateColor() {
   emit hueChanged(color);
 }
 
 // ---------------------------------------------- set/get ----------------------------------------------
 
-void HSelector::setInitH(int h){
+void HSelector::setInitH(int h) {
   QColor color;
   color.setHsv(h, s, v);
-  this->h=color.hue();
+  this->h = color.hue();
   emit hueChanged(color);
   update();
 }
 
 void HSelector::setH(int h)
 {
-  if(this->h == 360) this->h=0;
-  if(this->h == h) return;
+  if (this->h == 360) this->h = 0;
+  if (this->h == h) return;
 
   QColor color;
   color.setHsv(h, s, v);
@@ -158,13 +158,13 @@ void HSelector::setH(int h)
 
 void HSelector::setH(QColor color)
 {
-  int h=color.hue();
-  if(this->h == 360) this->h=0;
-  if(this->h == h){
+  int h = color.hue();
+  if (this->h == 360) this->h = 0;
+  if (this->h == h) {
     return;
   }
   
-  this->h=color.hue();
+  this->h = color.hue();
   emit hueChanged(color);
   update();
 }

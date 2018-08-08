@@ -7,8 +7,7 @@ Services::Services(QObject *parent) :
 
 // outer rect (specify rect with inner coordinates, the round rect will be outer)
 
-void Services::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor)
-{
+void Services::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor) {
   QPen pen;
   pen.setWidth(borderSize);
   pen.setColor(borderColor);
@@ -20,15 +19,14 @@ void Services::drawRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int b
   QRectF rect(sizeRect.x() - borderSize/2, sizeRect.y() - borderSize/2,
               sizeRect.width() + borderSize, sizeRect.height() + borderSize);
 
-  if(borderSize % 2 == 0)
+  if (borderSize % 2 == 0)
     p.drawRoundedRect(rect, borderSize, borderSize);
   else
     p.drawRoundedRect(rect.translated(0.5, 0.5), borderRadius, borderRadius);
 }
 
 
-void Services::drawInnerRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor)
-{
+void Services::drawInnerRoundRect(QPainter& p, QRectF sizeRect, int borderSize, int borderRadius, QColor borderColor) {
   QPen pen;
   pen.setWidth(borderSize);
   pen.setColor(borderColor);
@@ -40,7 +38,7 @@ void Services::drawInnerRoundRect(QPainter& p, QRectF sizeRect, int borderSize, 
   QRectF rect(sizeRect.x() + borderSize/2, sizeRect.y() + borderSize/2,
               sizeRect.width() - borderSize, sizeRect.height() - borderSize);
 
-  if(borderSize % 2 == 0)
+  if (borderSize % 2 == 0)
     p.drawRoundedRect(rect, borderSize, borderSize);
   else
     p.drawRoundedRect(rect.translated(0.5, 0.5), borderRadius, borderRadius);
@@ -49,7 +47,7 @@ void Services::drawInnerRoundRect(QPainter& p, QRectF sizeRect, int borderSize, 
 
 // ----------------- triangles for HueBar -----------------
 
-// void Services::drawLeftTriangle(QPainter& p){
+// void Services::drawLeftTriangle(QPainter& p) {
 //   QPen pen(Qt::NoPen);
 //   QBrush brush(pointerColor);
 //   pen.setCapStyle(Qt::FlatCap);
@@ -68,7 +66,7 @@ void Services::drawInnerRoundRect(QPainter& p, QRectF sizeRect, int borderSize, 
 //   p.drawPath(path);
 // }
 
-// void Services::drawRightTriangle(QPainter& p){
+// void Services::drawRightTriangle(QPainter& p) {
 //   QPen pen(Qt::NoPen);
 //   QBrush brush(pointerColor);
 //   pen.setCapStyle(Qt::FlatCap);

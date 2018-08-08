@@ -10,10 +10,9 @@ PickerView::PickerView(QWidget *parent) :
   init();
 }
 
-PickerView::~PickerView()
-{
+PickerView::~PickerView() {
 }
 
-void PickerView::init(){
+void PickerView::init() {
   
 }

@@ -5,16 +5,16 @@
 
 // v1.0.2
 
-void setPosition(MainWindow &view){
-  QDesktopWidget *w=QApplication::desktop();
-  int primary=w->primaryScreen();
-  QRect dim=w->screenGeometry(primary);
+void setPosition(MainWindow &view) {
+  QDesktopWidget *w = QApplication::desktop();
+  int primary = w->primaryScreen();
+  QRect dim = w->screenGeometry(primary);
 
-  int mx,my, corr=20;
+  int mx,my, corr = 20;
 
-  mx=view.x();
-  mx=dim.width() - view.width() - corr;
-  my=corr;
+  mx = view.x();
+  mx = dim.width() - view.width() - corr;
+  my = corr;
 
   view.move(mx, my);
 }
@@ -31,9 +31,9 @@ int main(int argc, char *argv[])
 }
 
 
-// void saveHuesToFile(){
+// void saveHuesToFile() {
 //   QFile file("hues.dat");
-//   if( !file.open(QIODevice::WriteOnly) ){
+//   if ( !file.open(QIODevice::WriteOnly) ) {
 //     qDebug("Cannot open file");
 //     return;
 //   }
@@ -41,14 +41,14 @@ int main(int argc, char *argv[])
 //   QList<QImage> hues;
 //   QColor color;
 
-//   int maxHue=360;
-//   int max=255;
+//   int maxHue = 360;
+//   int max = 255;
 
-//   for(int h=0;h<maxHue;h++){
+//   for (int h = 0;h<maxHue;h++) {
 //     QImage image(max+1, max+1, QImage::Format_RGB32);
 
-//     for(int s=0; s<=max; s++){
-//       for(int v=0; v<=max; v++){
+//     for (int s = 0; s<=max; s++) {
+//       for (int v = 0; v<=max; v++) {
 //         color.setHsv(h, s, v);
 //         image.setPixel(s, max-v, color.rgb());
 //       }

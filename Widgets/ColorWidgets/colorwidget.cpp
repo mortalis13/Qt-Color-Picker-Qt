@@ -10,21 +10,21 @@
 // ----------------------------------------------------------------------------------------------------
 
 ColorWidget::ColorWidget(QWidget *parent) : QWidget(parent) {
-  selectorDrawn=false;
-  middlePresed=false;
+  selectorDrawn = false;
+  middlePresed = false;
   
-  shiftHeld=false;
-  ctrlHeld=false;
+  shiftHeld = false;
+  ctrlHeld = false;
  
-  pointerY=0;
+  pointerY = 0;
   
-  h=0;
-  s=maxSV;
-  v=maxSV;
+  h = 0;
+  s = maxSV;
+  v = maxSV;
   
-  hf=0;
-  sf=maxF;
-  vf=maxF;
+  hf = 0;
+  sf = maxF;
+  vf = maxF;
   
   color.setHsv(h, s, v);
 }
@@ -32,14 +32,14 @@ ColorWidget::ColorWidget(QWidget *parent) : QWidget(parent) {
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void ColorWidget::drawCircle(QPainter& p){
+void ColorWidget::drawCircle(QPainter& p) {
   QPen pen(pointerBorderColor, pointerBorder);
   p.setPen(pen);
   p.setBrush(pointerColor);
   p.drawEllipse( QPoint(pointerX, pointerY), pointerR, pointerR );
 }
 
-void ColorWidget::drawRightTrapezoid(QPainter& p){
+void ColorWidget::drawRightTrapezoid(QPainter& p) {
   QPen pen(Qt::NoPen);
   pen.setCapStyle(Qt::FlatCap);
   QBrush brush(pointerColor);
@@ -60,46 +60,46 @@ void ColorWidget::drawRightTrapezoid(QPainter& p){
   p.drawPath(path);
 }
 
-void ColorWidget::hideCursor(QMouseEvent *e){
-  int x=e->x();
-  int y=e->y();
+void ColorWidget::hideCursor(QMouseEvent *e) {
+  int x = e->x();
+  int y = e->y();
 
-  if( ( x<minPointerXY || x>maxPointerXY ) || ( y<minPointerXY || y>maxPointerXY ) ) {
+  if ( ( x<minPointerXY || x>maxPointerXY ) || ( y<minPointerXY || y>maxPointerXY ) ) {
     restoreCursor();
     return;
   }
   this->setCursor( QCursor(Qt::BlankCursor) );
 }
 
-void ColorWidget::restoreCursor(){
+void ColorWidget::restoreCursor() {
   this->setCursor( QCursor(Qt::ArrowCursor) );
 }
 
 
 // ---------------------------------------------- slots ----------------------------------------------
 
-void ColorWidget::shiftPressed(){
-  shiftHeld=true;
+void ColorWidget::shiftPressed() {
+  shiftHeld = true;
 }
 
-void ColorWidget::shiftReleased(){
-  shiftHeld=false;
+void ColorWidget::shiftReleased() {
+  shiftHeld = false;
 }
 
-void ColorWidget::ctrlPressed(){
-  ctrlHeld=true;
+void ColorWidget::ctrlPressed() {
+  ctrlHeld = true;
 }
 
-void ColorWidget::ctrlReleased(){
-  ctrlHeld=false;
+void ColorWidget::ctrlReleased() {
+  ctrlHeld = false;
 }
 
 // ---------------------------------------------- other ----------------------------------------------
 
-void ColorWidget::log(QString format, int var){
+void ColorWidget::log(QString format, int var) {
  qDebug() << QString(format).arg(var);
 }
 
-void ColorWidget::log(QString format, qreal var){
+void ColorWidget::log(QString format, qreal var) {
  qDebug() << QString(format).arg(var);
 }

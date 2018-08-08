@@ -8,11 +8,11 @@ TestPaint::TestPaint(QWidget *parent) :
 {
 }
 
-void TestPaint::smallLines(QPainter& p){
+void TestPaint::smallLines(QPainter& p) {
   p.setPen(Qt::black);
-  int lines=0;
+  int lines = 0;
 
-  for(int i=0; i<=height(); i+=4){
+  for (int i = 0; i< = height(); i+=4) {
     p.drawLine(0, i, width(), i);
     lines++;
   }
@@ -20,17 +20,17 @@ void TestPaint::smallLines(QPainter& p){
   qDebug() << "smallLines: " << lines;
 }
 
-void TestPaint::largeLines(QPainter& p){
+void TestPaint::largeLines(QPainter& p) {
   QPen pen(QColor(0,0,0), 2);
   p.setPen(pen);
-  int hlines=0, vlines=0;
+  int hlines = 0, vlines = 0;
 
-  for(int i=0; i<=height(); i+=40){
+  for (int i = 0; i< = height(); i+=40) {
     p.drawLine(0, i, width(), i);
     hlines++;
   }
 
-  for(int i=0; i<=width(); i+=40){
+  for (int i = 0; i< = width(); i+=40) {
     p.drawLine(i, 0, i, height());
     vlines++;
   }

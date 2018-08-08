@@ -75,7 +75,6 @@ public slots:
   void changeYellow(QColor color);
   void changeBlack(QColor color); 
   
-  
 };
 
 #endif // MAINCONTROLLER_H

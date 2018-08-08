@@ -11,7 +11,7 @@ SlidersWindow::SlidersWindow(SlidersController *slidersController, QWidget *pare
 {
   ui->setupUi(this);
   
-  this->slidersController=slidersController;
+  this->slidersController = slidersController;
 
   addActions();
   addKeyActions();
@@ -24,7 +24,7 @@ SlidersWindow::~SlidersWindow()
   delete ui;
 }
 
-void SlidersWindow::init(){
+void SlidersWindow::init() {
   // setAttribute(Qt::WA_DeleteOnClose);
   
   ui->hSlider->setType(HSVSlider::Hue);
@@ -51,7 +51,7 @@ void SlidersWindow::init(){
   ui->ySlider->init();
 }
 
-void SlidersWindow::addActions(){
+void SlidersWindow::addActions() {
   connect( ui->hSlider, SIGNAL(hueChanged(QColor)), slidersController, SLOT(changeHue(QColor)) );
   connect( ui->sSlider, SIGNAL(saturationChanged(QColor)), slidersController, SLOT(changeSaturation(QColor)) );
   connect( ui->vSlider, SIGNAL(valueChanged(QColor)), slidersController, SLOT(changeValue(QColor)) );
@@ -80,7 +80,7 @@ void SlidersWindow::addActions(){
   connect( ui->spBlack, SIGNAL(valueChanged(int)), slidersController, SLOT(changeBlack(int)) );
 }
 
-void SlidersWindow::addKeyActions(){
+void SlidersWindow::addKeyActions() {
   connect( ui->hSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
   connect( ui->sSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
   connect( ui->vSlider, SIGNAL(middlePressedSignal(QMouseEvent*)), this, SLOT(sliderMiddlePressed(QMouseEvent*)) );
@@ -119,20 +119,20 @@ void SlidersWindow::addKeyActions(){
   connect( this, SIGNAL(ctrlReleased()), ui->kSlider, SLOT(ctrlReleased()) );
 }
 
-void SlidersWindow::addShortcuts(){
-  QShortcut *quit=new QShortcut(QKeySequence("Esc"), this);
+void SlidersWindow::addShortcuts() {
+  QShortcut *quit = new QShortcut(QKeySequence("Esc"), this);
   connect( quit, SIGNAL(activated()), this, SLOT(close()) );
 }
 
 
 // --------------------------------------------- slots ---------------------------------------------
 
-void SlidersWindow::sliderMiddlePressed(QMouseEvent* e){
-  mouseDown=true;
-  mouseMoved=false;
+void SlidersWindow::sliderMiddlePressed(QMouseEvent* e) {
+  mouseDown = true;
+  mouseMoved = false;
 
-  mx=e->x();
-  my=e->y();
+  mx = e->x();
+  my = e->y();
 }
 
 
@@ -140,32 +140,32 @@ void SlidersWindow::sliderMiddlePressed(QMouseEvent* e){
 
 void SlidersWindow::mousePressEvent(QMouseEvent *e)
 {
-  mouseDown=true;
-  mouseMoved=false;
+  mouseDown = true;
+  mouseMoved = false;
 
-  mx=e->x();
-  my=e->y();
+  mx = e->x();
+  my = e->y();
 }
 
 void SlidersWindow::mouseReleaseEvent(QMouseEvent *e)
 {
-  mouseDown=false;
-  if(e->button()==Qt::MiddleButton && !mouseMoved) close();
+  mouseDown = false;
+  if (e->button()==Qt::MiddleButton && !mouseMoved) close();
 }
 
 void SlidersWindow::mouseMoveEvent(QMouseEvent *e)
 {
-  if(mouseDown){
-    mouseMoved=true;
+  if (mouseDown) {
+    mouseMoved = true;
 
-    int gx=e->globalX();
-    int gy=e->globalY();
+    int gx = e->globalX();
+    int gy = e->globalY();
 
-    int corrX=geometry().x()-x();
-    int corrY=geometry().y()-y();
+    int corrX = geometry().x()-x();
+    int corrY = geometry().y()-y();
 
-    int moveX=gx-mx-corrX;
-    int moveY=gy-my-corrY;
+    int moveX = gx-mx-corrX;
+    int moveY = gy-my-corrY;
 
     move(moveX, moveY);
   }
@@ -173,16 +173,16 @@ void SlidersWindow::mouseMoveEvent(QMouseEvent *e)
 
 void SlidersWindow::keyPressEvent(QKeyEvent *e)
 {
-  int key=e->key();
-  if(key == Qt::Key_Control){
+  int key = e->key();
+  if (key == Qt::Key_Control) {
     emit ctrlPressed();
   }
 }
 
 void SlidersWindow::keyReleaseEvent(QKeyEvent *e)
 {
-  int key=e->key();
-  if(key == Qt::Key_Control){
+  int key = e->key();
+  if (key == Qt::Key_Control) {
     emit ctrlReleased();
   }
 }

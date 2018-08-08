@@ -7,19 +7,19 @@
 
 // ---------------------------------------------- consts ----------------------------------------------
 
-const int maxCMYK=255;
+const int maxCMYK = 255;
 
 
 // ----------------------------------------------------------------------------------------------------
 
 CMYKSlider::CMYKSlider(QWidget *parent) : ColorSlider(parent)
 {
-  sliderType=Cyan;
+  sliderType = Cyan;
   
-  c=0;
-  m=maxF;
-  y=maxF;
-  k=0;
+  c = 0;
+  m = maxF;
+  y = maxF;
+  k = 0;
   
   color.setCmykF(c, m, y, k);
 }
@@ -30,23 +30,23 @@ void CMYKSlider::paintEvent(QPaintEvent *e)
   p.setRenderHint(QPainter::Antialiasing);
   
   qreal val;
-  switch(sliderType){
+  switch (sliderType) {
     case Cyan:
-      val=c;
+      val = c;
       break;
     case Magenta:
-      val=m;
+      val = m;
       break;
     case Yellow:
-      val=y;
+      val = y;
       break;
     case Black:
-      val=k;
+      val = k;
       break;
   }
   calcVars(val);
 
-  if(!sliderDrawn || widthChanged){
+  if (!sliderDrawn || widthChanged) {
     paintComponent();
   }
   p.drawPixmap(sliderX, sliderY, sliderPixmap);
@@ -55,15 +55,15 @@ void CMYKSlider::paintEvent(QPaintEvent *e)
   drawBorder(p);
 }
 
-void CMYKSlider::paintComponent(){
-  sliderPixmap=QPixmap(sliderW, sliderH);
+void CMYKSlider::paintComponent() {
+  sliderPixmap = QPixmap(sliderW, sliderH);
   QPainter tempP( &sliderPixmap );
 
   QPointF p1( sliderX, sliderH/2 );
   QPointF p2( sliderX+sliderW, sliderH/2 );
   QLinearGradient grad(p1, p2);
   
-  switch(sliderType){
+  switch (sliderType) {
     case Cyan:
       paintCyan(grad);
       break;
@@ -82,32 +82,32 @@ void CMYKSlider::paintComponent(){
   tempP.setBrush( QBrush(grad) );
   tempP.drawRect(0, 0, sliderW, sliderH);
 
-  sliderDrawn=true;
-  widthChanged=false;
+  sliderDrawn = true;
+  widthChanged = false;
 }
 
-void CMYKSlider::paintCyan(QLinearGradient &grad){
+void CMYKSlider::paintCyan(QLinearGradient &grad) {
   grad.setColorAt( 0, QColor::fromCmykF(0, m, y, k) );
   grad.setColorAt( 1, QColor::fromCmykF(1, m, y, k) );
 }
 
-void CMYKSlider::paintMagenta(QLinearGradient &grad){
+void CMYKSlider::paintMagenta(QLinearGradient &grad) {
   grad.setColorAt( 0, QColor::fromCmykF(c, 0, y, k) );
   grad.setColorAt( 1, QColor::fromCmykF(c, 1, y, k) );
 }
 
-void CMYKSlider::paintYellow(QLinearGradient &grad){
+void CMYKSlider::paintYellow(QLinearGradient &grad) {
   grad.setColorAt( 0, QColor::fromCmykF(c, m, 0, k) );
   grad.setColorAt( 1, QColor::fromCmykF(c, m, 1, k) );
 }
 
-void CMYKSlider::paintBlack(QLinearGradient &grad){
+void CMYKSlider::paintBlack(QLinearGradient &grad) {
   grad.setColorAt( 0, QColor::fromCmykF(c, m, y, 0) );
   grad.setColorAt( 1, QColor::fromCmykF(c, m, y, 1) );
 }
 
 
-void CMYKSlider::updateColor(){
+void CMYKSlider::updateColor() {
   ColorSlider::updateColor();
 
   qreal val;
@@ -115,24 +115,24 @@ void CMYKSlider::updateColor(){
   val = qMax(0.0, val);
   val = qMin(maxF, val);
   
-  switch(sliderType){
+  switch (sliderType) {
     case Cyan:
-      c=val;
+      c = val;
       color.setCmykF(c, m, y, k);
       emit cyanChanged(color);
       break;
     case Magenta:
-      m=val;
+      m = val;
       color.setCmykF(c, m, y, k);
       emit magentaChanged(color);
       break;
     case Yellow:
-      y=val;
+      y = val;
       color.setCmykF(c, m, y, k);
       emit yellowChanged(color);
       break;
     case Black:
-      k=val;
+      k = val;
       color.setCmykF(c, m, y, k);
       emit blackChanged(color);
       break;
@@ -142,32 +142,32 @@ void CMYKSlider::updateColor(){
 // ---------------------------------------------- set/get ----------------------------------------------
 
 void CMYKSlider::setColorComponent(QColor color, SliderType stype) {
-  if(this->color == color){
+  if (this->color == color) {
     return;
   }
   
   qreal val;
-  switch(stype){
+  switch (stype) {
     case Cyan:
-      c=color.cyanF();
-      val=c;
+      c = color.cyanF();
+      val = c;
       break;
     case Magenta:
-      m=color.magentaF();
-      val=m;
+      m = color.magentaF();
+      val = m;
       break;
     case Yellow:
-      y=color.yellowF();
-      val=y;
+      y = color.yellowF();
+      val = y;
       break;
     case Black:
-      k=color.blackF();
-      val=k;
+      k = color.blackF();
+      val = k;
       break;
   }
   
-  sliderVal=qCeil( val * maxRange );
-  this->color=QColor::fromCmykF(c, m, y, k);
+  sliderVal = qCeil( val * maxRange );
+  this->color = QColor::fromCmykF(c, m, y, k);
   update();
 }
 
@@ -190,39 +190,39 @@ void CMYKSlider::setK(QColor color) {
 // ---------------------------------------------- slots ----------------------------------------------
 
 void CMYKSlider::updateSlider() {
-  this->color=QColor::fromCmykF(c, m, y, k);
-  sliderDrawn=false;
+  this->color = QColor::fromCmykF(c, m, y, k);
+  sliderDrawn = false;
   update();
 }
 
 void CMYKSlider::changeCyan(QColor color) {
-  c=color.cyanF();
+  c = color.cyanF();
   updateSlider();
 }
 
 void CMYKSlider::changeMagenta(QColor color) {
-  m=color.magentaF();
+  m = color.magentaF();
   updateSlider();
 }
 
 void CMYKSlider::changeYellow(QColor color) {
-  y=color.yellowF();
+  y = color.yellowF();
   updateSlider();
 }
 
 void CMYKSlider::changeBlack(QColor color) {
-  k=color.blackF();
+  k = color.blackF();
   updateSlider();
 }
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void CMYKSlider::init(){
-  if(sliderType==Magenta || sliderType==Yellow){
-    sliderVal=maxCMYK;
+void CMYKSlider::init() {
+  if (sliderType==Magenta || sliderType==Yellow) {
+    sliderVal = maxCMYK;
   }
 }
 
-void CMYKSlider::setType(SliderType type){
-  sliderType=type;
+void CMYKSlider::setType(SliderType type) {
+  sliderType = type;
 }

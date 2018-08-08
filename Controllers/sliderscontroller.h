@@ -135,7 +135,6 @@ public slots:
   void changeBlack(int k);
   void changeBlack(QColor color);
   void changeBlackFromSelector(QColor color);
-
   
 };
 

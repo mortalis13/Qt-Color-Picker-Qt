@@ -34,7 +34,6 @@ public:
 private:
   static int getSizeByType(Vars::ColorType colorType);
   
-  
 signals:
 
 public slots:

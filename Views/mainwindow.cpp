@@ -18,10 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  colorProcessor=new ColorProcessor(ui->hSelector, ui->svSelector);
-  mainController=new MainController(ui->hSelector, ui->svSelector, colorProcessor, this);
+  colorProcessor = new ColorProcessor(ui->hSelector, ui->svSelector);
+  mainController = new MainController(ui->hSelector, ui->svSelector, colorProcessor, this);
   
-  slidersWindow=NULL;
+  slidersWindow = NULL;
 
   addActions();
   addShortcuts();
@@ -40,13 +40,13 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
 }
 
 
-void MainWindow::init(){
+void MainWindow::init() {
   QApplication::setStyle("fusion");
   
-  mx=0;
-  my=0;
+  mx = 0;
+  my = 0;
   
-  mouseDown=false;
+  mouseDown = false;
 
   QMargins margins(5,0,0,0);
 
@@ -65,7 +65,7 @@ void MainWindow::init(){
   // qApp->installEventFilter(this);
 }
 
-void MainWindow::addActions(){
+void MainWindow::addActions() {
   connect( ui->hSelector, SIGNAL(hueChanged(QColor)), ui->svSelector, SLOT(changeHue(QColor)) );
   connect( ui->svSelector, SIGNAL(colorChanged(QColor)), ui->colorSample, SLOT(changeColor(QColor)) );
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), this, SLOT(updateColorText(QColor)) );
@@ -117,7 +117,7 @@ void MainWindow::addActions(){
   // connect( ui->bSliders, SIGNAL(clicked()), this, SLOT(openSliders()) );
 }
 
-void MainWindow::addSlidersActions(){
+void MainWindow::addSlidersActions() {
   // === HSV ===
   connect( slidersController, SIGNAL(hueChanged(QColor)), mainController, SLOT(changeHue(QColor)) );
   connect( slidersController, SIGNAL(saturationChanged(QColor)), mainController, SLOT(changeSaturation(QColor)) );
@@ -143,16 +143,16 @@ void MainWindow::addSlidersActions(){
   connect( ui->colorSample, SIGNAL(colorChanged(QColor)), slidersController, SIGNAL(CMYKChanged(QColor)) );
 }
 
-void MainWindow::addShortcuts(){
-  QShortcut* HSV_Text=new QShortcut(QKeySequence("Shift+F1"), this);
-  QShortcut* RGB_Text=new QShortcut(QKeySequence("Shift+F2"), this);
-  QShortcut* CMYK_Text=new QShortcut(QKeySequence("Shift+F3"), this);
-  QShortcut* Hex_Text=new QShortcut(QKeySequence("Shift+F4"), this);
+void MainWindow::addShortcuts() {
+  QShortcut* HSV_Text = new QShortcut(QKeySequence("Shift+F1"), this);
+  QShortcut* RGB_Text = new QShortcut(QKeySequence("Shift+F2"), this);
+  QShortcut* CMYK_Text = new QShortcut(QKeySequence("Shift+F3"), this);
+  QShortcut* Hex_Text = new QShortcut(QKeySequence("Shift+F4"), this);
   
-  QShortcut* toggleSlider_Key=new QShortcut(QKeySequence("Ctrl+S"), this);
+  QShortcut* toggleSlider_Key = new QShortcut(QKeySequence("Ctrl+S"), this);
   connect( toggleSlider_Key, SIGNAL(activated()), this, SLOT(toggleSliders()) );
   
-  mapper=new QSignalMapper(this);
+  mapper = new QSignalMapper(this);
   mapper->setMapping(HSV_Text, ui->leHSV);
   mapper->setMapping(RGB_Text, ui->leRGB);
   mapper->setMapping(CMYK_Text, ui->leCMYK);
@@ -165,31 +165,31 @@ void MainWindow::addShortcuts(){
   connect( mapper, SIGNAL(mapped(QWidget*)), this, SLOT(selectField(QWidget*)) );
   
   
-  QShortcut* HSV_Button=new QShortcut(QKeySequence("F1"), this);
+  QShortcut* HSV_Button = new QShortcut(QKeySequence("F1"), this);
   connect( HSV_Button, SIGNAL(activated()), ui->bHSV, SLOT(click()) );
   
-  QShortcut* RGB_Button=new QShortcut(QKeySequence("F2"), this);
+  QShortcut* RGB_Button = new QShortcut(QKeySequence("F2"), this);
   connect( RGB_Button, SIGNAL(activated()), ui->bRGB, SLOT(click()) );
   
-  QShortcut* CMYK_Button=new QShortcut(QKeySequence("F3"), this);
+  QShortcut* CMYK_Button = new QShortcut(QKeySequence("F3"), this);
   connect( CMYK_Button, SIGNAL(activated()), ui->bCMYK, SLOT(click()) );
   
-  QShortcut* Hex_Button=new QShortcut(QKeySequence("F4"), this);
+  QShortcut* Hex_Button = new QShortcut(QKeySequence("F4"), this);
   connect( Hex_Button, SIGNAL(activated()), ui->bHex, SLOT(click()) );
 
-  QShortcut* HexHash_Button=new QShortcut(QKeySequence("F5"), this);
+  QShortcut* HexHash_Button = new QShortcut(QKeySequence("F5"), this);
   connect( HexHash_Button, SIGNAL(activated()), ui->bHexHash, SLOT(click()) );
 
-  QShortcut* PasteHex_Button=new QShortcut(QKeySequence("F6"), this);
+  QShortcut* PasteHex_Button = new QShortcut(QKeySequence("F6"), this);
   connect( PasteHex_Button, SIGNAL(activated()), ui->bPasteHex, SLOT(click()) );
 
   
-  QShortcut *quit=new QShortcut(QKeySequence("Esc"), this);
+  QShortcut *quit = new QShortcut(QKeySequence("Esc"), this);
   connect( quit, SIGNAL(activated()), this, SLOT(close()) );
 }
 
-void MainWindow::selectField(QWidget* w){
-  QLineEdit* field=(QLineEdit*) w;
+void MainWindow::selectField(QWidget* w) {
+  QLineEdit* field = (QLineEdit*) w;
   field->setFocus();
   field->selectAll();
 }
@@ -197,39 +197,39 @@ void MainWindow::selectField(QWidget* w){
 
 // --------------------------------------------- slots ---------------------------------------------
 
-void MainWindow::hsvMiddlePressed(QMouseEvent* e){
-  mouseDown=true;
-  mouseMoved=false;
+void MainWindow::hsvMiddlePressed(QMouseEvent* e) {
+  mouseDown = true;
+  mouseMoved = false;
 
-  mx=e->x();
-  my=e->y();
+  mx = e->x();
+  my = e->y();
 }
 
-void MainWindow::middleClick(QMouseEvent* e){
+void MainWindow::middleClick(QMouseEvent* e) {
   mouseReleaseEvent(e);
 }
 
-void MainWindow::updateSliders(){
+void MainWindow::updateSliders() {
   ui->hSelector->reupdateColor();
   ui->svSelector->reupdateColor();
   ui->colorSample->reupdateColor();
 }
 
-void MainWindow::toggleSliders(){
-  if(slidersWindow==NULL || !slidersWindow->isVisible())
+void MainWindow::toggleSliders() {
+  if (slidersWindow==NULL || !slidersWindow->isVisible())
     openSliders();
   else
     closeSliders();
 }
 
-void MainWindow::closeSliders(){
+void MainWindow::closeSliders() {
   slidersWindow->hide();
 }
 
-void MainWindow::openSliders(){
-  if(slidersWindow==NULL){
-    slidersController=new SlidersController();
-    slidersWindow=new SlidersWindow(slidersController, this);
+void MainWindow::openSliders() {
+  if (slidersWindow==NULL) {
+    slidersController = new SlidersController();
+    slidersWindow = new SlidersWindow(slidersController, this);
     
     slidersController->setView(slidersWindow);
     mainController->addSlidersController(slidersController);
@@ -238,18 +238,18 @@ void MainWindow::openSliders(){
     updateSliders();
   }
   
-  if(slidersWindow!=NULL) {
+  if (slidersWindow!=NULL) {
     stickSliders();
     slidersWindow->show();
   }
 }
 
-void MainWindow::stickSliders(){
-  int corrX=frameGeometry().width()-width();
+void MainWindow::stickSliders() {
+  int corrX = frameGeometry().width()-width();
 
-  int sx=x();
-  int sy=y();
-  int w=slidersWindow->width()+corrX;
+  int sx = x();
+  int sy = y();
+  int w = slidersWindow->width()+corrX;
   sx-=w;
   
   // qDebug() << QString("Sliders: %1, %2").arg(sx).arg(sy);
@@ -260,7 +260,7 @@ void MainWindow::stickSliders(){
 }
 
 
-void MainWindow::focusNextField(){
+void MainWindow::focusNextField() {
   if (ui->leHSV->hasFocus()) {
     ui->leRGB->setFocus(Qt::TabFocusReason);
   }
@@ -275,7 +275,7 @@ void MainWindow::focusNextField(){
   }
 }
 
-void MainWindow::focusPrevField(){
+void MainWindow::focusPrevField() {
   if (ui->leHSV->hasFocus()) {
     ui->leHex->setFocus(Qt::BacktabFocusReason);
   }
@@ -290,7 +290,7 @@ void MainWindow::focusPrevField(){
   }
 }
 
-void MainWindow::showPickerClicked(){
+void MainWindow::showPickerClicked() {
   // PickerView* w = new PickerView(this);
   TestWidget* w = new TestWidget(this);
   // TestWidget* w = new TestWidget;
@@ -312,42 +312,42 @@ void MainWindow::showPickerClicked(){
 
 // --------------------------------------------- buttons ---------------------------------------------
 
-void MainWindow::copyHSV(){
-  QString text=ui->leHSV->text();
-  text=text.replace(" ", ", ");
+void MainWindow::copyHSV() {
+  QString text = ui->leHSV->text();
+  text = text.replace(" ", ", ");
   colorProcessor->copyText(text);
   status("HSV copied");
 }
 
-void MainWindow::copyRGB(){
-  QString text=ui->leRGB->text();
-  text=text.replace(" ", ", ");
+void MainWindow::copyRGB() {
+  QString text = ui->leRGB->text();
+  text = text.replace(" ", ", ");
   colorProcessor->copyText(text);
   status("RGB copied");
 }
 
-void MainWindow::copyCMYK(){
-  QString text=ui->leCMYK->text();
-  text=text.replace(" ", ", ");
+void MainWindow::copyCMYK() {
+  QString text = ui->leCMYK->text();
+  text = text.replace(" ", ", ");
   colorProcessor->copyText(text);
   status("CMYK copied");
 }
 
-void MainWindow::copyHex(){
-  QString text=ui->leHex->text();
+void MainWindow::copyHex() {
+  QString text = ui->leHex->text();
   colorProcessor->copyText(text);
   status("Hex copied");
 }
 
-void MainWindow::copyHexHash(){
-  QString text=ui->leHex->text();
+void MainWindow::copyHexHash() {
+  QString text = ui->leHex->text();
   colorProcessor->copyText("#"+text);
   status("Hex # copied");
 }
 
-void MainWindow::pasteHex(){
-  QString text=colorProcessor->pasteText();
-  if(!text.length()) return;
+void MainWindow::pasteHex() {
+  QString text = colorProcessor->pasteText();
+  if (!text.length()) return;
 
   ui->leHex->setText(text);
   ui->leHex->textEdited(text);
@@ -356,33 +356,33 @@ void MainWindow::pasteHex(){
 
 // --------------------------------------------- update color ---------------------------------------------
 
-void MainWindow::updateColorFinished(){
-  editingField="";
+void MainWindow::updateColorFinished() {
+  editingField = "";
 }
 
-void MainWindow::updateColorHSV(QString text){
-  editingField="HSV";
+void MainWindow::updateColorHSV(QString text) {
+  editingField = "HSV";
   text = Validator::correctColorText(text);
   ui->leHSV->updateText(text);
   colorProcessor->updateColorHSV(text);
 }
 
-void MainWindow::updateColorRGB(QString text){
-  editingField="RGB";
+void MainWindow::updateColorRGB(QString text) {
+  editingField = "RGB";
   text = Validator::correctColorText(text);
   ui->leRGB->updateText(text);
   colorProcessor->updateColorRGB(text);
 }
 
-void MainWindow::updateColorCMYK(QString text){
-  editingField="CMYK";
+void MainWindow::updateColorCMYK(QString text) {
+  editingField = "CMYK";
   text = Validator::correctColorText(text);
   ui->leCMYK->updateText(text);
   colorProcessor->updateColorCMYK(text);
 }
 
-void MainWindow::updateColorHex(QString text){
-  editingField="Hex";
+void MainWindow::updateColorHex(QString text) {
+  editingField = "Hex";
   text = Validator::correctColorText(text);
   ui->leHex->updateText(text);
   colorProcessor->updateColorHex(text);
@@ -390,13 +390,13 @@ void MainWindow::updateColorHex(QString text){
 
 // --------------------------------------------- update color text ---------------------------------------------
 
-void MainWindow::updateColorText(QColor color){
+void MainWindow::updateColorText(QColor color) {
   QString HSV, RGB, CMYK, Hex;
   
-  HSV=colorProcessor->getHSV(color);
-  RGB=colorProcessor->getRGB(color);
-  CMYK=colorProcessor->getCMYK(color);
-  Hex=colorProcessor->getHex(color);
+  HSV = colorProcessor->getHSV(color);
+  RGB = colorProcessor->getRGB(color);
+  CMYK = colorProcessor->getCMYK(color);
+  Hex = colorProcessor->getHex(color);
   
   setHSV(HSV);
   setRGB(RGB);
@@ -404,72 +404,72 @@ void MainWindow::updateColorText(QColor color){
   setHex(Hex);
 }
 
-void MainWindow::setHSV(QString text){
-  if(editingField=="HSV") return;
+void MainWindow::setHSV(QString text) {
+  if (editingField=="HSV") return;
   ui->leHSV->setText(text);
 }
 
-void MainWindow::setRGB(QString text){
-  if(editingField=="RGB") return;
+void MainWindow::setRGB(QString text) {
+  if (editingField=="RGB") return;
   ui->leRGB->setText(text);
 }
 
-void MainWindow::setCMYK(QString text){
-  if(editingField=="CMYK") return;
+void MainWindow::setCMYK(QString text) {
+  if (editingField=="CMYK") return;
   ui->leCMYK->setText(text);
 }
 
-void MainWindow::setHex(QString text){
-  if(editingField=="Hex") return;
+void MainWindow::setHex(QString text) {
+  if (editingField=="Hex") return;
   ui->leHex->setText(text);
 }
 
 
-QString MainWindow::getHSV(){
+QString MainWindow::getHSV() {
   return ui->leHSV->text();
 }
 
-QString MainWindow::getRGB(){
+QString MainWindow::getRGB() {
   return ui->leRGB->text();
 }
 
-QString MainWindow::getCMYK(){
+QString MainWindow::getCMYK() {
   return ui->leCMYK->text();
 }
 
-QString MainWindow::getHex(){
+QString MainWindow::getHex() {
   return ui->leHex->text();
 }
 
 // --------------------------------------------- service ---------------------------------------------
 
-void MainWindow::correctFields(){
+void MainWindow::correctFields() {
   QString text;
-  text=ui->leHSV->text();
-  text=correctField(text);
+  text = ui->leHSV->text();
+  text = correctField(text);
   ui->leHSV->setText(text);
   
-  text=ui->leRGB->text();
-  text=correctField(text);
+  text = ui->leRGB->text();
+  text = correctField(text);
   ui->leRGB->setText(text);
   
-  text=ui->leCMYK->text();
-  text=correctField(text);
+  text = ui->leCMYK->text();
+  text = correctField(text);
   ui->leCMYK->setText(text);
   
-  text=ui->leHex->text();
-  text=correctField(text);
+  text = ui->leHex->text();
+  text = correctField(text);
   ui->leHex->setText(text);
 }
 
-QString MainWindow::correctField(QString text){         // +++ to Validator
-  text=text.trimmed();
-  text=text.replace(QRegExp("\\s+"), " ");
+QString MainWindow::correctField(QString text) {         // +++ to Validator
+  text = text.trimmed();
+  text = text.replace(QRegExp("\\s+"), " ");
     
   return text;
 }
 
-void MainWindow::status(QString msg){
+void MainWindow::status(QString msg) {
   ui->statusBar->showMessage(msg, 3000);
 }
 
@@ -477,35 +477,35 @@ void MainWindow::status(QString msg){
 
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
-  mouseDown=true;
-  mouseMoved=false;
+  mouseDown = true;
+  mouseMoved = false;
 
-  mx=e->x();
-  my=e->y();
+  mx = e->x();
+  my = e->y();
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 {
-  mouseDown=false;
-  if(e->button()==Qt::MiddleButton && !mouseMoved) close();
+  mouseDown = false;
+  if (e->button()==Qt::MiddleButton && !mouseMoved) close();
   emit mouseReleasedOnWindow();
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *e)
 {
-  if(mouseDown){
-    mouseMoved=true;
+  if (mouseDown) {
+    mouseMoved = true;
 
     emit mouseMovedOnWindow();
 
-    int gx=e->globalX();
-    int gy=e->globalY();
+    int gx = e->globalX();
+    int gy = e->globalY();
 
-    int corrX=geometry().x()-x();
-    int corrY=geometry().y()-y();
+    int corrX = geometry().x()-x();
+    int corrY = geometry().y()-y();
 
-    int moveX=gx-mx-corrX;
-    int moveY=gy-my-corrY;
+    int moveX = gx-mx-corrX;
+    int moveY = gy-my-corrY;
 
     move(moveX, moveY);
   }
@@ -513,22 +513,22 @@ void MainWindow::mouseMoveEvent(QMouseEvent *e)
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-  int key=e->key();
-  if(key == Qt::Key_Shift){
+  int key = e->key();
+  if (key == Qt::Key_Shift) {
     emit shiftPressed();
   }
-  if(key == Qt::Key_Control){
+  if (key == Qt::Key_Control) {
     emit ctrlPressed();
   }
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e)
 {
-  int key=e->key();
-  if(key == Qt::Key_Shift){
+  int key = e->key();
+  if (key == Qt::Key_Shift) {
     emit shiftReleased();
   }
-  if(key == Qt::Key_Control){
+  if (key == Qt::Key_Control) {
     emit ctrlReleased();
   }
 }

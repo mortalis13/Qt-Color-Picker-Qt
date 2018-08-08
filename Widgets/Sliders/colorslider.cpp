@@ -12,14 +12,14 @@
 
 // --------------------------------------------- consts ---------------------------------------------
 
-const int border=2;
-const int borderRadius=10;
+const int border = 2;
+const int borderRadius = 10;
 
-const int sliderX=border;
-const int sliderY=border;
+const int sliderX = border;
+const int sliderY = border;
 
-const int pointerR=5;
-const int pointerBorder=2;
+const int pointerR = 5;
+const int pointerBorder = 2;
 
 const QColor borderColor(80,80,80,200);
 
@@ -34,25 +34,25 @@ const QColor pointerFillColor("#333");
 ColorSlider::ColorSlider(QWidget *parent) :
   QWidget(parent)
 {
-  sliderDrawn=false;
-  middlePresed=false;
-  ctrlHeld=false;
-  widthChanged=false;
+  sliderDrawn = false;
+  middlePresed = false;
+  ctrlHeld = false;
+  widthChanged = false;
   
-  pointerX=0;
-  pointerY=0;
+  pointerX = 0;
+  pointerY = 0;
   
-  sliderVal=0;
+  sliderVal = 0;
 }
 
 void ColorSlider::mousePressEvent(QMouseEvent *e)
 {
-  if( e->button() == Qt::MiddleButton ){
-    middlePresed=true;
+  if ( e->button() == Qt::MiddleButton ) {
+    middlePresed = true;
     e->ignore();
   }
-  else{
-    middlePresed=false;
+  else {
+    middlePresed = false;
     movePointer( e->x() );
     updateColor();
   }
@@ -60,10 +60,10 @@ void ColorSlider::mousePressEvent(QMouseEvent *e)
 
 void ColorSlider::mouseMoveEvent(QMouseEvent *e)
 {
-  if(middlePresed){
+  if (middlePresed) {
     e->ignore();
   }
-  else{
+  else {
     movePointer( e->x() );
     updateColor();
   }
@@ -76,13 +76,13 @@ void ColorSlider::mouseReleaseEvent(QMouseEvent *e)
 
 void ColorSlider::wheelEvent(QWheelEvent *e)
 {
-  QPoint p=e->angleDelta();
+  QPoint p = e->angleDelta();
   
-  int val=1;
-  if(ctrlHeld) val=10;
+  int val = 1;
+  if (ctrlHeld) val = 10;
   
-  if(p.y()>0) incPointer(val);
-  if(p.y()<0) decPointer(val);
+  if (p.y()>0) incPointer(val);
+  if (p.y()<0) decPointer(val);
 
   updateColor();
   e->accept();
@@ -91,45 +91,45 @@ void ColorSlider::wheelEvent(QWheelEvent *e)
 
 // ---------------------------------------------- service ----------------------------------------------
 
-void ColorSlider::calcVars(qreal val){
-  sliderX=border;
-  sliderY=border;
-  sliderW=width()-2*border;
-  sliderH=height()-2*border;
+void ColorSlider::calcVars(qreal val) {
+  sliderX = border;
+  sliderY = border;
+  sliderW = width()-2*border;
+  sliderH = height()-2*border;
 
   maxRange = sliderW - 1;
   minPointerX = sliderX;
   maxPointerX = minPointerX + maxRange;
   
-  if(sliderW!=prevSliderW){
-    widthChanged=true;
-    sliderVal=normalizePointerX(val);
+  if (sliderW!=prevSliderW) {
+    widthChanged = true;
+    sliderVal = normalizePointerX(val);
   }
-  prevSliderW=sliderW;
+  prevSliderW = sliderW;
 }
 
 
-void ColorSlider::movePointer(int x){
-  pointerX=x;
+void ColorSlider::movePointer(int x) {
+  pointerX = x;
   update();
 }
 
-void ColorSlider::correctPointer(){
+void ColorSlider::correctPointer() {
   pointerX = sliderVal + minPointerX;
   pointerX = qMax( minPointerX, pointerX );
   pointerX = qMin( maxPointerX, pointerX );
 }
 
-void ColorSlider::incPointer(int val){
+void ColorSlider::incPointer(int val) {
   movePointer(pointerX+val);
 }
 
-void ColorSlider::decPointer(int val){
+void ColorSlider::decPointer(int val) {
   movePointer(pointerX-val);
 }
 
 
-void ColorSlider::drawPointer(QPainter& p){
+void ColorSlider::drawPointer(QPainter& p) {
   correctPointer();
 
   pointerY = height()/2;
@@ -147,13 +147,13 @@ void ColorSlider::drawPointer(QPainter& p){
   p.drawLine( QPoint(pointerX, sliderY+sliderH), QPoint(pointerX, pointerY+pointerR+pointerBorder/2) );
 }
 
-void ColorSlider::drawBorder(QPainter& p){
+void ColorSlider::drawBorder(QPainter& p) {
   QRectF rectangle( sliderX, sliderY, sliderW, sliderH );                               // set inner rect coordinates (the border will be outer)
   Services::drawRoundRect( p, rectangle, border, borderRadius, borderColor );
 }
 
 
-void ColorSlider::updateColor(){
+void ColorSlider::updateColor() {
   sliderVal = pointerX - minPointerX;
   sliderVal = qMax(0, sliderVal);
   sliderVal = qMin(maxRange, sliderVal);
@@ -162,37 +162,37 @@ void ColorSlider::updateColor(){
 
 // ---------------------------------------------- correction ----------------------------------------------
 
-qreal ColorSlider::normalizeVal(int val){
+qreal ColorSlider::normalizeVal(int val) {
   qreal h = (qreal)val/maxRange;
   return h;
 }
 
-int ColorSlider::normalizePointerX(qreal val){
-  qreal d=val*maxRange;
+int ColorSlider::normalizePointerX(qreal val) {
+  qreal d = val*maxRange;
   return qCeil(d);
 }
 
 
 // ---------------------------------------------- slots ----------------------------------------------
 
-void ColorSlider::ctrlPressed(){
-  ctrlHeld=true;
+void ColorSlider::ctrlPressed() {
+  ctrlHeld = true;
 }
-void ColorSlider::ctrlReleased(){
-  ctrlHeld=false;
+void ColorSlider::ctrlReleased() {
+  ctrlHeld = false;
 }
 
 
 // ---------------------------------------------- other ----------------------------------------------
 
-void ColorSlider::updatePaint(){
+void ColorSlider::updatePaint() {
   update();
 }
 
-void ColorSlider::log(QString format, int var){
+void ColorSlider::log(QString format, int var) {
  qDebug() << QString(format).arg(var);
 }
 
-void ColorSlider::log(QString format, qreal var){
+void ColorSlider::log(QString format, qreal var) {
  qDebug() << QString(format).arg(var);
 }
