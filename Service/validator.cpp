@@ -116,7 +116,7 @@ bool Validator::checkValueHex(QString text) {
     int val = comp.toInt(&ok, 16);
     if (!ok) return false;
 
-    if (len==3) {
+    if (len == 3) {
       if (val<0 || val>maxShortHex) return false;
     }
     else {
@@ -128,39 +128,39 @@ bool Validator::checkValueHex(QString text) {
 }
 
 bool Validator::checkComponentVal(int val, Vars::ColorType colorType, int group, int hexLen) {
-  if (colorType==Vars::HSV) {
+  if (colorType == Vars::HSV) {
     switch (group) {
     case 0:
-      return (val> = 0 && val< = maxH);
+      return (val >= 0 && val <= maxH);
     case 1:
-      return (val> = 0 && val< = maxS);
+      return (val >= 0 && val <= maxS);
     case 2:
-      return (val> = 0 && val< = maxV);
+      return (val >= 0 && val <= maxV);
     }
   }
 
-  if (colorType==Vars::RGB) {
-    return (val> = 0 && val< = maxRGB);
+  if (colorType == Vars::RGB) {
+    return (val >= 0 && val <= maxRGB);
   }
 
-  if (colorType==Vars::CMYK) {
+  if (colorType == Vars::CMYK) {
     switch (group) {
     case 0:
-      return (val> = 0 && val< = maxCMYK);
+      return (val >= 0 && val <= maxCMYK);
     case 1:
-      return (val> = 0 && val< = maxCMYK);
+      return (val >= 0 && val <= maxCMYK);
     case 2:
-      return (val> = 0 && val< = maxCMYK);
+      return (val >= 0 && val <= maxCMYK);
     case 3:
-      return (val> = 0 && val< = maxCMYK);
+      return (val >= 0 && val <= maxCMYK);
     }
   }
 
-  if (colorType==Vars::Hex) {
-    if (hexLen==3)
-      return (val> = 0 && val< = maxShortHex);
-    else if (hexLen==6)
-      return (val> = 0 && val< = maxHex);
+  if (colorType == Vars::Hex) {
+    if (hexLen == 3)
+      return (val >= 0 && val <= maxShortHex);
+    else if (hexLen == 6)
+      return (val >= 0 && val <= maxHex);
   }
 
   return false;

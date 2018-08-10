@@ -216,7 +216,7 @@ void MainWindow::updateSliders() {
 }
 
 void MainWindow::toggleSliders() {
-  if (slidersWindow==NULL || !slidersWindow->isVisible())
+  if (slidersWindow == NULL || !slidersWindow->isVisible())
     openSliders();
   else
     closeSliders();
@@ -227,7 +227,7 @@ void MainWindow::closeSliders() {
 }
 
 void MainWindow::openSliders() {
-  if (slidersWindow==NULL) {
+  if (slidersWindow == NULL) {
     slidersController = new SlidersController();
     slidersWindow = new SlidersWindow(slidersController, this);
     
@@ -405,22 +405,22 @@ void MainWindow::updateColorText(QColor color) {
 }
 
 void MainWindow::setHSV(QString text) {
-  if (editingField=="HSV") return;
+  if (editingField == "HSV") return;
   ui->leHSV->setText(text);
 }
 
 void MainWindow::setRGB(QString text) {
-  if (editingField=="RGB") return;
+  if (editingField == "RGB") return;
   ui->leRGB->setText(text);
 }
 
 void MainWindow::setCMYK(QString text) {
-  if (editingField=="CMYK") return;
+  if (editingField == "CMYK") return;
   ui->leCMYK->setText(text);
 }
 
 void MainWindow::setHex(QString text) {
-  if (editingField=="Hex") return;
+  if (editingField == "Hex") return;
   ui->leHex->setText(text);
 }
 
@@ -487,7 +487,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 {
   mouseDown = false;
-  if (e->button()==Qt::MiddleButton && !mouseMoved) close();
+  if (e->button() == Qt::MiddleButton && !mouseMoved) close();
   emit mouseReleasedOnWindow();
 }
 

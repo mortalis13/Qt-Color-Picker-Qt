@@ -150,7 +150,7 @@ void SlidersWindow::mousePressEvent(QMouseEvent *e)
 void SlidersWindow::mouseReleaseEvent(QMouseEvent *e)
 {
   mouseDown = false;
-  if (e->button()==Qt::MiddleButton && !mouseMoved) close();
+  if (e->button() == Qt::MiddleButton && !mouseMoved) close();
 }
 
 void SlidersWindow::mouseMoveEvent(QMouseEvent *e)

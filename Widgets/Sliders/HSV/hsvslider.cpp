@@ -194,7 +194,7 @@ void HSVSlider::changeValue(QColor color) {
 // ---------------------------------------------- service ----------------------------------------------
 
 void HSVSlider::init() {
-  if (sliderType==Saturation || sliderType==Value) {
+  if (sliderType == Saturation || sliderType == Value) {
     sliderVal = maxSV;
   }
 }

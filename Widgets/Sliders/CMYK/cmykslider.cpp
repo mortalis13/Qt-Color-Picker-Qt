@@ -218,7 +218,7 @@ void CMYKSlider::changeBlack(QColor color) {
 // ---------------------------------------------- service ----------------------------------------------
 
 void CMYKSlider::init() {
-  if (sliderType==Magenta || sliderType==Yellow) {
+  if (sliderType == Magenta || sliderType == Yellow) {
     sliderVal = maxCMYK;
   }
 }

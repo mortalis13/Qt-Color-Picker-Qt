@@ -187,7 +187,7 @@ void RGBSlider::changeBlue(QColor color) {
 // ---------------------------------------------- service ----------------------------------------------
 
 void RGBSlider::init() {
-  if (sliderType==Red) {
+  if (sliderType == Red) {
     sliderVal = maxRGB;
   }
 }
